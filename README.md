@@ -1,2 +1,2 @@
-# pico-primer-for-competitors
-Textbook with chapters for each usual picoCTF problem/challenge category
+# pico Primer for Competitors
+Let's keep this a **private** repo until we seed it with our initial Textbook0 offering.
