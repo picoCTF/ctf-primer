@@ -1,0 +1,64 @@
+---
+title: Web Exploits
+chapter: 5
+custom_css:
+-
+custom_js:
+-
+---
+
+== Web Exploits
+
+=== HTML
+
+Before diving into Web Exploits, you need to understand how a website works. Many years ago, the web was used to visit static pages that did not have interactive features. They just showed information. To do a static page, it is enough to write some lines of HTML. What is HTML? First of all, it is not a programming language. Html means HyperText Markup Language, and we use it to determine the font size, colors, margins, or similar features in a web page. When an html file is accessed in a browser like Firefox, Chrome or whatever browser you like, the browser presents the text according to the html on it. Your browser can access an html file locally. Locally means that the file could be in your  laptop ́s file system. Also, it could access the file remotely through the Internet. Let’s see an example of creating a simple html and access it locally:
+
+. On your computer, create a folder called “picoexample” and then, inside that folder, create a text file and name it “myFirstPage.html”. You can do this  on Notepad on Windows, Textedit on Mac, or any text editor from Linux. It is important that the extension is “.html”. It cannot be ”.html.txt” or something that is not exactly “.html”.  If you don’t see the extension in your operating system, this is a good opportunity too google how to make it appear to be able to modify it. Remember, for this simple obstacles that might appear along the way, google is the answer.
+. Edit the content in a text editor and write:  Hello World!
+. Save the file
+. Open the file in any browser. To do that, you can right click on the file, and then select “open width” and choose the browser you want. You should see a page like the following:
+
+image::image16.png[]
+
+Now, in the text editor, modify the content of the file and replace the text by:
+[source,html]
+----
+<b>Hello World!</b>
+----
+
+Save the file on the text editor. Then, open the file in the browser again, or you can simply click refresh on your browser. Since it already has opened the file, you will see the message in bold, in page similar to this:
+
+You just created a page with a very simple HTML that made your message appeared in bold. Note that <b> is the opening tag, </b> is the closing tag. Analyze the difference between the opening and closing tag. What do you see? The closing tag is usually the same as the opening tag, but you include “/” like we just did. We just used an html tag to tell the browser we want some specific text in bold. Html is just a bunch of tags that allow us to do similar things.
+
+
+Now let’s make a page with more fields so you can get a sense of more tags and of the structure of a bigger page. Use the following  HTML code to replace the content of the file you are editing:
+
+[source,html]
+----
+<html>
+<header>
+   <title>This is a picoCTF html Example</title>
+</header>
+<body>
+   <h1>This is a Heading</h1>
+   <h2>This is a smaller Heading</h2>
+   <p>This is a paragraph.</p>
+   The following is an image:<br>
+   <img src="picologo.png" />
+</body>
+</html>
+----
+
+Now, as we were doing before, save the file in the text editor and click refresh on the browser. You probably see something like this:
+
+image::image8.png[]
+
+If you read the html code and try to analyze its content, you would realize the following:
+
+- The title shown in that tab of the browser “This is a picoCTF html Example”, appears there because you put that text inside in the `<title></title>` tags.
+- `<h1>` Is used to create a big heading
+- `<h2``>`` creates a heading a little smaller than <h1>
+- The `<header>` tags are used to group introductory content, in this case the title, but if you remove this tag, you will not see much change in our page. Do the experiment of removing it. If you only remove the opening or closing tag, that would cause and html error, so make sure to delete the opening tag and closing tag.
+- The `<body>` tags are used to group the main content of the page. Also, if you remove them, you will not see much change in our page.
+
+
