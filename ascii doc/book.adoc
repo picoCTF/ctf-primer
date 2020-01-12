@@ -1,0 +1,7 @@
+:source-highlighter: pygments
+:pygments-style: emacs
+:icons: font
+:sectnums:
+include::chapters/intro.adoc[]
+include::chapters/web.adoc[]
+

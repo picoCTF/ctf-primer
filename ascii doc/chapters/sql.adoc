@@ -1,0 +1,10 @@
+= Document Title (Level 0)
+
+== Introduction
+
+You are going to have real fun here. And, you will gain the ability to do impressive things in life using a computer. It will be like acquiring a super power to be able to do things that not ordinary people can do. Let’s see how is that possible.
+
+
+Our world depends on computers. If all of them broke, imagine the apocalyptic catastrophe: money in banks is inaccessible, all telecommunications die, airports cease functioning and commercial airliners would fall from the sky, energy distribution systems become uncontrollable, hospitals and critical life support systems would irrevocably fail, and our society would collapse… In 1988, a single person, without bad intentions, took down all the Internet with just one malicious program, known as the Morris Worm. Society was different at that time so it was not as catastrophic as it would have been now. But, why we have not collapsed yet?
+
+The only way to overcome a weakness is to first know that it exists. Hackers, find weaknesses in the computer world. The word hacker has had several definitions along history. In a dictionary, we can find two related definitions:

