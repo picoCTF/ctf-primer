@@ -1,0 +1,85 @@
+---
+title: Cybercrime
+chapter: 2
+---
+
+== MALWARE
+
+The word malware comes from “*mal*icious soft*ware*” +
+Malware is any software intentionally designed to cause damage to a computer, server, client, or computer network.
+Malware does the damage after it is implanted or introduced in some way into a target's computer and can take the form of directly executable code, scripts, so-called "active content" (Microsoft Windows), and other forms of data.
+Some kinds of malware are largely referred to in the media as computer viruses, worms, Trojan horses, ransomware, spyware, adware, and scareware, among other terms.
+Malware has a malicious intent, acting against the interest of the computer user—and so does not include software that causes unintentional harm due to some deficiency, which is typically described as a software bug.
+
+Programs officially supplied by companies can be considered malware if they secretly act against the interests of the computer user.
+For example, at one point Sony music Compact discs silently installed a rootkit on purchasers' computers running Microsoft Windows with the intention of preventing illicit copying; but which also reported on users' listening habits, and unintentionally created extra security vulnerabilities.
+
+One strategy for protecting against malware is to prevent the harmful software from gaining access to the target computer.
+For this reason, antivirus software, firewalls and other strategies are used to help protect against the introduction of malware, in addition to checking for the presence of malware and malicious activity and recovering from attacks.
+
+=== Virus
+
+A computer virus is a type of computer program that, when executed, replicates itself by modifying other computer programs and inserting its own code.[1] When this replication succeeds, the affected areas are then said to be "infected" with a computer virus.[2][3]
+
+Virus writers use social engineering deceptions and exploit detailed knowledge of security vulnerabilities to initially infect systems and to spread the virus.
+The vast majority of viruses target systems running Microsoft Windows,[4][5][6] employing a variety of mechanisms to infect new hosts,[7] and often using complex anti-detection/stealth strategies to evade antivirus software.[8][9][10][11] Motives for creating viruses can include seeking profit (e.g., with ransomware), desire to send a political message, personal amusement, to demonstrate that a vulnerability exists in software, for sabotage and denial of service, or simply because they wish to explore cybersecurity issues, artificial life and evolutionary algorithms.
+
+=== Worm
+
+A computer worm is a standalone malware computer program that replicates itself in order to spread to other computers.
+Often, it uses a computer network to spread itself, relying on security failures on the target computer to access it.
+Worms almost always cause at least some harm to the network, even if only by consuming bandwidth, whereas viruses almost always corrupt or modify files on a targeted computer.
+
+=== Trojan horse
+
+A computer worm is a standalone malware computer program that replicates itself in order to spread to other computers.
+Often, it uses a computer network to spread itself, relying on security failures on the target computer to access it.
+Worms almost always cause at least some harm to the network, even if only by consuming bandwidth, whereas viruses almost always corrupt or modify files on a targeted computer.
+
+=== Ransomware
+
+Ransomware is a type of malware from cryptovirology that threatens to publish the victim's data or perpetually block access to it unless a ransom is paid.
+While some simple ransomware may lock the system in a way which is not difficult for a knowledgeable person to reverse, more advanced malware uses a technique called cryptoviral extortion, in which it encrypts the victim's files, making them inaccessible, and demands a ransom payment to decrypt them.[1][2][3][4] In a properly implemented cryptoviral extortion attack, recovering the files without the decryption key is an intractable problem – and difficult to trace digital currencies such as Ukash or Bitcoin and other cryptocurrency are used for the ransoms, making tracing and prosecuting the perpetrators difficult.
+
+Ransomware attacks are typically carried out using a Trojan that is disguised as a legitimate file that the user is tricked into downloading or opening when it arrives as an email attachment.
+However, one high-profile example, the "WannaCry worm", travelled automatically between computers without user interaction.[5]
+
+Starting from around 2012 the use of ransomware scams has grown internationally.[6][7][8] There were 181.5 million ransomware attacks in the first six months of 2018. This marks a 229% increase over this same time frame in 2017.[9] In June 2014, vendor McAfee released data showing that it had collected more than double the number of samples of ransomware that quarter than it had in the same quarter of the previous year.[10] CryptoLocker was particularly successful, procuring an estimated US$3 million before it was taken down by authorities,[11] and CryptoWall was estimated by the US Federal Bureau of Investigation (FBI) to have accrued over US$18 million by June 2015.[12]
+
+=== Spyware
+
+Spyware is a software that aims to gather information about a person or organization, sometimes without their knowledge, and send such information to another entity without the consumer's consent.
+Furthermore, spyware asserts control over a device without the consumer's knowledge, sending confidential information to another entity with the consumer's  +
+consent, through cookies.
+
+=== Adware
+
+Adware, or advertising-supported software, is software that generates revenue for its developer by automatically generating online advertisements in the user interface of the software or on a screen presented to the user during the installation process.
+The software may generate two types of revenue: one is for the display of the advertisement and another on a "pay-per-click" basis, if the user clicks on the advertisement.
+The software may implement advertisements in a variety of ways, including a static box display, a banner display, full screen, a video, pop-up ad or in some other form.
+
+The 2003 Microsoft Encyclopedia of Security and some other sources use the term "adware" differently: "any software that installs itself on your system without your knowledge and displays advertisements when the user browses the Internet",[1] i.e., a form of malware.
+
+Some software developers offer their software free of charge, and rely on revenue from advertising to recoup their expenses and generate income.
+Some also offer a version of the software at a fee without advertising.
+
+The software's functions may be designed to analyze the user's location and which Internet sites the user visits and to present advertising pertinent to the types of goods or services featured there.
+
+=== Scareware
+
+Scareware is a form of malware which uses social engineering to cause shock, anxiety, or the perception of a threat in order to manipulate users into buying unwanted software.
+Scareware is part of a class of malicious software that includes rogue security software, ransomware and other scam software that tricks users into believing their computer is infected with a virus, then suggests that they download and pay for fake antivirus software to remove it.[1] Usually the virus is fictional and the software is non-functional or malware itself.[2] According to the Anti-Phishing Working Group, the number of scareware packages in circulation rose from 2,850 to 9,287 in the second half of 2008.[3] In the first half of 2009, the APWG identified a 585% increase in scareware programs[4]
+
+The "scareware" label can also apply to any application or virus which pranks users with intent to cause anxiety or panic.
+
+
+
+
+
+
+
+
+
+
+
+
