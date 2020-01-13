@@ -1,13 +1,18 @@
 ---
 ---
 
-.literalblock, .listingblock {
+.literalblock {
   padding: 10px;
   background-color: black;
   color: white;
   border-radius: 5px;
-  pre, code {
+  pre {
     color: white;
     margin-bottom: 0;
   }
+}
+
+.listingblock pre {
+  padding: 10px;
+  border-radius: 5px;
 }

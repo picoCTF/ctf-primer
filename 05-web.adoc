@@ -57,7 +57,7 @@ If you read the html code and try to analyze its content, you would realize the 
 
 - The title shown in that tab of the browser “This is a picoCTF html Example”, appears there because you put that text inside in the `<title></title>` tags.
 - `<h1>` Is used to create a big heading
-- `<h2``>`` creates a heading a little smaller than <h1>
+- `<h2>` creates a heading a little smaller than <h1>
 - The `<header>` tags are used to group introductory content, in this case the title, but if you remove this tag, you will not see much change in our page. Do the experiment of removing it. If you only remove the opening or closing tag, that would cause and html error, so make sure to delete the opening tag and closing tag.
 - The `<body>` tags are used to group the main content of the page. Also, if you remove them, you will not see much change in our page.
 
