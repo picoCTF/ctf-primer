@@ -301,7 +301,7 @@ Create a new user that has your name, but instead of the description has the fol
 
 If you navigate this link again, you will see your javascript code triggered:
 
-http://www.samuelsabogalpardo.com/pico/tableusers.php[http://www.samuelsabogalpardo.com/pico/tableusers.php, window="_blank"]
+http://primer.picoctf.com/vuln/web/tableusers.php[http://primer.picoctf.com/vuln/web/tableusers.php, window="_blank"]
 
 Like this:
 
