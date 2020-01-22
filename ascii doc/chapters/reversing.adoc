@@ -1,0 +1,13 @@
+
+
+== Reverse Engineering
+
+Reversing finds the most important parts of software quickly and understands
+them deeply. Though it is a specific and rare set of skills, there are a myriad
+of ways to use the knowledge it yields. One may exploit software or fix it,
+create malware or exterminate it, bypass protections or enhance them. A good
+reverser understands the aspects of software that the authors did not expect
+anyone else to understand, and a master reverser understands things about
+software that the authors of it know nothing about.
+
+
