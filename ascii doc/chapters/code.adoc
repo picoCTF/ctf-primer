@@ -1,0 +1,12 @@
+// LT: So my bit here I took out of my reversing chapter and stuck it here
+// because it seems like it would be more cohesive to be in a chapter dedicated
+// to coding (perhaps more abstractly than code considered in your web
+// chapter). I'd like to point my reversing chapter to this bit on "Levels of
+// Code" but not have it inline with the more reversing-centric material
+
+//  Levels of Code outline (originally in reversing outline)
+//    High-level Languages
+//    Low-level Languages
+//    Intermediate Representation (IR)
+//    Assembly & ISA’s
+//    Machine Instructions

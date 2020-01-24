@@ -1,15 +1,10 @@
-//Reversing Outline from Textbook0 Google Doc in picoCTF shared Google drive
+//Reversing Outline from Textbook0 Google Doc in picoCTF shared drive
 //  The Worlds of Reversing
 //    Software Debugging
 //    Cracking
 //    Corporate Espionage
 //    Malware Analysis
-//  Levels of Code
-//    High-level Languages
-//    Low-level Languages
-//    Intermediate Representation (IR)
-//    Assembly & ISA’s
-//    Machine Instructions
+//[LT:moved to code.adoc] Levels of Code
 //  Lifting Machine Instructions
 //    Disassembly
 //    Decompiling
