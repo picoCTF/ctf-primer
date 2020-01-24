@@ -8,6 +8,60 @@ of ways to use the knowledge it yields. One may exploit software or fix it,
 create malware or exterminate it, bypass protections or enhance them. A good
 reverser understands the aspects of software that the authors did not expect
 anyone else to understand, and a master reverser understands things about
-software that the authors of it know nothing about.
+software that even the authors of it know nothing about.
+
+=== Linguistics, Etymology & our Predecessors
+
+TIP: Optional section. BLUF: Reversing has existed for centuries and has always
+meant deconstructing something man-made to understand it better.
+
+I'm a bit of a history buff and I greatly enjoy the origins of words as well.
+This section started with finding a good definition of "reverse engineering,"
+but inevitably, it dredged up more than just that!
+
+I may have marked this section optional, but if I did not think it was
+important, I would not have written it at all. Understanding the origin of the
+term and how those who have gone before us practiced the discipline is not an
+exercise in optimizing proficiency in modern reversing techniques but rather an
+exercise in understanding what is possible when applying an ancient discipline
+to a new medium, and perhaps avoiding some pitfalls that our predecessors did
+not.
+
+.On the Reliability of Wikipedia
+[NOTE]
+It is important to note that while Wikipedia is not a great source for
+say, a history paper, it tends to very often be an excellent source of
+knowledge for sciences, esp. "arcane" ones like computer security. Of course,
+even for these subjects, using the Wikipedia article's sources are even better
+still!
+
+I think Wikipedia's definition of "reverse engineering" is really good.
+Dictionary definitions I've seen tend to create different definitions for
+reverse engineering machines versus software. The Wikipedia article at the time
+of this writing captures both well. I have paraphrased it below:
+
+.A good definition of Reverse Engineering, derived from Wikipedia article
+[quote]
+____
+Reverse engineering is the process by which a man-made object, entity, or
+artifact is deconstructed to reveal its designs, architecture, or to extract
+knowledge.
+____
+
+
+=== Levels of Software
+
+
+
+=== Profiles of Reversers
+
+As intimated in the introductory paragraph to reversing, in spite of how
+specific reverse engineering skills are, there are many ways in which these
+skills can be used and for very different goals. The next secitons cover some
+of the most common profiles for reverse engineering in the world of software.
+Although there are different goals for each profile, the means to them is the
+same: gaing deeper understanding of software by reverse engineering.
+
+==== The Debugger
 
 
