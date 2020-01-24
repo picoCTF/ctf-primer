@@ -10,6 +10,16 @@ reverser understands the aspects of software that the authors did not expect
 anyone else to understand, and a master reverser understands things about
 software that even the authors of it know nothing about.
 
+IMPORTANT: In the context of CTF's, *reversing* typically means analyzing a
+software artifact to discover its vulnerabilities, hidden information, or
+dormant functionality.
+
+The next section covers the definition and history of the discipline in much
+more depth. Feel free to skip that section, and go straight to our
+consideration of the most common high-level goals for reverse engineering, or
+go straight to the next section to get into the details of common challenges in
+reversing.
+
 === Linguistics, Etymology & our Predecessors
 
 TIP: Optional section. BLUF: Reversing has existed for centuries and has always
