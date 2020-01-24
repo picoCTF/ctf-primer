@@ -1,0 +1,21 @@
+//Forensics outline from Textbook0 Google Doc on shared picoCTF drive
+//  The Worlds of Forensics
+//    As a Profession
+//    As a Capture-The-Flag Competition Category
+//  Leading an Investigation
+//    The Intuitive Leap
+//    Courage with Small Leads
+//    Relating Disparate Evidence
+//    Getting Unstuck by Phoning a Friend
+//  The Knowledge of Digital Structures
+//    Bits, Nibbles, Bytes, Words, Double Words, Quad Words
+//    Hardware of Storage Mediums (Hard Drives, Disks, etc.)
+//    Software of Storage Systems (Filesystems, Memory Management, etc.)
+//    Protocols of Communication Systems (TCP & other packet analysis)
+//  Tools, Techniques & Procedures of Adversaries
+//    Destruction of Hardware
+//    Timestamp Manipulation
+//    File Deletion
+//    Hiding Files
+//    Steganography
+
