@@ -1,0 +1,90 @@
+//Shell outline
+//What is the shell?
+//Why is it powerful?
+//How is it the same as a pointing interface?
+//How is it different from a pointing interface?
+//How does one get a shell?
+
+//-----------------------------------------------------------------------------
+== The Shell
+[[shl]]
+
+//-----------------------------------------------------------------------------
+=== Symbol of the Hacker
+[[shl-symbol-of-the-hacker]]
+
+A blank, black screen and blinking cursor. Lines and lines of scrolling text
+and someone in front of that screen who seemingly understands an
+incomprehensible flow of information. That is the shell.
+
+The shell has many other names: the terminal, the command prompt, bash...
+Powershell, if you're looking at Windows and feeling blue. Each name has its
+own nuances. But that doesn't matter right now. What matters is that there is
+the interface to computing devices that nearly all people use, and then there
+is the shell.
+
+If you've come here to get a shell and don't care for much else, then you
+should skip to the <<shl-get-a-shell,Get a Shell>> section. Be warned that the
+shell is more powerful than the usual way of interacting with a device.
+Deleting files is permanent in the shell, any file can be accessed at any
+moment in the shell, and hopefully it's not far fetched to assert that those
+two things are a dangerous combination.
+
+
+//-----------------------------------------------------------------------------
+=== Got Shell?
+[[shl-got-shell]]
+
+Using a computer or smart device happens in 1 of 2 ways:
+
+1. Using a pointer such as a mouse, touchpad or finger to select apps or buttons
+2. Using keys on a keyboard to enter simple or complex commands (the Shell)
+
+Thankfully, there are TLA's (Three Letter Acronyms) for both of the methods
+described above:
+
+1. GUI. Pronounced "gooey," stands for Graphical User Interface
+2. CLI. Sounded out: "See-El-Eye," stands for Command Line Interface
+
+These acronyms are pretty good as far as acronyms go. We will refer to the
+shell by many names, perhaps sometimes even by the CLI initialism. The GUI
+doesn't have as nice of a name as the shell, so we will probably use GUI to
+briefly refer to the interface that everyone knows about on computing devices
+that is driven by a pointer on a screen.
+
+Below is a screenshot of a shell after successful login and before the user as
+typed in any 
+
+[.text-center]
+image::../images/shl-1-first-look-shell.png[]
+
+\[explanation of user/machine/folder/$\]
+
+//-----------------------------------------------------------------------------
+=== What the Shell!?
+[[shl-what-the-shell]]
+//learning curve with the shell
+
+
+
+//-----------------------------------------------------------------------------
+=== Get a Shell
+[[shl-get-a-shell]]
+Cybersecurity is a topic that is most deeply learned by listening *and* doing.
+For this reason, I advise you to create a picoCTF 2019 account at this time if
+you have not already. Beyond providing 120+ security challenges in helpful
+learning ramps, every picoCTF 2019 account gets a user on a Linux server, which
+can only be accessed with a shell. Register here:
+
+//TODO: add lots of screenshots!!! 
+//      (Might be the first time is interacting with a shell)
+https://2019game.picoctf.com/
+
+After successfully registering, a web shell can be accessed at the URL below.
+Use the same  user name and password that you registered on the picoCTF 2019
+website with.
+
+https://2019game.picoctf.com/shell
+
+Follow the instructions to effectively login in twice, which is only needed the
+first login. After that, logging in once will get you into the shell server.
