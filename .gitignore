@@ -1,0 +1,4 @@
+*.swp
+*~
+
+ascii doc/chapters/testing-output/*
