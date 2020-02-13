@@ -12,6 +12,8 @@
 //-----------------------------------------------------------------------------
 === Symbol of the Hacker
 [[shl-symbol-of-the-hacker]]
+//TODO:put animation here of terminal prompt w blinking cursor!
+//TODO:consider using hacker typer to demonstrate "flow of info"
 
 A blank, black screen and blinking cursor. Lines and lines of scrolling text
 and someone in front of that screen who seemingly understands an
@@ -53,12 +55,32 @@ briefly refer to the interface that everyone knows about on computing devices
 that is driven by a pointer on a screen.
 
 Below is a screenshot of a shell after successful login and before the user as
-typed in any 
+typed in any commands.
 
+[[first-look,First look at a new shell]]
+.The shell waiting for a command
 [.text-center]
-image::../images/shl-1-first-look-shell.png[]
+image::images/shl-1-first-look-shell.png[]
 
-\[explanation of user/machine/folder/$\]
+In the picture above, there is a lot of empty space, and even the line of text
+that exists, does not provide a lot of clarity. The situation is simpler than 
+how it looks. There are only 3 pieces of information in the screenshot above,
+and you would likely recognize at least one of them if it were you who logged 
+on:
+
+1. `Q0h313th`
+  * The user named "Q0h313th" is logged into this shell
+2. `pico-2019-shell1`
+  * The shell is on the computer called "pico-2019-shell1"
+3. `~`
+  * The shell is parked in Q0h313th's home directory on pico-2019-shell1
+  * `~` is just shorthand for `/home/Q0h313th/`
+//TODO:this merits further exposition for the curious.. it'd be fun to have a
+//little rabbit icon to click on to go down rabbitholes (maybe like to good
+//Google-Fu??)
+
+//TODO:consider wrapping up first pass of this chapter by leaning on what
+//exists in Marty's learning guides
 
 //-----------------------------------------------------------------------------
 === What the Shell!?
