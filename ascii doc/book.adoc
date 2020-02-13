@@ -4,4 +4,6 @@
 :sectnums:
 include::chapters/intro.adoc[]
 include::chapters/web.adoc[]
+include::chapters/sql.adoc[]
+include::chapters/python.adoc[]
 
