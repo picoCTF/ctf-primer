@@ -3,5 +3,9 @@
 :icons: font
 :sectnums:
 include::chapters/intro.adoc[]
+include::chapters/shell.adoc[]
+include::chapters/python.adoc[]
 include::chapters/web.adoc[]
+//include::chapters/sql.adoc[]
+
 

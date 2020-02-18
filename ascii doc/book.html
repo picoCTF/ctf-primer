@@ -443,12 +443,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_introduction">1. Introduction</a></li>
-<li><a href="#_web_exploits">2. Web Exploits</a>
+<li><a href="#_the_shell">2. The Shell</a>
 <ul class="sectlevel2">
-<li><a href="#_html">2.1. Html</a></li>
-<li><a href="#_javascript">2.2. JavaScript</a></li>
-<li><a href="#_server_code">2.3. Server code</a></li>
-<li><a href="#_cross_site_scripting_xss">2.4. Cross Site Scripting (XSS)</a></li>
+<li><a href="#shl">2.1. Symbol of the Hacker</a></li>
+<li><a href="#_got_shell">2.2. Got Shell?</a></li>
+<li><a href="#_what_the_shell">2.3. What the Shell!?</a></li>
+<li><a href="#shl-what-the-shell">2.4. Get a Shell</a></li>
+</ul>
+</li>
+<li><a href="#_programming_in_python">3. Programming in python</a>
+<ul class="sectlevel2">
+<li><a href="#_lists">3.1. Lists</a></li>
+<li><a href="#_functions">3.2. Functions</a></li>
+<li><a href="#_input_and_output">3.3. Input and output</a></li>
+<li><a href="#_comments">3.4. Comments</a></li>
+<li><a href="#_try_except_and_exceptions">3.5. Try-except and exceptions</a></li>
+<li><a href="#_pass_arguments_to_a_python_program">3.6. Pass arguments to a python program</a></li>
+<li><a href="#_ascii">3.7. ASCII</a></li>
+<li><a href="#_pwn_tools">3.8. Pwn tools</a></li>
+<li><a href="#_http_requests_in_python">3.9. Http requests in python</a></li>
+</ul>
+</li>
+<li><a href="#_web_exploits">4. Web Exploits</a>
+<ul class="sectlevel2">
+<li><a href="#_html">4.1. Html</a></li>
+<li><a href="#_javascript">4.2. JavaScript</a></li>
+<li><a href="#_server_code">4.3. Server code</a></li>
+<li><a href="#_cross_site_scripting_xss">4.4. Cross Site Scripting (XSS)</a></li>
 </ul>
 </li>
 </ul>
@@ -486,15 +507,997 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_web_exploits">2. Web Exploits</h2>
+<h2 id="_the_shell">2. The Shell</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="shl">2.1. Symbol of the Hacker</h3>
+<div id="shl-symbol-of-the-hacker" class="paragraph">
+<p>A blank, black screen and blinking cursor. Lines and lines of scrolling text
+and someone in front of that screen who seemingly understands an
+incomprehensible flow of information. That is the shell.</p>
+</div>
 <div class="paragraph">
-<p>At this point, you have already learned python, so you have an idea on how a programming language works. We are more than ready to begin to learn Web!</p>
+<p>The shell has many other names: the terminal, the command prompt, bash&#8230;&#8203;
+Powershell, if you&#8217;re looking at Windows and feeling blue. Each name has its
+own nuances. But that doesn&#8217;t matter right now. What matters is that there is
+the interface to computing devices that nearly all people use, and then there
+is the shell.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;ve come here to get a shell and don&#8217;t care for much else, then you
+should skip to the <a href="#shl-get-a-shell">Get a Shell</a> section. Be warned that the
+shell is more powerful than the usual way of interacting with a device.
+Deleting files is permanent in the shell, any file can be accessed at any
+moment in the shell, and hopefully it&#8217;s not far fetched to assert that those
+two things are a dangerous combination.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_html">2.1. Html</h3>
+<h3 id="_got_shell">2.2. Got Shell?</h3>
+<div id="shl-got-shell" class="paragraph">
+<p>Using a computer or smart device happens in 1 of 2 ways:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Using a pointer such as a mouse, touchpad or finger to select apps or buttons</p>
+</li>
+<li>
+<p>Using keys on a keyboard to enter simple or complex commands (the Shell)</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
-<p>Before diving into Web Exploits, you need to understand how a website works. Many years ago, the web was used to visit static pages that did not have interactive features. They just showed information. To do a static page, it is enough to write some lines of HTML. What is HTML? First of all, it is not a programming language. Html means HyperText Markup Language, and we use it to determine the font size, colors, margins, or similar features in a web page. When an html file is accessed in a browser like Firefox, Chrome or whatever browser you like, the browser presents the text according to the html on it. Your browser can access an html file locally. Locally means that the file could be in your laptop ́s file system. Also, it could access the file remotely through the Internet. Let’s see an example of creating a simple html and access it locally:</p>
+<p>Thankfully, there are TLA&#8217;s (Three Letter Acronyms) for both of the methods
+described above:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>GUI. Pronounced "gooey," stands for Graphical User Interface</p>
+</li>
+<li>
+<p>CLI. Sounded out: "See-El-Eye," stands for Command Line Interface</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>These acronyms are pretty good as far as acronyms go. We will refer to the
+shell by many names, perhaps sometimes even by the CLI initialism. The GUI
+doesn&#8217;t have as nice of a name as the shell, so we will probably use GUI to
+briefly refer to the interface that everyone knows about on computing devices
+that is driven by a pointer on a screen.</p>
+</div>
+<div class="paragraph">
+<p>Below is a screenshot of a shell after successful login and before the user as
+typed in any</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/shl-1-first-look-shell.png" alt="shl 1 first look shell">
+</div>
+</div>
+<div class="paragraph">
+<p>\[explanation of user/machine/folder/$\]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_the_shell">2.3. What the Shell!?</h3>
+
+</div>
+<div class="sect2">
+<h3 id="shl-what-the-shell">2.4. Get a Shell</h3>
+<div id="shl-get-a-shell" class="paragraph">
+<p>Cybersecurity is a topic that is most deeply learned by listening <strong>and</strong> doing.
+For this reason, I advise you to create a picoCTF 2019 account at this time if
+you have not already. Beyond providing 120+ security challenges in helpful
+learning ramps, every picoCTF 2019 account gets a user on a Linux server, which
+can only be accessed with a shell. Register here:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://2019game.picoctf.com/" class="bare">https://2019game.picoctf.com/</a></p>
+</div>
+<div class="paragraph">
+<p>After successfully registering, a web shell can be accessed at the URL below.
+Use the same  user name and password that you registered on the picoCTF 2019
+website with.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://2019game.picoctf.com/shell" class="bare">https://2019game.picoctf.com/shell</a></p>
+</div>
+<div class="paragraph">
+<p>Follow the instructions to effectively login in twice, which is only needed the
+first login. After that, logging in once will get you into the shell server.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_programming_in_python">3. Programming in python</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A computer program is a set of instructions that allow us to do a task automatically on a computer. We can make a computer program in a programming language. Computer programs are generally called "software". With a computer program we can do all sorts of things. Some examples are calculators, video games, text processors, browsers, and all the things you have ever used in a computer. Nowadays, there are computers everywhere. Any device such as a cell phone, smart watch, or modern car is running software that was made in programming. To begin, we are going to learn python, which is one of the easiest programming languages to learn.</p>
+</div>
+<div class="paragraph">
+<p>Let’s begin writing python! We are not going to explain each detail of python independently. For that, you could read the python documentation, which is located here:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.python.org/2/tutorial/index.html" target="_blank" rel="noopener">https://docs.python.org/2/tutorial/index.html</a></p>
+</div>
+<div class="paragraph">
+<p>However, if you don’t know any programming, going directly to the documentation can be overwhelming. We are just going to explain some parts of python which are a good start to begin to write your own programs to exploit software. We do this by making examples that achieve one objective and we explain how they work along the way. This will also allow you to read code written by someone else, of course, with the help of google if they use elements that you did not know previously.</p>
+</div>
+<div class="paragraph">
+<p>When you are learning a programming language, there is a tradition in which the first program you write simply prints "Hello World!"" on the screen. We will be using python 2, the number 2 is the version of python. There are already higher versions, however, we are using python 2 because it is compatible with the exploitation libraries we will teach. Nonetheless, after you learn python 2, it is very easy to learn python 3. Let’s start doing the "hello world!" program.</p>
+</div>
+<div class="paragraph">
+<p>Open the shell server, and create a folder called "python_examples". You can do it with the following line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">mkdir</span> <span class="tok-n">python_examples</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, access that folder using</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">cd</span> <span class="tok-n">python_examples</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create a file called "helloworld.py", you can do it with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">vim</span> <span class="tok-n">helloworld</span><span class="tok-o">.</span><span class="tok-n">py</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remember that in vim to begin to type you must press ‘i’. To make our ‘hello world!’ program in python, it is just required one line of code! Simply write this on the file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">print</span> <span class="tok-s2">&quot;Hello World!&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now save the file in vim by pressing escape and then write</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-p">:</span><span class="tok-n">wq</span><span class="tok-err">!</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to save and close vim.</p>
+</div>
+<div class="paragraph">
+<p>Run the program on the terminal with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">python</span> <span class="tok-n">helloworld</span><span class="tok-o">.</span><span class="tok-n">py</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see that is printed "Hello World!"" on the screen when you run it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="txt"><span></span>python helloworld.py
+Hello World!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That was our first program in python!</p>
+</div>
+<div class="paragraph">
+<p>Python, as any other programming language, has variables. A variable can hold different types of data. What we just printed on the screen, was a string of characters. When we enclose something in quotes, we are telling python it is a string of characters. A string is a data type. In python, to create a variable we simply choose a name and assign the value that we want. For example, we are going to create a variable called my_string, and we are going to assign to that variable the value "Hello World!"</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">my_string</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;Hello World!&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That line of code makes the variable my_string equals to "Hello World!". In python programming, the symbol = is used to assign the value from the right side of the equal to the variable at the left side. Variables can have any name we like, except some specific words that are reserved for python instructions. For example, the word 'print' is reserved, so you cannot use it as a variable name.</p>
+</div>
+<div class="paragraph">
+<p>Now, if we print the variable, it should print "Hello World!". Do that experiment! The python script should look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">my_string</span><span class="tok-o">=</span><span class="tok-s2">&quot;Hello World!&quot;</span>
+<span class="tok-k">print</span> <span class="tok-n">my_string</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run it and you will see "Hello World!"" printed on the screen again.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="txt"><span></span>Hello World!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also assign numbers to variables and do mathematical operations between them. Let’s make a simple program that calculates the area of a square. Create a file called "area.py" and write the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">side1</span><span class="tok-o">=</span><span class="tok-mi">4</span>
+<span class="tok-n">side2</span><span class="tok-o">=</span><span class="tok-mi">8</span>
+<span class="tok-n">result</span><span class="tok-o">=</span><span class="tok-n">side1</span><span class="tok-o">*</span><span class="tok-n">side2</span>
+<span class="tok-k">print</span> <span class="tok-n">result</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you run that script, what do you think is going to print?</p>
+</div>
+<div class="paragraph">
+<p>When you run it you should see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-mi">32</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Those were very trivial examples. Now, suppose you want to print a list of 20 numbers that starts at 0 and ends at 19. We can do that in just a couple of lines, instead of writing 20 prints! Create a file called loop.py and use the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-mi">20</span><span class="tok-p">):</span>
+    <span class="tok-k">print</span> <span class="tok-n">i</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run it and you should see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-mi">0</span>
+<span class="tok-mi">1</span>
+<span class="tok-mi">2</span>
+<span class="tok-mi">3</span>
+<span class="tok-mi">4</span>
+<span class="tok-mi">5</span>
+<span class="tok-mi">6</span>
+<span class="tok-mi">7</span>
+<span class="tok-mi">8</span>
+<span class="tok-mi">9</span>
+<span class="tok-mi">10</span>
+<span class="tok-mi">11</span>
+<span class="tok-mi">12</span>
+<span class="tok-mi">13</span>
+<span class="tok-mi">14</span>
+<span class="tok-mi">15</span>
+<span class="tok-mi">16</span>
+<span class="tok-mi">17</span>
+<span class="tok-mi">18</span>
+<span class="tok-mi">19</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We have introduced the concept of a python loop. The word 'for' is used to declare a 'for loop', which is a loop that iterates in a range of numbers. The 'i' next to 'for', is a variable that will be incremented on each iteration on a range of 20. We can change the range for a bigger one or a smaller one by changing the number inside the parenthesis. Note that a line of code will be inside the loop, if it is indented by four spaces. For example, run this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">):</span>
+    <span class="tok-k">print</span> <span class="tok-s2">&quot;I am inside the loop&quot;</span>
+    <span class="tok-k">print</span> <span class="tok-n">i</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;I am OUTSIDE&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">0</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">1</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">2</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">3</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">4</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">5</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">6</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">7</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">8</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">inside</span> <span class="tok-n">the</span> <span class="tok-n">loop</span>
+<span class="tok-mi">9</span>
+<span class="tok-n">I</span> <span class="tok-n">am</span> <span class="tok-n">OUTSIDE</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the string "I am OUTSIDE" was printed only once, because it is outside the loop. To be inside the loop the code need to be indented by 4 spaces, as we said. Once we use a line of code that is not indented for the first time after the loop, that is considered the end of the loop. If you try to indent a line after the loop has finished, like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-mi">20</span><span class="tok-p">):</span>
+    <span class="tok-k">print</span> <span class="tok-s2">&quot;I am inside the loop&quot;</span>
+    <span class="tok-k">print</span> <span class="tok-n">i</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;I am outside&quot;</span>
+    <span class="tok-k">print</span> <span class="tok-s2">&quot;I am outside 2&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That would cause a syntax error when you run it. A syntax error means that the code is not complying with the way python should be written. In this case, would specifically show an indentation error:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="txt"><span></span>python helloworld.py
+  File &quot;helloworld.py&quot;, line 5
+    print &quot;I am outside 2&quot;
+    ^
+IndentationError: unexpected indent</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That happens because we put and indentation, and the for loop was already closed. Syntax errors at the beginning can happen to you by accident and you might not fix them very easily, but with a little time you will begin to fix them quickly if they happen. To practice, spot the syntax error in the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-mi">20</span><span class="tok-p">):</span>
+    <span class="tok-n">prin</span> <span class="tok-s2">&quot;I am inside the loop&quot;</span>
+    <span class="tok-k">print</span> <span class="tok-n">i</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;I am outside&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What is the error?</p>
+</div>
+<div class="paragraph">
+<p>Run it to see what happens. It will show:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="txt"><span></span>python helloworld.py
+  File &quot;helloworld.py&quot;, line 2
+    prin &quot;I am inside the loop&quot;
+                              ^
+SyntaxError: invalid syntax</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Python shows you the line with the error, but not the exact location. In this case we missed the 't' from 'print'. Another error might be that the colon from the for loop is missing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-mi">20</span><span class="tok-p">)</span>
+    <span class="tok-k">print</span> <span class="tok-s2">&quot;I am inside the loop&quot;</span>
+    <span class="tok-k">print</span> <span class="tok-n">i</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;I am outside&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In that case it will show you:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="txt"><span></span>python helloworld.py
+  File &quot;helloworld.py&quot;, line 1
+    for i in range(20)
+                     ^
+SyntaxError: invalid syntax</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you add the missing colon after range(20), the program should work. A syntax error can happen because any reserved word is misspelled; remember that reserved words are words that python recognize as instructions. For example, 'print', 'for', 'in' are reserved words in our program. Additionally, a syntax error can happen because of a missing symbol such as a colon.</p>
+</div>
+<div class="paragraph">
+<p>As a challenge, implement a program that prints your name 10 times, and below your name prints a number starting at 100 and ends at 109. The output of your program should look similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="txt"><span></span>Samuel
+100
+Samuel
+101
+Samuel
+102
+Samuel
+103
+Samuel
+104
+Samuel
+105
+Samuel
+106
+Samuel
+107
+Samuel
+108
+Samuel
+109</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Hint: use range(100,109).</p>
+</div>
+<div class="paragraph">
+<p>Once you are done with the previous challenge, fix the following program that has several syntax errors and make it work:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-n">inn</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">:</span>
+    <span class="tok-n">prnt</span> <span class="tok-n">i</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The program should print the numbers from 0 to 9.</p>
+</div>
+<div class="paragraph">
+<p>So far we have seen how a computer can repeat an instruction several times, which is something fundamental in a computer. We want computers to do repetitive tasks for us. Another fundamental function we want in computers are conditional clauses. A conditional clause means that a program will do an action only if a condition is met, or take other path if the condition is not met. For example, suppose you are printing the numbers from 0 to 9, and you want to print a particular message when the number is less than 5 and another message when the number is equal or greater than 5. You would do it in the following manner:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">):</span>
+    <span class="tok-k">if</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-mi">5</span><span class="tok-p">:</span>
+        <span class="tok-k">print</span> <span class="tok-s2">&quot;The following number is less than 5&quot;</span>
+    <span class="tok-k">if</span> <span class="tok-n">i</span><span class="tok-o">&gt;=</span><span class="tok-mi">5</span><span class="tok-p">:</span>
+        <span class="tok-k">print</span> <span class="tok-s2">&quot;The following number is greater than or equal to 5&quot;</span>
+    <span class="tok-k">print</span> <span class="tok-n">i</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run it and verify the results. We have introduced an if-clause, which is a conditional clause. Note that all the code is inside the loop. The first message is inside the first if-clause, that is only fulfilled when 'i' is less than 5. The second message is inside the second if-clause, which is only fulfilled when the 'i' is greater than or equal to 5. At last, we print the variable 'i' , which is not inside any if-clause, so it is always printed.</p>
+</div>
+<div class="paragraph">
+<p>Another way to implement this program, is using an 'else':</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">):</span>
+    <span class="tok-k">if</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-mi">5</span><span class="tok-p">:</span>
+        <span class="tok-k">print</span> <span class="tok-s2">&quot;The following number is less than 5&quot;</span>
+    <span class="tok-k">else</span><span class="tok-p">:</span>
+        <span class="tok-k">print</span> <span class="tok-s2">&quot;The following number is greater than or equal to 5&quot;</span>
+    <span class="tok-k">print</span> <span class="tok-n">i</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When then condition in an if-clause is not met, it enters the 'else' to execute what is inside. You should still see this output when you run the program:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">python</span> <span class="tok-n">helloworld</span><span class="tok-o">.</span><span class="tok-n">py</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">less</span> <span class="tok-n">than</span> <span class="tok-mi">5</span>
+<span class="tok-mi">0</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">less</span> <span class="tok-n">than</span> <span class="tok-mi">5</span>
+<span class="tok-mi">1</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">less</span> <span class="tok-n">than</span> <span class="tok-mi">5</span>
+<span class="tok-mi">2</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">less</span> <span class="tok-n">than</span> <span class="tok-mi">5</span>
+<span class="tok-mi">3</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">less</span> <span class="tok-n">than</span> <span class="tok-mi">5</span>
+<span class="tok-mi">4</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">greater</span> <span class="tok-n">than</span> <span class="tok-ow">or</span> <span class="tok-n">equal</span> <span class="tok-n">to</span> <span class="tok-mi">5</span>
+<span class="tok-mi">5</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">greater</span> <span class="tok-n">than</span> <span class="tok-ow">or</span> <span class="tok-n">equal</span> <span class="tok-n">to</span> <span class="tok-mi">5</span>
+<span class="tok-mi">6</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">greater</span> <span class="tok-n">than</span> <span class="tok-ow">or</span> <span class="tok-n">equal</span> <span class="tok-n">to</span> <span class="tok-mi">5</span>
+<span class="tok-mi">7</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">greater</span> <span class="tok-n">than</span> <span class="tok-ow">or</span> <span class="tok-n">equal</span> <span class="tok-n">to</span> <span class="tok-mi">5</span>
+<span class="tok-mi">8</span>
+<span class="tok-n">The</span> <span class="tok-n">following</span> <span class="tok-n">number</span> <span class="tok-ow">is</span> <span class="tok-n">greater</span> <span class="tok-n">than</span> <span class="tok-ow">or</span> <span class="tok-n">equal</span> <span class="tok-n">to</span> <span class="tok-mi">5</span>
+<span class="tok-mi">9</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To practice, implement a program that prints a range of 100 numbers and prints a different message when the numbers are smaller than 10, other message when the numbers are between 10 and 50, and other message when the numbers are greater than 50.</p>
+</div>
+<div class="sect2">
+<h3 id="_lists">3.1. Lists</h3>
+<div class="paragraph">
+<p>There are several data structures in python, which are simply structures to organize data in a certain manner. Different data structures have different properties. We are going to introduce one that is called a 'list', which allows us to store several values, one after the other.</p>
+</div>
+<div class="paragraph">
+<p>We create a list like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">my_list</span> <span class="tok-o">=</span> <span class="tok-p">[</span><span class="tok-s2">&quot;I&quot;</span><span class="tok-p">,</span> <span class="tok-s2">&quot;Love&quot;</span><span class="tok-p">,</span> <span class="tok-s2">&quot;picoCTF&quot;</span><span class="tok-p">]</span>
+<span class="tok-k">print</span><span class="tok-p">(</span><span class="tok-n">my_list</span><span class="tok-p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can iterate in the list to operate on each item in any way we want. For example, suppose we want to print each item of the list, we could do this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">my_list</span> <span class="tok-o">=</span> <span class="tok-p">[</span><span class="tok-s2">&quot;I&quot;</span><span class="tok-p">,</span> <span class="tok-s2">&quot;Love&quot;</span><span class="tok-p">,</span> <span class="tok-s2">&quot;picoCTF&quot;</span><span class="tok-p">]</span>
+<span class="tok-k">print</span><span class="tok-p">(</span><span class="tok-nb">len</span><span class="tok-p">(</span><span class="tok-n">my_list</span><span class="tok-p">))</span>
+<span class="tok-k">print</span><span class="tok-p">(</span><span class="tok-n">my_list</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-n">my_list</span><span class="tok-p">:</span>
+    <span class="tok-k">print</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you run that program, you should see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-mi">3</span>
+<span class="tok-p">[</span><span class="tok-s1">&#39;I&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;Love&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;picoCTF&#39;</span><span class="tok-p">]</span>
+<span class="tok-n">I</span>
+<span class="tok-n">Love</span>
+<span class="tok-n">picoCTF</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the number 3 printed is the length of the list. You can sort the list alphabetically by calling a function that is part of the list like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">my_list</span> <span class="tok-o">=</span> <span class="tok-p">[</span><span class="tok-s2">&quot;this&quot;</span><span class="tok-p">,</span> <span class="tok-s2">&quot;is&quot;</span><span class="tok-p">,</span> <span class="tok-s2">&quot;not&quot;</span><span class="tok-p">,</span><span class="tok-s2">&quot;ordered&quot;</span><span class="tok-p">,</span><span class="tok-s2">&quot;alphabetically&quot;</span><span class="tok-p">]</span>
+<span class="tok-n">my_ordered_list</span><span class="tok-o">=</span><span class="tok-n">my_list</span><span class="tok-o">.</span><span class="tok-n">sort</span><span class="tok-p">()</span>
+<span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-n">my_list</span><span class="tok-p">:</span>
+    <span class="tok-k">print</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see this output when you run that program:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">alphabetically</span>
+<span class="tok-ow">is</span>
+<span class="tok-ow">not</span>
+<span class="tok-n">ordered</span>
+<span class="tok-n">this</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, create a list of numbers, and print it backwards! Using google, it should be very easy to find how to do it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functions">3.2. Functions</h3>
+<div class="paragraph">
+<p>If you have a piece of code that you want to use often, copy pasting that piece of code is a bad idea because your code gets longer and for a human becomes harder to read. On the other hand, if you want to make a modification in that piece of code, you would have to modify every part in which you copy and pasted that code. We can overcome that by using functions. A function can receive parameters, which are variables you pass to the function so operations with them can be done. Additionally, a function can return a value, which is the result after all the operations are done. Let’s see an example of a function that verifies if a number is even or odd. If it is even, it will return True. If it is odd, it will return False. The program receives any number you input and verifies that. Note that the '%' operator in the code, is the modulo operator, which calculates the remainder. In this case we calculate the remainder of x divided by 2, and compare that to zero to determine if the number is even or odd. Read the code to understand!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">def</span> <span class="tok-nf">even_odd</span><span class="tok-p">(</span> <span class="tok-n">x</span> <span class="tok-p">):</span>
+    <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">x</span> <span class="tok-o">%</span> <span class="tok-mi">2</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">):</span>
+        <span class="tok-k">return</span> <span class="tok-bp">True</span>
+    <span class="tok-k">else</span><span class="tok-p">:</span>
+        <span class="tok-k">return</span> <span class="tok-bp">False</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;Input a number:&quot;</span>
+<span class="tok-n">my_number</span> <span class="tok-o">=</span> <span class="tok-nb">input</span><span class="tok-p">()</span>
+<span class="tok-k">if</span> <span class="tok-n">is_even</span><span class="tok-p">(</span><span class="tok-n">my_number</span><span class="tok-p">):</span>
+    <span class="tok-k">print</span> <span class="tok-s2">&quot;The number is even&quot;</span>
+<span class="tok-k">else</span><span class="tok-p">:</span>
+    <span class="tok-k">print</span> <span class="tok-s2">&quot;The number is odd&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run that program and try several numbers!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_input_and_output">3.3. Input and output</h3>
+<div class="paragraph">
+<p>A program might need to have interactions with a user. For example, a calculator expects that the user enters some numbers to then do the processing. Receiving user input in a terminal is very easy in python because it has predefined functions that do it for us. The function ‘input()’ waits until the user writes something in the terminal and press enter. Note that a function can have zero parameters. Then, the function returns the string that the user wrote, and we assign it to the variable number_iterations’. Here is an example, in which we allow the user to control the number of iterations of our program:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">print</span> <span class="tok-s2">&quot;Input the number of iterations:&quot;</span>
+<span class="tok-n">number_iterations</span> <span class="tok-o">=</span> <span class="tok-nb">input</span><span class="tok-p">()</span>
+<span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-n">number_iterations</span><span class="tok-p">):</span>
+    <span class="tok-k">if</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-mi">5</span><span class="tok-p">:</span>
+        <span class="tok-k">print</span> <span class="tok-s2">&quot;The following number is less than 5&quot;</span>
+    <span class="tok-k">else</span><span class="tok-p">:</span>
+        <span class="tok-k">print</span> <span class="tok-s2">&quot;The following number is greater than or equal to 5&quot;</span>
+    <span class="tok-k">print</span> <span class="tok-n">i</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run that program. When you run it, it will do nothing until you input a number in the terminal and press enter.</p>
+</div>
+<div class="paragraph">
+<p>In other cases, the data we want to input does not have to come from the user. It could come from a file. We can read all the lines from a file using the function 'open'. Create a file called “pico.txt” in the same folder that you are creating the python programs. Then, in that file copy and paste this text:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-s2">&quot;The Cosmos is all that is or was or ever will be.</span>
+<span class="tok-n">Our</span> <span class="tok-n">feeblest</span> <span class="tok-n">contemplations</span> <span class="tok-n">of</span> <span class="tok-n">the</span> <span class="tok-n">Cosmos</span> <span class="tok-n">stir</span> <span class="tok-n">us</span>
+<span class="tok-o">--</span> <span class="tok-n">there</span> <span class="tok-ow">is</span> <span class="tok-n">a</span> <span class="tok-n">tingling</span> <span class="tok-ow">in</span> <span class="tok-n">the</span> <span class="tok-n">spine</span><span class="tok-p">,</span>
+<span class="tok-n">a</span> <span class="tok-n">catch</span> <span class="tok-ow">in</span> <span class="tok-n">the</span> <span class="tok-n">voice</span><span class="tok-p">,</span>
+<span class="tok-n">a</span> <span class="tok-n">faint</span> <span class="tok-n">sensation</span><span class="tok-p">,</span>
+<span class="tok-k">as</span> <span class="tok-k">if</span> <span class="tok-n">a</span> <span class="tok-n">distant</span> <span class="tok-n">memory</span><span class="tok-p">,</span>
+<span class="tok-n">of</span> <span class="tok-n">falling</span> <span class="tok-kn">from</span> <span class="tok-nn">a</span> <span class="tok-nn">great</span> <span class="tok-nn">height.</span>
+<span class="tok-n">We</span> <span class="tok-n">know</span> <span class="tok-n">we</span> <span class="tok-n">are</span> <span class="tok-n">approaching</span> <span class="tok-n">the</span> <span class="tok-n">greatest</span> <span class="tok-n">of</span> <span class="tok-n">mysteries</span><span class="tok-o">.</span><span class="tok-s2">&quot; Carl Sagan</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Save the file. Now, in the same folder, create a program with the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">filepath</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;pico.txt&quot;</span>
+<span class="tok-n">cnt</span> <span class="tok-o">=</span> <span class="tok-mi">1</span>
+<span class="tok-k">with</span> <span class="tok-nb">open</span><span class="tok-p">(</span><span class="tok-n">filepath</span><span class="tok-p">,</span> <span class="tok-s2">&quot;r&quot;</span><span class="tok-p">)</span> <span class="tok-k">as</span> <span class="tok-n">my_file</span><span class="tok-p">:</span>
+    <span class="tok-k">for</span> <span class="tok-n">line</span> <span class="tok-ow">in</span> <span class="tok-n">my_file</span><span class="tok-p">:</span>
+        <span class="tok-k">print</span> <span class="tok-n">cnt</span>
+        <span class="tok-k">print</span> <span class="tok-n">line</span>
+        <span class="tok-n">cnt</span> <span class="tok-o">+=</span> <span class="tok-mi">1</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">You</span> <span class="tok-n">should</span> <span class="tok-n">see</span> <span class="tok-n">the</span> <span class="tok-n">following</span> <span class="tok-n">output</span> <span class="tok-n">when</span> <span class="tok-n">you</span> <span class="tok-n">run</span> <span class="tok-n">the</span> <span class="tok-n">program</span><span class="tok-p">:</span>
+<span class="tok-mi">1</span>
+<span class="tok-n">The</span> <span class="tok-n">Cosmos</span> <span class="tok-ow">is</span> <span class="tok-nb">all</span> <span class="tok-n">that</span> <span class="tok-ow">is</span> <span class="tok-ow">or</span> <span class="tok-n">was</span> <span class="tok-ow">or</span> <span class="tok-n">ever</span> <span class="tok-n">will</span> <span class="tok-n">be</span><span class="tok-o">.</span>
+<span class="tok-mi">2</span>
+<span class="tok-n">Our</span> <span class="tok-n">feeblest</span> <span class="tok-n">contemplations</span> <span class="tok-n">of</span> <span class="tok-n">the</span> <span class="tok-n">Cosmos</span> <span class="tok-n">stir</span> <span class="tok-n">us</span>
+<span class="tok-mi">3</span>
+<span class="tok-o">--</span> <span class="tok-n">there</span> <span class="tok-ow">is</span> <span class="tok-n">a</span> <span class="tok-n">tingling</span> <span class="tok-ow">in</span> <span class="tok-n">the</span> <span class="tok-n">spine</span><span class="tok-p">,</span>
+<span class="tok-mi">4</span>
+<span class="tok-n">a</span> <span class="tok-n">catch</span> <span class="tok-ow">in</span> <span class="tok-n">the</span> <span class="tok-n">voice</span><span class="tok-p">,</span>
+<span class="tok-mi">5</span>
+<span class="tok-n">a</span> <span class="tok-n">faint</span> <span class="tok-n">sensation</span><span class="tok-p">,</span>
+<span class="tok-mi">6</span>
+<span class="tok-k">as</span> <span class="tok-k">if</span> <span class="tok-n">a</span> <span class="tok-n">distant</span> <span class="tok-n">memory</span><span class="tok-p">,</span>
+<span class="tok-mi">7</span>
+<span class="tok-n">of</span> <span class="tok-n">falling</span> <span class="tok-kn">from</span> <span class="tok-nn">a</span> <span class="tok-nn">great</span> <span class="tok-nn">height.</span>
+<span class="tok-mi">8</span>
+<span class="tok-n">We</span> <span class="tok-n">know</span> <span class="tok-n">we</span> <span class="tok-n">are</span> <span class="tok-n">approaching</span> <span class="tok-n">the</span> <span class="tok-n">greatest</span> <span class="tok-n">of</span> <span class="tok-n">mysteries</span><span class="tok-o">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you saw, this program reads a file and enumerates each line in the output. The 'open' function has two parameters, the first one is the path of the file you want to open, and the second has a string with the letter 'r', which means that we want to <strong>r</strong>ead the file. 'my_file' is just the name of the file we want to read. Then, we can iterate over each of the lines of the file in a for loop.</p>
+</div>
+<div class="paragraph">
+<p>Note that this is all made inside a 'with' block. We use the 'with' statement before opening a file to close the file automatically after reading. Also, to handle in a simpler way possible exceptions during the execution. What that means is that when you open a file, you have to close it and make sure that is closed correctly. For example, if you do my_file.close(), that would close the file, however, imagine that along the way before calling close, something happens and you never get to the line in which you close the file, so you left it open accidentally. Later we will give you more details on exceptions. For the time being, just think of 'with' as an easy way to ensure that the file will be closed correctly.</p>
+</div>
+<div class="paragraph">
+<p>If you want to save your output in another file, you can easily do it in the following manner:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">filepath_read</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;pico.txt&quot;</span>
+<span class="tok-n">filepath_write</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;outputpico.txt&quot;</span>
+<span class="tok-n">cnt</span> <span class="tok-o">=</span> <span class="tok-mi">1</span>
+<span class="tok-k">with</span> <span class="tok-nb">open</span><span class="tok-p">(</span><span class="tok-n">filepath_read</span><span class="tok-p">,</span> <span class="tok-s2">&quot;r&quot;</span><span class="tok-p">)</span> <span class="tok-k">as</span> <span class="tok-n">file_read</span><span class="tok-p">:</span>
+    <span class="tok-k">with</span> <span class="tok-nb">open</span><span class="tok-p">(</span><span class="tok-n">filepath_write</span><span class="tok-p">,</span> <span class="tok-s2">&quot;w&quot;</span><span class="tok-p">)</span> <span class="tok-k">as</span> <span class="tok-n">file_write</span><span class="tok-p">:</span>
+       <span class="tok-k">for</span> <span class="tok-n">line</span> <span class="tok-ow">in</span> <span class="tok-n">file_read</span><span class="tok-p">:</span>
+            <span class="tok-n">file_write</span><span class="tok-o">.</span><span class="tok-n">write</span><span class="tok-p">(</span><span class="tok-nb">str</span><span class="tok-p">(</span><span class="tok-n">cnt</span><span class="tok-p">)</span><span class="tok-o">+</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-p">)</span>
+            <span class="tok-n">file_write</span><span class="tok-o">.</span><span class="tok-n">write</span><span class="tok-p">(</span><span class="tok-n">line</span><span class="tok-o">+</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-p">)</span>
+            <span class="tok-n">cnt</span> <span class="tok-o">+=</span> <span class="tok-mi">1</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;look inside your folder...&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We introduced some new concepts in this code. This:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-nb">str</span><span class="tok-p">(</span><span class="tok-n">cnt</span><span class="tok-p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Is a cast from an integer to string. We want to convert that integer into a string to be able to concatenate two strings. For example, if we have the string "hello" and the integer 123, and we want to create a string that is "hello123", we can concatenate those two values. But first, we need to convert the integer to string, otherwise python will show an error. To concatenate strings, we use the operator '+'. When we add two strings, python will concatenate them. When we add two integers, python will do a mathematical addition. To represent a break of line in a string, we use "\n".</p>
+</div>
+<div class="paragraph">
+<p>After this explanation, you should know that this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-nb">str</span><span class="tok-p">(</span><span class="tok-n">cnt</span><span class="tok-p">)</span><span class="tok-o">+</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Simply converts an integer to string, and then we concatenate a breakline to it. We do that, because the function line write() does not add a breakline to the string after it writes it, so we would have a file with a single huge line of text if we don’t do that. When you run the code, you should see no output in the terminal, but if you show the contents of the folder you are in, you should see a new file called 'outputpico.txt'. If you show the contents of that file, you should see the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="txt"><span></span>cat outputpico.txt
+1
+The Cosmos is all that is or was or ever will be.
+2
+Our feeblest contemplations of the Cosmos stir us
+3
+-- there is a tingling in the spine,
+4
+a catch in the voice,
+5
+a faint sensation,
+6
+as if a distant memory,
+7
+of falling from a great height.
+8
+We know we are approaching the greatest of mysteries.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We just learn how to read and create files!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_comments">3.4. Comments</h3>
+<div class="paragraph">
+<p>It is a good practice to explain what your code is doing in a comment. In that way, the reader of the code, that can be yourself, will understand easier what some part of the code is doing. You will realize that when you write some code, you will forget the exact logic and you will have to read it again to understand what you did. In summary, comments are something very important in programming. In python, you write a comment by adding the '#' symbol at the beginning of any line of your code. That line, will be ignored by the python interpreter as it did not exist, so it does nothing in the program. See the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">print</span> <span class="tok-s2">&quot;Input the number of iterations&quot;</span>
+<span class="tok-c1">#We read user input and assign it to the variable number_iterations</span>
+<span class="tok-n">number_iterations</span> <span class="tok-o">=</span> <span class="tok-nb">input</span><span class="tok-p">()</span>
+<span class="tok-c1">#we iterate according to the value input by the user</span>
+<span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-n">number_iterations</span><span class="tok-p">):</span>
+    <span class="tok-k">if</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-mi">5</span><span class="tok-p">:</span>
+         <span class="tok-c1"># we only print this message when the value of i is less than 5</span>
+        <span class="tok-k">print</span> <span class="tok-s2">&quot;The following number is less than 5&quot;</span>
+    <span class="tok-k">else</span><span class="tok-p">:</span>
+        <span class="tok-c1"># we only print the value of i is greater than or equal to 5</span>
+        <span class="tok-k">print</span> <span class="tok-s2">&quot;The following number is greater than or equal to 5&quot;</span>
+    <span class="tok-c1"># we always print this</span>
+    <span class="tok-k">print</span> <span class="tok-n">i</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_try_except_and_exceptions">3.5. Try-except and exceptions</h3>
+<div class="paragraph">
+<p>Exceptions are useful in hacking in several cases, for example, when you want an attack to keep executing even if an unknown error occurred. When a program tries to execute an instruction that even though it has a correct syntax, it cannot be done for some other reason, an exception is thrown. For example, if you try to divide a number by zero, that can have the correct syntax to do it, but when the program is executing that line it will stop and fail. Let’s do the experiment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">num1</span><span class="tok-o">=</span><span class="tok-mi">8</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;Input the number that will divide:&quot;</span>
+<span class="tok-n">num2</span><span class="tok-o">=</span><span class="tok-nb">input</span><span class="tok-p">()</span>
+<span class="tok-n">result</span><span class="tok-o">=</span><span class="tok-n">num1</span><span class="tok-o">/</span><span class="tok-n">num2</span>
+<span class="tok-k">print</span><span class="tok-p">(</span><span class="tok-n">result</span><span class="tok-p">)</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;The program keeps executing to do other stuff...&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see that program divides 8 by any number input by the user. If you run it and input for example 2, nothing bad will happen, and you will see this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="txt"><span></span>Input the number that will divide:
+2
+4
+The program keeps executing to do other stuff...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, run the program again and input 0, you will see this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">Input</span> <span class="tok-n">the</span> <span class="tok-n">number</span> <span class="tok-n">that</span> <span class="tok-n">will</span> <span class="tok-n">divide</span><span class="tok-p">:</span>
+<span class="tok-mi">0</span>
+<span class="tok-n">Traceback</span> <span class="tok-p">(</span><span class="tok-n">most</span> <span class="tok-n">recent</span> <span class="tok-n">call</span> <span class="tok-n">last</span><span class="tok-p">):</span>
+  <span class="tok-n">File</span> <span class="tok-s2">&quot;helloworld.py&quot;</span><span class="tok-p">,</span> <span class="tok-n">line</span> <span class="tok-mi">4</span><span class="tok-p">,</span> <span class="tok-ow">in</span> <span class="tok-o">&lt;</span><span class="tok-n">module</span><span class="tok-o">&gt;</span>
+    <span class="tok-n">result</span><span class="tok-o">=</span><span class="tok-n">num1</span><span class="tok-o">/</span><span class="tok-n">num2</span>
+<span class="tok-ne">ZeroDivisionError</span><span class="tok-p">:</span> <span class="tok-n">integer</span> <span class="tok-n">division</span> <span class="tok-ow">or</span> <span class="tok-n">modulo</span> <span class="tok-n">by</span> <span class="tok-n">zero</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An error was caused, because you cannot divide by zero. That is a rule of python and most programming languages. Your program will stop when an error happens and further lines will not be executed. In this case, you could verify that the number is not zero in an if-clause, but, for the sake of the example, let’s fix the program instead using a try-except:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">num1</span><span class="tok-o">=</span><span class="tok-mi">8</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;Input the number that will divide:&quot;</span>
+<span class="tok-n">num2</span><span class="tok-o">=</span><span class="tok-nb">input</span><span class="tok-p">()</span>
+<span class="tok-k">try</span><span class="tok-p">:</span>
+    <span class="tok-n">result</span><span class="tok-o">=</span><span class="tok-n">num1</span><span class="tok-o">/</span><span class="tok-n">num2</span>
+    <span class="tok-k">print</span><span class="tok-p">(</span><span class="tok-n">result</span><span class="tok-p">)</span>
+<span class="tok-k">except</span><span class="tok-p">:</span>
+    <span class="tok-k">print</span> <span class="tok-s2">&quot;An error has occurred, did you try to divide by zero?&quot;</span><span class="tok-p">)</span>
+<span class="tok-k">print</span><span class="tok-p">(</span><span class="tok-s2">&quot;The program keeps executing to do other stuff...&quot;</span><span class="tok-p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In our previous code, you would print the same message for any error. Try to input a string instead of 0. It will show the same message. If you want to be more specific, you can catch specific errors in the following manner:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">num1</span><span class="tok-o">=</span><span class="tok-mi">8</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;Input the number that will divide:&quot;</span>
+<span class="tok-n">num2</span><span class="tok-o">=</span><span class="tok-nb">input</span><span class="tok-p">()</span>
+<span class="tok-k">try</span><span class="tok-p">:</span>
+    <span class="tok-n">result</span><span class="tok-o">=</span><span class="tok-n">num1</span><span class="tok-o">/</span><span class="tok-n">num2</span>
+    <span class="tok-k">print</span> <span class="tok-n">result</span>
+<span class="tok-k">except</span> <span class="tok-ne">ZeroDivisionError</span><span class="tok-p">:</span>
+    <span class="tok-k">print</span> <span class="tok-s2">&quot;Do not divide by zero, that is forbidden.&quot;</span>
+<span class="tok-k">except</span> <span class="tok-ne">TypeError</span><span class="tok-p">:</span>
+    <span class="tok-k">print</span> <span class="tok-s2">&quot;Your input value must be an integer.&quot;</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;The program keeps executing to do other stuff...&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now if you input a string, it will show this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">Input</span> <span class="tok-n">the</span> <span class="tok-n">number</span> <span class="tok-n">that</span> <span class="tok-n">will</span> <span class="tok-n">divide</span><span class="tok-p">:</span>
+<span class="tok-s2">&quot;Any string&quot;</span>
+<span class="tok-n">Your</span> <span class="tok-nb">input</span> <span class="tok-n">value</span> <span class="tok-n">must</span> <span class="tok-n">be</span> <span class="tok-n">an</span> <span class="tok-n">integer</span><span class="tok-o">.</span>
+<span class="tok-n">The</span> <span class="tok-n">program</span> <span class="tok-n">keeps</span> <span class="tok-n">executing</span> <span class="tok-n">to</span> <span class="tok-n">do</span> <span class="tok-n">other</span> <span class="tok-n">stuff</span><span class="tok-o">...</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And if you input zero it will show this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">Input</span> <span class="tok-n">the</span> <span class="tok-n">number</span> <span class="tok-n">that</span> <span class="tok-n">will</span> <span class="tok-n">divide</span><span class="tok-p">:</span>
+<span class="tok-mi">0</span>
+<span class="tok-n">Do</span> <span class="tok-ow">not</span> <span class="tok-n">divide</span> <span class="tok-n">by</span> <span class="tok-n">zero</span><span class="tok-p">,</span> <span class="tok-n">that</span> <span class="tok-ow">is</span> <span class="tok-n">forbidden</span><span class="tok-o">.</span>
+<span class="tok-n">The</span> <span class="tok-n">program</span> <span class="tok-n">keeps</span> <span class="tok-n">executing</span> <span class="tok-n">to</span> <span class="tok-n">do</span> <span class="tok-n">other</span> <span class="tok-n">stuff</span><span class="tok-o">...</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that when an error occurs, the following lines inside the 'try' block will not execute. See that 'result' is not printed, and that makes sense because there was no result to print. The program jumps into the ‘except’ block immediately.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pass_arguments_to_a_python_program">3.6. Pass arguments to a python program</h3>
+<div class="paragraph">
+<p>When you call a program from the command line, it is possible to pass arguments in the same way you do with several programs in the terminal. The following program shows how to do this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-kn">import</span> <span class="tok-nn">sys</span>
+<span class="tok-k">print</span> <span class="tok-s1">&#39;Number of arguments:&#39;</span><span class="tok-p">,</span> <span class="tok-nb">len</span><span class="tok-p">(</span><span class="tok-n">sys</span><span class="tok-o">.</span><span class="tok-n">argv</span><span class="tok-p">),</span> <span class="tok-s1">&#39;arguments.&#39;</span>
+<span class="tok-k">print</span> <span class="tok-s1">&#39;Argument List:&#39;</span><span class="tok-p">,</span> <span class="tok-nb">str</span><span class="tok-p">(</span><span class="tok-n">sys</span><span class="tok-o">.</span><span class="tok-n">argv</span><span class="tok-p">)</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;The number of arguments is taken from the second argument.&quot;</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;Remember that in an array [0] is the first one, [1] is the second one.&quot;</span>
+<span class="tok-n">number_iterations</span> <span class="tok-o">=</span> <span class="tok-n">sys</span><span class="tok-o">.</span><span class="tok-n">argv</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span>
+<span class="tok-n">f</span> <span class="tok-o">=</span> <span class="tok-nb">open</span><span class="tok-p">(</span><span class="tok-s2">&quot;output2.txt&quot;</span><span class="tok-p">,</span> <span class="tok-s2">&quot;w&quot;</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-nb">int</span><span class="tok-p">(</span><span class="tok-n">number_iterations</span><span class="tok-p">)):</span>
+    <span class="tok-k">if</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-mi">5</span><span class="tok-p">:</span>
+        <span class="tok-n">f</span><span class="tok-o">.</span><span class="tok-n">write</span><span class="tok-p">(</span><span class="tok-s2">&quot;The following number is less than 5&quot;</span><span class="tok-p">)</span>
+    <span class="tok-k">else</span><span class="tok-p">:</span>
+        <span class="tok-n">f</span><span class="tok-o">.</span><span class="tok-n">write</span><span class="tok-p">(</span><span class="tok-s2">&quot;The following number is greater than or equal to 5&quot;</span><span class="tok-p">)</span>
+    <span class="tok-n">f</span><span class="tok-o">.</span><span class="tok-n">write</span><span class="tok-p">(</span><span class="tok-nb">str</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">))</span>
+<span class="tok-n">f</span><span class="tok-o">.</span><span class="tok-n">close</span><span class="tok-p">()</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;look inside your folder...&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example we introduced another way to open a file, which does not handle the close for us.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ascii">3.7. ASCII</h3>
+<div class="paragraph">
+<p>ASCII is a way in which a computer represents characters. We could say that in memory and computer only store numbers, but a program can interpret those numbers in a certain way to understand them as characters.</p>
+</div>
+<div class="paragraph">
+<p>In the following table, it is shown what number corresponds to each character in ASCII:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/4image1.png" alt="image" width="624" height="46"></span>
+Ref <a href="http://www.asciitable.com/" target="_blank" rel="noopener">http://www.asciitable.com/</a></p>
+</div>
+<div class="paragraph">
+<p>The ASCII includes all the characters that are used normally in the english language. For other languages, there is a bigger character set called Unicode.</p>
+</div>
+<div class="paragraph">
+<p>In the ASCII table, for example, you can see that the @ symbol is represented as the 64 number in decimal.</p>
+</div>
+<div class="paragraph">
+<p>The table also has a column called Hx. That means Hexadecimal, which is base 16. Decimal is base 10. What is this?</p>
+</div>
+<div class="paragraph">
+<p>The decimal base, is the one we use in everyday life. They say that it comes from the fact that humans generally have 10 fingers. So, we have 10 different symbols to represent all different numbers. In computers, it is helpful to have a base with 16 symbols, because it translates easier to binary. You probably know that most computers physically store only binary numbers, which are represented only by 0 and 1. A binary digit, is called a bit. So, computers use binary, and base 16 is easy to translate from binary for us humans.</p>
+</div>
+<div class="paragraph">
+<p>The hexadecimal base (or base 16) has the following symbols:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-mi">0</span> <span class="tok-mi">1</span> <span class="tok-mi">2</span> <span class="tok-mi">3</span> <span class="tok-mi">4</span> <span class="tok-mi">5</span> <span class="tok-mi">6</span> <span class="tok-mi">7</span> <span class="tok-mi">8</span> <span class="tok-mi">9</span> <span class="tok-n">a</span> <span class="tok-n">b</span> <span class="tok-n">c</span> <span class="tok-n">d</span> <span class="tok-n">e</span> <span class="tok-n">f</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The binary base (or base 2) has these symbols:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-mi">0</span> <span class="tok-mi">1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The decimal base (or base 10), has the following symbols:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-mi">0</span> <span class="tok-mi">1</span> <span class="tok-mi">2</span> <span class="tok-mi">3</span> <span class="tok-mi">4</span> <span class="tok-mi">5</span> <span class="tok-mi">6</span> <span class="tok-mi">7</span> <span class="tok-mi">8</span> <span class="tok-mi">9</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let’s see in python how can we use the hexadecimal representation to print characters. In a python string, you can put “\x” which is a special sequence, to tell python that the following two characters are a hexadecimal number:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-k">print</span> <span class="tok-s2">&quot;picoCTF&quot;</span>
+<span class="tok-k">print</span> <span class="tok-s2">&quot;</span><span class="tok-se">\x70\x69\x63\x6f\x43\x54\x46</span><span class="tok-s2">&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you run that program you should see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">picoCTF</span>
+<span class="tok-n">picoCTF</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check the table to see that the characters match!</p>
+</div>
+<div class="paragraph">
+<p>Challenge, print the string “I_LOVE_PICOCTF” only using hexadecimal. Note that uppercase letters are represented by a different hexadecimal number than lowercase letters.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pwn_tools">3.8. Pwn tools</h3>
+<div class="paragraph">
+<p>For binary exploitation, there is a very useful library called pwn tools:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://docs.pwntools.com/en/stable/" class="bare">http://docs.pwntools.com/en/stable/</a><span class="[.underline"><a href="http://docs.pwntools.com/en/stable/" class="bare">http://docs.pwntools.com/en/stable/</a></span>]</p>
+</div>
+<div class="paragraph">
+<p>Keep this library in mind as an important part of python for exploitation. You do not need to learn anything right now. We will teach how to use it in binary exploitation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_http_requests_in_python">3.9. Http requests in python</h3>
+<div class="paragraph">
+<p>This is an example of how you can request a web page in python. Here we are requesting the HTML of the picoCTF website. Right now, maybe you do not know HTML, so this will not make much sense to you. After you are done with the Web section, come back here a try this example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-kn">import</span> <span class="tok-nn">httplib</span>
+<span class="tok-n">conn</span> <span class="tok-o">=</span> <span class="tok-n">httplib</span><span class="tok-o">.</span><span class="tok-n">HTTPSConnection</span><span class="tok-p">(</span><span class="tok-s2">&quot;https://picoctf.com/&quot;</span><span class="tok-p">)</span>
+<span class="tok-n">conn</span><span class="tok-o">.</span><span class="tok-n">request</span><span class="tok-p">(</span><span class="tok-s2">&quot;GET&quot;</span><span class="tok-p">,</span> <span class="tok-s2">&quot;/&quot;</span><span class="tok-p">)</span>
+<span class="tok-n">r1</span> <span class="tok-o">=</span> <span class="tok-n">conn</span><span class="tok-o">.</span><span class="tok-n">getresponse</span><span class="tok-p">()</span>
+<span class="tok-k">print</span> <span class="tok-n">r1</span><span class="tok-o">.</span><span class="tok-n">status</span><span class="tok-p">,</span> <span class="tok-n">r1</span><span class="tok-o">.</span><span class="tok-n">reason</span>
+<span class="tok-c1">#200 OK</span>
+<span class="tok-n">data1</span> <span class="tok-o">=</span> <span class="tok-n">r1</span><span class="tok-o">.</span><span class="tok-n">read</span><span class="tok-p">()</span>
+<span class="tok-n">conn</span><span class="tok-o">.</span><span class="tok-n">request</span><span class="tok-p">(</span><span class="tok-s2">&quot;GET&quot;</span><span class="tok-p">,</span> <span class="tok-s2">&quot;/&quot;</span><span class="tok-p">)</span>
+<span class="tok-n">r2</span> <span class="tok-o">=</span> <span class="tok-n">conn</span><span class="tok-o">.</span><span class="tok-n">getresponse</span><span class="tok-p">()</span>
+<span class="tok-k">print</span> <span class="tok-n">r2</span><span class="tok-o">.</span><span class="tok-n">status</span><span class="tok-p">,</span> <span class="tok-n">r2</span><span class="tok-o">.</span><span class="tok-n">reason</span>
+<span class="tok-c1">#404 Not Found</span>
+<span class="tok-n">data2</span> <span class="tok-o">=</span> <span class="tok-n">r2</span><span class="tok-o">.</span><span class="tok-n">read</span><span class="tok-p">()</span>
+<span class="tok-n">conn</span><span class="tok-o">.</span><span class="tok-n">close</span><span class="tok-p">()</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After you do, or if you did the Web Section, you can query the html of your own page!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_web_exploits">4. Web Exploits</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Web exploits are a nice starting point to dive into the world of hacking. Chances are that you are familiar with a web browser, so you will feel you are working on something that you already know!</p>
+</div>
+<div class="sect2">
+<h3 id="_html">4.1. Html</h3>
+<div class="paragraph">
+<p>Before diving into Web Exploits, you need to understand how a website works. Many years ago, the web was used to visit static pages that did not have interactive features; they just showed information. To do a static page, it is enough to write some lines of HTML. What is HTML? First of all, it is not a programming language. Html means HyperText Markup Language, and we use it to determine the font size, colors, margins, or similar features in a web page. When an html file is accessed in a browser like Firefox, Chrome or whatever browser you like, the browser presents the text according to the html on it. Your browser can access an html file locally. Locally means that the file could be in your laptop or file system. In contrast, it could access the file remotely through the Internet. Let’s see an example of creating a simple html and access it locally:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -508,7 +1511,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Save the file</p>
 </li>
 <li>
-<p>Open the file in any browser. To do that, you can right click on the file, and then select “open width” and choose the browser you want. You should see a page like the following:</p>
+<p>Open the file in any browser. To do that, you can right click on the file, and then select “open with” and choose the browser you want. You should see a page like the following:</p>
 </li>
 </ol>
 </div>
@@ -571,15 +1574,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>&lt;h2&gt; creates a heading a little smaller than &lt;h1&gt;</p>
 </li>
 <li>
-<p>The &lt;header&gt; tags are used to group introductory content, in this case the title, but if you remove this tag, you will not see much change in our page. Do the experiment of removing it. If you only remove the opening or closing tag, that would cause and html error, so make sure to delete the opening tag and closing tag.</p>
+<p>The &lt;header&gt; tags are used to group introductory content, in this case the title, but if you remove this tag, you will not see much change in our page. Do the experiment of removing it. If you only remove the opening or closing tag, that would cause an html error, so make sure to delete the opening tag and closing tag.</p>
 </li>
 <li>
-<p>The &lt;body&gt; tags are used to group the main content of the page. Also, if you remove them, you will not see much change in our page.</p>
+<p>The &lt;body&gt; tags are used to group the main content of the page. Also, if you remove them, you will not see much change in our page because we have just a few things. However, in several cases you might break a page completely if you remove a tag without proper care.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Now, you must have noted the &lt;img&gt; tag is not showing any image as it should. Why? Let’s analyze the element img:</p>
+<p>NYou must have noted the &lt;img&gt; tag is not showing any image as it should. Why? Let’s analyze the element img:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -587,7 +1590,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>First you see there is not opening or closing tag, there is just one tag. This is ok for an image. As you can see, it has an <strong>attribute</strong> called ”src”, which means source. We are assigning to “src” the value “picologo.png”. Our html is gonna try to access a file called “picologo.png” in the same folder as “myFirstPage.html” is contained, which is the folder we name at first “picoexample”. There is no image called “picologo.png”, so the browser has nothing to show. Copy and paste an image to the folder and name it “picologo.png”. Don’t forget that the extension has to be ”.png”. If you successfully created the image “picologo.png” in the folder, and refresh the browser, you will see the following, of course, with your own custom image:</p>
+<p>First you see there is not opening or closing tag, there is just one tag with the slash at the right hand side. This is ok for an image. As you can see, it has an <strong>attribute</strong> called ”src”, which means source. We are assigning to “src” the value “picologo.png”. Our html is going to try to access a file called “picologo.png” in the same folder as “myFirstPage.html” is contained, which is the folder we name at first “picoexample”. There is no image called “picologo.png”, so the browser has nothing to show. Copy and paste an image to the folder and name it “picologo.png”. The extension of the image has to be ”.png”. If you have an image with a different extension, you can just use the extension you need in the "src" attribute in your html. For example, if the extension of the image you have is ".jpg" you can simply replace</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="html"><span></span><span class="tok-p">&lt;</span><span class="tok-nt">img</span> <span class="tok-na">src</span><span class="tok-o">=</span><span class="tok-s">&quot;picologo.png&quot;</span> <span class="tok-p">/&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>by</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="html"><span></span><span class="tok-p">&lt;</span><span class="tok-nt">img</span> <span class="tok-na">src</span><span class="tok-o">=</span><span class="tok-s">&quot;picologo.jpg&quot;</span> <span class="tok-p">/&gt;</span></code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>If you successfully created the image in the folder, and refresh the browser, you will see the following, of course, with your own custom image:</pre>
+</div>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="images/image22.png" alt="image" width="624" height="496"></span></p>
@@ -608,9 +1629,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_javascript">2.2. JavaScript</h3>
+<h3 id="_javascript">4.2. JavaScript</h3>
 <div class="paragraph">
-<p>To make pages more interactive, JavaScript is commonly used. JavaScript is a programming language! We can do algorithms using it. JavaScript is executed in your browser. For example, when you visit a website, the JavaScript code is downloaded along the HTML and it only executes once it is loaded in your browser. When you visit a page, you are downloading an html file and your browser interprets the tags and prints the text and images as we learned before. This image illustrates that process:</p>
+<p>To make pages more interactive JavaScript is commonly used. JavaScript is a programming language! We can do algorithms using it. JavaScript is executed in your browser. For example, when you visit a website, the JavaScript code is downloaded along the HTML and it only executes once it is loaded in your browser. When you visit a page, you are downloading an html file and your browser interprets the tags and prints the text and images as we learned before. This image illustrates that process:</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="images/image26.png" alt="image" width="624" height="357"></span></p>
@@ -650,7 +1671,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>Whatever you put inside the tags “&lt;script&gt; &lt;/script&gt;” will be tried to execute by the browser. Since JavaScript is a programming language, we should be able to do some arithmetic. Replace the string “Hello picoCTF” by an arithmetic operation, like 8*8, like this:</p>
+<p>Whatever you put inside the tags “&lt;script&gt; &lt;/script&gt;” will be tried to execute by the browser as JavaScript. Since JavaScript is a programming language, we should be able to do some arithmetic. Replace the string “Hello picoCTF” by an arithmetic operation, like 8*8, like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -678,10 +1699,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><span class="image"><img src="images/image6.png" alt="image" width="474" height="376"></span></p>
 </div>
 <div class="paragraph">
-<p>This is a very important thing! Never put a secret in your javascript code. If someone does it, that will be an open door for hacking.</p>
+<p>This is a very important thing! Never put a secret in your javascript code or html. If someone does it, that will be a vulnerability in your page. As a hacker, you can try to look for secrets on the html of a page you want to exploit.</p>
 </div>
 <div class="paragraph">
-<p>Now let’s use some more elaborated code. We are going to make a page that adds two numbers input by the user and shows the result in an alert. The code is the following:</p>
+<p>Now let’s use some more elaborated code. We are going to make a page that adds two numbers input by the user and shows the result in an alert. We will explain its code in detail later. The code is the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -709,7 +1730,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>Put it on a text file and save it and open it on a browser as usual. You should see this:</p>
+<p>Put it on a text file, save it, and open it on a browser as usual. You should see this:</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="images/image3.png" alt="image" width="492" height="390"></span></p>
@@ -721,7 +1742,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><span class="image"><img src="images/image23.png" alt="image" width="510" height="405"></span></p>
 </div>
 <div class="paragraph">
-<p>Now that you know what the code does, let’s analyze the new lines of the code. In this line we have an input tag:</p>
+<p>Now that you know what the page does, let’s analyze the new lines of the code. In this line we have an input tag:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -729,7 +1750,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see, it is of type text, and it has an “id” equal to “number1”. This “id” is something we arbitrarily define to be able to access the content of this text input in JavaScript. This line:</p>
+<p>As you can see, it is of type text, and it has an “id” with the value of “number1”. The value of the “id”, in this case "number1", is something we arbitrarily define to be able to access the content of this text input in JavaScript. This line:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -737,7 +1758,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>Is responsible for calling the function “myFunctionSum()” when the button is clicked. The function has to be defined inside the script tags. With your knowledge of programming, you should be able to read the function and understand at a general level what each line is doing:</p>
+<p>Is responsible for calling the function “myFunctionSum()” when the button is clicked. A function is just a piece of code that we can define, so whenever is called it executes the code inside. In this case, we named the function "myFunctionSum", but is is possible to give it any name. The function has to be defined inside the script tags. Try to read the function and understand at a general level what each line is doing:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -750,13 +1771,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>Modify the file to multiply the two numbers. When you are done, include a new third input number! At this point you should be able to do it on your own. Be careful with the syntax, remember that a single character wrong will break the whole code.</p>
+<p>Challenge! Modify the file to multiply the two numbers. When you are done with that, include a new third input number to multiply three different numbers! At this point you should be able to do it on your own. Be careful with the syntax, remember that a single character wrong might break the whole code.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_server_code">2.3. Server code</h3>
+<h3 id="_server_code">4.3. Server code</h3>
 <div class="paragraph">
-<p>As we said previously, javascript is executed only in the browser. But, what if you want to do calculations and store data in the remote server? For example, when you login into a Website, your user and password has to be verified on the server. The password is stored in the server and should not travel outside of it for the sake of security. If you would verify a password on JavaScript, you would be able to see it on your browser in the same way you can see any JavaScript. There are several programming languages that can be executed on the server, for example:</p>
+<p>As we said previously, javascript is executed only in the browser. But, what if you want to do calculations and store data in the remote server? For example, when you login into a Website, your user and password has to be verified on the server. The password is stored in the server and should not travel outside of it for the sake of security. If you would verify a password on JavaScript, you would be able to see it on your browser in the same way you can see any JavaScript, and that would be very insecure. There are several programming languages that can be executed on the server, for instance:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -781,10 +1802,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p>For our examples, we will begin using PHP, not because we think is a great language, but because most of the websites on the Internet use it and it is very easy to learn and deploy. As a hacker, you would generally have to learn all the languages you can because different Websites are made on different languages, as well as CTF challenges that try to simulate real life! The more a language is used, the more likely you will have to attack a website made with it. However, the vulnerabilities we will be explaining can happen in any programming language, because they are not a fault of the language, but a fault of the programmer that did the website.</p>
+<p>For our examples, we will begin using PHP, not because we think is a great language, but because a huge amount of websites on the Internet use it and it is very easy to learn and deploy. In any case, as a hacker, you would generally have to learn all the languages you can because different Websites are made on different languages, as well as CTF challenges that try to simulate real life! The more a language is used, the more likely you will have to attack a website made with it. However, the vulnerabilities we will be explaining can happen in any programming language, because they are not a fault of the language, but a fault of the programmer that did the website.</p>
 </div>
 <div class="paragraph">
-<p>Suppose you have a text file named hello.html, containing:</p>
+<p>Suppose you have a text file named hello.php, containing:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -796,7 +1817,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>If the server supports PHP, everything inside <strong>&lt;?php ?&gt;</strong> will be understood as PHP code and run by the server, not by the browser.</p>
+<p>Note that in a file with the extension .php you can mix html, javascript, and PHP code! If the server supports PHP, everything inside <strong>&lt;?php ?&gt;</strong> will be understood as PHP code and run by the server, not by the browser.</p>
 </div>
 <div class="paragraph">
 <p>Look at the following image carefully to understand what happens:</p>
@@ -811,7 +1832,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="https://www.w3schools.com/php/phptryit.asp?filename=tryphp_intro" target="_blank" rel="noopener">https://www.w3schools.com/php/phptryit.asp?filename=tryphp_intro</a></p>
 </div>
 <div class="paragraph">
-<p>Access that link, and you will see an html file with PHP code, that when is run, prints "My first PHP script!". Modify the code to additionally print the date, so below the line</p>
+<p>Access that link, and you will see at the right a file with html and PHP code, that when is run, prints "My first PHP script!". Let&#8217;s modify the code to additionally print the date, so below the line</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -841,19 +1862,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>That string echoed in PHP, has javascript code. Is the JavaScript alert shown? What happened? As expected, anything printed on php, will become an integral part of the html downloaded file, so the javascript will be executed. This opens the door for the famous attack of Cross Site Scripting (XSS).</p>
+<p>That string echoed in PHP has javascript code. Is the JavaScript alert shown? What happened? As expected, anything printed on php, will become an integral part of the html downloaded file, so the javascript will be executed. This opens the door for the famous attack of Cross Site Scripting (XSS).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_cross_site_scripting_xss">2.4. Cross Site Scripting (XSS)</h3>
+<h3 id="_cross_site_scripting_xss">4.4. Cross Site Scripting (XSS)</h3>
 <div class="paragraph">
-<p>After you Login into a Website, the Website needs a way to know that any request coming from your browser is coming from a user that previously logged in, without the need to send the user-password again. To do that, the website can send to your browser a secret random value after login. That value is generally stored in a cookie or in javascript local storage. For this example, let’s pretend it is stored in a cookie, which is simply a variable in your browser that can retain data. If a Website sets a specific cookie in your browser, your browser automatically re-sends that cookie in each request to the website. If a Website only uses cookies to retain a session, and if a hacker can steal the authentication cookie from you, they could pretend to be you! At least until the cookie expires. Note that only using cookies for autentication will open the possibility of Cross Site Request Forgery (CSRF), but this will be explained later, for now let’s focus on XSS.</p>
+<p>After you Login into a Website, the Website needs a way to know that any request coming from your browser is coming from a user that previously logged in, without the need to send the user-password again. To do that, the website can send to your browser a secret random value after login. That value is generally stored in a cookie or in javascript local storage. For this example, let’s pretend it is stored in a cookie, which is simply a variable in your browser that can retain data. If a Website sets a specific cookie in your browser, your browser automatically re-sends that cookie in each request to the website. If a Website only uses cookies to retain a session, and if a hacker can steal the authentication cookie from you, they could pretend to be you! Note that only using cookies for autentication will open the possibility of Cross Site Request Forgery (CSRF), but this will be explained later, for now let’s focus on XSS.</p>
 </div>
 <div class="paragraph">
 <p>Suppose you are a hacker in a social network. When you create your account, instead of using your name, you input javascript code. When a friend of yours visit your profile, the WebSite will try to print your name, but your name is actually javascript code, so the browser might execute that javascript code. In that way, you could execute your own javascript on your friend’s browser!</p>
 </div>
 <div class="paragraph">
-<p>When you get to execute javascript in someone else’s browser, you can read their authentication data, which can be a secret value placed on a cookie or javascript local storage after a user login. At that point, your friend’s account would probably be compromised!</p>
+<p>When you get to execute javascript in someone else’s browser, you can read their authentication data, which can be a secret value placed on a cookie or javascript local storage after a user logs in. At that point, your friend’s account would probably be compromised!</p>
 </div>
 <div class="paragraph">
 <p>An important skill to have, is to use the browser debugger. For this explanation we will use Firefox. You can download an install Firefox here:</p>
@@ -941,7 +1962,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>Let’s understand the code. The first line, imports a library called jquery that allow us to do requests and send data from javascript to a service:</p>
+<p>Let’s understand the code. The first line, imports a library called jquery:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -949,7 +1970,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>Then, we are just sending the cookie to a remote service that is made to receive cookies from this exercise. That service receive two variables: “cookie” and “hackername”. The value of the variable cookie will be “document.cookie”. Here, instead of “=”, we use “:” to assign a value to a variable. Using document.cookie you access the cookies from javascript, so that should contain the cookie you want to steal. The variable hackername simply has assigned a name. You could replace the string “YourName” with your actual name. Remember that a string has to be inside quotes in javascript.</p>
+<p>A library is simply a set of functions that allow us to do some actions in an easier manner. In this case, it allow us to do requests and send data from javascript to a server. Then, we are just sending the cookie to a remote service that is made to receive cookies from this exercise. That service receive two variables: “cookie” and “hackername”. The value of the variable cookie will be “document.cookie”. Here, instead of “=”, we use “:” to assign a value to a variable. Using document.cookie you access the cookies from javascript, so that should contain the cookie you want to steal. The variable hackername simply has  a name assigned. You could replace the string “YourName” with your actual name. Remember that a string has to be inside quotes in javascript.</p>
 </div>
 <div class="paragraph">
 <p>The function:</p>
@@ -971,13 +1992,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="http://primer.picoctf.com/vuln/web/tableusers.php" target="_blank" rel="noopener">http://primer.picoctf.com/vuln/web/tableusers.php</a></p>
 </div>
 <div class="paragraph">
-<p>When a user visits that site is when the javascript is executed and the cookie stolen. You should see the message:</p>
+<p>When a user visits that site is when the javascript is executed and the cookie is stolen. You should see the message:</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="images/image14.png" alt="image" width="624" height="380"></span></p>
 </div>
 <div class="paragraph">
-<p>If you injected scripts previously, all those scripts are stored in the web site, and will be executed in the order you injected them when the page that prints them is visited.</p>
+<p>If you injected scripts previously, all those scripts are stored in the web site and will be executed in the order you injected them when the page that prints them is visited.</p>
 </div>
 <div class="paragraph">
 <p>Now you should be able to see the cookie you stole here:</p>
@@ -989,7 +2010,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><span class="image"><img src="images/image21.png" alt="image" width="624" height="380"></span></p>
 </div>
 <div class="paragraph">
-<p>At this point you should have some understanding on how a website works. You are ready to begin to do more challenges on the pico gym for Web!</p>
+<p>At this point you should have some understanding on how a website works. You are ready to begin to do more web challenges on the picoCTF!</p>
 </div>
 </div>
 </div>
@@ -997,7 +2018,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-12 14:58:29 -0500
+Last updated 2020-02-16 15:04:00 -0500
 </div>
 </div>
 <style>
