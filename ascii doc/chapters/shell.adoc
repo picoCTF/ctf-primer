@@ -32,14 +32,14 @@ Deleting files is permanent in the shell, any file can be accessed at any
 moment in the shell, and hopefully it's not far fetched to assert that those
 two things are a dangerous combination.
 
-
 //-----------------------------------------------------------------------------
 === Got Shell?
 [[shl-got-shell]]
 
 Using a computer or smart device happens in 1 of 2 ways:
 
-1. Using a pointer such as a mouse, touchpad or finger to select apps or buttons
+1. Using a pointer such as a mouse, touchpad or finger to select apps, files,
+   or buttons
 2. Using keys on a keyboard to enter simple or complex commands (the Shell)
 
 Thankfully, there are TLA's (Three Letter Acronyms) for both of the methods
@@ -54,8 +54,8 @@ doesn't have as nice of a name as the shell, so we will probably use GUI to
 briefly refer to the interface that everyone knows about on computing devices
 that is driven by a pointer on a screen.
 
-Below is a screenshot of a shell after successful login and before the user as
-typed in any commands.
+Below is a screenshot of a shell after successful login and before the user has
+typed in any commands:
 
 [[first-look,First look at a new shell]]
 .The shell waiting for a command
@@ -67,6 +67,10 @@ that exists, does not provide a lot of clarity. The situation is simpler than
 how it looks. There are only 3 pieces of information in the screenshot above,
 and you would likely recognize at least one of them if it were you who logged 
 on:
+
+//TODO: implement simple mock terminal to provide an interactive, fun quiz,
+//      that starts to build confidence in shell
+//      looks good: https://terminal.jcubic.pl/
 
 1. `Q0h313th`
   * The user named "Q0h313th" is logged into this shell
@@ -83,30 +87,55 @@ on:
 //exists in Marty's learning guides
 
 //-----------------------------------------------------------------------------
-=== What the Shell!?
-[[shl-what-the-shell]]
-//learning curve with the shell
-
-
-
-//-----------------------------------------------------------------------------
 === Get a Shell
 [[shl-get-a-shell]]
 Cybersecurity is a topic that is most deeply learned by listening *and* doing.
 For this reason, I advise you to create a picoCTF 2019 account at this time if
 you have not already. Beyond providing 120+ security challenges in helpful
 learning ramps, every picoCTF 2019 account gets a user on a Linux server, which
-can only be accessed with a shell. Register here:
+can only be accessed with a **shell**. 
 
-//TODO: add lots of screenshots!!! 
-//      (Might be the first time is interacting with a shell)
+A note on textbook structure: many times I will provide a high level
+walkthrough for a task and also a step by step walkthrough for the same task.
+This is my attempt at accomodating different learning styles, different levels
+of experience or whatever else.  Typically, the high level walkthrough is more
+for learners who already know the basics but need a refresher or need a
+reminder about the particulars when it comes to this Primer. The step by step
+walkthrough is more for learners who have never ventured in a particular sort
+of task before. Of course, you must choose your own path here, but the safest
+bet may be to read the high level walkthrough but actually put hands to
+keyboard for the step by step walkthrough.
+
+==== High Level Walkthrough
+*Register for a picoCTF 2019 account at the link below.* You will need to
+validate the email address you provide by clicking on a link that is sent to
+it.
+
 https://2019game.picoctf.com/
 
 After successfully registering, a web shell can be accessed at the URL below.
-Use the same  user name and password that you registered on the picoCTF 2019
-website with.
+*Use the same  user name and password that you registered on the picoCTF 2019
+website to log into the shell at the link below* (or in the "Shell" tab in the
+picoCTF 2019 website) For the sake of security, you will not see your password
+as you type it in. *You will log in twice.* This is only for your first log
+in.
 
 https://2019game.picoctf.com/shell
 
-Follow the instructions to effectively login in twice, which is only needed the
-first login. After that, logging in once will get you into the shell server.
+You will know you've successfully logged into the shell if you see a very 
+similar screen as <<first-look,Q0h313th's empty prompt>>.
+
+==== Step by Step Walkthrough
+
+
+==== Debrief
+//explaining ssh a bit, pico-shell1, etc
+
+//-----------------------------------------------------------------------------
+=== What the Shell!?
+[[shl-what-the-shell]]
+//learning curve with the shell, dealing with complexity, errors and lots of 
+//typing
+
+//TODO: add links to terminal cheat sheets
+//TODO: emphasize shortcuts, man & Google fu
