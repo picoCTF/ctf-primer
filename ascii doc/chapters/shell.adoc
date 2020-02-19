@@ -1,19 +1,25 @@
-//Shell outline
-//What is the shell?
-//Why is it powerful?
-//How is it the same as a pointing interface?
-//How is it different from a pointing interface?
-//How does one get a shell?
-
 //-----------------------------------------------------------------------------
 == The Shell
 [[shl]]
+The Shell is foundational to so many parts of securing computing devices and 
+their networks. Intimidating and alluring (like most symbols enshrined by film
+makers), understanding the shell can make or break one's ability to solve 
+challenges in a capture-the-flag competition like picoCTF.
+
+To be transparent, I (LT) am still learning a lot about the shell, and I'm
+just about 10 years into it right now! This is an encouragement - anyone 
+curious enough to jump into rabbitholes here and there is always going to have
+opportunities to learn more about an amazing tool like the shell. But rest 
+assured, I was proficient in the shell long ago and it does not take very much
+time before the shell starts working for *you*.
+
+Next up, what is that mystique unique to the hacker and their shell?
 
 //-----------------------------------------------------------------------------
 === Symbol of the Hacker
 [[shl-symbol-of-the-hacker]]
-//TODO:put animation here of terminal prompt w blinking cursor!
-//TODO:consider using hacker typer to demonstrate "flow of info"
+//TODO punt :put animation here of terminal prompt w blinking cursor!
+//TODO punt :consider using hacker typer to demonstrate "flow of info"
 
 A blank, black screen and blinking cursor. Lines and lines of scrolling text
 and someone in front of that screen who seemingly understands an
@@ -63,14 +69,16 @@ typed in any commands:
 image::images/shl-1-first-look-shell.png[]
 
 In the picture above, there is a lot of empty space, and even the line of text
-that exists, does not provide a lot of clarity. The situation is simpler than 
+that exists, does not provide a lot of clarity. The situation is simpler than
 how it looks. There are only 3 pieces of information in the screenshot above,
-and you would likely recognize at least one of them if it were you who logged 
+and you would likely recognize at least one of them if it were *you* who logged
 on:
 
-//TODO: implement simple mock terminal to provide an interactive, fun quiz,
-//      that starts to build confidence in shell
-//      looks good: https://terminal.jcubic.pl/
+// TODO ssp^ punt :
+// implement simple mock terminal to provide an interactive, fun quiz, that
+// starts to build confidence in shell looks good: https://terminal.jcubic.pl/
+// TODO rn :
+// do footnotes for answers
 
 1. `Q0h313th`
   * The user named "Q0h313th" is logged into this shell
@@ -78,13 +86,19 @@ on:
   * The shell is on the computer called "pico-2019-shell1"
 3. `~`
   * The shell is parked in Q0h313th's home directory on pico-2019-shell1
-  * `~` is just shorthand for `/home/Q0h313th/`
-//TODO:this merits further exposition for the curious.. it'd be fun to have a
-//little rabbit icon to click on to go down rabbitholes (maybe like to good
-//Google-Fu??)
+  * `~` is shorthand for `/home/Q0h313th/`
+// TODO punt :
+// this merits further exposition for the curious.. it'd be fun to have a
+// little rabbit icon to click on to go down rabbitholes (maybe like to good
+// Google-Fu??)
 
-//TODO:consider wrapping up first pass of this chapter by leaning on what
-//exists in Marty's learning guides
+In terms of raw power, Q0h313th could delete every file they own on this
+machine with one command. That's almost never desireable, and I will wait to
+show this command until there is something useful and desireable to do with it.
+In terms of useful power, Q0h313th could create a copy of an entire website for
+use when there is no accessible WiFi. That's using the command `wget`.
+
+Now let's talk about getting a shell!
 
 //-----------------------------------------------------------------------------
 === Get a Shell
@@ -95,18 +109,21 @@ you have not already. Beyond providing 120+ security challenges in helpful
 learning ramps, every picoCTF 2019 account gets a user on a Linux server, which
 can only be accessed with a **shell**. 
 
-A note on textbook structure: many times I will provide a high level
-walkthrough for a task and also a step by step walkthrough for the same task.
-This is my attempt at accomodating different learning styles, different levels
-of experience or whatever else.  Typically, the high level walkthrough is more
-for learners who already know the basics but need a refresher or need a
+A note on the structure of my (LT's) chapters: many times I will provide a high
+level tutorial for a task and also a step by step walkthrough for the same
+task.  This is my attempt at accomodating different learning styles, different
+levels of experience or whatever else.  Typically, the high level walkthrough
+is more for learners who already know the basics but need a refresher or need a
 reminder about the particulars when it comes to this Primer. The step by step
 walkthrough is more for learners who have never ventured in a particular sort
 of task before. Of course, you must choose your own path here, but the safest
 bet may be to read the high level walkthrough but actually put hands to
 keyboard for the step by step walkthrough.
 
-==== High Level Walkthrough
+==== High level tutorial
+1. Gain access to a practice shell
+
+==== Step by Step Walkthrough
 *Register for a picoCTF 2019 account at the link below.* You will need to
 validate the email address you provide by clicking on a link that is sent to
 it.
@@ -122,20 +139,70 @@ in.
 
 https://2019game.picoctf.com/shell
 
+// TODO FIXME rn : take screenshot of post-pico login (lots of motd)
 You will know you've successfully logged into the shell if you see a very 
 similar screen as <<first-look,Q0h313th's empty prompt>>.
 
-==== Step by Step Walkthrough
-
-
 ==== Debrief
-//explaining ssh a bit, pico-shell1, etc
+// TODO rn : explaining ssh a bit, pico-shell1, etc (take from learning guide?)
+
 
 //-----------------------------------------------------------------------------
-=== What the Shell!?
+=== GUI-fu to Shell-fu
+[[shl-gui-fu-to-shell-fu]]
+Our first language as children, whether Spanish, English or anything else
+primarily for communication with other humans, likely took little conscious
+effort on our part. For anyone who has learned a second language, it was quite
+the opposite: very little - if anything - came naturally. Learning Shell for
+someone who has only "spoken" GUI is like learning a second language. This is
+good news and bad news. The good news is that Shell and GUI are languages for
+something you've been using for probably years, but the bad news is there is a
+whole new vocabulary with only a handful of cognates (words that sound and mean
+the same in both langauges) here and there.
+
+==== The Basics
+The basic computer operations that everyone is familiar with in GUI's can
+easily be done in the shell as well. Here's some of the most common operations
+for anyone using a computing device: 
+
+.Basic computer operations
+|===
+|Operation |GUI action |Shell action |Shell example |Note
+
+|Start app
+|Click or touch icon of app
+|Type name of app and press enter
+|`$ date`
+|Pressing the Enter key sends the command to the shell to run and return.
+
+|Open file
+|Browse to file, click
+|Use `cat` app to print file
+|`$ cat \~/my-file.txt`
+|`cat` displays all text in a file.
+
+|Download app
+|Browse app store, click
+|Use `apt` to download app
+|`$ apt install chessx`
+|Install ChessX game. The hard part was finding a relevant package name.
+|===
+
+As the table above shows, using a GUI involves browsing and clicking, while
+using a shell involves knowing a good app to use. Google has made finding the
+right app for a shell interface much easier than it was years ago. As always
+for CTF's, Google is your friend!
+
+==== What the Shell!?
 [[shl-what-the-shell]]
 //learning curve with the shell, dealing with complexity, errors and lots of 
 //typing
 
 //TODO: add links to terminal cheat sheets
 //TODO: emphasize shortcuts, man & Google fu
+
+//TODO:consider wrapping up first pass of this chapter by leaning on what
+//exists in Marty's learning guides
+//TODO :==== Common Tasks
+//      such as editing a document (nano!) (for making source code)
+//      creating code (simple shell script to make a task solution permanent)
