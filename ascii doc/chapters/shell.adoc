@@ -91,6 +91,7 @@ on:
 // this merits further exposition for the curious.. it'd be fun to have a
 // little rabbit icon to click on to go down rabbitholes (maybe like to good
 // Google-Fu??)
+// TODO rn : add exposition on separator characters in shell prompt
 
 In terms of raw power, Q0h313th could delete every file they own on this
 machine with one command. That's almost never desireable, and I will wait to
@@ -107,7 +108,7 @@ Cybersecurity is a topic that is most deeply learned by listening *and* doing.
 For this reason, I advise you to create a picoCTF 2019 account at this time if
 you have not already. Beyond providing 120+ security challenges in helpful
 learning ramps, every picoCTF 2019 account gets a user on a Linux server, which
-can only be accessed with a **shell**. 
+can only be accessed with a _shell_. 
 
 A note on the structure of my (LT's) chapters: many times I will provide a high
 level tutorial for a task and also a step by step walkthrough for the same
@@ -121,9 +122,17 @@ bet may be to read the high level walkthrough but actually put hands to
 keyboard for the step by step walkthrough.
 
 ==== High level tutorial
-1. Gain access to a practice shell
+. *Gain access to a practice shell*
+.. Register for a picoCTF 2019 account
+  * Click link in email that is sent to registered email address
+.. Register account on picoCTF 2019 shell server
+... Log in once to create account on shell server
+   * Only required for first login for your account
+... Reconnect
+... Log in again to get a shell
 
 ==== Step by Step Walkthrough
+//TODO punt : turn bold text into hyperlinks in this section
 *Register for a picoCTF 2019 account at the link below.* You will need to
 validate the email address you provide by clicking on a link that is sent to
 it.
@@ -139,12 +148,25 @@ in.
 
 https://2019game.picoctf.com/shell
 
-// TODO FIXME rn : take screenshot of post-pico login (lots of motd)
-You will know you've successfully logged into the shell if you see a very 
-similar screen as <<first-look,Q0h313th's empty prompt>>.
+You will know you've successfully logged into the shell if you see a screen
+similar to this:
+
+[[pico-successful-login,Fresh shell on pico shell server]]
+.Lots of extra info! Try the `clear` command!
+[.text-center]
+image::images/shl-2-pico-motd-login.png[]
+
+Not as sterile as the empty shell I pictured <<first-look,here>>. However, if
+you type `clear` and press enter, it will be quite pristine! All of the info
+that is pictured directly above is mostly for system administrators 
+(sysadmins). You can safely ignore it.
+
 
 ==== Debrief
-// TODO rn : explaining ssh a bit, pico-shell1, etc (take from learning guide?)
+Congratulations (esp. if this is your first time staring at a command prompt)!
+The next section focuses on demystifying the shell by relating its usage to
+devices you've probably already used for years; and if not, you'll join the
+ranks of those whose first language is Shell.
 
 
 //-----------------------------------------------------------------------------
@@ -178,7 +200,7 @@ for anyone using a computing device:
 |Open file
 |Browse to file, click
 |Use `cat` app to print file
-|`$ cat \~/my-file.txt`
+|`$ cat ~/my-file.txt`
 |`cat` displays all text in a file.
 
 |Download app
