@@ -1,19 +1,25 @@
-//Shell outline
-//What is the shell?
-//Why is it powerful?
-//How is it the same as a pointing interface?
-//How is it different from a pointing interface?
-//How does one get a shell?
-
 //-----------------------------------------------------------------------------
 == The Shell
 [[shl]]
+The Shell is foundational to so many parts of securing computing devices and 
+their networks. Intimidating and alluring (like most symbols enshrined by film
+makers), understanding the shell can make or break one's ability to solve 
+challenges in a capture-the-flag competition like picoCTF.
+
+To be transparent, I (LT) am still learning a lot about the shell, and I'm
+just about 10 years into it right now! This is an encouragement - anyone 
+curious enough to jump into rabbitholes here and there is always going to have
+opportunities to learn more about an amazing tool like the shell. But rest 
+assured, I was proficient in the shell long ago and it does not take very much
+time before the shell starts working for *you*.
+
+Next up, what is that mystique unique to the hacker and their shell?
 
 //-----------------------------------------------------------------------------
 === Symbol of the Hacker
 [[shl-symbol-of-the-hacker]]
-//TODO:put animation here of terminal prompt w blinking cursor!
-//TODO:consider using hacker typer to demonstrate "flow of info"
+//TODO punt :put animation here of terminal prompt w blinking cursor!
+//TODO punt :consider using hacker typer to demonstrate "flow of info"
 
 A blank, black screen and blinking cursor. Lines and lines of scrolling text
 and someone in front of that screen who seemingly understands an
@@ -32,14 +38,14 @@ Deleting files is permanent in the shell, any file can be accessed at any
 moment in the shell, and hopefully it's not far fetched to assert that those
 two things are a dangerous combination.
 
-
 //-----------------------------------------------------------------------------
 === Got Shell?
 [[shl-got-shell]]
 
 Using a computer or smart device happens in 1 of 2 ways:
 
-1. Using a pointer such as a mouse, touchpad or finger to select apps or buttons
+1. Using a pointer such as a mouse, touchpad or finger to select apps, files,
+   or buttons
 2. Using keys on a keyboard to enter simple or complex commands (the Shell)
 
 Thankfully, there are TLA's (Three Letter Acronyms) for both of the methods
@@ -54,8 +60,8 @@ doesn't have as nice of a name as the shell, so we will probably use GUI to
 briefly refer to the interface that everyone knows about on computing devices
 that is driven by a pointer on a screen.
 
-Below is a screenshot of a shell after successful login and before the user as
-typed in any commands.
+Below is a screenshot of a shell after successful login and before the user has
+typed in any commands:
 
 [[first-look,First look at a new shell]]
 .The shell waiting for a command
@@ -63,31 +69,36 @@ typed in any commands.
 image::images/shl-1-first-look-shell.png[]
 
 In the picture above, there is a lot of empty space, and even the line of text
-that exists, does not provide a lot of clarity. The situation is simpler than 
+that exists, does not provide a lot of clarity. The situation is simpler than
 how it looks. There are only 3 pieces of information in the screenshot above,
-and you would likely recognize at least one of them if it were you who logged 
+and you would likely recognize at least one of them if it were *you* who logged
 on:
 
-1. `Q0h313th`
-  * The user named "Q0h313th" is logged into this shell
-2. `pico-2019-shell1`
-  * The shell is on the computer called "pico-2019-shell1"
-3. `~`
-  * The shell is parked in Q0h313th's home directory on pico-2019-shell1
-  * `~` is just shorthand for `/home/Q0h313th/`
-//TODO:this merits further exposition for the curious.. it'd be fun to have a
-//little rabbit icon to click on to go down rabbitholes (maybe like to good
-//Google-Fu??)
+// TODO ssp^ punt :
+// implement simple mock terminal to provide an interactive, fun quiz, that
+// starts to build confidence in shell looks good: https://terminal.jcubic.pl/
+From left to right in the shell command line prompt:
 
-//TODO:consider wrapping up first pass of this chapter by leaning on what
-//exists in Marty's learning guides
+1. What does `Q0h313th` mean?
+   * Answer: https://gist.github.com/syreal17/a000b3ac491b80bfabb6ab80491b66e5
+2. What does `pico-2019-shell1` mean?
+   * Answer: https://gist.github.com/syreal17/2152a545457f7f83a11006139e5a04f1
+3. What does `~` mean?
+   * Answer: https://gist.github.com/syreal17/8b4bdf7bd0b35a7196b73c02c31c0ec2
+4. What does `$` mean?
+   * Answer: https://gist.github.com/syreal17/dc1340fef44be3dc59819e3379c3fe28
+// TODO punt :
+// this merits further exposition for the curious.. it'd be fun to have a
+// little rabbit icon to click on to go down rabbitholes (maybe like to good
+// Google-Fu??)
 
-//-----------------------------------------------------------------------------
-=== What the Shell!?
-[[shl-what-the-shell]]
-//learning curve with the shell
+In terms of raw power, Q0h313th could delete every file they own on this
+machine with one command. That's almost never desireable, and I will wait to
+show this command until there is something useful and desireable to do with it.
+In terms of useful power, Q0h313th could create a copy of an entire website for
+use when there is no accessible WiFi. That's using the command `wget`.
 
-
+Now let's talk about *getting* a shell!
 
 //-----------------------------------------------------------------------------
 === Get a Shell
@@ -96,17 +107,300 @@ Cybersecurity is a topic that is most deeply learned by listening *and* doing.
 For this reason, I advise you to create a picoCTF 2019 account at this time if
 you have not already. Beyond providing 120+ security challenges in helpful
 learning ramps, every picoCTF 2019 account gets a user on a Linux server, which
-can only be accessed with a shell. Register here:
+can only be accessed with a _shell_. 
 
-//TODO: add lots of screenshots!!! 
-//      (Might be the first time is interacting with a shell)
+A note on the structure of my (LT's) chapters: many times I will provide a high
+level tutorial for a task and also a step by step walkthrough for the same
+task.  This is my attempt at accomodating different learning styles, different
+levels of experience or whatever else.  Typically, the high level walkthrough
+is more for learners who already know the basics but need a refresher or need a
+reminder about the particulars when it comes to this Primer. The step by step
+walkthrough is more for learners who have never ventured in a particular sort
+of task before. Of course, you must choose your own path here, but the safest
+bet may be to read the high level walkthrough but actually put hands to
+keyboard for the step by step walkthrough.
+
+==== High level tutorial
+. *Gain access to a practice shell*
+.. Register for a picoCTF 2019 account
+  * Click link in email that is sent to registered email address
+.. Register account on picoCTF 2019 shell server
+... Log in once to create account on shell server
+   * Only required for first login for your account
+... Reconnect
+... Log in again to get a shell
+
+==== Step by Step Walkthrough
+//TODO punt : turn bold text into hyperlinks in this section
+*Register for a picoCTF 2019 account at the link below.* You will need to
+validate the email address you provide by clicking on a link that is sent to
+it.
+
 https://2019game.picoctf.com/
 
 After successfully registering, a web shell can be accessed at the URL below.
-Use the same  user name and password that you registered on the picoCTF 2019
-website with.
+*Use the same  user name and password that you registered on the picoCTF 2019
+website to log into the shell at the link below* (or in the "Shell" tab in the
+picoCTF 2019 website) For the sake of security, you will not see your password
+as you type it in. *You will log in twice.* This is only for your first log
+in.
 
 https://2019game.picoctf.com/shell
 
-Follow the instructions to effectively login in twice, which is only needed the
-first login. After that, logging in once will get you into the shell server.
+You will know you've successfully logged into the shell if you see a screen
+similar to this:
+
+[[pico-successful-login,Fresh shell on pico shell server]]
+.Lots of extra info! Try the `clear` command!
+[.text-center]
+image::images/shl-2-pico-motd-login.png[]
+
+Not as sterile as the empty shell I pictured <<first-look,here>>. However, if
+you type `clear` and press enter, it will be quite pristine! All of the info
+that is pictured directly above is mostly for system administrators 
+(sysadmins). You can safely ignore it.
+
+
+==== Debrief
+Congratulations (esp. if this is your first time staring at a command prompt)!
+The next section focuses on demystifying the shell by relating its usage to
+devices you've probably already used for years; and if not, you'll join the
+ranks of those whose first language is Shell.
+
+
+//-----------------------------------------------------------------------------
+=== GUI-fu to Shell-fu
+[[shl-gui-fu-to-shell-fu]]
+Our first language as children, whether Spanish, English or anything else
+primarily for communication with other humans, likely took little conscious
+effort on our part. For anyone who has learned a second language, it was quite
+the opposite: very little - if anything - came naturally. Learning Shell for
+someone who has only "spoken" GUI is like learning a second language. This is
+good news and bad news. The good news is that Shell and GUI are languages for
+something you've been using for probably years, but the bad news is there is a
+whole new vocabulary with only a handful of cognates (words that sound and mean
+the same in both langauges) here and there.
+
+The basic computer operations that everyone is familiar with in GUI's can
+easily be done in the shell as well. Here's some of the most common operations
+for anyone using a computing device: 
+
+.Basic computer operations
+|===
+|Operation |GUI action |Shell action |Shell example |Note
+
+|Start app
+|Click or touch icon of app
+|Type name of app and press enter
+|`$ date`
+|Pressing the Enter key sends the command to the shell to run and return.
+
+|Open file
+|Browse to file, click
+|Use `cat` app to print file
+|`$ cat ~/my-file.txt`
+|`cat` displays all text in a file.
+
+|Download app
+|Browse app store, click
+|Use `apt` to download app
+|`$ apt install chessx`
+|Install ChessX game. The hard part was finding a relevant package name.
+|===
+
+As the table above shows, using a GUI involves browsing and clicking, while
+using a shell involves knowing a good app to use. Google has made finding the
+right app for a shell interface much easier than it was years ago. As always
+for CTF's, Google is your friend! However, more direct resources can be even
+more helpful, such as this website below that quickly explains shell commands:
+
+https://explainshell.com/explain?cmd=date
+
+However, things do not always go as planned. The next section deals with
+those sorts of situations that inevitably arise.
+
+//-----------------------------------------------------------------------------
+=== What the Shell!?
+[[shl-what-the-shell]]
+//learning curve due to memorization, lots of typing, and memorizing arguments
+The main severity in the learning curve with the shell is that you must know
+the apps and commands available to you either by memorization or by looking
+them up when you need them. Certainly it is faster to memorize as many as
+possible.
+
+The other challenge is the amount of typing that sometimes must be done to
+reference the intended file.
+
+Lastly, interfacing with apps also requires memorizing or looking up names of
+parameters or arguments.
+
+To summarize, some of the most challenging aspects of using the shell:
+
+1. Memorizing commands (aka apps/programs)
+2. Typing out long commands
+3. Memorizing arguments for commands
+
+==== Challenge 1: Memorizing commands
+Having a cheatsheet with shell commands listed is a must for overcoming the
+challenge of memorizing commands. Printing it out is an added bonus if 
+possible! (Saves screen space). The cheat sheet linked below is very good!
+
+https://www.git-tower.com/blog/command-line-cheat-sheet/
+
+
+==== Challenge 2: Typing out long commands
+Many wonderfully brilliant students of mine have not known how to speed up
+their typing in the shell command prompt until thousands of picoCTF points into
+their learning. I take responsibility for this, and really, most of us go
+through that phase, but we do not have to! One word:
+
+*TAB*
+
+In the shell, pressing the TAB key invokes auto-complete by 1. assuming you've
+spelled the command or file correctly up to the point of pressing tab, and 2. 
+completing the command of file name as much as it can.
+
+The functionality of auto-complete in the shell is so different from 
+autocomplete in other apps, such as those in a phone, that shell auto-complete
+is often referred to as tab-complete. It takes some practice to get used to,
+but it is really worth the time as it probably cuts number of key presses in
+half!
+
+Unlike autocomplete for a soft keyboard on a phone, tab-complete is never 
+wrong, however, this is mostly because it makes no guesses and only helps with
+completing commands and file paths and names. It hardly ever helps complete
+arguments to commands besides file names. If pressing tab doesn't do anything,
+this is either because 1. there is no such command or file name to complete
+what you've already typed into the command prompt, or 2. there are multiple 
+commands or file names that could complete what you've already typed into the
+command prompt. Try typing another letter or two. Hit the tab key again. If
+nothing more is completed, hit tab one more time. If nothing really happens
+besides an angry noise or flash, then there is no way to complete what you've
+already typed (maybe there is a typo?), but if the issue is that there are 
+multiple possibilities for tab complete to choose, then these options will 
+display after your second strike on the tab key. The double press of tab can
+be done at any time, but if there are hundreds of options then the shell will
+ask for your approval before printing all those options because that's not
+usually very helpful.
+
+In the next section, I will guide you through some fundamental shell commands
+to start getting a sense for the world of the shell.
+
+==== Shell Nav Exercise 1
+//TODO :==== Common Tasks
+//      such as editing a document (nano!) (for making source code)
+//      creating code (simple shell script to make a task solution permanent)
+```
+# SOME NOTES: 
+# * text listed after "$" I mean for you to enter into the shell and then
+#   press enter
+# * text listed after "#" are comments from me to you but are ignored by 
+#   the shell
+#
+# this short tutorial is meant to run through foundational shell commands 
+# with brief explanations for each
+
+# the following command "parks" your shell in your home directory (which is
+# somewhere you can create files!)
+
+$ cd
+
+
+# the following command shows where your shell is parked
+
+$ pwd
+
+
+# the following command creates a new directory called "tutorial" where you
+# are currently parked
+
+$ mkdir tutorial
+
+
+# the following command moves your shell and parks it in the "tutorial" folder
+# you just created
+
+$ cd tutorial
+
+
+# pwd stands for "print working directory". "working directory" is the 
+# technical term for where one's shell is parked
+
+$ pwd
+
+
+# the following command creates an empty file with the name "note.txt"
+
+$ touch note.txt
+
+
+# the following command list the contents of your working directory
+
+$ ls
+
+
+# personally, I prefer a one column output of the contents of my working 
+# directory, like
+
+$ ls -l
+
+
+# the following command shows the text content of "note.txt" (which is empty
+# right now)
+
+$ cat note.txt
+
+
+# the following command puts "hello world! I'm a snail" into "note.txt"
+
+$ echo "hello world! I'm a snail" > note.txt
+
+
+# cat will print something now that there is content in "note.txt"
+
+$ cat note.txt
+
+
+# the following command makes a copy of "note.txt" called "new-note.txt"
+
+$ cp note.txt new-note.txt
+
+
+# what is in "new-note.txt"?
+
+$ cat new-note.txt
+
+
+# * the following command opens "new-note.txt" in a terminal text editor
+# * try changing the file, then press Ctrl-X to exit and save
+
+$ nano new-note.txt
+
+
+# if you were successful, this command should print the new content
+
+$ cat new-note.txt
+
+
+# if you were not successful, that is just fine. revisit this exercise after
+# some more reading and practice!
+
+```
+
+//-----------------------------------------------------------------------------
+=== Conclusion
+You may have noticed that we did not cover overcoming challenge 3. If you are
+curious, look up the `man` command explained in this cheat sheet:
+
+https://www.git-tower.com/blog/command-line-cheat-sheet/
+
+Using Google helps with learning commands to help solve problems in the shell,
+and also the "Expain Shell" website I linked to earlier in this chapter.
+
+There is so much to learn in the shell, but before learning more, my friend
+will continue as your guide in the next chapter on the Python programming
+language. Using the `nano` text editor app, as described in the tutorial
+above, you now have the skills to write programs in the shell!
+
+Let the Shell lessons sink in as you learn more about one of the most popular
+and powerful programming languages to grace the Earth.
