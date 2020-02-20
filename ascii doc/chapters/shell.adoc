@@ -247,11 +247,11 @@ possible! (Saves screen space). The cheat sheet linked below is very good!
 
 https://www.git-tower.com/blog/command-line-cheat-sheet/
 
-//TODO: emphasize shortcuts, man & Google fu
+
 ==== Challenge 2: Typing out long commands
 Many wonderfully brilliant students of mine have not known how to speed up
 their typing in the shell command prompt until thousands of picoCTF points into
-their learning. I take responsibility for this, and really, most of use go
+their learning. I take responsibility for this, and really, most of us go
 through that phase, but we do not have to! One word:
 
 *TAB*
@@ -260,72 +260,147 @@ In the shell, pressing the TAB key invokes auto-complete by 1. assuming you've
 spelled the command or file correctly up to the point of pressing tab, and 2. 
 completing the command of file name as much as it can.
 
-//TODO HERE: compare to phone autocomplete and give some examples?
+The functionality of auto-complete in the shell is so different from 
+autocomplete in other apps, such as those in a phone, that shell auto-complete
+is often referred to as tab-complete. It takes some practice to get used to,
+but it is really worth the time as it probably cuts number of key presses in
+half!
 
+Unlike autocomplete for a soft keyboard on a phone, tab-complete is never 
+wrong, however, this is mostly because it makes no guesses and only helps with
+completing commands and file paths and names. It hardly ever helps complete
+arguments to commands besides file names. If pressing tab doesn't do anything,
+this is either because 1. there is no such command or file name to complete
+what you've already typed into the command prompt, or 2. there are multiple 
+commands or file names that could complete what you've already typed into the
+command prompt. Try typing another letter or two. Hit the tab key again. If
+nothing more is completed, hit tab one more time. If nothing really happens
+besides an angry noise or flash, then there is no way to complete what you've
+already typed (maybe there is a typo?), but if the issue is that there are 
+multiple possibilities for tab complete to choose, then these options will 
+display after your second strike on the tab key. The double press of tab can
+be done at any time, but if there are hundreds of options then the shell will
+ask for your approval before printing all those options because that's not
+usually very helpful.
 
-//TODO:consider wrapping up first pass of this chapter by leaning on what
-//exists in Marty's learning guides
+In the next section, I will guide you through some fundamental shell commands
+to start getting a sense for the world of the shell.
+
+==== Shell Nav Exercise 1
 //TODO :==== Common Tasks
 //      such as editing a document (nano!) (for making source code)
 //      creating code (simple shell script to make a task solution permanent)
-#SOME NOTES: 
-#* text listed after “$” below are meant to be typed into your shell and entered
-#* text listed after "#" are comments from me to you but are ignored by the shell
+```
+# SOME NOTES: 
+# * text listed after "$" I mean for you to enter into the shell and then
+#   press enter
+# * text listed after "#" are comments from me to you but are ignored by 
+#   the shell
 #
-# this short tutorial is meant to run through the most fundamental shell commands and explain each
+# this short tutorial is meant to run through foundational shell commands 
+# with brief explanations for each
 
-# the following command "parks" your shell in your home directory (which is somewhere you can create files!)
+# the following command "parks" your shell in your home directory (which is
+# somewhere you can create files!)
+
 $ cd
 
+
 # the following command shows where your shell is parked
+
 $ pwd
 
-# the following command creates a new directory called "tutorial" where you are currently parked
+
+# the following command creates a new directory called "tutorial" where you
+# are currently parked
+
 $ mkdir tutorial
 
-# the following command moves your shell and parks it in the "tutorial" folder you just created
+
+# the following command moves your shell and parks it in the "tutorial" folder
+# you just created
+
 $ cd tutorial
 
-# pwd stands for "print working directory". "working directory" is the technical term for where one's shell is parked
+
+# pwd stands for "print working directory". "working directory" is the 
+# technical term for where one's shell is parked
+
 $ pwd
 
+
 # the following command creates an empty file with the name "note.txt"
+
 $ touch note.txt
 
+
 # the following command list the contents of your working directory
+
 $ ls
 
-# personally, I prefer a one column output of the contents of my working directory, like
+
+# personally, I prefer a one column output of the contents of my working 
+# directory, like
+
 $ ls -l
 
-# the following command shows the text content of "note.txt" (which is empty right now)
+
+# the following command shows the text content of "note.txt" (which is empty
+# right now)
+
 $ cat note.txt
+
 
 # the following command puts "hello world! I'm a snail" into "note.txt"
+
 $ echo "hello world! I'm a snail" > note.txt
 
+
 # cat will print something now that there is content in "note.txt"
+
 $ cat note.txt
 
+
 # the following command makes a copy of "note.txt" called "new-note.txt"
+
 $ cp note.txt new-note.txt
 
+
 # what is in "new-note.txt"?
+
 $ cat new-note.txt
 
-# the following command opens "new-note.txt"
 
-#“Park“ shell at <path/to/destination/dir>
-$ cd ..: change directories to one folder before
-$ cd ~: change directories to your home directory
-$ ls: list contents of given directory
-$ ls -a: list all contents of given directory including hidden files
-$ cp <source> <destination>: copies source file or directory into destination directory
-$ cat <filename>: print file contents to console
-$ less <filename>: view file in scrollable format
-$ grep "pattern to find" <filename>: search for lines in the file that match the pattern
-$ touch <filename>: create file with given name
-$ rm <filename>: remove file of given name
-$ mkdir <dirname>: make directory with given name
-$ nano <filename>: open file in nano text editor
+# * the following command opens "new-note.txt" in a terminal text editor
+# * try changing the file, then press Ctrl-X to exit and save
 
+$ nano new-note.txt
+
+
+# if you were successful, this command should print the new content
+
+$ cat new-note.txt
+
+
+# if you were not successful, that is just fine. revisit this exercise after
+# some more reading and practice!
+
+```
+
+//-----------------------------------------------------------------------------
+=== Conclusion
+You may have noticed that we did not cover overcoming challenge 3. If you are
+curious, look up the `man` command explained in this cheat sheet:
+
+https://www.git-tower.com/blog/command-line-cheat-sheet/
+
+Using Google helps with learning commands to help solve problems in the shell,
+and also the "Expain Shell" website I linked to earlier in this chapter.
+
+There is so much to learn in the shell, but before learning more, my friend
+will continue as your guide in the next chapter on the Python programming
+language. Using the `nano` text editor app, as described in the tutorial
+above, you now have the skills to write programs in the shell!
+
+Let the Shell lessons sink in as you learn more about one of the most popular
+and powerful programming languages to grace the Earth.
