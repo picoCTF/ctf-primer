@@ -77,9 +77,6 @@ on:
 // TODO ssp^ punt :
 // implement simple mock terminal to provide an interactive, fun quiz, that
 // starts to build confidence in shell looks good: https://terminal.jcubic.pl/
-// TODO rn :
-// do footnotes for answers
-
 From left to right in the shell command line prompt:
 
 1. What does `Q0h313th` mean?
@@ -184,7 +181,6 @@ something you've been using for probably years, but the bad news is there is a
 whole new vocabulary with only a handful of cognates (words that sound and mean
 the same in both langauges) here and there.
 
-==== The Basics
 The basic computer operations that everyone is familiar with in GUI's can
 easily be done in the shell as well. Here's some of the most common operations
 for anyone using a computing device: 
@@ -223,16 +219,113 @@ https://explainshell.com/explain?cmd=date
 However, things do not always go as planned. The next section deals with
 those sorts of situations that inevitably arise.
 
-==== What the Shell!?
+//-----------------------------------------------------------------------------
+=== What the Shell!?
 [[shl-what-the-shell]]
-//learning curve with the shell, dealing with complexity, errors and lots of 
-//typing
+//learning curve due to memorization, lots of typing, and memorizing arguments
+The main severity in the learning curve with the shell is that you must know
+the apps and commands available to you either by memorization or by looking
+them up when you need them. Certainly it is faster to memorize as many as
+possible.
 
-//TODO: add links to terminal cheat sheets
+The other challenge is the amount of typing that sometimes must be done to
+reference the intended file.
+
+Lastly, interfacing with apps also requires memorizing or looking up names of
+parameters or arguments.
+
+To summarize, some of the most challenging aspects of using the shell:
+
+1. Memorizing commands (aka apps/programs)
+2. Typing out long commands
+3. Memorizing arguments for commands
+
+==== Challenge 1: Memorizing commands
+Having a cheatsheet with shell commands listed is a must for overcoming the
+challenge of memorizing commands. Printing it out is an added bonus if 
+possible! (Saves screen space). The cheat sheet linked below is very good!
+
+https://www.git-tower.com/blog/command-line-cheat-sheet/
+
 //TODO: emphasize shortcuts, man & Google fu
+==== Challenge 2: Typing out long commands
+Many wonderfully brilliant students of mine have not known how to speed up
+their typing in the shell command prompt until thousands of picoCTF points into
+their learning. I take responsibility for this, and really, most of use go
+through that phase, but we do not have to! One word:
+
+*TAB*
+
+In the shell, pressing the TAB key invokes auto-complete by 1. assuming you've
+spelled the command or file correctly up to the point of pressing tab, and 2. 
+completing the command of file name as much as it can.
+
+//TODO HERE: compare to phone autocomplete and give some examples?
+
 
 //TODO:consider wrapping up first pass of this chapter by leaning on what
 //exists in Marty's learning guides
 //TODO :==== Common Tasks
 //      such as editing a document (nano!) (for making source code)
 //      creating code (simple shell script to make a task solution permanent)
+#SOME NOTES: 
+#* text listed after “$” below are meant to be typed into your shell and entered
+#* text listed after "#" are comments from me to you but are ignored by the shell
+#
+# this short tutorial is meant to run through the most fundamental shell commands and explain each
+
+# the following command "parks" your shell in your home directory (which is somewhere you can create files!)
+$ cd
+
+# the following command shows where your shell is parked
+$ pwd
+
+# the following command creates a new directory called "tutorial" where you are currently parked
+$ mkdir tutorial
+
+# the following command moves your shell and parks it in the "tutorial" folder you just created
+$ cd tutorial
+
+# pwd stands for "print working directory". "working directory" is the technical term for where one's shell is parked
+$ pwd
+
+# the following command creates an empty file with the name "note.txt"
+$ touch note.txt
+
+# the following command list the contents of your working directory
+$ ls
+
+# personally, I prefer a one column output of the contents of my working directory, like
+$ ls -l
+
+# the following command shows the text content of "note.txt" (which is empty right now)
+$ cat note.txt
+
+# the following command puts "hello world! I'm a snail" into "note.txt"
+$ echo "hello world! I'm a snail" > note.txt
+
+# cat will print something now that there is content in "note.txt"
+$ cat note.txt
+
+# the following command makes a copy of "note.txt" called "new-note.txt"
+$ cp note.txt new-note.txt
+
+# what is in "new-note.txt"?
+$ cat new-note.txt
+
+# the following command opens "new-note.txt"
+
+#“Park“ shell at <path/to/destination/dir>
+$ cd ..: change directories to one folder before
+$ cd ~: change directories to your home directory
+$ ls: list contents of given directory
+$ ls -a: list all contents of given directory including hidden files
+$ cp <source> <destination>: copies source file or directory into destination directory
+$ cat <filename>: print file contents to console
+$ less <filename>: view file in scrollable format
+$ grep "pattern to find" <filename>: search for lines in the file that match the pattern
+$ touch <filename>: create file with given name
+$ rm <filename>: remove file of given name
+$ mkdir <dirname>: make directory with given name
+$ nano <filename>: open file in nano text editor
+
