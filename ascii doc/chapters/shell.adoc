@@ -80,18 +80,20 @@ on:
 // TODO rn :
 // do footnotes for answers
 
-1. `Q0h313th`
-  * The user named "Q0h313th" is logged into this shell
-2. `pico-2019-shell1`
-  * The shell is on the computer called "pico-2019-shell1"
-3. `~`
-  * The shell is parked in Q0h313th's home directory on pico-2019-shell1
-  * `~` is shorthand for `/home/Q0h313th/`
+From left to right in the shell command line prompt:
+
+1. What does `Q0h313th` mean?
+   * Answer: https://gist.github.com/syreal17/a000b3ac491b80bfabb6ab80491b66e5
+2. What does `pico-2019-shell1` mean?
+   * Answer: https://gist.github.com/syreal17/2152a545457f7f83a11006139e5a04f1
+3. What does `~` mean?
+   * Answer: https://gist.github.com/syreal17/8b4bdf7bd0b35a7196b73c02c31c0ec2
+4. What does `$` mean?
+   * Answer: https://gist.github.com/syreal17/dc1340fef44be3dc59819e3379c3fe28
 // TODO punt :
 // this merits further exposition for the curious.. it'd be fun to have a
 // little rabbit icon to click on to go down rabbitholes (maybe like to good
 // Google-Fu??)
-// TODO rn : add exposition on separator characters in shell prompt
 
 In terms of raw power, Q0h313th could delete every file they own on this
 machine with one command. That's almost never desireable, and I will wait to
@@ -99,7 +101,7 @@ show this command until there is something useful and desireable to do with it.
 In terms of useful power, Q0h313th could create a copy of an entire website for
 use when there is no accessible WiFi. That's using the command `wget`.
 
-Now let's talk about getting a shell!
+Now let's talk about *getting* a shell!
 
 //-----------------------------------------------------------------------------
 === Get a Shell
@@ -213,7 +215,13 @@ for anyone using a computing device:
 As the table above shows, using a GUI involves browsing and clicking, while
 using a shell involves knowing a good app to use. Google has made finding the
 right app for a shell interface much easier than it was years ago. As always
-for CTF's, Google is your friend!
+for CTF's, Google is your friend! However, more direct resources can be even
+more helpful, such as this website below that quickly explains shell commands:
+
+https://explainshell.com/explain?cmd=date
+
+However, things do not always go as planned. The next section deals with
+those sorts of situations that inevitably arise.
 
 ==== What the Shell!?
 [[shl-what-the-shell]]
