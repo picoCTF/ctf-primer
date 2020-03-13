@@ -1,0 +1,397 @@
+
+== Cryptography
+
+Cryptography is an ancient field that dates to the antique Rome. Etymologically, the word traces back to the Greek roots "kryptos" meaning "hidden" and "graphein" meaning "to write." It is used to communicate secretly in the presence of an enemy. With cryptography we can achieve the following properties when a message is sent:
+
+
+*Confidentiality: No one unintended will be able to read the message.
+
+*Integrity: If a message is tampered, it is possible to detect that it was.
+
+*Authentication: It can be verified accurately the identity of someone.
+
+*Non repudiation: If a person sent a specific message, then the person cannot deny that the message was sent by them.
+
+
+First we will see how to achieve Confidentiality. This is done with encryption. When we want to hide a message, we say that we encrypt the message. To understand how encryption works, we will see an example of an ancient way of encrypting a message that is not secure by any means today, but it is good for illustration.
+
+=== Substitution ciphers
+
+"Cipher" means a secret or disguised way of writing a message. It can be thought as the same as encryption. One cipher method invented in the antique Rome and named after the emperor Julious Caesar who used it for his private communication is Caesar's cipher. This cipher simply substitutes each of the letters of a word by another one that is a certain number of positions further in the alphabet. That "certain number of positions" is called the shift. For example, if we have the word "hello" and we want to encrypt it using Caesar's cipher with a shift of 3, we would replace the 'h' by 'k' because 'k' is 3 positions further in the alphabet, the 'e' by 'h' for the same reason, and so on. We called the original text we want to encrypt the cleartext or plaintext. The result of encrypting 'hello' using caesar's with a shift of 3, is the following:
+
+cleartext -> h e l l o
+
+Encrypted text -> k h o o r
+
+"Decrypting", means obtaining the clear text from the encrypted text. For Caesar's cipher we simply do the same but in reverse; we subtract 3 positions in the alphabet to each letter.
+
+Note that when we get to the end of the alphabet after adding positions while encrypting something, we simply overlap the alphabet. For example, to encrypt the letter 'z', we would encrypt it using the letter 'c'.
+
+To make sure you understand the decryption, decrypt the following text using caesar cipher with a shift of 3:
+
+s l f r f w i
+
+The result is something you probably know. Hint: the first decrypted letter is 'p' .
+
+Caesar's cipher is a *substitution cipher*, because it replaces each letter by something else. In a substitution cipher, you don't necessarily need to replace a letter by another letter. You can use any symbol, as long as you know how to reverse it.
+
+=== Transposition ciphers
+
+In transposition ciphers, we don't replace the letters by other symbols, but we simply change the order in which they appear on the cleartext. For example, we can decide that our encryption algorithm simply moves the letters to the right and overlaps. Let's encrypt the word 'pico' by rotating its letters by one position to the right.
+
+clear text -> p i c o
+
+encrypted text -> o p i c
+
+This is a very simple kind of transposition. But you can have a map that makes more complicated transpositions. For instance, you can decide that you will encrypt a text by doing transpositions in chunks of 6 letters using the following mapping:
+
+[.text-center]
+image:images/5image1.png[image,width=198,height=222]
+
+The number indicate the position of the letters. Using that mapping, let's encrypt the word 'pico'. Since pico only has 4 letters, we can simply use a padding to complete until 6 letters. For this example, we will use the symbol * as padding, so we have:
+
+[.text-center]
+image:images/5image2.png[image,width=198,height=222]
+
+The encrypted word is 'c*ip*o' using our arbitrarily defined mapping. Suppose we want to encrypt a long text. In that case we simply apply the same mapping each 6 characters.
+
+So far we saw how transposition and substitution ciphers work. If they are used only by themselves, they are very easy to crack. On the other hand, if someone finds out the algorithm we use to encrypt, the encryption is broken forever! A way to improve this, is by using encryption algorithms based on a key.
+
+=== Key ciphers
+
+There is a principle in cryptography called the Kerckhoffs's principle that states: "A cryptoststem should be secure even if everything about the system, except the key, is public knowledge". That principle pretends to overcome the fact that once the encryption algorithm is known by the enemy the encryption is broken. The solution is to use a key. One old algorithm that was used to encrypt data using a key was "Vigenere". It looks certainly stronger than the previous algorithms we learned. Even though it is easily breakable nowadays, in its time it was considered unbreakable.
+
+To understand how Vigenere works we will encrypt the cleartext:
+
+"I LOVE PITTSBURGH"
+
+First, we remove the spaces, because the Vigenere table does not have the  space. However, a human can easily recognize the words of a text even if it has no spaces. We get:
+
+"ILOVEPITTSBURGH"
+
+Now, we can pick a key. For this example, we will use the key "PICOCTF". Since our text is larger than the key, we simply repeat the key several times until we get the same length in the following manner:
+
+Plaintext: ILOVEPITTSBURGH
+
+Key: PICOCTFPICOCTFP
+
+The first letter of the cleartext is paired with the first letter of the key. So we have the pair ('I','P') Now in the vigenere table that is presented below, we use row i and column p. The cell at the intersection of the column and the row will be the encrypted letter, which in this case is X. We do the same for the rest of the letters, and we would obtain the following:
+
+Cleartext: ILOVEPITTSBURGH
+
+Key: PICOCTFPICOCTFP
+
+Encrypted text: XTQJGINIBUPWKLW
+
+
+Vigenere table:
+[.text-center]
+image::images/5image45.png[align="center",image,width=427,height=301]
+
+Now let's see how decryption works. Suppose we only have the key and the encrypted:
+
+Key: PICOCTFPICOCTFP
+
+Encrypted text: XTQJGINIBUPWKLW
+
+We take the first letter of the key, which is 'P', and go to that row in the vigenere table. Then in the row 'P', we find the first letter of the encrypted text, which is 'X'.The column that corresponds to 'X', is the first letter of the clear text, in our case 'I'. You repeat the same process for each character until you get 'ILOVEPITSBURGH'.
+
+To verify that you understand the decryption, decrypt the encrypted text "WMNZQAJ" using the key "HELLO", remember that if the key is shorter, you just repeat it. You should obtain a word you will easily recognize!
+
+Vigenere is easily broken even without a computer. Simon Singh, a famous science communicator, has a nice tool on his website for cracking Vigenere:
+
+https://www.simonsingh.net/The_Black_Chamber/vigenere_cracking_tool.html[[.underline]#https://www.simonsingh.net/The_Black_Chamber/vigenere_cracking_tool.html#]
+
+Cracking ciphers is a field itself called cryptanalysis. Cryptanalysis and Cryptography compose bigger field called Cryptology.
+
+=== Modern cryptography
+
+In modern cryptography exist the concept of symmetric and asymmetric cryptography. Symmetric cryptography means that you use the same key for encryption and decryption like we just did on Vigenere. In asymmetric cryptography you have two keys. One is for encryption, known as the public key, the other one is for decryption, known as the private key. Asymmetric cryptography is useful because it can be used to solve the problem of a key exchange. Additionally, it can be applied for digital signatures that provide integrity and non-repudiation.
+
+==== Symmetric crypto example: AES
+
+A commonly used algorithm today for symmetric cryptography, is AES, which means "Advanced Encryption Standard". This algorithm has a combination of substitutions and transpositions using a key of fixed length. A key of fixed length means that the algorithm can only have a key with a certain size. However, AES has different versions and each version can support a key length of different sizes. The most common versions are AES 128 and AES 256, which have a key length of 128 bits and AES 256 respectively. AES algorithm is considered secure. However, the implementation can be attacked successfully if it has flaws. For example, one famous way to break AES encryption is the Padding Oracle Attack, which allows to successfully crack SSL, an encrypted protocol that was widely used to secure HTTP traffic. However, this is not a weakness of AES, but a weakness in how it is used.
+
+AES has different operation modes. We will analyze two of them to illustrate vulnerabilities that can emerge in their use. This operation modes are "ECB" and "CBC".
+
+===== Operation mode ECB
+
+ECB means Electronic Code Book. In this operation mode we encrypt independently blocks of the clear text according to the key length. For example, if we are using AES 128, we break the clear text in chunks of 128 bits and use AES to encrypt them independently. This causes a problem because it leaks structure in the encrypted text. There is a famous example on the internet about an image of Tux (the penguin from linux) encrypted using AES in ECB operation mode:
+
+Original image: 
+
+image:images/5image46.png[image,width=196,height=216] 
+
+Encrypted image using AES on ECB mode:
+
+image:images/5image47.png[image,width=196,height=216]
+
+Yow can see that is easy to identify that the encrypted image contains the penguin. In other cases this operation mode can be very bad for other reasons. Suppose you are sending an encrypted text and you know that the first 128 bits contain a name and the second 128 bits contain a date. Imagine that you are an attacker that captures some encrypted messages on different dates. Even if you do not know the key, you could be able to interchange the second block of messages to tamper the date. To understand this better let's look at an example. Suppose you intercept a message sent on May 1, and after some days you intercept another message in on may 8.
+
+Imagine you want to make the receiver think that the second message is from May 1. You could simply replace the blue block by the red block.
+
+image:images/5image3.png[]
+
+Another problem of ECB, is that if you send the same message twice, any attacker can see that the same message is being sent again. A secure encryption algorithm should not leak any information about the message. Knowing that the same message was sent in the past can be used to learn details about the communication. It is simply recommended to never use ECB.
+
+===== Operation mode CBC
+
+A more secure operation mode is CBC, which means Cipher Block Chaining. In this mode we include additional elements. The first one is the initialization vector; a random value with the same size as the key. In AES, the key size is the same as the block size. Remember that in AES we have to separate the cleartext in blocks with the same size as the key. Before starting the encryption, we do XOR between the first block of cleartext and the Initialization Vector, then we begin to encrypt using AES with the key of our choice. The initialization vector is different for every message, so if we send the same message twice, it will be different due to the initialization vector. We must attach the initialization vector to the message. Another element we add in this operation mode, is that we do not encrypt blocks independently, but we use the encrypted text from one block and XOR it with the next block of cleartext we want to encrypt. Then, we use AES and the key to encrypt that result. In the following image it is shown the graphical representation of what it was just explained, note that the circle with the cross means XOR:
+
+image:images/5image48.png[image,width=624,height=250]
+
+In AES, the cleartext has to be the same size as a multiple of the block size. For example, If you have a cleartext that happens to be shorter than a block, you need to add padding to the cleartext so it matches at least one block. In case that the cleartext is larger than one block, but smaller than two, you need two add padding to the cleartext until it is the same size as two blocks. In AES there is a common way of padding, which is actually a standard called PKCS #7. In AES 128, as we said previously, the block size is 128 bits, which is equivalent to 16 bytes. Suppose you want to encrypt the message
+
+"HELLOPICOCTF"
+
+Since that message is 12 bytes, we require to add a padding of 4 bytes to complete the size of a block. In PKCS#7, you pad using a byte with the value of bytes you need to pad. In our example, since we need to pad 4 bytes to complete 16 byte, we would pad like this:
+
+"HELLOPICOCTF"+"\x04\x04\x04\x04"
+
+Note that "\x" is a way to tell that in a string we want to use that exact number on a byte, even if it is not printable ASCII. Now, suppose we want to encrypt a message of 14 bytes like:
+
+"GOODBYEPICOCTF!"
+
+After we pad it using PKCS#7, the result is:
+
+"GOODBYEPICOCTF!"+"\x01"
+
+What would be the result after padding the message "BYEPICOCTF"?
+
+…
+
+If you answered:
+
+"BYEPICOCTF"+"\x06\x06\x06\x06\x06\x06"
+
+You are correct. 
+
+==== Asymmetric crypto example: RSA
+
+Remember that asymmetric crypto, means that we use one key for encrypting (the public key) and another key for decrypting (the private key). Suppose you want to communicate secretly with asymmetric crypto. In that case, you generate a public and private key pair. Then, give the public key to anyone that wants to send you encrypted an encrypted message. They will encrypt the message using your public key and when you receive the encrypted message, you are the only one that can decrypt it, because you are the only one that has the private key. That's why it is called "private". Note that your public key can be of public knowledge and no one would be able to decrypt the message. If you want to send an encrypted message to someone, that person would have to give you their public key.
+
+A very widely used algorithm for asymmetric cryptography is RSA. It is called RSA because of its inventors: Ronald **R**ivest, Adi **S**hamir, and Leonard **A**dleman. To understand how it works, we will encrypt and decrypt using RSA algorithm with a public-private key pair that was generated for this example; it will seem a bit magical. After that, we will understand some concepts, learn to generate keys, and encrypt and decrypt with the generated keys.
+
+Before encrypting, you need to understand how it works the modulo operation if you do not know already. It is actually very simple. The modulo operation finds the remainder after division of one number by another. For example, 8 mod 3 = 2, because 3 fits in 8 two times, and we have a reminder of 2. Since RSA uses very basic arithmetic, we are ready to see the example. In RSA, the public key is a pair of numbers, as well as the private key. The message can be anything that we can represent as a number. In a computer, everything is a number as we know. The encrypted text, also called ciphertext, will be another number. In summary, this what we need in RSA to encrypt and decrypt:
+
+RSA public key: Is a pair of numbers (e,n)
+
+RSA private key: Is a pair of numbers (d,n)
+
+Message: m
+
+Ciphertex: c
+
+To encrypt: m^e^ mod n = c
+
+To decrypt: c^d^ mod n = m
+
+Basically, 'd' is the private value of the private key, since 'n' is also in the public key. As you just saw, the formulas are very simple. To encrypt a message you simply take the message to the power of 'e', and then do modulo 'n'. To decrypt, take the ciphertext to the power of 'd', and then do modulo 'n', and that would result in the original message. In this example the numbers of the keys are very small; that is insecure in real life. RSA is only secure when large values are used. In 2019, RSA is considered secure only if the key is a number that would take at least 2048 bits. Which is roughly a number of *617 digits*. This is how it looks a 617 digit number:
+
+[source, text]
+639792933441952154134189948544473456738316249934191318148092777710386387734317720754565453220777092120190516609628049092636019759882816133231666365286193266863360627356763035447762803504507772355471058595487027908143562401451718062464362679456127531813407833033625423278394497538243720583531147711992606381334677687969597030983391307710987040859133746414428227726346594704745878477872019277152807317679077071572134447306057007334924369311383504931631284042512192565179806941135280131470130478164378851852909285452011658393419656213491434159562586586557055269049652098580338507224264829397285847831630577775606888764
+
+Certainly a very big number. However, to understand how it works it is a good idea to use small numbers. Let's look at an example:
+
+
+Public key (e,n) -> (11,117)
+
+Private key (d,n) -> (35,117)
+
+Message m –> 10
+
+So far, we have a private key which has an e=11, and a public key with a d=35. Our message is 10. To encrypt 10, we do:
+
+10^11^ mod 117
+
+The result of that is 82. So we have:
+
+10^11^ mod 117 = 82
+
+Ciphertext -> 82
+
+Now, for decrypting, we do:
+
+82^35^ mod 117 = 10
+
+Cleartext -> 82
+
+That was a bit magical. The RSA private and public key are generated with some steps that makes them have this property. The process of key generation is relatively simple. We only need to understand some parts of it to show our attack. Note that "In number theory, two integers a and b are said to be relatively prime, mutually prime, or coprime (also written co-prime) if the only positive integer (factor) that divides both of them is 1. Consequently, any prime number that divides one does not divide the other. This is equivalent to their greatest common divisor (gcd) being 1"footnote:[https://en.wikipedia.org/wiki/Coprime_integers[[.underline]#https://en.wikipedia.org/wiki/Coprime_integers#]]. The multiplicative inverse, is a number that we use to multiply another number, and obtain 1 as a result. For example, in non integer arithmetic (in RSA we only use integer arithmetic) the multiplicative inverse of 8, is 1/8, Because 8 * 1/8=1. However in integer arithmetic we don't have fractions. But we can have a multiplicative inverse modulo n, which means that if we have a number, multiply it by its multiplicative inverse, and take modulo n, the result will be 1.
+
+For example, the multiplicative inverse in 3 modulo 4, is 3, Why? Because if you multiply 3*3, that results in 9, and 9 modulo 4, is 1. Now you are ready to see the key generation without getting lost. This is it:
+
+* Generate two large co-prime numbers, p and q.
+* Find n = pq and phi = (p-1) (q-1)
+* Select e such that 1 < e < phi, and e is coprime of phi
+* Find d, which is the multiplicative inverse of e modulo phi.
+* The couple (e, n) is the public key
+* The couple (d, n) is the private key
+
+
+It is relatively simple! To find a multiplicative inverse, you can use the Extended Euclidean Algorithm (EEA). In google it is easy to find an online implementation of it. Remember our example in which we had these key pair?
+
+Public key (e,n) -> (11,117)
+
+Private key (d,n) -> (35,117)
+
+That was generated in exactly the same manner. First we picked two coprime numbers. The number of our choice were:
+
+p=13
+
+q=9
+
+They are coprime, because their greatest common divisor is 1. Then
+
+n=13*9=117
+
+phi=(13-1)(9-1)=96
+
+To pick e, we arbitrarily pick a number that is greater than 1 and less than phi, and it is coprime with phi. The number 11 complies with those requirements. So
+
+e=11
+
+Now, to obtain 'd' applying the EEA. We can do that on this web site:
+
+https://planetcalc.com/3298/[[.underline]#https://planetcalc.com/3298/#]
+
+So we input 11 and 96 in the following manner:
+
+image:images/5image49.png[]
+
+And the result we want is 35. So we have that
+
+d=35
+
+With those results, we know that are private and public keys are:
+
+Public key (e,n) -> (11,117)
+
+Private key (d,n) -> (35,117)
+
+*Excercise*: Create your own public and private key, and use it to encrypt and decrypt a two digit number!
+
+===== Attacking RSA
+
+RSA can be easily broken if it has a small 'n'. This does not happen often in real life, unless a programmer decides to implement its own version of RSA. A programmer should not make its own implementations of cryptography, it is a general rule to use libraries tested by industry. The security of RSA is based on the fact that there is not an efficient algorithm to factorize a large 'n', so an attacker is not able to generate the private key from the public key. In case 'n' is too small, it is possible to factorize it.
+
+We are going to see how to break RSA by recovering the private key from the public. In real life, the public key comes in a digital certificate, which is a package that contains data related to the owner of the public key along with the public key itself. Digital certificates are often encoded in base64, which is a way of encoding a binary as a printable text. The following is an example of a digital certificate encoded in base64:
+
+[source, text]
+-----BEGIN CERTIFICATE-----
+MIIB6zCB1AICMDkwDQYJKoZIhvcNAQECBQAwEjEQMA4GA1UEAxMHUGljb0NURjAe
+Fw0xOTA3MDgwNzIxMThaFw0xOTA2MjYxNzM0MzhaMGcxEDAOBgNVBAsTB1BpY29D
+VEYxEDAOBgNVBAoTB1BpY29DVEYxEDAOBgNVBAcTB1BpY29DVEYxEDAOBgNVBAgT
+B1BpY29DVEYxCzAJBgNVBAYTAlVTMRAwDgYDVQQDEwdQaWNvQ1RGMCIwDQYJKoZI
+hvcNAQEBBQADEQAwDgIHEaTUUhKxfwIDAQABMA0GCSqGSIb3DQEBAgUAA4IBAQAH
+al1hMsGeBb3rd/Oq+7uDguueopOvDC864hrpdGubgtjv/hrIsph7FtxM2B4rkkyA
+eIV708y31HIplCLruxFdspqvfGvLsCynkYfsY70i6I/dOA6l4Qq/NdmkPDx7edqO
+T/zK4jhnRafebqJucXFH8Ak+G6ASNRWhKfFZJTWj5CoyTMIutLU9lDiTXng3rDU1
+BhXg04ei1jvAf0UrtpeOA6jUyeCLaKDFRbrOm35xI79r28yO8ng1UAzTRclvkORt
+b8LMxw7e+vdIntBGqf7T25PLn/MycGPPvNXyIsTzvvY/MXXJHnAqpI5DlqwzbRHz
+q16/S1WLvzg4PsElmv1f
+-----END CERTIFICATE-----
+
+Copy that text into a text file on the shell server, and name it "weak_n_certificate". The first thing we have to do to crack RSA with a weak n, is to extract the n from the certificate. Remember that n is the modulus and e is the exponent.
+You can use the following command to extract those values:
+
+[source, text]
+openssl x509 -in weak_n_certificate -text -noout
+
+In this case, 
+
+n= 4966306421059967
+
+e= 65537
+
+As we can see in the output of the command:
+
+[source, text]
+Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number: 12345 (0x3039)
+        Signature Algorithm: md2WithRSAEncryption
+        Issuer: CN = PicoCTF
+        Validity
+            Not Before: Jul  8 07:21:18 2019 GMT
+            Not After : Jun 26 17:34:38 2019 GMT
+        Subject: OU = PicoCTF, O = PicoCTF, L = PicoCTF, ST = PicoCTF, C = US, CN = PicoCTF
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (53 bit)
+                Modulus: 4966306421059967 (0x11a4d45212b17f)
+                Exponent: 65537 (0x10001)
+    Signature Algorithm: md2WithRSAEncryption
+         07:6a:5d:61:32:c1:9e:05:bd:eb:77:f3:aa:fb:bb:83:82:eb:
+         9e:a2:93:af:0c:2f:3a:e2:1a:e9:74:6b:9b:82:d8:ef:fe:1a:
+         c8:b2:98:7b:16:dc:4c:d8:1e:2b:92:4c:80:78:85:7b:d3:cc:
+         b7:d4:72:29:94:22:eb:bb:11:5d:b2:9a:af:7c:6b:cb:b0:2c:
+         a7:91:87:ec:63:bd:22:e8:8f:dd:38:0e:a5:e1:0a:bf:35:d9:
+         a4:3c:3c:7b:79:da:8e:4f:fc:ca:e2:38:67:45:a7:de:6e:a2:
+         6e:71:71:47:f0:09:3e:1b:a0:12:35:15:a1:29:f1:59:25:35:
+         a3:e4:2a:32:4c:c2:2e:b4:b5:3d:94:38:93:5e:78:37:ac:35:
+         35:06:15:e0:d3:87:a2:d6:3b:c0:7f:45:2b:b6:97:8e:03:a8:
+         d4:c9:e0:8b:68:a0:c5:45:ba:ce:9b:7e:71:23:bf:6b:db:cc:
+         8e:f2:78:35:50:0c:d3:45:c9:6f:90:e4:6d:6f:c2:cc:c7:0e:
+         de:fa:f7:48:9e:d0:46:a9:fe:d3:db:93:cb:9f:f3:32:70:63:
+         cf:bc:d5:f2:22:c4:f3:be:f6:3f:31:75:c9:1e:70:2a:a4:8e:
+         43:96:ac:33:6d:11:f3:ab:5e:bf:4b:55:8b:bf:38:38:3e:c1:
+         25:9a:fd:5f
+
+Factorize that n is pretty easy. If you google "integer factorization online", the first result is this one:
+
+https://www.alpertron.com.ar/ECM.HTM[[.underline]#https://www.alpertron.com.ar/ECM.HTM#]
+
+Input the value of n in the text field on that website, and click the button factor. You will get the following:
+
+image:images/5image50.png[image,width=624,height=533]
+
+That is correct, 67867967 and 73176001 happen to be 'p' and 'q' in the RSA public key. Having those to values, you are be able to calculate the private key.
+
+*Challenge*: what is the private key?
+
+==== Hashing
+
+Imagine you want to download a big file from the internet. However, after downloading, you want to check that every bit of the file is correct, and nothing was changed because of a transmission error or a malicious attacker. To do this, you can use a hash, which is a value that you get after applying a hash function to the file, and you obtain a string of fixed length that identifies that file. Whenever you apply the hash function to the file, you will get exactly the same hash, unless the file has been modify. If one bit of the file was changed, you would get a very different hash. So, using a hash we can check the integrity.
+
+There are several hash functions used in industry that are considered secure. One that is commonly used, is SHA2, which means "Secure Hashing Algorithm 2", because it is the second version of SHA. Let's look at an example. Open the shell server and create a file called "bio.txt" and copy paste the following content (do not include the quotes and make sure there is not break line at the end or beginning):
+
+"Charles Babbage KH FRS (26 December 1791 – 18 October 1871) was an English polymath. A mathematician, philosopher, inventor and mechanical engineer, Babbage originated the concept of a digital programmable computer."
+
+Save it, and run the command "sha256sum" like this:
+
+[source, text]
+sha256sum bio.txt
+
+As a result, you should get a hex string of 64 characters. In this particular text, you should get:
+
+[source, text]
+338f1cefc564f86ecfc241310d35e31125bb14cff61c080f293be2ef24fb3a69
+
+That string is an identification for the information contained in our file. If we make just a little change to the file, it will change completely. For example, create a new file called "bio2.txt" with the same data, but now without the dot at the end:
+
+"Charles Babbage KH FRS (26 December 1791 – 18 October 1871) was an English polymath. A mathematician, philosopher, inventor and mechanical engineer, Babbage originated the concept of a digital programmable computer"
+
+Save it, and run the command "sha256sum" like this:
+
+sha256sum bio2.txt
+
+You should get:
+
+3e7e604c81440507f6140becfed1c3510bc49cc4745c938166b9979245215618
+
+Note that the hash is very different just because we removed one single dot. Now, add the dot back at the end in the file bio2.txt, and run "sha256sum" on that file. You should get the original hash that we got from "bio.txt", because the information contained in the file is exactly the same.
+
+So, if we store a file, calculate the hash, and keep the hash with us, we could know if the file was modified by recalculating the hash and verifying that it matches with the hash we had. This is a very useful integrity measure. One caveat, is that an attacker should not have access to the place in which the hash is stored, because in that case, the attacker would be able to modify the file, recalculate the hash, and replaced the stored hash, so we would not be able to tell that the file was modified.
+
+Hashes, are commonly used to store passwords in a database. When a user logs in, the hash of the password is calculated and it is compared with the hash stored. If they match, we know that the user input the correct password. Note that a fundamental property of hashes is that it is impossible to get the original text from the hash. Because of that, a system administrator would not be able to learn the actual password of users if they have access to the database. In the case of a data breach, when a database is leaked, attackers would not be able to obtain the real password of users.
+
+How can a hash be attacked? In the case of passwords, an attacker can create a table that maps several passwords to their hash by calculating the hash of several words, for example all the words in an english dictionary. In that way, if the attacker finds a hash of the password in the database, and the password was a word present in an english dictionary, it could be possible to map it back to the original password by looking for it in the table. However, if a user picked a secure password, this attack would not work because that secure password with complexity, would not be ina dictionary. Note there are lists of commonly used passwords which contain words in several languages and modifications of them, for example, "Hello_12345". A secure password should be random characters to prevent this attack.
+
+Challenge: The following hash of a password was leaked from a database, and you know the user did not use a strong password.
+
+e7ae6cfee91a324590df7b048dcc9802b7389c1b0d996d474d61c4cbb1253455
+
+Search on google the list of passwords called "rockyou", and generate the hash to find the password that corresponds to the leaked hash!
+
+Hint: you can use python to generate hashes. The hashing algorithm is SHA2.

@@ -1,0 +1,82 @@
+
+== 6 The Network
+
+A network is made up of several computers connected. They can be connected through different protocols. A Protocol is a set of rules that allow two computers in a network to send and receive information. That set of rules is essential to understand what information is coming from what source, or how to send information to a particular computer in the network. To sniff traffic in a network, we will be using a tool called Wireshark, which can show the packets transmitted on a network and we can get passwords from insecure connections. But first, we will briefly explain some important things so you roughly understand the composition of a packet and can extract the parts you need.
+
+=== Network Layers
+
+The networks we commonly used today, are broken down into different layers. This design by layers assigns responsibilities to each layer to accomplish something. It is good to have a design by layers for several reasons. For example, if network engineers want to make a change in one of the layers, the impact on the other layers is minimized. Another example, is that if you are a programmer and want to connect your application with a server, you do not necessarily need to care if the user is using wifi or ethernet cable, or how the user is connection to the internet. Your application can simply trust other layers are going to take care of that and your application will have a successful connection. These are the layers, viewed in a top down approach.
+
+. Application layer: Responsible for handling data traffic between applications. HTTP belongs to this layer, HTTP protocol is commonly used to obtain Web Pages.
+
+. Transport layer: Responsible for providing several connections on the same host, that means that you can have several applications on the same device and each of them can have a different connection even if it is just one device. It also defines functionalities for reliable transport. Two protocols are used on this layer. TCP (Transport Control Protocol). You use this protocol when you need to have reliable transport, this makes sure that if a piece of information was missing while being transfer, is resent again. HTTP from the Application layer, runs on top of TCP, because when you visit a Web Page you want to have every part of it accurately. On the other hand, when you don’t need reliable transport, but you want faster transport that does not resend parts that were missing, UDP (User Datagram Protocol) is used. An example when UDP is needed is for voice communication. When you are talking if a little part of the audio is missing, you do not want it to appear later in the communication because that would confuse the listener. It is preferred that is simply lost, and the listener can still understand what you are saying if that little part missing is small enough. Since UDP has no controls for transport, it is faster than TCP. This layer assigns a port to each connection, and that is how it tells the difference between connections in the same computer, because of the port.
+
+. Network layer: It provides devices with an address in the network called the IP (Internet Protocol) address, and routes information through different routers. It provides mapping between all the computers connected to the internet. When you connect to a network in some specific place, an IP is assigned to your device.
+
+. Data link layer: It provides communication between devices that are connected directly. Examples of protocols in the data link layer are Ethernet or WiFi. You generally use WiFi to send messages to your router directly without any other devices in between. Each device has a physical address in wifi or ethernet, known as the mac address. The mac address is used for this layer. This is not an address like the IP that can change depending on the network you are connected to. The mac address is assigned to the hardware of your network card when it is manufactured.
+
+. Physical layer: This handles electrical pulses on the wire that represent bits.
+
+When you access a browser and visit a web site , the information of the web site is downloaded in packets. Today’s Internet is pretty fast, and you might feel that the website appears all at once. But if you download a big file, you can see that it takes some time. This happens because the file is broken down into packets that are received in your computer, and begin to accumulate, until they are all received and conform the whole file when the download is completed. Each packet contains a piece corresponding to each layer.
+
+=== Sniffing and attack example
+
+In a tool called wireshark, we can “sniff” the packets transmitted on a network. The technical term that is used to refer to a tool like wireshark it is actually “sniffer”.
+
+On your computer, Download wireshark from their site:
+
+https://www.wireshark.org/[[.underline]#https://www.wireshark.org/#]
+
+You have to download the version corresponding to your operating system. It should be a very easy process, however, if you have any issue or doubt, at Google there is plenty of good documentation about Wireshark.
+
+Once you install it, open it and you should see a window similar to this:
+
+image:images/5image39.png[image,width=624,height=529]
+
+That is the list of devices you can sniff. In this case, we want to sniff the network card you are using to connect to the internet. If you are connected to a WiFi, you should select the one that is called “WiFi”. In case you are connected to the Internet using Ethernet cable, you should select “Ethernet”. Then, click the “start capture” button on the upper left side which is circled in the following image:
+
+image:images/5image40.png[image,width=624,height=529]
+
+The capture now starts. If you have applications running on your computer or have website open in your browser, you will probably see several packets immediately, leave that Wireshark window running the packet sniffing. In your browser, navigate to the following link:
+
+http://www.samuelsabogalpardo.com/pico/sign_in.php[[.underline]#http://www.samuelsabogalpardo.com/pico/sign_in.php#]
+
+You should see the following page:
+
+image:images/5image41.png[image,width=624,height=529]
+
+
+Now come back to the Wireshark window. What we want to do now is finding the packets that were sent and received in your computer when you accessed the link. If there are too many packets from all the connections on your computer, that would be hard task without the help of a wireshark filter. A wireshark filter allows you to tell wire shark that you only want to see some specific packets. You can filter by protocol, a particular ip, string on your request, or anything you need that helps you find what you are looking for faster. When we accessed the link on the browser, we did an HTTP request. We can filter http request, by simply typing http on the filter textfield and pressing enter. The following image shows the results and we circled in red the textfield in which you have to type:
+
+image:images/5image42.png[image,width=624,height=529]
+
+Right below the textfield in which you typed it is the packet list. We can see two packets. The first one is the request your browser sent to the server asking for the web page, so naturally it has your IP as the source, and the IP of the server as the destination. The second packet is the reply, which now has your IP as the destination and the IP of the server as the source because now the server is the one that is sending the page to you after you request it.
+
+In the lower part of the window, we can see the information related to all the layers we explained previously of the currently selected packet. Now, we will send a user and password to the web site. This page in particular does not do anything after you send a password, it is just receive it and does nothing, but the important thing is to note that we can see the password on wireshark when we send it. In the web page, type the following in user and password respectively:
+
+picouser
+
+picopassword
+
+In Wireshark, you should see now two more packets, one in which you send the user and password, and the reply of the server. Note that the reply of the server is the same page, as we said this page does nothing. So far we have 4 packets, and the third one is the one in which you send the user and password!
+
+Click the third packet, and in the lower part of the window where are show the layers, click “Hypertext Transfer Protocol”. Note that at the end we can see &password=picopassword
+
+image:images/5image43.png[image,width=624,height=529]
+
+So we just found the password we sent using sniffing. A fundamental thing to note, is that we were able to do that because the website was using HTTP, instead of HTTPS which is encrypted. Encryption prevents us from understanding the contents of a packet.
+
+Additionally, we are always able the network card of our own computer. However, if we want to sniff packets from other devices connected to the same wifi, we have to do additional things because WiFi could be using encryption. We encourage you to use a second device, it can be a smartphone, to access the web page and send a password. Then in your computer use Wireshark to capture the password sent, but first you need to do two things:
+
+Enable monitor mode in Wireshark: Stop any packet capture you are doing and open the capture dialog, which is located in the upper part of the window and click “options”Choose Wifi Interface and check “monitor” as in the following image:
+
+image:images/5image44.png[image,width=624,height=529]
+
+
+IMPORTANT: When the monitor mode is enabled and you are capturing packets, you would not be able to navigate the Internet on your computer. To be able to navigate again, disable monitor mode by unchecking the checkbox.
+
+Decrypt WiFi Decrypt WiFi connection: You can do this only if you have the password for the WiFi you are sniffing. In the following link:
+
+https://wiki.wireshark.org/HowToDecrypt802.11[[.underline]#https://wiki.wireshark.org/HowToDecrypt802.11#]
+
+There is a very good article that explains how to do it. Note that Wifi Encryption is encryption of the datalink layer, which is different to the encryption provided by HTTPS which is in the application layer. So even if you decrypt the WiFi connection, if a website it is still using HTTPS, you will not be able to see anything from that website on Wireshark.

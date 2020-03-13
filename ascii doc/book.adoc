@@ -6,6 +6,10 @@ include::chapters/intro.adoc[]
 include::chapters/shell.adoc[]
 include::chapters/python.adoc[]
 include::chapters/web.adoc[]
-//include::chapters/sql.adoc[]
+include::chapters/crypto.adoc[]
+include::chapters/network.adoc[]
+include::chapters/sql.adoc[]
+//include::chapters/binary.adoc[]
+
 
 

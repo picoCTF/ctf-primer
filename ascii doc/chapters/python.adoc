@@ -24,19 +24,14 @@ cd python_examples
 Create a file called "helloworld.py", you can do it with:
 
 [source, python]
-vim helloworld.py
+nano helloworld.py
 
-Remember that in vim to begin to type you must press ‘i’. To make our ‘hello world!’ program in python, it is just required one line of code! Simply write this on the file:
+ To make our ‘hello world!’ program in python, it is just required one line of code! Simply write this on the file:
 
 [source, python]
 print "Hello World!"
 
-Now save the file in vim by pressing escape and then write 
-
-[source, python]
-:wq! 
-
-to save and close vim.
+Now save the file in nano by pressing 'control' and 'x' at the same time, and then press 'y', then 'enter'. 
 
 Run the program on the terminal with:
 
