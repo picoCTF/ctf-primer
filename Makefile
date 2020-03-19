@@ -1,5 +1,5 @@
 book.html :
-	asciidoctor book.adoc
+	asciidoctor -a toc=left book.adoc
 
 clean :
-	rm book.html
+	rm book.html *~
