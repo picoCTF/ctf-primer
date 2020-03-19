@@ -1,14 +1,13 @@
 # pico Primer for Competitors
-{WARNING: WIP: image links known to be broken with this current repo and
-compile/deploy setup.}
 
 ## Compile & Deploy
 NOTE: asciidoctor required. Apt install as needed.
 
 ```
 # turns AsciiDoc "pico Primer for Competitors" into HTML form
-asciidoctor book.adoc
+make
 
-# really fancy deploy process
-cp book.html /var/www/html/index.html
+# copies book.html from `make` above to /var/www/html/index.html
+# and included images to /var/www/images/
+./deploy.sh </var/www/html/index.html> </var/www/images/>
 ```
