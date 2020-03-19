@@ -1,8 +1,14 @@
 # pico Primer for Competitors
-This repo is added as a submodule of the primary picoctf.com website at https://github.com/picoCTF/picoCTF-site-outside
+{WARNING: WIP: image links known to be broken with this current repo and
+compile/deploy setup.}
 
-Follow instructions in that respective README but make sure to `git clone` the aforementioned repo with the `--recurse-submodules` flag.
+## Compile & Deploy
+NOTE: asciidoctor required. Apt install as needed.
 
-`jekyll build` or `jekyll serve` will then include the picoPrimer content in the `/primer` subdirectory.
+```
+# turns AsciiDoc "pico Primer for Competitors" into HTML form
+asciidoctor book.adoc
 
- 
+# really fancy deploy process
+cp book.html /var/www/html/index.html
+```
