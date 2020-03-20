@@ -359,204 +359,176 @@ Note that GDB prints each group of 4 bytes as a numbers. Because of little endia
 //BEGIN EDITING HERE!
 ===== Function call
 
-When a function is called, the IP moves to wherever the code of the function is located. When the function is finished, the IP moves back to the next instruction to the function call. As we mentioned previously, the address of the next instruction has to be stored somewhere so the program knows where to comeback after the function is finished. We call this address the "return address". The return address is stored in the memory segment that we called the stack. How do we know in which part of the stack? There is a register called the Stack Pointer (SP), that points to the tip of the stack. When a function is called, the stack pointer moves to make room for the return address and new local variables. When the function is finished, the stack pointer moves to the original position prior to the function call, making the memory addresses in which the local variables were free again.
+When a function is called, the IP moves to wherever the code of the function is located. When the function is finished, the IP moves back to the next instruction to the function call. As we mentioned previously, the address of the next instruction has to be stored somewhere so the program knows where to comeback after the function is finished. We call this address the "return address". The return address is stored in the memory segment refered as the stack. How do we know in which part of the stack? There is a register called the Stack Pointer (SP), that points to the tip of the stack. When a function is called, the stack pointer moves to make room for the return address and new local variables. When the function is finished, the Stack Pointer moves to the original position prior to the function call, making the memory addresses in which the local variables from the function were located free again.
 
-(stack explanation graphically, and show how the stack pointer points to it)
+Imagine that we have a toy memory with only a few addresses. Remember that the SP is the Stack Pointer, and the Stack is a region of memory, in this case colored in yellow. Suppose that we have created no local variables or anything on the stack. The stack would look like this:
 
-Let’s see this in practice.
+
+[.text-center]
+image:images/6image1.png[image,width=198,height=222]
+		
+
+Then we create a local variable, using something like:
+
+[source, c]
+int var=4;
+
+After that is executed, the stack would look like in the following image, because by creating a variable we push it into the stack (in this example we are using “<=” as a simple arrow):
+
+[.text-center]
+image:images/6image2.png[image,width=198,height=222]
+
+Note that when we push a variable into the stack, we subtract one address to the SP, so it points to the new top of the stack. In this case the new SP value will be 16, which means is pointing to the address 16. If we create another local variable like this:
+
+[source, c]
+int var=5;
+
+The stack would look like this:
+
+[.text-center]
+image:images/6image3.png[image,width=198,height=222] 
+
+And the SP would be equal to 15.
+
+In real life, on a 32 bit Intel architecture, each address contains four bytes. Integers are stored in little endian, and the addresses would have bigger values on a running program because the stack is placed on higher addresses. A piece of the stack that created two integer with values 5 and 4, could look like this (remember that address and memory are usually represented in hex): 
+
+[.text-center]
+image:images/6image4.png[image,width=198,height=222] 
+ 
+Let’s go now to real life on our 64 bit program.
 
 In GDB, set a breakpoint in the function "main" using "b main":
 
+[source, text]
 (gdb) b main
 
 And run the program again using "r"
 
+[source, text]
 (gdb) r
 
 The program being debugged has been started already.
 
+[source, text]
 Start it from the beginning? (y or n) y
-
 Starting program: /vuln1
-
 Breakpoint 2, 0x0000000000400611 in main ()
-
 (gdb)
 
 To show the assembly of the current function in where we are, which is "main", use "disas":
 
+[source, text]
 (gdb) disas
-
-Dump of assembler code for function main:
-
-0x000000000040060d <+0>: push %rbp
-
-0x000000000040060e <+1>: mov %rsp,%rbp
-
-=> 0x0000000000400611 <+4>: sub $0x10,%rsp
-
-0x0000000000400615 <+8>: mov %edi,-0x4(%rbp)
-
-0x0000000000400618 <+11>: mov %rsi,-0x10(%rbp)
-
-0x000000000040061c <+15>: mov $0x0,%eax
-
-0x0000000000400621 <+20>: callq 0x4005ca <vuln>
-
-0x0000000000400626 <+25>: mov $0x0,%eax
-
-0x000000000040062b <+30>: leaveq
-
-0x000000000040062c <+31>: retq
-
+    Dump of assembler code for function main:
+    0x000000000040060d <+0>: push %rbp
+    0x000000000040060e <+1>: mov %rsp,%rbp
+ => 0x0000000000400611 <+4>: sub $0x10,%rsp
+    0x0000000000400615 <+8>: mov %edi,-0x4(%rbp)
+    0x0000000000400618 <+11>: mov %rsi,-0x10(%rbp)
+    0x000000000040061c <+15>: mov $0x0,%eax
+    0x0000000000400621 <+20>: callq 0x4005ca <vuln>
+    0x0000000000400626 <+25>: mov $0x0,%eax
+    0x000000000040062b <+30>: leaveq
+    0x000000000040062c <+31>: retq
 End of assembler dump.
 
 Even if you don’t know assembly, if you look through it, you might guess that "callq 0x4005ca <vuln>" is the function call to "vuln". We will go to that instruction in the debugger. To advance one instruction in GDB we can use "si". Try it, and use "disas" again to see where we are now. You should see something like this:
 
+[source, text]
 (gdb) si
+    0x0000000000400615 in main ()
+    (gdb) disas
+    Dump of assembler code for function main:
+    0x000000000040060d <+0>: push %rbp
+    0x000000000040060e <+1>: mov %rsp,%rbp
+    0x0000000000400611 <+4>: sub $0x10,%rsp
+ => 0x0000000000400615 <+8>: mov %edi,-0x4(%rbp)
+    0x0000000000400618 <+11>: mov %rsi,-0x10(%rbp)
+    0x000000000040061c <+15>: mov $0x0,%eax
+    0x0000000000400621 <+20>: callq 0x4005ca <vuln>
+    0x0000000000400626 <+25>: mov $0x0,%eax
+    0x000000000040062b <+30>: leaveq
+    0x000000000040062c <+31>: retq
+    End of assembler
 
-0x0000000000400615 in main ()
+We could use "si" three times more to get to the instruction in which the function call is made. But this strategy might not be good if we are far away from the function call. Instead, we can set a breakpoint on the memory address of the function call that we see is "0x0000000000400621". To set a breakpoint on a memory address, we also use "b", but we put an asterisk previous to the address like this "b *0x0000000000400621", after pressing enter you should see something like:
 
-(gdb) disas
-
-Dump of assembler code for function main:
-
-0x000000000040060d <+0>: push %rbp
-
-0x000000000040060e <+1>: mov %rsp,%rbp
-
-0x0000000000400611 <+4>: sub $0x10,%rsp
-
-=> 0x0000000000400615 <+8>: mov %edi,-0x4(%rbp)
-
-0x0000000000400618 <+11>: mov %rsi,-0x10(%rbp)
-
-0x000000000040061c <+15>: mov $0x0,%eax
-
-0x0000000000400621 <+20>: callq 0x4005ca <vuln>
-
-0x0000000000400626 <+25>: mov $0x0,%eax
-
-0x000000000040062b <+30>: leaveq
-
-0x000000000040062c <+31>: retq
-
-End of assembler
-
-We could use "si" three times more to get to the instruction in which the function call is made. But this strategy might be not good if we are far away from the function call. Instead, We can set a breakpoint in the memory address of the function call, that we see is "0x0000000000400621". To set a breakpoint on a memory address, we also use "b", but we put an asterisk previous to the address like this "b *0x0000000000400621", after pressing enter you should see something like:
-
+[source, text]
 (gdb) b *0x0000000000400621
-
 Breakpoint 3 at 0x400621
-
 (gdb)
 
 Now, use "continue" or "c" to continue to the breakpoint:
 
+[source, text]
 (gdb) c
-
 Continuing.
-
 Breakpoint 3, 0x0000000000400621 in main ()
-
 (gdb)
 
 Now, verify that we actually get to where we wanted using "disas":
 
+[source, text]
 (gdb) disas
-
-Dump of assembler code for function main:
-
-0x000000000040060d <+0>: push %rbp
-
-0x000000000040060e <+1>: mov %rsp,%rbp
-
-0x0000000000400611 <+4>: sub $0x10,%rsp
-
-0x0000000000400615 <+8>: mov %edi,-0x4(%rbp)
-
-0x0000000000400618 <+11>: mov %rsi,-0x10(%rbp)
-
-0x000000000040061c <+15>: mov $0x0,%eax
-
-=> 0x0000000000400621 <+20>: callq 0x4005ca <vuln>
-
-0x0000000000400626 <+25>: mov $0x0,%eax
-
-0x000000000040062b <+30>: leaveq
-
-0x000000000040062c <+31>: retq
-
-End of assembler dump.
-
-(gdb)
+    Dump of assembler code for function main:
+    0x000000000040060d <+0>: push %rbp
+    0x000000000040060e <+1>: mov %rsp,%rbp
+    0x0000000000400611 <+4>: sub $0x10,%rsp
+    0x0000000000400615 <+8>: mov %edi,-0x4(%rbp)
+    0x0000000000400618 <+11>: mov %rsi,-0x10(%rbp)
+    0x000000000040061c <+15>: mov $0x0,%eax
+ => 0x0000000000400621 <+20>: callq 0x4005ca <vuln>
+    0x0000000000400626 <+25>: mov $0x0,%eax
+    0x000000000040062b <+30>: leaveq
+    0x000000000040062c <+31>: retq
+    End of assembler dump.
+    (gdb)
 
 At this point, the program is about to execute the function call to "vuln()". Remember that the return address is the next instruction to the function call. Note that If it was the same as the function call, it would return and call the function again and get into an infinite loop
 
 In this case, the return address is "0x0000000000400626", remember this address. If we check the Stack Pointer (SP) right now using "x $rsp" we would see that it points to an address that does not contain the return address yet:
 
-(gdb) x $rsp
 
+[source, text]
+(gdb) x $rsp
 0x7fffffffe010: 0xffffe108
 
 If we advance one instruction using "si", we would suddenly be in the first instruction of the function "vuln()":
 
+[source, text]
 (gdb) si
-
 0x00000000004005ca in vuln ()
-
 (gdb) disas
-
 Dump of assembler code for function vuln:
-
-=> 0x00000000004005ca <+0>: push %rbp
-
-0x00000000004005cb <+1>: mov %rsp,%rbp
-
-0x00000000004005ce <+4>: add $0xffffffffffffff80,%rsp
-
-0x00000000004005d2 <+8>: lea 0x127(%rip),%rdi # 0x400700
-
-0x00000000004005d9 <+15>: callq 0x4004a0 <puts@plt>
-
-0x00000000004005de <+20>: lea -0x80(%rbp),%rax
-
-0x00000000004005e2 <+24>: mov %rax,%rdi
-
-0x00000000004005e5 <+27>: mov $0x0,%eax
-
-0x00000000004005ea <+32>: callq 0x4004b0 <gets@plt>
-
-0x00000000004005ef <+37>: lea -0x80(%rbp),%rax
-
-0x00000000004005f3 <+41>: mov %rax,%rdi
-
-0x00000000004005f6 <+44>: callq 0x4004a0 <puts@plt>
-
-0x00000000004005fb <+49>: mov 0x200a3e(%rip),%rax
-
-0x0000000000400602 <+56>: mov %rax,%rdi
-
-0x0000000000400605 <+59>: callq 0x4004c0 <fflush@plt>
-
-0x000000000040060a <+64>: nop
-
-0x000000000040060b <+65>: leaveq
-
-0x000000000040060c <+66>: retq
-
-End of
+=>  0x00000000004005ca <+0>: push %rbp
+    0x00000000004005cb <+1>: mov %rsp,%rbp
+    0x00000000004005ce <+4>: add $0xffffffffffffff80,%rsp
+    0x00000000004005d2 <+8>: lea 0x127(%rip),%rdi # 0x400700
+    0x00000000004005d9 <+15>: callq 0x4004a0 <puts@plt>
+    0x00000000004005de <+20>: lea -0x80(%rbp),%rax
+    0x00000000004005e2 <+24>: mov %rax,%rdi
+    0x00000000004005e5 <+27>: mov $0x0,%eax
+    0x00000000004005ea <+32>: callq 0x4004b0 <gets@plt>
+    0x00000000004005ef <+37>: lea -0x80(%rbp),%rax
+    0x00000000004005f3 <+41>: mov %rax,%rdi
+    0x00000000004005f6 <+44>: callq 0x4004a0 <puts@plt>
+    0x00000000004005fb <+49>: mov 0x200a3e(%rip),%rax
+    0x0000000000400602 <+56>: mov %rax,%rdi
+    0x0000000000400605 <+59>: callq 0x4004c0 <fflush@plt>
+    0x000000000040060a <+64>: nop
+    0x000000000040060b <+65>: leaveq
+    0x000000000040060c <+66>: retq
+    End of
 
 And if we check the SP again:
 
+[source, text]
 (gdb) x $rsp
-
 0x7fffffffe008: 0x00400626
-
 (gdb)
 
 Do you remember the return address was "0x0000000000400626"? We can see that the SP points to the address "0x7fffffffe008", and that address contains the return address!
 
 The whole idea of the attack, is to modify the return address, to return at another place. In our attack example at the beginning, we modify it so it returned to the function "win()".
 
-The function gets() in C, simply copies any user input and puts all that in memory, so we simply need to overwrite the return address.
+The function gets() in C, simply copies any user input and puts all that in memory, so we simply need to overwrite the return address. As a programmer, never use gets() in C, you would introduce a vulnerability in your program that is very easy to exploit!
