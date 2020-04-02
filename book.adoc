@@ -9,7 +9,7 @@ include::chapters/web.adoc[]
 include::chapters/crypto.adoc[]
 include::chapters/network.adoc[]
 include::chapters/sql.adoc[]
-//include::chapters/binary.adoc[]
+include::chapters/binary.adoc[]
 
 
 
