@@ -25,30 +25,38 @@ In a tool called wireshark, we can “sniff” the packets transmitted on a netw
 
 On your computer, Download wireshark from their site:
 
-https://www.wireshark.org/[[.underline]#https://www.wireshark.org/#]
+https://www.wireshark.org/[[.underline]#https://www.wireshark.org/#
 
 You have to download the version corresponding to your operating system. It should be a very easy process, however, if you have any issue or doubt, at Google there is plenty of good documentation about Wireshark.
 
 Once you install it, open it and you should see a window similar to this:
 
-image:images/5image39.png[image,width=624,height=529]
+[.text-center]
+.Wireshark GUI
+image::images/5image39.png[image,width=624,height=529]
 
 That is the list of devices you can sniff. In this case, we want to sniff the network card you are using to connect to the internet. If you are connected to a WiFi, you should select the one that is called “WiFi”. In case you are connected to the Internet using Ethernet cable, you should select “Ethernet”. Then, click the “start capture” button on the upper left side which is circled in the following image:
 
-image:images/5image40.png[image,width=624,height=529]
+[.text-center]
+.Wireshark run button
+image::images/5image40.png[image,width=624,height=529]
 
 The capture now starts. If you have applications running on your computer or have website open in your browser, you will probably see several packets immediately, leave that Wireshark window running the packet sniffing. In your browser, navigate to the following link:
 
-http://www.samuelsabogalpardo.com/pico/sign_in.php[[.underline]#http://www.samuelsabogalpardo.com/pico/sign_in.php#]
+https://primer.picoctf.com/vuln/web/sign_in.php
 
 You should see the following page:
 
-image:images/5image41.png[image,width=624,height=529]
+[.text-center]
+.Sign-in page
+image::images/5image41.png[image,width=624,height=529]
 
 
 Now come back to the Wireshark window. What we want to do now is finding the packets that were sent and received in your computer when you accessed the link. If there are too many packets from all the connections on your computer, that would be hard task without the help of a wireshark filter. A wireshark filter allows you to tell wire shark that you only want to see some specific packets. You can filter by protocol, a particular ip, string on your request, or anything you need that helps you find what you are looking for faster. When we accessed the link on the browser, we did an HTTP request. We can filter http request, by simply typing http on the filter textfield and pressing enter. The following image shows the results and we circled in red the textfield in which you have to type:
 
-image:images/5image42.png[image,width=624,height=529]
+[.text-center]
+.Wireshark HTTP filter
+image::images/5image42.png[image,width=624,height=529]
 
 Right below the textfield in which you typed it is the packet list. We can see two packets. The first one is the request your browser sent to the server asking for the web page, so naturally it has your IP as the source, and the IP of the server as the destination. The second packet is the reply, which now has your IP as the destination and the IP of the server as the source because now the server is the one that is sending the page to you after you request it.
 
@@ -62,7 +70,9 @@ In Wireshark, you should see now two more packets, one in which you send the use
 
 Click the third packet, and in the lower part of the window where are show the layers, click “Hypertext Transfer Protocol”. Note that at the end we can see &password=picopassword
 
-image:images/5image43.png[image,width=624,height=529]
+[.text-center]
+.Sniffed password
+image::images/5image43.png[image,width=624,height=529]
 
 So we just found the password we sent using sniffing. A fundamental thing to note, is that we were able to do that because the website was using HTTP, instead of HTTPS which is encrypted. Encryption prevents us from understanding the contents of a packet.
 
@@ -70,8 +80,9 @@ Additionally, we are always able the network card of our own computer. However, 
 
 Enable monitor mode in Wireshark: Stop any packet capture you are doing and open the capture dialog, which is located in the upper part of the window and click “options”Choose Wifi Interface and check “monitor” as in the following image:
 
-image:images/5image44.png[image,width=624,height=529]
-
+[.text-center]
+.Monitor mode on Wireshark
+image::images/5image44.png[image,width=624,height=529]
 
 IMPORTANT: When the monitor mode is enabled and you are capturing packets, you would not be able to navigate the Internet on your computer. To be able to navigate again, disable monitor mode by unchecking the checkbox.
 

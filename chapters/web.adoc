@@ -19,13 +19,17 @@ Before diving into Web Exploits, you need to understand how a website works. Man
 
 
 [.text-center]
-image:images/image13.png[image,width=624,height=496]
+.Hello World! page
+image::images/image13.png[image,width=624,height=46]
 
 . Now, in the text editor, modify the content of the file and replace the text by: <b>Hello World!</b>
 . Save the file on the text editor. Then, open the file in the browser again, or you can simply click refresh on your browser. Since it already has opened the file, you will see the message in bold, in page similar to this:
 
+
 [.text-center]
-image:images/image27.png[image,width=624,height=496]
+.Hello World! page in bold
+image::images/image27.png[image,width=624,height=46]
+
 
 
 You just created a page with a very simple HTML that made your message appeared in bold. Note that <b> is the opening tag, </b> is the closing tag. Analyze the difference between the opening and closing tag. What do you see? The closing tag is usually the same as the opening tag, but you include “/” like we just did. We just used an html tag to tell the browser we want some specific text in bold. Html is just a bunch of tags that allow us to do similar things.
@@ -53,7 +57,8 @@ Now let’s make a page with more fields so you can get a sense of more tags and
 Now, as we were doing before, save the file in the text editor and click refresh on the browser. You probably see something like this:
 
 [.text-center]
-image:images/image17.png[image,width=624,height=496]
+.Headings of different size and broken image 
+image::images/image17.png[image,width=624,height=496]
 
 If you read the html code and try to analyze its content, you would realize the following:
 
@@ -78,10 +83,11 @@ by
 [source,html]
 <img src="picologo.jpg" />
 
- If you successfully created the image in the folder, and refresh the browser, you will see the following, of course, with your own custom image:
+If you successfully created the image in the folder, and refresh the browser, you will see the following, of course, with your own custom image:
 
 [.text-center]
-image:images/image22.png[image,width=624,height=496]
+.Custom image
+image::images/image22.png[image,width=624,height=496]
 
 A fundamental part of web site are the links. The link tag is *<a>*, the following is an example of a link directed to google:
 
@@ -98,7 +104,8 @@ https://www.w3schools.com/tags/[https://www.w3schools.com/tags/, window="_blank"
 To make pages more interactive JavaScript is commonly used. JavaScript is a programming language! We can do algorithms using it. JavaScript is executed in your browser. For example, when you visit a website, the JavaScript code is downloaded along the HTML and it only executes once it is loaded in your browser. When you visit a page, you are downloading an html file and your browser interprets the tags and prints the text and images as we learned before. This image illustrates that process:
 
 [.text-center]
-image:images/image26.png[image,width=624,height=357]
+.Client to server communication
+image::images/image26.png[image,width=624,height=357]
 
 If that file happens to contain JavaScript, your browser will execute it. Let’s look at an example. In the same folder “picoexample”, create a file called “myFirstJS.html“ using a text editor. Then, put the following content in the file:
 
@@ -119,7 +126,8 @@ If that file happens to contain JavaScript, your browser will execute it. Let’
 Save the file. As soon as you open the page, you will see an alert showing “Hello picoCTF”, something like this:
 
 [.text-center]
-image:images/image5.png[image,width=624,height=496]
+.Alert "hello picoCTF"
+image::images/image5.png[image,width=624,height=496]
 
 If you analyze the file, you will note that the magic is happening in this element:
 
@@ -138,17 +146,21 @@ Whatever you put inside the tags “<script> </script>” will be tried to execu
 Note that we only use quotes when we want to use a string. In arithmetic operations we don’t use quotes. Save the file, and refresh the browser as we always do. You should see the following:
 
 [.text-center]
-image:images/image18.png[image,width=624,height=496]
+.Arithmetic result
+image::images/image18.png[image,width=624,height=496]
+
 
 Click Ok in the alert message to make it go away. Anything you write in JavaScript or html, will be visible for any user that access your page in a browser. To see the html and Javascript code in your browser, right click the page and then “View Page Source”
 
 [.text-center]
-image:images/image10.png[image,width=402,height=296]
+.Right click to view page source
+image::images/image10.png[image,width=402,height=296]
 
 You will see the javascript code you just wrote:
 
 [.text-center]
-image:images/image6.png[image,width=474,height=376]
+.HTML source code
+image::images/image6.png[image,width=474,height=376]
 
 This is a very important thing! Never put a secret in your javascript code or html. If someone does it, that will be a vulnerability in your page. As a hacker, you can try to look for secrets on the html of a page you want to exploit.
 
@@ -180,12 +192,14 @@ Now let’s use some more elaborated code. We are going to make a page that adds
 Put it on a text file, save it, and open it on a browser as usual. You should see this:
 
 [.text-center]
-image:images/image3.png[image,width=492,height=390]
+.Add two numbers
+image::images/image3.png[image,width=492,height=390]
 
 If you put the numbers in each text field, and click “show alert!”, you will see the alert with the result. For this example let’s input 4 and 2 in the text fields, you should see:
 
 [.text-center]
-image:images/image23.png[image,width=510,height=405]
+.Alert result
+image::images/image23.png[image,width=510,height=405]
 
 Now that you know what the page does, let’s analyze the new lines of the code. In this line we have an input tag:
 
@@ -236,7 +250,8 @@ Note that in a file with the extension .php you can mix html, javascript, and PH
 Look at the following image carefully to understand what happens:
 
 [.text-center]
-image:images/image36.png[image,width=624,height=345]
+.Client to server communication detail
+image::images/image36.png[image,width=624,height=345]
 
 If you open a file with that content on your laptop, the PHP code will not be executed, because your laptop is not a PHP server (if you have not made it one). So, to execute PHP you need to make your laptop a server. But for the time being, we can use the following:
 
@@ -291,12 +306,14 @@ http://primer.picoctf.com/vuln/web/tableusers.php[http://primer.picoctf.com/vuln
 Now, in the Firefox Menu, click “Web Developer” and then click “Debugger”. You should see a pane like the following:
 
 [.text-center]
-image:images/image15.png[image,width=624,height=446]
+.Web Debugger
+image::images/image15.png[image,width=624,height=446]
 
 In that pane, click “storage”. At the left click “cookies” and click the domain you are currently on. You will see a cookie that has your name in the value!
 
 [.text-center]
-image:images/image25.png[image,width=624,height=370]
+.Web Debugger - storage
+image::images/image25.png[image,width=624,height=370]
 
 You can only see your cookie. Other users would see their cookie with their name. For this experiment, you will steal your own cookie. But with the same method, you could steal the cookie of someone else.
 
@@ -316,7 +333,8 @@ http://primer.picoctf.com/vuln/web/tableusers.php[http://primer.picoctf.com/vuln
 Like this:
 
 [.text-center]
-image:images/image16.png[image,width=624,height=370]
+.JavaScript triggered
+image::images/image16.png[image,width=624,height=370]
 
 You just verified that you can inject javascript in the website. Now we are going to inject javascript that will steal the cookie. Create another user in the same link for creating users:
 
@@ -359,7 +377,8 @@ http://primer.picoctf.com/vuln/web/tableusers.php[http://primer.picoctf.com/vuln
 When a user visits that site is when the javascript is executed and the cookie is stolen. You should see the message:
 
 [.text-center]
-image:images/image14.png[image,width=624,height=380]
+.Alert after stealing cookie
+image::images/image14.png[image,width=624,height=380]
 
 If you injected scripts previously, all those scripts are stored in the web site and will be executed in the order you injected them when the page that prints them is visited.
 
@@ -368,7 +387,8 @@ Now you should be able to see the cookie you stole here:
 http://primer.picoctf.com/vuln/web/tablestolen.php[http://primer.picoctf.com/vuln/web/tablestolen.php, window="_blank"]
 
 [.text-center]
-image:images/image21.png[image,width=624,height=380]
+.Table showing results
+image::images/image21.png[image,width=624,height=380]
 
 At this point you should have some understanding on how a website works. You are ready to begin to do more web challenges on the picoCTF!
 

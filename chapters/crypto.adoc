@@ -163,7 +163,7 @@ Archive:  my_protected_info.zip
  extracting: my_info/my_name.txt     
  extracting: my_info/my_lastname.txt 
 
-It is not possible to obtain the original content without the password, because such a password is used to do operations with the content to obtain as a result the encrypted file. At this point you might have no idea of what happened. There are many algorithms for encryption, that were created since the antique Rome. Old ways of encrypting data are easily broken nowadays. Even relatively new ways of encrypting data are broken easily today. Some of them are considered unbreakable right now, but will be broken in the future.  Let's begin to understand how encryption work!
+It is not possible to obtain the original content without the password, because such a password is used to do operations with the content to obtain as a result the encrypted file. At this point you might have no idea of what happened. There are many algorithms for encryption, that were created since the antique Rome. Old ways of encrypting data are easily broken nowadays. Even relatively new ways of encrypting data are broken easily today. Some of them are considered unbreakable right now, but will be broken in the future.  Let's begin to understand how encryption works!
 
 
 === Substitution ciphers
@@ -323,12 +323,14 @@ encrypted text -> o p i c
 This is a very simple kind of transposition. But you can have a map that makes more complicated transpositions. For instance, you can decide that you will encrypt a text by doing transpositions in chunks of 6 letters using the following mapping:
 
 [.text-center]
-image:images/5image1.png[image,width=198,height=222]
+.Example of mapping of transposition cipher
+image::images/5image1.png[image,width=198,height=222]
 
 The number indicate the position of the letters. Using that mapping, let's encrypt the word 'pico'. Since pico only has 4 letters, we can simply use a padding to complete until 6 letters. For this example, we will use the symbol * as padding, so we have:
 
 [.text-center]
-image:images/5image2.png[image,width=198,height=222]
+.Applying mapping with padding
+image::images/5image2.png[image,width=198,height=222]
 
 The encrypted word is 'c*ip*o' using our arbitrarily defined mapping. Suppose we want to encrypt a long text. In that case we simply apply the same mapping each 6 characters.
 
@@ -360,9 +362,8 @@ Key: PICOCTFPICOCTFP
 
 Encrypted text: XTQJGINIBUPWKLW
 
-
-Vigenere table:
 [.text-center]
+.Vigenere table
 image::images/5image45.png[align="center",image,width=427,height=301]
 
 Now let's see how decryption works. Suppose we only have the key and the encrypted:
@@ -397,17 +398,23 @@ ECB means Electronic Code Book. In this operation mode we encrypt independently 
 
 Original image: 
 
-image:images/5image46.png[image,width=196,height=216] 
+[.text-center]
+.Tux, the Linux penguin
+image::images/5image46.png[image,width=196,height=216] 
 
 Encrypted image using AES on ECB mode:
 
-image:images/5image47.png[image,width=196,height=216]
+[.text-center]
+.Encrypted penguin using ECB, we still see it, which is bad
+image::images/5image47.png[image,width=196,height=216]
 
 Yow can see that is easy to identify that the encrypted image contains the penguin. In other cases this operation mode can be very bad for other reasons. Suppose you are sending an encrypted text and you know that the first 128 bits contain a name and the second 128 bits contain a date. Imagine that you are an attacker that captures some encrypted messages on different dates. Even if you do not know the key, you could be able to interchange the second block of messages to tamper the date. To understand this better let's look at an example. Suppose you intercept a message sent on May 1, and after some days you intercept another message in on may 8.
 
 Imagine you want to make the receiver think that the second message is from May 1. You could simply replace the blue block by the red block.
 
-image:images/5image3.png[]
+[.text-center]
+.Blocks of message
+image::images/5image3.png[]
 
 Another problem of ECB, is that if you send the same message twice, any attacker can see that the same message is being sent again. A secure encryption algorithm should not leak any information about the message. Knowing that the same message was sent in the past can be used to learn details about the communication. It is simply recommended to never use ECB.
 
@@ -415,7 +422,9 @@ Another problem of ECB, is that if you send the same message twice, any attacker
 
 A more secure operation mode is CBC, which means Cipher Block Chaining. In this mode we include additional elements. The first one is the initialization vector; a random value with the same size as the key. In AES, the key size is the same as the block size. Remember that in AES we have to separate the cleartext in blocks with the same size as the key. Before starting the encryption, we do XOR between the first block of cleartext and the Initialization Vector, then we begin to encrypt using AES with the key of our choice. The initialization vector is different for every message, so if we send the same message twice, it will be different due to the initialization vector. We must attach the initialization vector to the message. Another element we add in this operation mode, is that we do not encrypt blocks independently, but we use the encrypted text from one block and XOR it with the next block of cleartext we want to encrypt. Then, we use AES and the key to encrypt that result. In the following image it is shown the graphical representation of what it was just explained, note that the circle with the cross means XOR:
 
-image:images/5image48.png[image,width=624,height=250]
+[.text-center]
+.CBC diagram
+image::images/5image48.png[image,width=624,height=250]
 
 In AES, the cleartext has to be the same size as a multiple of the block size. For example, If you have a cleartext that happens to be shorter than a block, you need to add padding to the cleartext so it matches at least one block. In case that the cleartext is larger than one block, but smaller than two, you need two add padding to the cleartext until it is the same size as two blocks. In AES there is a common way of padding, which is actually a standard called PKCS #7. In AES 128, as we said previously, the block size is 128 bits, which is equivalent to 16 bytes. Suppose you want to encrypt the message
 
@@ -533,7 +542,9 @@ https://planetcalc.com/3298/[[.underline]#https://planetcalc.com/3298/#]
 
 So we input 11 and 96 in the following manner:
 
-image:images/5image49.png[]
+[.text-center]
+.Euclidean Extended Algorithm online interface
+image::images/5image49.png[]
 
 And the result we want is 35. So we have that
 
@@ -621,7 +632,9 @@ https://www.alpertron.com.ar/ECM.HTM[[.underline]#https://www.alpertron.com.ar/E
 
 Input the value of n in the text field on that website, and click the button factor. You will get the following:
 
-image:images/5image50.png[image,width=624,height=533]
+[.text-center]
+.Integer factorization online interface
+image::images/5image50.png[image,width=624,height=533]
 
 That is correct, 67867967 and 73176001 happen to be 'p' and 'q' in the RSA public key. Having those to values, you are be able to calculate the private key.
 

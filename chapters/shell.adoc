@@ -64,8 +64,8 @@ Below is a screenshot of a shell after successful login and before the user has
 typed in any commands:
 
 [[first-look,First look at a new shell]]
-.The shell waiting for a command
 [.text-center]
+.The shell waiting for a command
 image::images/shl-1-first-look-shell.png[]
 
 In the picture above, there is a lot of empty space, and even the line of text

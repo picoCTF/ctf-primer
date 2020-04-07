@@ -23,7 +23,9 @@ https://paiza.io/en/projects/new?language=mysql[https://paiza.io/en/projects/new
 
 We can execute MySQL statements online. So, let's create our table from the previous example on it. First, delete the code present in the editor. You should be seeing something like this:
 
-image:images/3image7.png[image,width=624,height=552]
+[.text-center]
+.Online MySQL engine
+image::images/3image7.png[image,width=624,height=552]
 
 Now, you can create the table using the following statement:
 
@@ -37,7 +39,9 @@ insert into user (id, name, lastname, phone, password) values (1, 'Jane', 'Doe',
 
 As you can see, the statement is self explanatory. It will insert each of those values in each column of user conforming a new row. Hit run, and verify it was successful. It should look like this:
 
-image:images/3image16.png[image,width=624,height=46]
+[.text-center]
+.Create table and insert
+image::images/3image16.png[image,width=624,height=46]
 
 Now, add the following line that will query the data you have inserted so far:
 
@@ -45,11 +49,15 @@ Select * from user;
 
 The * means that you want to see the content of all the columns. Hit Run.
 
-image:images/3image12.png[image,width=624,height=146]
+[.text-center]
+.Query data by running select sentence
+image::images/3image12.png[image,width=624,height=146]
 
 You can see the results at the end. Now insert the two rows missing to conform our 3 row table:
 
-image:images/3image24.png[image,width=624,height=177]
+[.text-center]
+.Inserting the rows missing
+image::images/3image24.png[image,width=624,height=177]
 
 If you are interested in returning only some particular columns, you can list them instead of using the *. For example, let's return only the name and lastname:
 
@@ -57,7 +65,9 @@ select name, lastname from user;
 
 You will see:
 
-image:images/3image10.png[image,width=624,height=154]
+[.text-center]
+.Querying only full name
+image::images/3image10.png[image,width=624,height=154]
 
 We can make our query more granular if we add a "where" clause like this:
 
@@ -78,11 +88,15 @@ select * from user where phone='200 111 1111' ;
 
 You should be seeing the following:
 
-image:images/3image21.png[image,width=624,height=60]
+[.text-center]
+.Filtering by a specific phone number
+image::images/3image21.png[image,width=624,height=60]
 
 Run it. If you look at the rows inserted. ‘Jone Doe' had the same phone number as ‘Arpit Gupta'. The select statement should return 2 rows like this:
 
-image:images/3image9.png[image,width=624,height=174]
+[.text-center]
+.Result of filtering by a specific phone number
+image::images/3image9.png[image,width=624,height=174]
 
 We can also filter by two fields in the same query using the logical operators ‘and' in the following manner:
 
@@ -90,7 +104,9 @@ select * from user where phone='200 111 1111' and name='Jane';
 
 After the "where" clause, you can put several boolean expressions. As you learned previously in the programming chapter, when you use "and" it means that both expressions have to be true so the expression is true. The query should return this:
 
-image:images/3image3.png[image,width=624,height=172]
+[.text-center]
+.Result of filtering by a specific phone number and name
+image::images/3image3.png[image,width=624,height=172]
 
 Now, add another ‘and' operator, to try to filter using a name that does not exist in the table:
 
@@ -98,7 +114,9 @@ select * from user where phone='200 111 1111' and name='Jane' and name='Mario';
 
 The query should return no results, because ‘Mario' does not exist in our database:
 
-image:images/3image29.png[image,width=624,height=124]
+[.text-center]
+.Filtering by a name that is not present in the data we inserted
+image::images/3image29.png[image,width=624,height=124]
 
 Now, as an experiment add another filter, but this time use "or" instead of "and". For example, run:
 
@@ -106,7 +124,9 @@ select * from user where phone='200 111 1111' and name='Mario' or name='Arpit';
 
 You will see:
 
-image:images/3image19.png[image,width=624,height=138]
+[.text-center]
+.Filtering by two different names using OR
+image::images/3image19.png[image,width=624,height=138]
 
 What happened here? Analyze the query carefully. You know there is no one called Mario in our table. Why in the world the query return a row? If you think about it, any expression, no matter how long it is, if results in False, but then you do "or" with something that is true, it will be true. For example:
 
@@ -118,7 +138,9 @@ Try the following:
 
 select * from user where phone='200 111 1111' and name='Mario' *or 1=1*;
 
-image:images/3image20.png[image,width=624,height=148]
+[.text-center]
+.Result of filtering by something specific but using OR with something that is always true
+image::images/3image20.png[image,width=624,height=148]
 
 You just returned all the results! That happens, as you might guess, because "1=1" is always true. As an exercise, create a new table with new data and create new queries.
 
@@ -161,7 +183,9 @@ If we input our previous injection in the password field:
 
 We will see that the application found something and shows the message "REGISTER FOUND":
 
-image:images/3image28.png[image,width=624,height=205]
+[.text-center]
+.Blind SQL injection
+image::images/3image28.png[image,width=624,height=205]
 
 Internally, the injection deceives the application into returning records, but the application did not show us those records. That's why it is called Blind SQL injection. We are able to inject SQL, but we cannot see the result!
 
@@ -183,7 +207,9 @@ It will return results, but you are not learning any information. We know two co
 
 Note that we do not use the *'1'='1* any more because we want a statement that will filter only one user. If you inject that on the password field from the web page, you will still see:
 
-image:images/3image14.png[image,width=624,height=130]
+[.text-center]
+.Register found after injection
+image::images/3image14.png[image,width=624,height=130]
 
 Remember that in our injection, if the part at the right of the "or" is true, it will return results. It is true that username is equal to ‘picoctf' only in the row on the picoctf!
 
@@ -193,7 +219,9 @@ Now we will add the part that compares the first character of the password. We c
 
 If you inject that, you will see that nothing was found:
 
-image:images/3image8.png[image,width=624,height=206]
+[.text-center]
+.Nothing found after comparing with single character
+image::images/3image8.png[image,width=624,height=206]
 
 That is because we did not guess the first character. If you keep trying different characters, you will find that the first character of the password is ‘f', when you inject this:
 
@@ -201,7 +229,9 @@ That is because we did not guess the first character. If you keep trying differe
 
 And see as a result this:
 
-image:images/3image5.png[image,width=624,height=185]
+[.text-center]
+.Register found after comparing with single character
+image::images/3image5.png[image,width=624,height=185]
 
 You could possibly find the whole password manually, but it would take too much effort. On the other hand, you may want to obtain all the passwords in the database, or even all the fields from the database! This same process can be applied for any field… In most of the SQL engines there is a system table that contains the names of all tables and columns, so once we find a SQL injections databases we might be able to leak the whole database. For this exercise we will only obtain one password. To be more efficient, we will write a python script that does the job for us. Suppose we found the name of the table in some way. The script would be the following:
 

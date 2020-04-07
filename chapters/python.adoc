@@ -588,8 +588,9 @@ ASCII is a way in which a computer represents characters. We could say that in m
 
 In the following table, it is shown what number corresponds to each character in ASCII:
 
-image:images/4image1.png[image,width=624,height=46]
-Ref http://www.asciitable.com/[http://www.asciitable.com/, window="_blank"]
+[.text-center]
+.ASCII Table Ref http://www.asciitable.com/[http://www.asciitable.com/, window="_blank"]
+image::images/4image1.png[image,width=624,height=46]
 
 
 The ASCII includes all the characters that are used normally in the english language. For other languages, there is a bigger character set called Unicode.
@@ -659,4 +660,4 @@ data2 = r2.read()
 conn.close()
 
 
-After you do, or if you did the Web Section, you can query the html of your own page!
+After you do, or if you did the Web Section, you could query the html of your own page!

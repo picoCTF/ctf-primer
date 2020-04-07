@@ -158,13 +158,15 @@ Conceptually, a RAM is a grid with slots that can contain data. Let's imagine we
 
 
 [.text-center]
-image:images/4image36.png[image,width=198,height=222]
+.Imagined memory
+image::images/4image36.png[image,width=198,height=222]
 
 
 Now, if we want to put the word "HELLO" in our imaginary memory, we could put each character of "HELLO" in each slot, like this:
 
 [.text-center]
-image:images/4image37.png[image,width=198,height=222]
+.Imagined memory containing 'HELLO'
+image::images/4image37.png[image,width=198,height=222]
 
 The numbers we used to identify each slot of the memory are called addresses. If we ask: what character is in the address 1? The answer would be the character ‘E’. A real memory from a computer nowadays can have billions of addresses. Normally, addresses are shown in hexadecimal. For example, the address "255" would normally be shown as "0xFF".
 
@@ -365,7 +367,8 @@ Imagine that we have a toy memory with only a few addresses. Remember that the S
 
 
 [.text-center]
-image:images/6image1.png[image,width=198,height=222]
+.Stack
+image::images/6image1.png[image,width=198,height=222]
 		
 
 Then we create a local variable, using something like:
@@ -376,7 +379,8 @@ int var=4;
 After that is executed, the stack would look like in the following image, because by creating a variable we push it into the stack (in this example we are using “<=” as a simple arrow):
 
 [.text-center]
-image:images/6image2.png[image,width=198,height=222]
+.Stack after pushing 4
+image::images/6image2.png[image,width=198,height=222]
 
 Note that when we push a variable into the stack, we subtract one address to the SP, so it points to the new top of the stack. In this case the new SP value will be 16, which means is pointing to the address 16. If we create another local variable like this:
 
@@ -386,14 +390,16 @@ int var=5;
 The stack would look like this:
 
 [.text-center]
-image:images/6image3.png[image,width=198,height=222] 
+.Stack after pushing 4 and 5
+image::images/6image3.png[image,width=198,height=222] 
 
 And the SP would be equal to 15.
 
 In real life, on a 32 bit Intel architecture, each address contains four bytes. Integers are stored in little endian, and the addresses would have bigger values on a running program because the stack is placed on higher addresses. A piece of the stack that created two integer with values 5 and 4, could look like this (remember that address and memory are usually represented in hex): 
 
 [.text-center]
-image:images/6image4.png[image,width=198,height=222] 
+.More realistic Stack after pushing 4 and 5
+image::images/6image4.png[image,width=198,height=222] 
  
 Let’s go now to real life on our 64 bit program.
 
