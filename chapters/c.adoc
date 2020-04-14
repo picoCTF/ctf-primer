@@ -278,7 +278,7 @@ printf("\n Array value at position 7: %i \n", arr[6]);
 
 You might be thinking that line would cause an error, because we don't even have a seventh position in our array. However, it will not! Compile again and run the code. Remember to always compile. If you are used to python, you might forget that step. Do not forget it! The code looks like this:
 
-[source, txt]
+[source, c]
 #include <stdio.h>
 int main() 
 {
