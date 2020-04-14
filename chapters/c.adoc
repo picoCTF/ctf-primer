@@ -1,9 +1,9 @@
 
 == A little about C language
 
-We could say that C programming is one of the oldest programming languages that is still widely used in industry* It was developed in 1972 by the famous Dennis Ritchie, and even after all these years, is in fact one of the most used languages* This is the case because it is very efficient and we can control very directly the resources of the machine, in contrast to other languages, such as python* However, it is a more difficult language to learn to use it correctly, and it is much more prone to errors and vulnerabilities* Even experienced programmers that have written a lot of C in their lives can make a little mistake and introduce a bad vulnerability in a program that hacker can exploit to take complete control of the machine in which the program is running* 
+We could say that C programming is one of the oldest programming languages that is still widely used in industry. It was developed in 1972 by the famous Dennis Ritchie, and even after all these years, is in fact one of the most used languages. This is the case because it is very efficient and we can control very directly the resources of the machine, in contrast to other languages, such as python. However, it is a more difficult language to learn to use it correctly, and it is much more prone to errors and vulnerabilities. Even experienced programmers that have written a lot of C in their lives can make a little mistake and introduce a bad vulnerability in a program that hacker can exploit to take complete control of the machine in which the program is running. 
 
-Nonetheless, many people still love C* We can use it to implement programs that need to be very efficient, such as the Operating Systems, Drivers (the programs that control the hardware of devices that we connect to our computer), or Embedded Systems* You will probably not hear about an Operating System, or a Driver, fully implemented on python, at least any time soon* 
+Nonetheless, many people still love C. We can use it to implement programs that need to be very efficient, such as the Operating Systems, Drivers (the programs that control the hardware of devices that we connect to our computer), or Embedded Systems. You will probably not hear about an Operating System, or a Driver, fully implemented on python, at least any time soon. 
 
 === Some C features
 
@@ -11,9 +11,9 @@ Keep in mind the following aspects of C:
 
 * In C you can access directly an address of memory, and move through it with a pointer even if you don't have variable that is stored there.
 
-* C is very prompt to vulnerabilities, as we already mentioned* We will learn to exploit those vulnerabilities* C is harder to learn and write than python, because you need to clearly understand how the memory interacts with your program.
+* C is very prompt to vulnerabilities, as we already mentioned. We will learn to exploit those vulnerabilities. C is harder to learn and write than python, because you need to clearly understand how the memory interacts with your program.
 
-* It is not indented as python to determine the lines of code inside a function, loop, clause, etc* For example, the lines of code inside an 'if clause', are determined by braces, not four spaces* This is an 'if clause' in python and C respectively:
+* It is not indented as python to determine the lines of code inside a function, loop, clause, etc. For example, the lines of code inside an 'if clause', are determined by braces, not four spaces. This is an 'if clause' in python and C respectively:
 
 [source, python]
 if x>5:
@@ -35,9 +35,9 @@ if(x>5)
 printf("Hello");    
 }
 
-And it would work* But it is important you do not write it like that if you begin to do programming in C, because a program can become very unreadable* Always use indentations on C, even if they are not mandatory.
+And it would work. But it is important you do not write it like that if you begin to do programming in C, because a program can become very unreadable. Always use indentations on C, even if they are not mandatory.
 
-* In C, you do comments using '//', instead of '#' as in python* For example, the same comment in python and C, would be:
+* In C, you do comments using '//', instead of '#' as in python. For example, the same comment in python and C, would be:
 
 [source, python]
  #This is a comment in python
@@ -45,13 +45,14 @@ And it would work* But it is important you do not write it like that if you begi
 [source, c]
  //This is a comment in C
 
-* You can compile C for different platforms* Compiling, means the process of translating the programing language to machine code* A computer does not understand directly the source code you write* A compiler, is a program that reads your source code, and converts it to a binary that your computer can execute* The instructions in that binary are harder to read for a human in comparison to the source code* Those instructions that the processor understands directly are called machine code* When the programs is compiled, you do not need any additional program to execute it besides the operating system* In contrast, when you run a python program, to execute it, you need the python interpreter* 
+* You can compile C for different platforms. Compiling, means the process of translating the programing language to machine code. A computer does not understand directly the source code you write. A compiler, is a program that reads your source code, and converts it to a binary that your computer can execute. The instructions in that binary are harder to read for a human in comparison to the source code. Those instructions that the processor understands directly are called machine code. When the programs is compiled, you do not need any additional program to execute it besides the operating system. In contrast, when you run a python program, to execute it, you need the python interpreter. 
 
-* Since C is so direct ot the machine, people often says that is like a portable Assembly* Assembly, as we will see later, is a language that is used to manipulate the instructions of the processor in your machine* Assembly changes depending of the kind of processor you are using* For example, Intel processors understand a different Assembly language than ARM processors* However, you could write the same program in C and it could work on both, because you can compile it either for ARM or for Intel* 
+* Since C is so direct ot the machine, people often says that is like a portable Assembly. Assembly, as we will see later, is a language that is used to manipulate the instructions of the processor in your machine. Assembly changes depending of the kind of processor you are using. For example, Intel processors understand a different Assembly language than ARM processors. However, you could write the same program in C and it could work on both, because you can compile it either for ARM or for Intel. 
 
-* In languages like python, we do not compile the program, because python has an interpreter that translates line by line when it is being executed* That makes it slower, by a fair amount* You can do an experiment by implementing a for loop that calculates something on each iteration, and compare the result between python and C, and you will note that a python loop takes much longer than a C loop that calculate the same* 
+* In languages like python, we do not compile the program, because python has an interpreter that translates line by line when it is being executed. That makes it slower, by a fair amount. You can do an experiment by implementing a for loop that calculates something on each iteration, and compare the result between python and C, and you will note that a python loop takes much longer than a C loop that calculate the same. 
 
 === C Hello World!
+
 Let's get hand on now! Access the shell server in its web version at:
 
 https://2019game.picoctf.com/[.underline]#https://2019game.picoctf.com/#]
@@ -71,7 +72,7 @@ Go inside the folder using:
 [source, txt]
 cd c_examples
 
-Now, create a file called "my_c_example.c" in this file, we will write the C code* You can create the file with:
+Now, create a file called "my_c_example.c" in this file, we will write the C code. You can create the file with:
 
 [source, txt]
 nano my_c_example.c
@@ -90,40 +91,40 @@ Note that this line:
 [source, c]
 #include <stdio.h> 
 
-Is used to import a library, which is a set of functions, that allows us to read and write from the terminal in our program* This:
+Is used to import a library, which is a set of functions, that allows us to read and write from the terminal in our program. This:
 
 [source, c]
 printf("Hello World!");
 
-Is the function printf, which we can use to print strings in the terminal* The function main:
+Is the function printf, which we can use to print strings in the terminal. The function main:
 
 [source, c]
 int main() {
 }
 
-Is the function that wraps the code of our program* Note that in C, the content of function is enclosed in braces {}* By convention, main is the function that would be executed in our program, even if we don't call it* In C, functions return a data type* In this case, main returns an 'int', which means integer.That is why we see the word 'int' right before 'main'* This line:
+Is the function that wraps the code of our program. Note that in C, the content of function is enclosed in braces {}. By convention, main is the function that would be executed in our program, even if we don't call it. In C, functions return a data type. In this case, main returns an 'int', which means integer.That is why we see the word 'int' right before 'main'. This line:
 
 [source, c]
 return 0;
 
-Is our main function returning the integer 0* When the main function returns, that marks the end of our program.
+Is our main function returning the integer 0. When the main function returns, that marks the end of our program.
 
-Now save the program* Remember that in the nano editor, you save the program by pressing in your keyboard 'control' and 'x' at the same time* Now, to compile our program, we will use 'gcc' which is a very famous compiler; 'gcc' means 'GNU Compiler Collection'* To compile the program, run:
+Now save the program. Remember that in the nano editor, you save the program by pressing in your keyboard 'control' and 'x' at the same time. Now, to compile our program, we will use 'gcc' which is a very famous compiler; 'gcc' means 'GNU Compiler Collection'. To compile the program, run:
 
 [source, txt]
 gcc my_c_example.c
 
-You will see no output on the screen if it compiled correctly* However, if you list the contents of your current folder using:
+You will see no output on the screen if it compiled correctly. However, if you list the contents of your current folder using:
 
 [source, txt]
 ls
 
-You should see a new file created, called 'a.out'* The is your new executable binary! You can run it using:
+You should see a new file created, called 'a.out'. The is your new executable binary! You can run it using:
 
 [source, txt]
  ./a.out
 
-You should see printed the message 'Hello World!' on the screen* Note that we can execute the binary with no additional program, as we had to do with python, in which we needed the python interpreter, hence we wrote 'python' before the name of our program* 
+You should see printed the message 'Hello World!' on the screen. Note that we can execute the binary with no additional program, as we had to do with python, in which we needed the python interpreter, hence we wrote 'python' before the name of our program. 
 
 What if we want to give a name to our binary when we compile it? We can do:
 
@@ -135,21 +136,21 @@ If you list the contents of your folder using:
 [source, txt]
 ls
 
-You should see the file 'my_binary' listed* You can run it using:
+You should see the file 'my_binary' listed. You can run it using:
 
 [source, txt]
  ./my_binary 
 
-And it will show  'Hello World!' as it did before* 
+And it will show  'Hello World!' as it did before. 
 
 === C data types
 
-Before proceeding to do more interesting programs, let's stop to learn the data types in C* In python, you can create a variables without specifying the data type* However, in C, you need to specify it* These are fundamental data types in C:
+Before proceeding to do more interesting programs, let's stop to learn the data types in C. In python, you can create a variables without specifying the data type. However, in C, you need to specify it. These are fundamental data types in C:
 
-* char: It is the data type for allocating a single character* In most of the compilers, it takes only one byte* Note that we can store any number on it, it does not have to be an actual character* Remember that a character in a computer is a number too* Since it is one byte, it can represent 256 values* As you know already, one byte is made up of 8 bits* So, 2^8 is equal to 256.
-* int: It is an integer type* We can place on it an integer number, but can be much bigger as the char, because an int uses four bytes* Therefore, we can place on it, roughly, four billion values (2^32).
-* float: This data type is used to store decimal numbers* In other words, numbers with a floating point value* They also take four bytes* But since they are decimals, is not that easy to show how many possible values stores* It is a  finite number of possible values of course* But for now, just know it is used for storing numbers with decimals* Since we are on a computer, the precision is limited* A float can have at most 7 decimals!
-* double: It is used to store decimal numbers but with double precision, so it can have at most 15 decimals* It takes 8 bytes.
+* char: It is the data type for allocating a single character. In most of the compilers, it takes only one byte. Note that we can store any number on it, it does not have to be an actual character. Remember that a character in a computer is a number too. Since it is one byte, it can represent 256 values. As you know already, one byte is made up of 8 bits. So, 2^8 is equal to 256.
+* int: It is an integer type. We can place on it an integer number, but can be much bigger as the char, because an int uses four bytes. Therefore, we can place on it, roughly, four billion values (2^32).
+* float: This data type is used to store decimal numbers. In other words, numbers with a floating point value. They also take four bytes. But since they are decimals, is not that easy to show how many possible values stores. It is a  finite number of possible values of course. But for now, just know it is used for storing numbers with decimals. Since we are on a computer, the precision is limited. A float can have at most 7 decimals!
+* double: It is used to store decimal numbers but with double precision, so it can have at most 15 decimals. It takes 8 bytes.
 
 In C, you could have the following code using  those data types:
 
@@ -175,7 +176,7 @@ Create the  file 'print_data_types.c':
 [source, txt]
 nano print_data_types.c
 
-And put the previous code on it* Compile it with:
+And put the previous code on it. Compile it with:
 
 [source, txt]
 gcc print_data_types.c -o print_data_types
@@ -193,9 +194,9 @@ You should see the following output:
  my float: 1.123456 
  my double: 1.012345678912345 
 
-We just saw how to print different data types* Things to note:
+We just saw how to print different data types. Things to note:
 
-* %c is used to output a character* You can have it in any position of the first string you pass as argument to printf* You can also have it in several places if you pass more characters like this:
+* %c is used to output a character. You can have it in any position of the first string you pass as argument to printf. You can also have it in several places if you pass more characters like this:
 
 [source, txt]
 printf("\n my char %c , my second char %c , my third char %c  ",a,a,a);
@@ -204,16 +205,16 @@ printf("\n my char %c , my second char %c , my third char %c  ",a,a,a);
 * %f to print a float.
 * %.16g is to print a float but we can specify the number of decimals we want, in this case 16, but we could change that number.
 
-An important thing to note, that we already mention, is that a character is just a number that is interpreted as such* Do the following experiment: use %i instead of %c to print the character 'p' in our program* What number do you see and why that number?
+An important thing to note, that we already mention, is that a character is just a number that is interpreted as such. Do the following experiment: use %i instead of %c to print the character 'p' in our program. What number do you see and why that number?
 
-Answer: You should have seen 112* That happens because 112 is the ASCII of 'p', as we can see in the ASCII table:
+Answer: You should have seen 112. That happens because 112 is the ASCII of 'p', as we can see in the ASCII table:
 
 http://www.asciitable.com/
 
  
 === C pointers
 
-When you need to store a list of integers, you could use  a buffer of memory to do it, which is just a chunk of empty memory that can be filled with the integers you need* For example, suppose we need to store a list of 5 integers and the print the whole list* We could do something like the following:
+When you need to store a list of integers, you could use  a buffer of memory to do it, which is just a chunk of empty memory that can be filled with the integers you need. For example, suppose we need to store a list of 5 integers and the print the whole list. We could do something like the following:
 
 [source, c]
 #include <stdio.h>
@@ -233,9 +234,9 @@ int main()
 
 
 
-In the line 'int arr[5];' we are declaring an array of 5 integers* So the program allocated a buffer of 20 bytes, because each integer takes 4 bytes* Then we assign an arbitrary integer to each of the positions, and then we print them on a loop.
+In the line 'int arr[5];' we are declaring an array of 5 integers. So the program allocated a buffer of 20 bytes, because each integer takes 4 bytes. Then we assign an arbitrary integer to each of the positions, and then we print them on a loop.
 
-In C, the first line of a for loop is made up of three parts: In the first one, you can declare a variable and set its starting value* That is 'int i=0' in our code* The second part is the condition; the loop will keep iterating as long as that condition is met* In our code the condition is 'i<5'* The third part is generally a modification you do so the loop advances* In this case we increment i by 1* Note that in C this: 
+In C, the first line of a for loop is made up of three parts: In the first one, you can declare a variable and set its starting value. That is 'int i=0' in our code. The second part is the condition; the loop will keep iterating as long as that condition is met. In our code the condition is 'i<5'. The third part is generally a modification you do so the loop advances. In this case we increment i by 1. Note that in C this: 
 
 [source, c]
 i++;
@@ -245,7 +246,7 @@ Is exactly the same as this:
 [source, c]
 i=i+1; 
 
-Inside our loop, we print our counter 'i', and the current value at position in 'i' in the array* Put that code in a file using:
+Inside our loop, we print our counter 'i', and the current value at position in 'i' in the array. Put that code in a file using:
 
 [source,txt]
 nano print_array.c
@@ -270,12 +271,12 @@ You should see as the output:
  Array value at position 4: 15 
 
 
-So far, everything seems to work fine* But now, add the following line after the for loop:
+So far, everything seems to work fine. But now, add the following line after the for loop:
 
 [source, c]
 printf("\n Array value at position 7: %i \n", arr[6]);
 
-You might be thinking that line would cause an error, because we don't even have a seventh position in our array* However, it will not! Compile again and run the code* Remember to always compile* If you are used to python, you might forget that step* Do not forget it! The code looks like this:
+You might be thinking that line would cause an error, because we don't even have a seventh position in our array. However, it will not! Compile again and run the code. Remember to always compile. If you are used to python, you might forget that step. Do not forget it! The code looks like this:
 
 [source, txt]
 #include <stdio.h>
@@ -305,9 +306,9 @@ And the output, should look, somewhat, like this:
  Array value at position 4: 15 
  Array value at position 7: 1695902208
 
-What is going on here? we did not even had a 7th position* Our array is actually only 5 positions in size* This is something bad* What is happening, is that C does not actually have real arrays with size as other languages do* It is merely a chunk of memory* In this case, our variable 'arr' is just a pointer to the first byte of that chunk of memory* When we do, for example, arr[2], we are pointing to the first byte of the chunk of memory plus 8 bytes, because each integer has 4 bytes, so we move in memory to point to the place in which is stored the third position* You will understand this better as you advance in binary exploitation and understand how variables are placed in memory* For now, just know that C allocates the memory needed to place a buffer, but does not have any control that prevents you accessing the wrong place* In our example, 1695902208 is  value from our program that is 8 bytes away from the spots in which or array should be stored, it could be other variable* Many people claim that C does not have real arrays, because as you saw, it is just a chunk of memory* 
+What is going on here? we did not even had a 7th position. Our array is actually only 5 positions in size. This is something bad. What is happening, is that C does not actually have real arrays with size as other languages do. It is merely a chunk of memory. In this case, our variable 'arr' is just a pointer to the first byte of that chunk of memory. When we do, for example, arr[2], we are pointing to the first byte of the chunk of memory plus 8 bytes, because each integer has 4 bytes, so we move in memory to point to the place in which is stored the third position. You will understand this better as you advance in binary exploitation and understand how variables are placed in memory. For now, just know that C allocates the memory needed to place a buffer, but does not have any control that prevents you accessing the wrong place. In our example, 1695902208 is  value from our program that is 8 bytes away from the spots in which or array should be stored, it could be other variable. Many people claim that C does not have real arrays, because as you saw, it is just a chunk of memory. 
 
-In C, you can create not only variables, but also pointers to variables* A pointer simply stores the address in which a variable is located in memory* Now that you can read few lines of C, it is better to explain a program using the comments on C to explain the things that might be new to you* So, let's take a look at the following program that illustrates pointers in an easy manner* Pay close attention to the comments* Create a file, paste that code, compile it, and run it as you already know how to* The following program might seem a bit long, but it is because it has several prints so you can understand what is happening* Is very easy to read* This is the program:
+In C, you can create not only variables, but also pointers to variables. A pointer simply stores the address in which a variable is located in memory. Now that you can read few lines of C, it is better to explain a program using the comments on C to explain the things that might be new to you. So, let's take a look at the following program that illustrates pointers in an easy manner. Pay close attention to the comments. Create a file, paste that code, compile it, and run it as you already know how to. The following program might seem a bit long, but it is because it has several prints so you can understand what is happening. Is very easy to read. This is the program:
 
 
 [source, c]
@@ -317,10 +318,10 @@ int main() {
     char c='S';
     //We declare a pointer to char, for that we use the *
     char *p;
-    //Assign address of the char c, to pointer p* To get the address of a variable we use &
+    //Assign address of the char c, to pointer p. To get the address of a variable we use &
     p=&c;
     printf ("\n This is the value of char c: %c ", c);
-    //As we said, we use & to get the address* We are printing the memory address in which c is located:
+    //As we said, we use & to get the address. We are printing the memory address in which c is located:
     printf ("\n This is the address of char c: %d ", &c);
     printf ("\n This is the address that pointer p is pointing at, which is the address of c: %d ", p);
     //we use * to get the content in the address we are pointing at
@@ -334,7 +335,7 @@ int main() {
     printf ("\n This is the address that pointer p2 is pointing at %d ", p2);
     //Note: memory allocated with malloc, is allocated in the heap, so you see
     //that its value is far from the other values we have printed that were local
-    //variables and are allocated in the stack* You will learn more about the stack and heap later.
+    //variables and are allocated in the stack. You will learn more about the stack and heap later.
     //p2 is pointing to memory in the heap, but it's a local variable, so if we print 
     //its address it should be close to the other local variables:
     printf ("\n This is the address of  p2: %d ", &p2);
@@ -346,7 +347,7 @@ int main() {
     *(p2+4)='o';
     *(p2+5)=0;
     printf("\n This is p2 printed as a string: %s ",p2);
-    //Note that 0 (the ASCII for NULL), is the end of the string* 
+    //Note that 0 (the ASCII for NULL), is the end of the string. 
     //Also note that 0 is different from '0', '0' is actually 48, if you print it as an int
     printf("\n This is the value of the zero char, different from null char: %d ",'0');
     //See what happens if we put a 0 in the middle of our char array:
@@ -390,9 +391,9 @@ int main() {
     printf("\n This is hi: %s ", *pp2);
     printf("\n This is carnegie: %s ", *(pp2+1));
     printf("\n This is mellon: %s ", *(pp2+2));
-    //You might be wondering about the relation between arrays and pointers* Some people say in c, the use of [] is just syntactic sugar.
+    //You might be wondering about the relation between arrays and pointers. Some people say in c, the use of [] is just syntactic sugar.
     //But there are not actual arrays on C.
-    //In this expression it is created a pointer to the first element of the array* In fact, arr is pointer to the first element:
+    //In this expression it is created a pointer to the first element of the array. In fact, arr is pointer to the first element:
     char arr[5]="hello";
     //these expressions are the same:
     printf("\n This is arr[0]: %c ", arr[0]);
@@ -409,7 +410,7 @@ int main() {
     //understanding that, you can see now why in C, a thing that looks very weird as the following, makes sense:
     printf("\n This is 1[arr]: %c ", 1[arr]);
     //As you see, it printed 'e', because that expression is just *(1+a), which is the same as *(a+1)
-    //People says that proves that in C there are not actual arrays* What is our opinion? As long as you clearly
+    //People says that proves that in C there are not actual arrays. What is our opinion? As long as you clearly
     //understand how it works in the languages you are using
     printf("\n SEE YOU!  keep on the good work! \n ");
 }
@@ -420,9 +421,9 @@ At this point you should know the commands for creating a file, compile it, and 
 [source, txt]
 nano pointers.c
 gcc pointers.c -o pointers
-\ ./pointers
+ ./pointers
 
 Note that the compilation shows several warnings, because we did things, for the sake of the example, that are not good practice.
 
-With this introduction to C, you will be able to begin to read the source code from challenges and clarify new things you see along the way on Google* Now it is approaching the real fun of binary exploitation!
+With this introduction to C, you will be able to begin to read the source code from challenges and clarify new things you see along the way on Google. Now it is approaching the real fun of binary exploitation!
 
