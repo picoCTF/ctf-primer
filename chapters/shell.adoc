@@ -8,7 +8,7 @@ challenges in a capture-the-flag competition like picoCTF.
 
 To be transparent, I (LT) am still learning a lot about the shell, and I'm
 just about 10 years into it right now! This is an encouragement - anyone 
-curious enough to jump into rabbitholes here and there is always going to have
+curious enough to jump into rabbit holes here and there is always going to have
 opportunities to learn more about an amazing tool like the shell. But rest 
 assured, I was proficient in the shell long ago and it does not take very much
 time before the shell starts working for *you*.
@@ -26,7 +26,7 @@ and someone in front of that screen who seemingly understands an
 incomprehensible flow of information. That is the shell.
 
 The shell has many other names: the terminal, the command prompt, bash...
-Powershell, if you're looking at Windows and feeling blue. Each name has its
+PowerShell, if you're looking at Windows and feeling blue. Each name has its
 own nuances. But that doesn't matter right now. What matters is that there is
 the interface to computing devices that nearly all people use, and then there
 is the shell.
@@ -35,7 +35,7 @@ If you've come here to get a shell and don't care for much else, then you
 should skip to the <<shl-get-a-shell,Get a Shell>> section. Be warned that the
 shell is more powerful than the usual way of interacting with a device.
 Deleting files is permanent in the shell, any file can be accessed at any
-moment in the shell, and hopefully it's not far fetched to assert that those
+moment in the shell, and hopefully it's not farfetched to assert that those
 two things are a dangerous combination.
 
 //-----------------------------------------------------------------------------
@@ -48,7 +48,7 @@ Using a computer or smart device happens in 1 of 2 ways:
    or buttons
 2. Using keys on a keyboard to enter simple or complex commands (the Shell)
 
-Thankfully, there are TLA's (Three Letter Acronyms) for both of the methods
+Thankfully, there are TLA's (Three Letter Acronyms) for both methods
 described above:
 
 1. GUI. Pronounced "gooey," stands for Graphical User Interface
@@ -89,12 +89,12 @@ From left to right in the shell command line prompt:
    * Answer: https://gist.github.com/syreal17/dc1340fef44be3dc59819e3379c3fe28
 // TODO punt :
 // this merits further exposition for the curious.. it'd be fun to have a
-// little rabbit icon to click on to go down rabbitholes (maybe like to good
+// little rabbit icon to click on to go down rabbit holes (maybe like to good
 // Google-Fu??)
 
 In terms of raw power, Q0h313th could delete every file they own on this
-machine with one command. That's almost never desireable, and I will wait to
-show this command until there is something useful and desireable to do with it.
+machine with one command. That's almost never desirable, and I will wait to
+show this command until there is something useful and desirable to do with it.
 In terms of useful power, Q0h313th could create a copy of an entire website for
 use when there is no accessible WiFi. That's using the command `wget`.
 
@@ -104,21 +104,21 @@ Now let's talk about *getting* a shell!
 === Get a Shell
 [[shl-get-a-shell]]
 Cybersecurity is a topic that is most deeply learned by listening *and* doing.
-For this reason, I advise you to create a picoCTF 2019 account at this time if
+For this reason, I advise you to create a picoCTF 2019 account at this point if
 you have not already. Beyond providing 120+ security challenges in helpful
 learning ramps, every picoCTF 2019 account gets a user on a Linux server, which
 can only be accessed with a _shell_. 
 
 A note on the structure of my (LT's) chapters: many times I will provide a high
 level tutorial for a task and also a step by step walkthrough for the same
-task.  This is my attempt at accomodating different learning styles, different
-levels of experience or whatever else.  Typically, the high level walkthrough
-is more for learners who already know the basics but need a refresher or need a
+task.  This is my attempt at accommodating different learning styles and,
+different levels of experience. Typically, the high-level walkthrough is more
+for learners who already know the basics but need a refresher or need a
 reminder about the particulars when it comes to this Primer. The step by step
-walkthrough is more for learners who have never ventured in a particular sort
-of task before. Of course, you must choose your own path here, but the safest
-bet may be to read the high level walkthrough but actually put hands to
-keyboard for the step by step walkthrough.
+walkthrough is more for learners who have never ventured in a particular task
+before. Of course, you must choose your own path here, but the safest bet may
+be to read the high-level walkthrough but actually put hands to keyboard for
+the step by step walkthrough.
 
 ==== High level tutorial
 . *Gain access to a practice shell*
@@ -156,7 +156,7 @@ similar to this:
 image::images/shl-2-pico-motd-login.png[]
 
 Not as sterile as the empty shell I pictured <<first-look,here>>. However, if
-you type `clear` and press enter, it will be quite pristine! All of the info
+you type `clear` and press enter, it will be quite pristine! All the info
 that is pictured directly above is mostly for system administrators 
 (sysadmins). You can safely ignore it.
 
@@ -179,7 +179,7 @@ someone who has only "spoken" GUI is like learning a second language. This is
 good news and bad news. The good news is that Shell and GUI are languages for
 something you've been using for probably years, but the bad news is there is a
 whole new vocabulary with only a handful of cognates (words that sound and mean
-the same in both langauges) here and there.
+the same in both languages) here and there.
 
 The basic computer operations that everyone is familiar with in GUI's can
 easily be done in the shell as well. Here's some of the most common operations
@@ -225,7 +225,7 @@ those sorts of situations that inevitably arise.
 //learning curve due to memorization, lots of typing, and memorizing arguments
 The main severity in the learning curve with the shell is that you must know
 the apps and commands available to you either by memorization or by looking
-them up when you need them. Certainly it is faster to memorize as many as
+them up when you need them. Certainly, it is faster to memorize as many as
 possible.
 
 The other challenge is the amount of typing that sometimes must be done to
@@ -241,9 +241,9 @@ To summarize, some of the most challenging aspects of using the shell:
 3. Memorizing arguments for commands
 
 ==== Challenge 1: Memorizing commands
-Having a cheatsheet with shell commands listed is a must for overcoming the
-challenge of memorizing commands. Printing it out is an added bonus if 
-possible! (Saves screen space). The cheat sheet linked below is very good!
+Having a cheat sheet with shell commands listed is a must for overcoming the
+challenge of memorizing commands. Printing it out is a bonus if possible!
+(Saves screen space). The cheat sheet linked below is very good!
 
 https://www.git-tower.com/blog/command-line-cheat-sheet/
 
@@ -260,13 +260,12 @@ In the shell, pressing the TAB key invokes auto-complete by 1. assuming you've
 spelled the command or file correctly up to the point of pressing tab, and 2. 
 completing the command of file name as much as it can.
 
-The functionality of auto-complete in the shell is so different from 
-autocomplete in other apps, such as those in a phone, that shell auto-complete
+The functionality of auto-complete in the shell is so different from
+auto-complete in other apps, such as those in a phone, that shell auto-complete
 is often referred to as tab-complete. It takes some practice to get used to,
-but it is really worth the time as it probably cuts number of key presses in
-half!
+but it is worth the time as it probably cuts number of key presses in half!
 
-Unlike autocomplete for a soft keyboard on a phone, tab-complete is never 
+Unlike auto-complete for a soft keyboard on a phone, tab-complete is never 
 wrong, however, this is mostly because it makes no guesses and only helps with
 completing commands and file paths and names. It hardly ever helps complete
 arguments to commands besides file names. If pressing tab doesn't do anything,
@@ -395,7 +394,7 @@ curious, look up the `man` command explained in this cheat sheet:
 https://www.git-tower.com/blog/command-line-cheat-sheet/
 
 Using Google helps with learning commands to help solve problems in the shell,
-and also the "Expain Shell" website I linked to earlier in this chapter.
+and also the "Explain Shell" website I linked to earlier in this chapter.
 
 There is so much to learn in the shell, but before learning more, my friend
 will continue as your guide in the next chapter on the Python programming
