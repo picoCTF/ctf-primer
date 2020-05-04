@@ -127,7 +127,7 @@ ls
 my_info  my_info.zip
 
 
-Now, let's create a zip file protected with encryption, so it cannot be uncompressed without a key. In this context, the words  ‘key’ and ‘password’ are synonyms.
+Now, let's create a zip file protected with encryption, so it cannot be uncompressed without a key. In this context, the words  'key' and 'password' are synonyms.
 
 Let's remove first the .zip file we already created running:
 
@@ -798,7 +798,7 @@ ls
 my_info  my_info.zip
 
 
-Now, let's create a zip file protected with encryption, so it cannot be uncompressed without a key. In this context, the words  ‘key’ and ‘password’ are synonyms.
+Now, let's create a zip file protected with encryption, so it cannot be uncompressed without a key. In this context, the words  'key' and 'password' are synonyms.
 
 Let's remove first the .zip file we already created running:
 
@@ -834,4 +834,75 @@ Archive:  my_protected_info.zip
  extracting: my_info/my_name.txt     
  extracting: my_info/my_lastname.txt 
 
-It is not possible to obtain the original content without the password, because such a password is used to do operations with the content to obtain as a result the encrypted file. At this point you might have no idea of what happened. There are many algorithms for encryption, that were created since the antique Rome. Old ways of encrypting data are easily broken nowadays. Even relatively new ways of encrypting data are broken easily today. Some of them are considered unbreakable right now, but will be broken in the future.  Let's begin to understand how encryption work!
+It is not possible to obtain the original content without the password, because such a password is used to do operations with the content to obtain the encrypted file. 
+
+Note that a compressed file, to the human eye, might look similar as if it was encrypted. You can print the contents of a file with 'cat'. If it is not text, you would not understand. Run cat on both files. For the non-encrypted zip, you will see something similar to:
+
+
+[source, txt]
+cat my_info.zip 
+PK
+,�my_info/UT	#[�^���^ux
+                           
+                              
+                                PK
+,�P���my_info/my_name.txtUT	#[�^a\�^ux
+                                           
+                                              
+                                                samuel
+PK
+,�Pg��my_info/my_lastname.txtUT	#[�^a\�^ux
+                                                   
+                                                      
+                                                        pardo
+PK
+,��Amy_info/UT#[�^ux
+                        
+                           
+                             PK
+,�P�����Bmy_info/my_name.txtUT#[�^ux
+                                          
+                                             
+                                               PK
+,�Pg�����my_info/my_lastname.txtUT#[�^ux
+                                                
+                                                   
+                                                     PK�
+
+If you 'cat' the encrypted file, you will see something like this:
+
+[source, txt]
+cat my_protected_info.zip 
+PK
+,�my_info/UT	#[�^�ߜ^ux
+                          
+                             
+                               PK
+	,�P���my_info/my_name.txtUT	#[�^a\�^ux
+                                                           
+                                                              
+                                                                q1�TVi�V�@�+w-��P���PK
+	,�Pg��my_info/my_lastname.txtUT	#[�^a\�^ux
+                                                           
+                                                              
+                                                                ��k�����AbK>B�RB�Pg��PK
+,��Amy_info/UT#[�^ux
+                        
+                           
+                             PK
+	,�P�����Bmy_info/my_name.txtUT#[�^ux
+                                                   
+                                                      
+                                                        PK
+	,�Pg�����my_info/my_lastname.txtUT#[�^ux
+                                                        
+                                                           
+                                                             PK%
+
+
+
+Note that in the non-encrypted zip, it is possible to spot the name 'samuel' and the lastname 'pardo', in contrast with the encrypted one. However, you can see the path of the files in both cases. Sometimes is necessary you also hide this on a zip file. That can be achieved in several ways. One of them, is encrypting the encrypted file again. Generally, encrypting something twice does not provide more security. In this particular case it does, because the file paths were not encrypted at all.
+
+Beware that sometimes files seem to be encrypted, but they are not, and you can recover the original content by running an algorithm without a key. For example, there are compression algorithms that make data smaller, which means they compress the data for real. Previously we called putting a file on zip compression, but you can have a zip file with or without compression. To be precise, compression is only when you make data smaller. We ran the zip command without compression. When data is compressed, it looks as encrypted because if you 'cat' it, you could not understand the contents. However, by simply running the compression algorithm without any key you can get the original content, which is obviously not secure because anyone can run it without knowing any key.
+
+At this point you might have no idea of what happened on the inside while doing encryption. There are many algorithms for encryption, that were created since the Ancient Rome. Old ways of encrypting data are easily broken nowadays. Even relatively new ways of encrypting data are broken easily today. Some of them are considered unbreakable right now, but will be broken in the future.  Let's begin to understand how encryption work!
