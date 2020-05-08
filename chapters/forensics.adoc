@@ -21,25 +21,36 @@
 
 == Forensics
 
-When people work in the computer science field they generally call “Forensics”, for shorter, to “Digital Forensics”, which is the field in cybersecurity that tries to gather and understand evidence after an incident, which can be crime, to determine how it happened. This not only helps law enforcement when pledging someone innocent or guilty, but also to understand how to improve security in a system that was successfully attacked. Digital Forensics focuses on gathering evidence present in computer devices that can hold information electronically. It is a branch of Forensic Science, which can also investigate any type of crime to gather evidence and understand how it happened. 
+=== What is Forensics?
 
-We will begin by learning how to search for information in a file system.  y. Go to the shell server in its web version at:
+In general, computer science professionals refer to "Digital Forensics" as "Forensics", for simplicity's sake. Digital Forensics is the field in cybersecurity that tries to gather and understand evidence after an incident, which can be crime, to determine how it happened. This not only helps law enforcement when pledging someone innocent or guilty, but also to understand how to improve security in a system that was successfully attacked. Digital Forensics focuses on gathering evidence present in computer devices that hold information electronically. It is a branch of Forensic Science, which can also investigate any type of crime even if there is not computer media involved. 
+
+=== How to search for strings and filenames
+
+We will begin by learning how to search for information in a file system.  Go to the shell server in its web version at:
 https://2019game.picoctf.com/https://2019game.picoctf.com/]
 Or use ssh to connect to it:
 ssh your_username@2019shell1.picoctf.com
 
-Once you are connected, download the file files.zip from the following url:
+Once you are connected, download the file ‘files.zip’ from the following url:
 https://primer.picoctf.com/files/files.zip
 
 To do that, run:
+
 [source, txt]
 wget https://primer.picoctf.com/files/files.zip
-That will download the .zip file, which is a compressed folder, to your current folder. To uncompress it, run:
+
+That will download the .zip file, which is a compressed folder, to your current folder. 
+To uncompress it, run:
+
 [source, txt]
 unzip files.zip
-You will obtain a folder called files in your current directory. Let’s try a little challenge. That folder has a  lot of files and folders. More than 8000 files. Try to find the following string there:
+
+You will obtain a folder called ‘files’ in your current directory. Let’s try a little challenge. That folder has a  lot of files and folders. More than 8000 files. Try to find the following string there:
+
 [source, txt]
 information on the record will last a billion years. Genes and brains and books
+
 You know by now that you can access folders using the command ‘cd’. For example, to access the folder ‘files’ that you just uncompressed, you can run:
 
 [source, txt]
@@ -51,10 +62,10 @@ You could run:
 [source, txt]
 grep -r "information on the record will last a billion years. Genes and brains and books"
 
-Note that grep is a program in linux intended for searching strings in files. The ‘-r’ in the command, is use to tell grep that It should search insides any folder inside the current folder. When you run it, you will see something like this:
+Note that grep is a program in Linux intended for searching strings in files. The ‘-r’ in the command, is used to tell grep that It should search any folder inside the current folder. When you run it, you will see something like this:
 grep -r "information on the record will last a billion years. Genes and brains and books"
 folder_pmbymkjcya/folder_cawigcwvgv/folder_ltdayfmktr/folder_fnpfclfyee/whzxrpivpqld.txt:information on the record will last a billion years. Genes and brains and books encode
-Not that the string you wanted was found. It shows you the path of the file. In this case, is:
+Note that the string you wanted was found. It shows you the path of the file. In this case, is:
 
 [source, txt]
 folder_pmbymkjcya/folder_cawigcwvgv/folder_ltdayfmktr/folder_fnpfclfyee/whzxrpivpqld.txt
@@ -64,9 +75,32 @@ You can run:
 find . -name file_klcvdqhi.txt
 
 
-As a output, you should see the path:
+As an output, you should see the path:
 
 [source, txt]
 ./folder_aziwuihrzs/folder_noitiuqyjv/file_klcvdqhi.txt
 
-That was rather simple, but let’s dive into more interesting challenges! 
+To practice, find the path of the following files:
+
+[source, txt]
+file_ebmjfalaycoai.txt
+file_swdbhgvbkkythij.txt
+file_sivftkrsckd.txt
+
+What is the content on each of them?
+
+Now, identify the file name in which is contained each of the following 3 pieces of text:
+
+[source, txt]
+collapse and star formation. In this sense, stars have parents; and, as is sometimes also true
+
+[source, txt]
+such as meters or miles, chosen for their utility on Earth, would make little sense. Instead,
+
+[source, txt]
+ancient kings and heroes deified by later generations.
+
+That was rather simple. However, it is an important ability to have. Soon you will learn more interesting things!
+
+
+
