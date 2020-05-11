@@ -13,6 +13,7 @@ include::chapters/network.adoc[]
 include::chapters/sql.adoc[]
 include::chapters/c.adoc[]
 include::chapters/binary.adoc[]
+include::chapters/assembly.adoc[]
 
 
 
