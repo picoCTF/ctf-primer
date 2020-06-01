@@ -2,9 +2,48 @@
 
 == Assembly 
 
-We previously saw how some registers work and how the memory of a program is allocated. Once you got some idea of how to do basic binary exploits, to enter in a more advance level it is useful to understand the assembly in more detail. There a several assembly languages, depending on the processor we are working on. Processor brands have specific instructions. For example,  an Intel processor can do different things than an ARM processor, hence, the assembly language for ARM is different than the one for Intel. To begin, we will be using Intel assembly, because Intel is widely used. The shell server, and your computer, probably have an Intel architecture. Note that the AMD processor has the same instruction set as Intel. In contrast, your smartphone probably has an ARM processor.  
+We previously saw in binary exploitation how some registers work and how the memory of a program is allocated. Once you get some idea of how to do basic binary exploits, to enter in a more advance level it is useful to understand the assembly in more detail. There a several assembly languages and they are exclusive to the processor architecture of a computer. Processor architectures have specific instructions. For example,  an Intel processor can execute different instruction than an ARM processor, hence, the assembly language for ARM is different than the one for Intel. To begin, we will be using Intel assembly just for the fact that Intel architecture is widely used. The shell server, and your computer probably, have an Intel architecture. Note that the AMD processors have the same architecture and instruction set as Intel. Smartphones, in contrast to most laptops or desktops computers, generally have an ARM processor.  
 
-Intel is CISC (Complex Instruction Set Computer); that makes it have much more instructions than ARM which is RISC (Reduced Set Instruction Computer). However, we will only be exploring some instruction in intel that are common and useful to know. It would be too dense to begin to explain instructions independently. Instead, let’s make a program and begin to understand it.  Go to the shell server in its web version at:
+Intel is CISC (Complex Instruction Set Computer); that implies that it has much more instructions than ARM which is RISC (Reduced Set Instruction Computer). However, we will only be exploring some instruction in intel that are common and useful to know. It would be too dense to begin to explain instructions independently. Instead, let’s make a program and begin to understand it. Assembly is not easy to abstract at the beginning, but once you learn a few things, it becomes very intuitive and it is possible to read assembly to understand the logic of a program in an architecture you never saw before because it has similar patterns. Therefore, we encourage you to keep trying on this part even if it seems not easy to grasp at the beginning.
+
+=== Registers
+
+We will show in this part, for reference, the most relevant registers from Intel Architecture for an example of a program in assembly we will introduce. The Intel registers are broken down in several categories. They include General Registers, Segment Registers, Index/Pointer Registers, and Flags registers.  For now, it is good to see the purpose of each of the registers in two of those categories.
+
+=== General Registers
+
+Note that in the General Registers, when we are using processor of 64 bits, the register name begins with R. In a 32 bits processor, the register name begins with E, and in 16-bit architecture, it does not have a prefix and the name is only two letters. For example, there is a 16-bit register called AX. In 32 bits, we have the same register for the same purpose, but it can hold 32 bits, and it is called EAX. In 64 bits, that same register is called RAX. We can use a 16-bit or 32-bit register in a 64-bit architecture, but not the other way around. Each register is conventionally used for some specific operations, but they can be used for other purposes. These are the General Registers in 16, 32, 64 bits:
+RAX,EAX,AX (Accumulator register):  It is usually used to place the return value of a function but can be used for other purposes.
+               
+
+REX,EBX,BX (Base register): Used as the base pointer for memory access. We subtract or add an offset to the value of this register to access variables.
+
+RCX,ECX,CX (Counter register): Called the. Usually used as a loop counter.
+
+RDX,EDX,DX (Data register): Usually used to store temporary data in operations.
+
+Note that in  a 64 bits program, the conventions can change. For example, in a 32-bit architecture we generally pass the arguments of a function in the stack, while in 64-bit programs we pass them in registers in many cases. For now, do not worry about those details. Focus on getting a sense on how assembly works when we show the example of a program in assembly.
+
+=== Index/Pointer Registers
+
+These registers are used to mark the end or start of a region of memory to allow a program keeping track of elements such as location of variables or the top of the stack, which are essential to manipulate data in memory.
+
+RSP,ESP,SP (Stack pointer register): Indicates the top of the stack. Whenever we create a local variable, this pointer changes to allow space to that variable. For example, if we create an variable that takes 4 bytes, the stack pointer moves 4 bytes to make room for that new variable.
+
+RIP,EIP,IP (Instruction Pointer): Indicates the current instruction that the program is executing. If we make this register pointing to an address, the program will execute the code at that address.
+
+RBP,EBP,BP (Base pointer register): Indicates the beginning of the stack frame of a function. The stack frame is a region of memory in which we place data, such as local variables, from a specific function. To access a local variable from a function, we take the address of the base pointer and subtract an offset. 
+
+RDI,EDI,DI (Destination index register): Generally used for copying chunks of memory, that can be strings or arrays. 
+
+RSI,ESI,SI (Source index register): Similar purpose to the previous register (Destination index register).
+
+
+=== Assembly example
+
+Now, let’s dive into the assembly of a program!
+
+Go to the shell server in its web version at:
 
 https://2019game.picoctf.com/https://2019game.picoctf.com/]
 
@@ -13,7 +52,7 @@ ssh your_username@2019shell1.picoctf.com
 
 Compile the following program:
 
-[source, txt]
+[source, c]
 #include <stdio.h>
 int main( ) {
    int i;
@@ -33,35 +72,49 @@ To do that you can create a file with:
 nano example.c
 
 Paste the code in that file, save it with control+x, and then compile the file with:
+
 [source, txt]
 gcc example.c -o example
 
 Run it to verify its functionality with:
+
 [source, txt]
-./example
+ ./example
+
+You can obtain the assembly of a compiled program without having the original source code with the following command:
 
 [source, txt]
 objdump --disassemble example 
 
+That will output the assembly of the compiled program ‘example’ on the terminal. You can redirect that output to a file, which in this case we call dump.txt, using:
+
 [source, txt]
 objdump --disassemble example > dump.txt
+
+That assembly dump has many things. For now, we will focus only on the assembly of the function ‘main’. We can dump the assembly of a specific function, in this case ‘main’, in the following manner:
 
 [source, txt]
 gdb -batch -ex 'file example ' -ex 'disassemble main' 
 
- [source, txt]
+Also, you can run the program on GDB like this:
+
+[source, txt]
 gdb example
+
+Set a break point on main:
 
 [source, txt]
 (gdb) b main
 Breakpoint 1 at 0x71e
+
+And runt the program:
 
 [source, txt]
 (gdb) r
 Starting program: /home/your_user/example 
 Breakpoint 1, 0x000055555555471e in main ()Breakpoint 1, 0x0000555555555189 in main ()
 
-
+Since the program execution stopped at main, you can do ‘disas’ to obtain the assembly from ‘main’:
 
 [source, txt]
 (gdb) disas
@@ -99,13 +152,13 @@ Dump of assembler code for function main:
    0x00005555555547a0 <+134>:	retq   
 End of assembler dump.
 
-Note that the that the instruction on an Intel processor, can be interpreted with two types of syntax. There is the AT&T syntax, which is the one we just printed, and there is the Intel syntax. Note that the syntax is different from architecture of the processor. Here we are on the same processor, which is Intel architecture, but we can use AT&T syntax or Intel syntax. To print intel syntax, we can do on gdb:
+Note that the instructions on an Intel processor can be represented with two types of syntax. There is the AT&T syntax, which is the one we just printed, and there is the Intel syntax. Note that the syntax is different from architecture of the processor. Here we are on the same processor, which is Intel architecture, but we can use AT&T syntax or Intel syntax. To print intel syntax on GDB, we can do:
 
 [source, txt]
 (gdb) set disassembly-flavor intel
 
-
 If you run ‘disas’ again, you will see the same main function, but in Intel syntax:
+
 
 [source, txt]
 (gdb) disas
@@ -144,81 +197,203 @@ Dump of assembler code for function main:
 End of assembler dump.
 
 
-In AT&T syntax,  there are several differences. One of them that is notorious, is that you see the symbol % all around, which is used to prefix registers.  We will explain the program using Intel syntax. Remember from the binary exploitation section,  that the hexadecimal number we observe at the left, is the memory address in which that instruction of assembly is stored.  In the first line of assembly we see in the main function is the following (we removed the address shown at the left for simplicity):
+In AT&T syntax,  there are several differences. One of them that is notorious, is that you see the symbol % all around, which is used to prefix registers.  Also, in some operations the position of arguments is different. Keep in mind this to prevent confusion. We will explain the program using Intel syntax, following each line of the assembly code. Remember from the binary exploitation section,  that the hexadecimal number we observe at the left, for example this ‘0x000055555555471a <+0>:’, is the memory address in which that instruction of assembly is  located on RAM.  In the first line of assembly we see in the main function is the following (we removed the address shown at the left for simplicity):
 
 [source, txt]
 push   rbp
 
-We observe the instruction ‘push rbp’. As we know already, rbp is the base pointer, which is a register used to keep track of the part of the stack in which the local variables of a function begin to be stored. In this case, the current value of the rbp is push to the stack, to be able to recover it later. This is an important part of a function that allow us to keep the value of the base pointer from the previous function. For example, suppose you have a function call inside another function:
+We observe the instruction ‘push rbp’. As we know already, rbp is the base pointer, which is a register used to keep track of the part of the stack in which the local variables of a function begin to be stored. In this case, the current value of the rbp is pushed into the stack, to be able to recover it later. This is an important part of a function that allow us to keep the value of the base pointer from the previous function. For example, suppose you have a function call inside another function, like in the following example in which we call func2 from func1:
 
-[source, c]
-void func2(){
+[source, txt]
+Void func2(){
 	char var4;
-    char var5;
-    char var6;
-	func2();
+char var5;
+char var6;
 }
-
-[source, c]
-void func1(){
+Void func1(){
 	char var1;
-    char var2;
-    char var3;
+char var2;
+char var3;
 	func2();
 }
 
-The piece of memory in which are stored the variables of a function is called the stack frame. In assembly you do not have variable names, instead,  we have the rbp pointing to  the memory address in which begins the stack frame of a function. For example, if the program is currently executing func2, the three variables declared in func2, could look like the following in memory:
+The piece of memory in which are stored the variables of a function is called the stack frame. In assembly we do not have variable names, instead,  we have the rbp pointing to  the memory address in which begins the stack frame of a function. For example, if the program is currently executing func2, the three variables declared in func2, could look like the following in memory:
+
 
 [.text-center]
 .Stack frame of func2
-image::images/9image1.png[image,width=198,height=222]
+image::images/9image1.png[]
 
-If we want to access the value of var6, we do rbp-3. Note that if we subtract three positions from rbp, we would be pointing to var6. As you can see, accesing variables in assembly is not complicated, we just need to subtract from rbp some positions to point to the variable we want. However, we just have one register in the processor to keep the value of the base pointer. So, what we do, is pushing into memory the value of the base pointer from the previous function. That is the “rbp func1” that you see in the memory from the previous image. We store the rbp from a previous function, as we store a local variable, to be able to recover it later when we come back to func1, and be able to access the variable from func1. We explained all that to point out what was this line for:
+If we want to access the value of var6, we do rbp minus 3. Note that if we subtract three positions from rbp, we would be pointing to var6. As you can see, accessing variables in assembly is not complicated, we just need to subtract from rbp some positions to point to the variable we want. However, we just have one register in the processor to keep the value of the base pointer. So, what we do, is pushing into memory the value of the base pointer from the previous function. That is the “rbp func1” that you see in the memory from the previous image. We store the rbp from a previous function, as we store a local variable, to be able to recover it later when we come back to func1 and be able to access the variable from func1. We explained all that to point out what was this line for:
+
+
 [source, txt]
 push   rbp
-In that line of code we are storing the previous value of the rbp, to later restore it when we return from the current function. Push, places  the value of a registry into memory, and subtracts the size of the register to the stack pointer. In a Intel processor of 64 bits, a register is 8 bytes. So, when we do ‘push rbp’, it is automatically subtracted 8 to the stack pointer.
+
+In that line of assembly, we are storing the previous value of the rbp, to later restore it when we return from the current function. The instruction push, places  the value of a registry into memory, and subtracts the size of the register to the stack pointer. In an Intel processor of 64 bits, a register is 8 bytes. So, when we do ‘push rbp’, it is automatically subtracted 8 to the stack pointer.
 
 In the second line:
+
 [source, txt]
 0x000055555555471b <+1>:	mov    rbp,rsp
 
-We assign the stack pointer value to the base pointer. Mov in Intel syntax, assigns the value of the  operand at the right to the operand at the left. In this case, rsp (stack pointer), is the operand at the right, and rbp (base pointer) is the operand at the left.  
-We do that assigment because at the beginning of a function, the stack pointer is pointing to the beginning of the stack frame. After we begin to push variable in that function, the stack pointer will move, because the stack pointer will be pointing always to the last variable pushed. 
-
-Then, in the line:
+We assign the stack pointer value to the base pointer. Mov, in Intel syntax, assigns the value of the  operand at the right side to the operand at the left side. In this case, rsp (stack pointer), is the operand at the right side, and rbp (base pointer) is the operand at the left.  
+Such an assignment is done, because at the beginning of a function the stack pointer is pointing to the beginning of the stack frame. When push variables in a function, the stack pointer will move, because the stack pointer will be pointing always to the last variable pushed. Then, in the line:
 
 [source, txt]
 sub    rsp,0x10
-We are subtracting 16 bytes  from the stack pointer. Note that the prefix ‘0x’ is used to denote a hexadecimal number. 10 in hexadecimal is 16 in decimal.  In Intel syntax,  ‘sub’ subtracts the operand at the right side to the operand on the left side. In this case, we subtract 10 from rsp. That subtraction is done to allocate 16 bytes on the stack. We will assign values in those bytes later. So far, we have something like the following, in which we have 16 bytes allocated:
+
+We are subtracting 16 bytes  from the stack pointer. Note that the prefix ‘0x’ is used to denote a hexadecimal number. 10 in hexadecimal is 16 in decimal.  In Intel syntax,  the instructions ‘sub’ subtracts the operand at the right side to the operand on the left side. In this case, we subtract 10 from rsp. That subtraction is done to allocate 16 bytes on the stack. We will assign values in those bytes later. So far, we have something like the following, in which we have 16 bytes allocated:
+
 
 [.text-center]
 .16 bytes of memory allocated with the rbp pointing at the base and rsp at top
 image::images/9image2.png[image,width=198,height=222]
 
-Because we subtracted 16 bytes of the rsp. In this line:
+
+Then in this line:
 
 [source, txt]
 mov    rax,QWORD PTR fs:0x28
 
-We are assigning FS:0x28  to the register rax. The register rax is often used as a register to  manipulate values. QWORD PTR, means that is a pointer to a QWORD. A QWORD simply means a variable of 8 bytes. FS:0x28 contains something called the stack canary. It is a random value used to mitigate the risk of buffer overflow attacks. If that value is overwritten, the program will detect an attack or error and terminate. Then in this line:
+We are assigning FS:0x28  to the register rax. QWORD PTR, means that is a pointer to a QWORD. A QWORD simply means a variable of 8 bytes. FS:0x28 contains something called the stack canary, which is a random value used to mitigate the risk of buffer overflow attacks. If that value is overwritten, the program will detect an attack or error and terminate. Then in this line:
+
 [source, txt]
-mov    QWORD PTR [rbp-0x8],rax
+mov    QWORD PTR [rbp-0x8], rax
+
 We are assigning the value of rax, which currently has the stack canary, to rbp-0x8. Note that  rbp-0x8 is located in the memory chunk of 16 bytes we previously allocated. So, we are placing the stack canary in the first part of the stack frame of the main function. In the following image the stack canary is colored in yellow:
+
 
 [.text-center]
 .Stack canary placed
-image::images/9image2.png[image,width=198,height=222]
+image::images/9image3.png[image,width=198,height=222]
 
 
-In assembly, we cannot assign directly the contents of a memory address into other memory address. We must read the contents of the memory address into a register, and then assign that register to the other memory address. That’s why rax was used.
+In assembly, we cannot assign directly the contents of a memory address into other memory address. We must read the contents of the memory address into a register and then assign that register to the other memory address. That’s why rax was used.
 In this line:
 
 [source, txt]
 mov    eax,0x0
 
-We are assigning 0 to the lower 32 bits of the rax register. In other words, eax are the lower 4 bytes of the rax register. The line:
+We are assigning 0 to the lower 32 bits of the rax register. In other words, eax are the lower 4 bytes of the rax register which is 64 bits. Then, the line:
 
 [source, txt]
 xor    eax,eax
 
-Is used to make eax equal to zero. XOR is exclusive OR. When you XOR  a variable with itself, the result is always zero. This is a property of the XOR operation.
+Is used to make eax equal to zero. XOR is exclusive OR. When you XOR  a variable with itself, the result is always zero. This is a property of the XOR operation. 
+
+Afterwards in this line:
+
+[source, txt]
+lea    rdi,[rip+0xfc]        # 0x555555554834
+
+We are assigning to rdi the string that contains the message "Enter a value :" in our program. The instruction ‘lea’ assigns the address in the square brackets. In contrast, mov assigns the content that is located in that address. The string  "Enter a value :"  is located in rip+0xfc. Note that GDB gives us an indication of what is the value of rip+0xfc, as a comment at the right that shows  0x555555554834. In the current GDB session you started, run the following command to print the string at that address:
+
+[source, txt]
+print (char*) 0x555555554834
+
+You will see as output:
+
+[source, txt]
+$2 = 0x555555554834 "Enter a value :"
+
+In this line:
+
+[source, txt]
+mov    eax,0x0
+
+We are setting eax to 0. Note that there are not square brackets, because of that, mov assigns the value at the right side directly, and not the content in the address 0. We need to set eax to zero because this is the number of floating-point arguments (FP args) that we will be passed to printf, which we are about to call. So, we are indicating we are not passing any floating-point numbers to printf. Note that we have already set eax to zero doing the XOR. Sometimes, compilers generate assembly that a human could optimize further.
+In this line, we finally call printf, with the string "Enter a value :"  as the argument :
+[source, txt]
+call   0x5555555545e0 <printf@plt>
+
+Afterwards,  we are calling scanf. Remember that in C, we called scanf like this:
+
+[source, txt]
+scanf("%d", &i);
+
+In assembly, the next line we are executing is this:
+
+[source, txt]
+lea    rax,[rbp-0xc]
+
+[rbp-0xc] is the address of a local variable, remember that rbp is the base pointer. In assembly we subtract an offset to the base pointer to access the local variable we want. In [rbp-0xc] is located the variable we declared in C as ‘int i’. In other words, [rbp-0xc]  is the address of ‘I’.  Then we have:
+
+[source, txt]
+mov    rsi,rax
+
+In which we assign rax to rsi. The register rsi is the source index register,  which determines where the information read from the keyboard goes in scanf. Since we assign the address of ‘i’ to that register, the user input will be assigned to ‘i’.
+
+The following line calls scanf, with the arguments that are already set:
+
+[source, txt]
+call   0x5555555545f0 <__isoc99_scanf@plt>
+
+This line:
+
+[source, txt]
+mov    eax,DWORD PTR [rbp-0xc]
+Assigns the content at [rbp-0xc], to eax. By now, [rbp-0xc], which is the spot that stores the value of the variable ‘i’ we declared on C,  already has the value that the user input. So, eax currently has the value that the user input.
+The line:
+
+[source, txt]
+cmp    eax,0x5
+
+compares eax to 5. The result in that comparison is placed in flags that we do not see in the source code and belong to a register called the control register. Those flags are the carry flag,  sign flag, overflow flag, and zero flag. Assembly automatically uses them to represent the result of a comparison.
+
+Then, in the following line:
+[source, txt]
+jle    0x555555554775
+
+The instruction jle means Jump if Less or Equal. So, if in the result of the previous comparison eax was less than or equal than 5, the execution of the program jumps to the address 0x555555554775.  You may have different addresses in your assembly if you compiled it on your own, but the instructions are the same. In the assembly from the example, at address 0x555555554775,  we have the following lines ( note that we kept the addresses at the left of the instructions so you can verify the address you jumped to):
+
+[source, txt]
+   0x0000555555554775 <+91>:	lea    rdi,[rip+0xda]        # 0x555555554856
+   0x000055555555477c <+98>:	mov    eax,0x0
+   0x0000555555554781 <+103>:	call   0x5555555545e0 <printf@plt>
+
+Those lines will print the message "Less or equal than 5" in a similar manner we printed a message before.  Then, the next lines after the call of printf, are:
+
+[source, txt]
+   0000555555554786 <+108>:	    mov    eax,0x0
+   0x000055555555478b <+113>:   mov    rdx,QWORD PTR [rbp-0x8]
+   0x000055555555478f <+117>:	xor    rdx,QWORD PTR fs:0x28
+   0x0000555555554798 <+126>:	je     0x55555555479f <main+133>
+   0x000055555555479a <+128>:	call   0x5555555545d0 <__stack_chk_fail@plt>
+   0x000055555555479f <+133>:   leave  
+   0x00005555555547a0 <+134>:	ret  
+
+In the first of those lines which is:
+
+[source, txt]
+mov   eax, 0x0
+
+We make eax zero. Then we have:
+
+[source, txt]
+mov   rdx, QWORD PTR [rbp-0x8]
+
+That line access bpp-0x8, which contains the value of the stack canary. We assign that value to rdx. Then at this line:
+
+[source, txt]
+xor    rdx,QWORD PTR fs:0x28
+
+We xor the rdx  with fs:0x28. In an XOR operation, if the two elements we operate are equal, the result is zero.  Then, in this line:
+
+[source, txt]
+je     0x55555555479f <main+133>
+
+‘je’ means jump if equals. If the result of the XOR is zero, which would set the flags as if a comparison was equal,  we jump to 0x55555555479f. What we are doing at a general level in the last lines, is taking the stack canary from our stack frame. Remember that the stack canary was previously  stored there. Now we compare it with the original value of the stack canary at fs:0x28. If the value is the same, it means that the chunk of memory which was holding the stack canary in the stack frame was never overwritten. If it was never overwritten, we do a jump to skip this line:
+
+[source, txt]
+0x000055555555479a <+128>:	call   0x5555555545d0 <__stack_chk_fail@plt>
+
+Which  calls a function that indicates that the protection was violated. Note that the ‘jmp’ instruction jumps without verifying any condition. In the last two lines of the program:
+
+[source, txt]
+   0x000055555555479f <+133>:   leave  
+   0x00005555555547a0 <+134>:	ret  
+
+The instruction ‘leave’ restores the old value of the EBP that was stored in the stack. As we explained, the ebp from the previous function that called the current function is stored in the stack. Then, ‘ret’ pops the return address from the stack and redirects the execution of the program to that address. Note that a program can redirect its execution to other address by assigning that address to the rip (instruction pointer). The instruction ‘ret’ automatically pops an address from the stack and assigns it to the instruction pointer.
+
+That is the end of the ‘main’ function! Stay tuned for more content on Assembly!
