@@ -12,7 +12,7 @@ amazing the picoCTF community is. In that community, there have been multiple
 requests to contribute to this textbook, and there is no one better to
 contribute to this textbook than our own community.
 
-Please see GitHub's [https://opensource.guide] for great advice on contributing
+Please see GitHub's https://opensource.guide for great advice on contributing
 to any open source project. More specifically, see our own CONTRIBUTING files
 for details on what sort of contributions will be most helpful for us.
 
