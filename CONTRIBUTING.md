@@ -27,7 +27,7 @@ those that address punctuation, spelling and grammar.
 # Ground Rules
 
 * At a minimum, expect the review of your PR to take 2 weeks.
-* At a minimum, esure that ascidoctor renders your text source without errors
+* At a minimum, ensure that asciidoctor renders your text source without errors
 * Keep as much discussion as possible on our public Discord server so that
   others can benefit from your previous experience.
 
