@@ -48,11 +48,16 @@ to post questions in any channel to get started.
 LT is the best point-of-contact for hacking on this Primer.
 
 
-## Compile
-
-NOTE: asciidoctor is a hard dependency. You must install it in order to 
+## Dependencies
+**NOTE:** asciidoctor is a *hard* dependency. You must install it in order to 
 transform \*.adoc source files into HTML or user facing formats, as our
 Makefile does!
+
+**NOTE:** `pygments.rb` is a Ruby Gem which is a soft dependency for syntax
+coloring. If this gem is not installed, everything will work besides color
+highlighting of code blocks.
+
+## Compile
 
 ```
 # compiles `book.adoc` into `book.html` with a table of contents.
