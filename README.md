@@ -48,18 +48,22 @@ to post questions in any channel to get started.
 LT is the best point-of-contact for hacking on this Primer.
 
 
-## Compile & Deploy
-NOTE: asciidoctor required. Apt install as needed.
+## Compile
+
+NOTE: asciidoctor is a hard dependency. You must install it in order to 
+transform \*.adoc source files into HTML or user facing formats, as our
+Makefile does!
 
 ```
-# turns AsciiDoc "pico Primer for Competitors" into HTML form
+# compiles `book.adoc` into `book.html` with a table of contents.
 make
-
-# copies book.html from `make` above to /var/www/html/index.html
-# and included images to /var/www/images/
-./deploy.sh </var/www/html/index.html> </var/www/images/>
-
-To compile run:
-
-asciidoctor -a toc=left book.adoc
 ```
+
+
+## Deploy
+
+If you're just testing how your text looks as HTML, then after you compile,
+you can just open `book.html` in a browser.
+
+The `deploy.sh` is just a simple time-saving script for us to copy files as
+needed to our production Primer server.
