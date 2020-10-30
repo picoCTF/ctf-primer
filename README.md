@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a succint textbook on solving cybersecurity challenges presented by 
+This is a succinct textbook on solving cybersecurity challenges presented by 
 traditional "Jeopardy-style" Capture-The-Flag (CTF) competitions.
 
 In the security CTF world, picoCTF is often cited as an excellent CTF for 
