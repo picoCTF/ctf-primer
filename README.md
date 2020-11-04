@@ -1,4 +1,4 @@
-# pico Primer for Competitors
+# CTF Primer
 
 
 
