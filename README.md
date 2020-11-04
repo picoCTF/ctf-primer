@@ -1,12 +1,14 @@
 # pico Primer for Competitors
 
+
+
 ## Overview
 
 This is a succinct textbook on solving cybersecurity challenges presented by 
 traditional "Jeopardy-style" Capture-The-Flag (CTF) competitions.
 
 In the security CTF world, picoCTF is often cited as an excellent CTF for 
-beginners. More than most of CTF's we tailor our problems to build on each
+beginners. More than most CTF's, we tailor our problems to build on each
 other and ramp competitors up to more advanced security topics. This has all
 been done through our annual CTF, but with this Primer, we slowly branch into
 education outside of the CTF format.
@@ -30,6 +32,7 @@ for details on what sort of contributions will be most helpful for us.
 Thank you for your interest and support of picoCTF! 
 
 
+
 ## Community
 
 Our Discord server is our main connection with our community at the current 
@@ -48,7 +51,9 @@ to post questions in any channel to get started.
 LT is the best point-of-contact for hacking on this Primer.
 
 
+
 ## Dependencies
+
 **NOTE:** asciidoctor is a *hard* dependency. You must install it in order to 
 transform \*.adoc source files into HTML or user facing formats, as our
 Makefile does!
@@ -57,10 +62,13 @@ Makefile does!
 coloring. If this gem is not installed, everything will work besides color
 highlighting of code blocks.
 
+
+
 ## Compile
 
+The following line compiles `book.adoc` into `book.html` with a table of contents.
+
 ```
-# compiles `book.adoc` into `book.html` with a table of contents.
 make
 ```
 
