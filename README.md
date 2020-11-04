@@ -69,7 +69,7 @@ highlighting of code blocks.
 The following line compiles `book.adoc` into `book.html` with a table of contents.
 
 ```
-make
+$ make
 ```
 
 
