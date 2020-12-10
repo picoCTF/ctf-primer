@@ -343,7 +343,7 @@ def even_odd( x ):
         return False
 print "Input a number:" 
 my_number = input()
-if is_even(my_number):
+if even_odd(my_number):
     print "The number is even" 
 else:
     print "The number is odd" 
