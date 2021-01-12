@@ -1,7 +1,6 @@
 # CTF Primer
 
 
-
 ## Overview
 
 This is a succinct textbook on solving cybersecurity challenges presented by 
