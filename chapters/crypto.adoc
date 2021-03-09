@@ -8,12 +8,12 @@ Cryptography is an ancient field that dates to Ancient Rome. Etymologically, the
 
 *Integrity: If a message is tampered, it is possible to detect that it was.
 
-*Authentication: It can be verified accurately the identity of someone.
+*Authentication: The identity of a person can be verified accurately.
 
 *Nonrepudiation: If a person sent a specific message, then the person cannot deny that the message was sent by them.
 
 
-First, we will see how to achieve Confidentiality. This is done with encryption. When we want to hide a message, we say that we encrypt the message. To understand how encryption works, we will see an example of an ancient way of encrypting a message that is not secure by any means today, but it is good for illustration. But first, to practice our terminal skills, we will encrypt a folder in linux to prevent anyone could read its contents without the appropriate password.
+First, we will see how to achieve Confidentiality. This is done with encryption. When we want to hide a message, we say that we encrypt the message. To understand how encryption works, we will see an example of an ancient way of encrypting a message that is not secure by any means today, but it is good for illustration. But first, to practice our terminal skills, we will encrypt a folder in linux to prevent anyone from reading its contents without the appropriate password.
 
 === Practical example
 
@@ -66,7 +66,7 @@ Now, create another file with your last name called 'my_lastname.txt'. You can u
 echo "pardo" > my_lastname.txt
 
 
-We will move both files to a new folder, then compress that folder, and then encrypt it! Compressing a folder just makes several files or folders to appear a single file, and they would take less space on disk, but compressing does not provide any security. Anyone would be able to simply decompress it and see the original content. However, encryption will do prevent obtaining the original content without the key. To do that experiment, create a directory called my info:
+We will move both files to a new folder, then compress that folder, and then encrypt it! Compressing a folder just makes several files or folders to appear as a single file, and they would take less space on disk, but compressing does not provide any security. Anyone would be able to simply decompress it and see the original content. However, encryption will prevent obtaining the original content without the key. To do that experiment, create a directory called my info:
 
 [source, txt]
 mkdir my_info
@@ -93,7 +93,7 @@ You should see the folder and the compressed file:
 ls
 my_info  my_info.zip
 
-Now remove the folder running:
+Now remove the folder by running:
 
 [source, txt]
 rm -r my_info
@@ -129,7 +129,7 @@ my_info  my_info.zip
 
 Now, let's create a zip file protected with encryption, so it cannot be uncompressed without a key. In this context, the words  'key' and 'password' are synonyms.
 
-Let's remove first the .zip file we already created running:
+Let's first remove the .zip file we already created by running:
 
 [source, txt]
 rm my_info.zip
@@ -139,7 +139,7 @@ Now, let's create our encrypted zip, by using a password, with the following com
 [source, txt]
 zip --encrypt -r my_protected_info.zip my_info/
 
-You will be asked to input a password and verify it, remember the password you use to be able to decrypt it later:
+You will be asked to input a password and verify it, so remember the password you use to be able to decrypt it later:
 
 [source, txt]
 zip --encrypt -r my_protected_info.zip my_info/
@@ -163,7 +163,7 @@ Archive:  my_protected_info.zip
  extracting: my_info/my_name.txt     
  extracting: my_info/my_lastname.txt 
 
-It is not possible to obtain the original content without the password, because such a password is used to do operations with the content to obtain as a result the encrypted file. At this point you might have no idea of what happened. There are many algorithms for encryption, that were created since the antique Rome. Old ways of encrypting data are easily broken nowadays. Even relatively new ways of encrypting data are broken easily today. Some of them are considered unbreakable right now, but will be broken in the future.  Let's begin to understand how encryption works!
+It is not possible to obtain the original content without the password because it is used to do operations with the content to obtain the resulting encrypted file. At this point you might have no idea of what happened. There are many algorithms for encryption, that were created since the antique Rome. Old ways of encrypting data are easily broken nowadays. Even relatively new ways of encrypting data are broken easily today. Some of them are considered unbreakable right now, but will be broken in the future.  Let's begin to understand how encryption works!
 
 
 === Substitution ciphers
@@ -196,56 +196,56 @@ We will use a python code that encrypts and decrypts only lowercase letters usin
 [source, python]
 def caesar_encrypt(text):
     result = ""
-    # we go through each character of the text in this for loop
+    # Go through each character of the text in this for loop
     for i in range(len(text)):
-        #Obtain the ASCII value using ord
+        # Obtain the ASCII value using ord
         char_position = ord(text[i])
-        #Substract 97 to have a character from 1 to 26
+        # Substract 97 to have a character from 1 to 26
         char_position = char_position - 97
-        #Add 3 to the position, as caesar does
-        new_char_position=char_position+3
-        #Make sure that the position does not surpass 26 (we wrap around)
-        new_char_position=new_char_position%26
-        #Convert back to ASCII values
-        new_char_position=new_char_position+97
-        #Convert ASCII value to character and concatenate it to final result
+        # Add 3 to the position, as caesar does
+        new_char_position = char_position + 3
+        # Make sure that the position does not surpass 26 (we wrap around)
+        new_char_position = new_char_position % 26
+        # Convert back to ASCII values
+        new_char_position = new_char_position + 97
+        # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
-        print result
+        print(result)
     return result
 def caesar_decrypt(cipher_text):
     result = ""
-    # we go through each character of the text in this for loop
+    # Go through each character of the text in this for loop
     for i in range(len(cipher_text)):
-        #Obtain the ASCII value using ord 
-        char_position = ord(cipher_text[i]) 
-        #Substract 97 to have a character from 1 to 26   
+        # Obtain the ASCII value using ord
+        char_position = ord(cipher_text[i])
+        # Substract 97 to have a character from 1 to 26
         char_position = char_position - 97
-        #Substract 3 to the position, to get back original position
-        new_char_position=char_position-3
-        #Make sure that the position does not surpass 26 (we wrap around)
-        new_char_position=new_char_position%26
-        #Convert back to ASCII values
-        new_char_position=new_char_position+97
-        #Convert ASCII value to character and concatenate it to final result
+        # Substract 3 to the position, to get back original position
+        new_char_position = char_position - 3
+        # Make sure that the position does not surpass 26 (we wrap around)
+        new_char_position = new_char_position % 26
+        # Convert back to ASCII values
+        new_char_position = new_char_position + 97
+        # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
-        print result
+        print(result)
     return result
 text = "picoctf"
-print "Plain Text : " + text
+print(f"Plain Text: {text}")
 cipher_text = caesar_encrypt(text)
-print "Encrypted: " + cipher_text
-print "Decrypted: " + caesar_decrypt(cipher_text)
+print(f"Encrypted: {cipher_text}")
+print(f"Decrypted: {caesar_decrypt(cipher_text)}")
  
 Copy and paste the code into the file, save the file by pressing control+x, press enter, and then execute it with:
  
  
 [source, txt]
-pytho caesar.py
+python3 caesar.py
  
 You should see the following output:
  
 [source, txt]
-Plain Text : picoctf
+Plain Text: picoctf
 s
 sl
 slf
@@ -278,35 +278,35 @@ Note that the letter 'a', is in the position 97, so we simply subtract 97 to app
 [source,python]
 def caesar_encrypt(text):
     result = ""
-    # we go through each character of the text in this for loop
+    # Go through each character of the text in this for loop
     for i in range(len(text)):
-        #Obtain the ASCII value using ord
+        # Obtain the ASCII value using ord
         char_position = ord(text[i])
-        #Add 3 to the position, as caesar does
-        new_char_position=char_position+3
-        new_char_position=new_char_position%123
-        #Convert ASCII value to character and concatenate it to final result
+        # Add 3 to the position, as caesar does
+        new_char_position = char_position + 3
+        new_char_position = new_char_position % 123
+        # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
-        print result
+        print(result)
     return result
 def caesar_decrypt(cipher_text):
     result = ""
-    # we go through each character of the text in this for loop
+    # Go through each character of the text in this for loop
     for i in range(len(cipher_text)):
-        #Obtain the ASCII value using ord 
+        # Obtain the ASCII value using ord 
         char_position = ord(cipher_text[i]) 
-        #Substract 3 to the position, to get back original position
-        new_char_position=char_position-3
-        new_char_position=new_char_position%123
-        #Convert ASCII value to character and concatenate it to final result
+        # Substract 3 to the position, to get back original position
+        new_char_position = char_position - 3
+        new_char_position = new_char_position % 123
+        # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
-        print result
+        print(result)
     return result
 text = "picoctf"
-print "Plain Text : " + text
+print(f"Plain Text: {text}")
 cipher_text = caesar_encrypt(text)
-print "Encrypted: " + cipher_text
-print "Decrypted: " + caesar_decrypt(cipher_text)
+print(f"Encrypted: {cipher_text}")
+print(f"Decrypted: {caesar_decrypt(cipher_text)}")
  
 Can you explain why?
  
@@ -390,7 +390,7 @@ In modern cryptography exist the concept of symmetric and asymmetric cryptograph
 
 A commonly used algorithm today for symmetric cryptography, is AES, which means "Advanced Encryption Standard". This algorithm has a combination of substitutions and transpositions using a key of fixed length. A key of fixed length means that the algorithm can only have a key with a certain size. However, AES has different versions and each version can support a key length of different sizes. The most common versions are AES 128 and AES 256, which have a key length of 128 bits and AES 256 respectively. AES algorithm is considered secure. However, the implementation can be attacked successfully if it has flaws. For example, one famous way to break AES encryption is the Padding Oracle Attack, which allows to successfully crack SSL, an encrypted protocol that was widely used to secure HTTP traffic. However, this is not a weakness of AES, but a weakness in how it is used.
 
-AES has different operation modes. We will analyze two of them to illustrate vulnerabilities that can emerge in their use. This operation modes are "ECB" and "CBC".
+AES has different operation modes. We will analyze two of them to illustrate vulnerabilities that can emerge in their use. These operation modes are "ECB" and "CBC".
 
 ===== Operation mode ECB
 
@@ -800,7 +800,7 @@ my_info  my_info.zip
 
 Now, let's create a zip file protected with encryption, so it cannot be uncompressed without a key. In this context, the words  'key' and 'password' are synonyms.
 
-Let's remove first the .zip file we already created running:
+Let's remove first the .zip file we already created by running:
 
 [source, txt]
 rm my_info.zip
