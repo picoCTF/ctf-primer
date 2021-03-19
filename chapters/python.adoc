@@ -383,12 +383,12 @@ Save the file. Now, in the same folder, create a program with the following code
 
 [source, python]
 filepath = "pico.txt"
-cnt = 1
+i = 1
 with open(filepath, "r") as my_file:
     for line in my_file:
-        print(cnt)
+        print(i)
         print(line)
-        cnt += 1
+        i += 1
 
 [source, python]
 You should see the following output when you run the program:
@@ -418,26 +418,26 @@ If you want to save your output in another file, you can easily do it in the fol
 [source, python]
 filepath_read = "pico.txt"
 filepath_write = "outputpico.txt"
-cnt = 1
+i = 1
 with open(filepath_read, "r") as file_read:
     with open(filepath_write, "w") as file_write:
        for line in file_read:
-            file_write.write(str(cnt) + "\n")
+            file_write.write(str(i) + "\n")
             file_write.write(line + "\n")
-            cnt += 1
+            i += 1
 print("look inside your folder...")
 
 We introduced some new concepts in this code. This:
 
 [source, python]
-str(cnt)
+str(i)
 
 Is a cast from an integer to string. We want to convert that integer into a string to be able to concatenate two strings. For example, if we have the string "hello" and the integer 123, and we want to create a string that is "hello123", we can concatenate those two values. But first, we need to convert the integer to string, otherwise python will show an error. To concatenate strings, we use the operator '+'. When we add two strings, python will concatenate them. When we add two integers, python will do a mathematical addition. To represent a break of line in a string, we use "\n".
 
 After this explanation, you should know that this:
 
 [source, python]
-str(cnt) + "\n"
+str(i) + "\n"
 
 Simply converts an integer to string, and then we concatenate a break line to it. We do that, because the function line write() does not add a breakline to the string after it writes it, so we would have a file with a single huge line of text if we don’t do that. When you run the code, you should see no output in the terminal, but if you show the contents of the folder you are in, you should see a new file called 'outputpico.txt'. If you show the contents of that file, you should see the following:
 
