@@ -222,7 +222,7 @@ Samuel
 Samuel
 109
 
-Hint: use range(100, 109).
+Hint: use range(100, 110).
 
 Once you are done with the previous challenge, fix the following program that has several syntax errors and make it work:
 
