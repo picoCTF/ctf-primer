@@ -104,10 +104,9 @@ Now let's talk about *getting* a shell!
 === Get a Shell
 [[shl-get-a-shell]]
 Cybersecurity is a topic that is most deeply learned by listening *and* doing.
-For this reason, I advise you to create a picoCTF 2019 account at this point if
+For this reason, I advise you to create a picoCTF account at this point if
 you have not already. Beyond providing 120+ security challenges in helpful
-learning ramps, every picoCTF 2019 account gets a user on a Linux server, which
-can only be accessed with a _shell_. 
+learning ramps, every picoCTF account gets access to a web-based Linux _shell_.
 
 A note on the structure of my (LT's) chapters: many times I will provide a high
 level tutorial for a task and also a step by step walkthrough for the same
@@ -122,44 +121,25 @@ the step by step walkthrough.
 
 ==== High level tutorial
 . *Gain access to a practice shell*
-.. Register for a picoCTF 2019 account
+.. Register for a picoCTF account
   * Click link in email that is sent to registered email address
-.. Register account on picoCTF 2019 shell server
-... Log in once to create account on shell server
-   * Only required for first login for your account
-... Reconnect
-... Log in again to get a shell
+... Log in to the picoCTF webshell
 
 ==== Step by Step Walkthrough
 //TODO punt : turn bold text into hyperlinks in this section
-*Register for a picoCTF 2019 account at the link below.* You will need to
+*Register for a picoCTF account at the link below.* You will need to
 validate the email address you provide by clicking on a link that is sent to
 it.
 
-https://2019game.picoctf.com/
+https://play.picoctf.org/
 
 After successfully registering, a web shell can be accessed at the URL below.
-*Use the same  user name and password that you registered on the picoCTF 2019
-website to log into the shell at the link below* (or in the "Shell" tab in the
-picoCTF 2019 website) For the sake of security, you will not see your password
-as you type it in. *You will log in twice.* This is only for your first log
-in.
+*Use the same  user name and password that you registered on the picoCTF
+website to log into the shell at the link below* (or in the "Webshell" panel
+on the picoCTF website) For the sake of security, you will not see your password
+as you type it in.
 
-https://2019game.picoctf.com/shell
-
-You will know you've successfully logged into the shell if you see a screen
-similar to this:
-
-[[pico-successful-login,Fresh shell on pico shell server]]
-.Lots of extra info! Try the `clear` command!
-[.text-center]
-image::images/shl-2-pico-motd-login.png[]
-
-Not as sterile as the empty shell I pictured <<first-look,here>>. However, if
-you type `clear` and press enter, it will be quite pristine! All the info
-that is pictured directly above is mostly for system administrators 
-(sysadmins). You can safely ignore it.
-
+https://webshell.picoctf.org/
 
 ==== Debrief
 Congratulations (esp. if this is your first time staring at a command prompt)!

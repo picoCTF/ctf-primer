@@ -27,10 +27,8 @@ In general, computer science professionals refer to "Digital Forensics" as "Fore
 
 === How to search for strings and filenames
 
-We will begin by learning how to search for information in a file system.  Go to the shell server in its web version at:
-https://2019game.picoctf.com/https://2019game.picoctf.com/]
-Or use ssh to connect to it:
-ssh your_username@2019shell1.picoctf.com
+We will begin by learning how to search for information in a file system.  Go to the picoCTF webshell at:
+https://webshell.picoctf.org/
 
 Once you are connected, download the file ‘files.zip’ from the following url:
 https://primer.picoctf.com/files/files.zip
