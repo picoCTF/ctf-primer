@@ -43,12 +43,9 @@ RSI,ESI,SI (Source index register): Similar purpose to the previous register (De
 
 Now, let’s dive into the assembly of a program!
 
-Go to the shell server in its web version at:
+Go to the picoCTF webshell:
 
-https://2019game.picoctf.com/https://2019game.picoctf.com/]
-
-Or use ssh to connect to it:
-ssh your_username@2019shell1.picoctf.com
+https://webshell.picoctf.org/
 
 Compile the following program:
 
