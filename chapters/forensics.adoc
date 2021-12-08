@@ -31,12 +31,12 @@ We will begin by learning how to search for information in a file system.  Go to
 https://webshell.picoctf.org/
 
 Once you are connected, download the file ‘files.zip’ from the following url:
-https://primer.picoctf.com/files/files.zip
+https://primer.picoctf.org/files/files.zip
 
 To do that, run:
 
 [source, txt]
-wget https://primer.picoctf.com/files/files.zip
+wget https://primer.picoctf.org/files/files.zip
 
 That will download the .zip file, which is a compressed folder, to your current folder. 
 To uncompress it, run:
