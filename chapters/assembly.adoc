@@ -393,4 +393,4 @@ Which  calls a function that indicates that the protection was violated. Note th
 
 The instruction ‘leave’ restores the old value of the EBP that was stored in the stack. As we explained, the ebp from the previous function that called the current function is stored in the stack. Then, ‘ret’ pops the return address from the stack and redirects the execution of the program to that address. Note that a program can redirect its execution to other address by assigning that address to the rip (instruction pointer). The instruction ‘ret’ automatically pops an address from the stack and assigns it to the instruction pointer.
 
-That is the end of the ‘main’ function! Stay tuned for more content on Assembly!
+That is the end of the ‘main’ function! Stay tuned for more content on Assembly and in the meantime checkout this link:https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Arch1001_x86-64_Asm+2021_v1/about[great online course] on the topic!
