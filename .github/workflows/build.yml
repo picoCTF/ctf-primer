@@ -1,0 +1,26 @@
+name: Build HTML
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+  # Allows running workflow manually
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install asciidoctor
+        run: sudo apt-get install -y asciidoctor
+      - name: Build the site using asciidoctor
+        run: make
+      - uses: actions/upload-artifact@v2
+        with:
+          name: book.html
+          path: book.html
+
+
