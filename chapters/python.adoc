@@ -644,13 +644,13 @@ Below is an example of how you can request a web page in python. Here we are req
 
 [source, python]
 import http.client
-conn = http.client.HTTPSConnection("https://picoctf.com/")
+conn = http.client.HTTPSConnection("picoctf.org")
 conn.request("GET", "/")
 r1 = conn.getresponse()
 print(r1.status, r1.reason)
 # 200 OK
 data1 = r1.read()
-conn.request("GET", "/")
+conn.request("GET", "/a")
 r2 = conn.getresponse()
 print(r2.status, r2.reason)
 # 404 Not Found
