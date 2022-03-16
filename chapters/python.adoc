@@ -342,7 +342,7 @@ def even_odd(x):
     else: 
         return False
 print("Input a number:")
-my_number = input()
+my_number = int(input())
 if even_odd(my_number):
     print("The number is even")
 else:
@@ -357,7 +357,7 @@ A program might need to have interactions with a user. For example, a calculator
 
 [source, python]
 print("Input the number of iterations:")
-number_iterations = input()
+number_iterations = int(input())
 for i in range(number_iterations):
     if i < 5:
         print("The following number is less than 5")
@@ -469,7 +469,7 @@ It is a good practice to explain what your code is doing in a comment. In that w
 [source, python]
 print("Input the number of iterations")
 # We read user input and assign it to the variable number_iterations
-number_iterations = input()
+number_iterations = int(input())
 # We iterate according to the value input by the user
 for i in range(number_iterations):
     if i < 5:
@@ -488,7 +488,7 @@ Exceptions are useful in hacking in several cases, for example, when you want an
 [source, python]
 num1 = 8
 print("Input the number that will divide:")
-num2 = input()
+num2 = int(input())
 result = num1 / num2
 print(result)
 print("The program keeps executing to do other stuff...")
@@ -516,7 +516,7 @@ An error ocurred because you cannot divide by zero. That is a rule of python and
 [source, python]
 num1 = 8
 print("Input the number that will divide:")
-num2 = input()
+num2 = int(input())
 try:
     result = num1 / num2
     print(result)
@@ -529,7 +529,7 @@ In our previous code, you would print the same message for any error. Try to inp
 [source, python]
 num1 = 8
 print("Input the number that will divide:")
-num2 = input()
+num2 = int(input())
 try:
     result = num1 / num2
     print(result)
