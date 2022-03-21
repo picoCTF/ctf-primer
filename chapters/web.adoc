@@ -174,16 +174,16 @@ Now let's use some more elaborated code. We are going to make a page that adds t
             function myFunctionSum(){
                 var number1 = document.getElementById("number1").value;
                 var number2 = document.getElementById("number2").value;
-                var result = number1 + number2;
+                var result = Number(number1) + Number(number2);
                 alert(result);
             }
         </script>
     </head>
     <body>
         <h1>JavaScript example to add2 numbers</h1>
-        Input the first number<br> 
+        Input the first number<br>
         <input type="text" id="number1"  ><br>
-        Input the second number<br> 
+        Input the second number<br>
         <input type="text" id="number2" ><br>
         <button onclick="myFunctionSum()"> Show alert! </button>
     </body>
@@ -215,11 +215,21 @@ Is responsible for calling the function "myFunctionSum()" when the button is cli
 
 [source,javascript]
 function myFunctionSum(){
-    var number1 = document.getElementById("number1").value;
-    var number2 = document.getElementById("number2").value;
-    var result = number1 + number2;
-    alert(result);
+  var number1 = document.getElementById("number1").value;
+  var number2 = document.getElementById("number2").value;
+  var result = Number(number1) + Number(number2);
+  alert(result);
 }
+
+Perhaps a confusing part is the following line:
+
+[source,javascript]
+  var result = Number(number1) + Number(number2);
+  
+When the variables are defined, both number1 and number2 are textual not
+numerical. This line turns them into numbers before adding them together. Why
+don't you experiment and see what happens when these variables aren't converted
+to numbers?
 
 Challenge! Modify the file to multiply the two numbers. When you are done with that, include a new third input number to multiply three different numbers! At this point you should be able to do it on your own. Be careful with the syntax, remember that a single character wrong might break the whole code.
 
