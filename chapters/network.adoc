@@ -60,7 +60,7 @@ image::images/5image42.png[image,width=624,height=529]
 
 Right below the textfield in which you typed is the packet list. We can see two packets. The first one is the request your browser sent to the server asking for the web page, so naturally it has your IP as the source, and the IP of the server as the destination. The second packet is the reply, which now has your IP as the destination and the IP of the server as the source because now the server is the one that is sending the page to you after you request it.
 
-In the lower part of the window, we can see the information related to all the layers we explained previously of the currently selected packet. Now, we will send a user and password to the web site. This page in particular does not do anything after you send a password, it just receives it, but the important thing is to note that we can see the password on wireshark when we send it. In the web page, type the following in user and password respectively:www
+In the lower part of the window, we can see the information related to all the layers we explained previously of the currently selected packet. Now, we will send a user and password to the web site. This page in particular does not do anything after you send a password, it just receives it, but the important thing is to note that we can see the password on wireshark when we send it. In the web page, type the following in user and password respectively:
 
 picouser
 

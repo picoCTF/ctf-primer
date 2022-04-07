@@ -497,7 +497,7 @@ Now, for decrypting, we do:
 
 82^35^ mod 117 = 10
 
-Cleartext -> 82
+Cleartext -> 10
 
 That was a bit magical. The RSA private and public key are generated with steps that make them have this property. The process of key generation is relatively simple. We only need to understand some parts of it to show our attack. Note that "In number theory, two integers a and b are said to be relatively prime, mutually prime, or coprime (also written co-prime) if the only positive integer (factor) that divides both of them is 1. Consequently, any prime number that divides one does not divide the other. This is equivalent to their greatest common divisor (gcd) being 1"footnote:[https://en.wikipedia.org/wiki/Coprime_integers[[.underline]#https://en.wikipedia.org/wiki/Coprime_integers#]]. The multiplicative inverse is a number that we use to multiply another number, and obtain 1 as a result. For example, in non-integer arithmetic (in RSA we only use integer arithmetic) the multiplicative inverse of 8, is 1/8, Because 8 * 1/8=1. However, in integer arithmetic we don't have fractions. But we can have a multiplicative inverse modulo n, which means that if we have a number, multiply it by its multiplicative inverse, and take modulo n, the result will be 1.
 
