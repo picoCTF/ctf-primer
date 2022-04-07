@@ -261,8 +261,10 @@ Decrypted: picoctf
 Read the comments in the python source code to understand it. You probably noted the '%', which is called the modulo operator. That allows us to wrap around a number, because it calculates the remainder of the division. We will see more detail of this in the future, so do not worry too much about it for now. But, know that if we want a number to start from 0 again if it surpasses certain threshold, we can use modulo operator. In this case, we use it because we only have 26 letters in the english alphabet. So, the first position is 0, which contains 'a', because arrays start at zero. The last position is 25, which contains 'z'. So, if we want to encrypt 'z', we would need to add 3 positions, and 25+3 is 28, but after 25 we need to begin from 0 again because of the way that caesar works. Modulo operator works perfect for that because:
  
 26%26 is 0
+
 27%26 is 1
-28%16 is 2
+
+28%26 is 2
  
 So, as we said before in an example, the letter 'z' would be encrypted with 'c', which is in the position 2 considering that arrays start at 0. Other thing that you maybe did not understand at once from the code, was that we subtracted 97 from the ASCII value. Go to:
  
