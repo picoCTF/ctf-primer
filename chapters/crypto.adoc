@@ -32,7 +32,7 @@ The 'echo' command simply outputs a string, and we are redirecting that output t
 [source, txt]
 echo "samuel"
 
-You will simple see 'samuell' printed on the screen. Now run: 
+You will simple see 'samuel' printed on the screen. Now run: 
 
 [source, txt]
 ls
@@ -261,8 +261,10 @@ Decrypted: picoctf
 Read the comments in the python source code to understand it. You probably noted the '%', which is called the modulo operator. That allows us to wrap around a number, because it calculates the remainder of the division. We will see more detail of this in the future, so do not worry too much about it for now. But, know that if we want a number to start from 0 again if it surpasses certain threshold, we can use modulo operator. In this case, we use it because we only have 26 letters in the english alphabet. So, the first position is 0, which contains 'a', because arrays start at zero. The last position is 25, which contains 'z'. So, if we want to encrypt 'z', we would need to add 3 positions, and 25+3 is 28, but after 25 we need to begin from 0 again because of the way that caesar works. Modulo operator works perfect for that because:
  
 26%26 is 0
+
 27%26 is 1
-28%16 is 2
+
+28%26 is 2
  
 So, as we said before in an example, the letter 'z' would be encrypted with 'c', which is in the position 2 considering that arrays start at 0. Other thing that you maybe did not understand at once from the code, was that we subtracted 97 from the ASCII value. Go to:
  
@@ -495,7 +497,7 @@ Now, for decrypting, we do:
 
 82^35^ mod 117 = 10
 
-Cleartext -> 82
+Cleartext -> 10
 
 That was a bit magical. The RSA private and public key are generated with steps that make them have this property. The process of key generation is relatively simple. We only need to understand some parts of it to show our attack. Note that "In number theory, two integers a and b are said to be relatively prime, mutually prime, or coprime (also written co-prime) if the only positive integer (factor) that divides both of them is 1. Consequently, any prime number that divides one does not divide the other. This is equivalent to their greatest common divisor (gcd) being 1"footnote:[https://en.wikipedia.org/wiki/Coprime_integers[[.underline]#https://en.wikipedia.org/wiki/Coprime_integers#]]. The multiplicative inverse is a number that we use to multiply another number, and obtain 1 as a result. For example, in non-integer arithmetic (in RSA we only use integer arithmetic) the multiplicative inverse of 8, is 1/8, Because 8 * 1/8=1. However, in integer arithmetic we don't have fractions. But we can have a multiplicative inverse modulo n, which means that if we have a number, multiply it by its multiplicative inverse, and take modulo n, the result will be 1.
 
@@ -680,219 +682,3 @@ e7ae6cfee91a324590df7b048dcc9802b7389c1b0d996d474d61c4cbb1253455
 Search on google the list of passwords called "rockyou" and generate the hash to find the password that corresponds to the leaked hash!
 
 Hint: you can use python to generate hashes. The hashing algorithm is SHA2.
-
-===== Practical example
-
-
-To use cryptography in real life, you should never use your own implementations. To begin, we will demonstrate how to encrypt a file, without any knowledge in cryptography. Go to the picoCTF webshell at:
-
-https://webshell.picoctf.org/
-
-When you are there, create a file called 'my_name.txt' containing your name. You could use the 'nano' editor, but in linux it is possible to do the following trick: If your name was 'samuel', you would run the following command to create the text file:
-
-[source, txt]
-echo "samuel" > my_name.txt
-
-The 'echo' command simply outputs a string, and we are redirecting that output to a file. For example, if we just run
-
-[source, txt]
-echo "samuel"
-
-You will simple see 'samuel' printed on the screen. Now run:
-
-[source, txt]
-ls
-
-and you will see the file you created:
-
-[source, txt]
-ls
-my_name.txt
-
-If you run the command: 
-
-[source, txt]
-cat my_name.txt 
-
-you will see the content:
-
-[source, txt]
-cat my_name.txt 
-samuel
-
-
-Now, create another file with your last name called 'my_lastname.txt'. You can use the same technique to create 'my_lastname.txt':
-
-[source, txt]
-echo "pardo" > my_lastname.txt
-
-
-We will move both files to a new folder, then compress that folder, and then encrypt it! Compressing a folder just makes several files or folders to appear a single file, and they would take less space on disk, but compressing does not provide any security. Anyone would be able to simply decompress it and see the original content. However, encryption will do prevent obtaining the original content without the key. To do that experiment, create a directory called my info:
-
-[source, txt]
-mkdir my_info
-
-And move both files inside using the command mv (mv means move):
-
-[source, txt]
-mv my_name.txt my_info/
-mv my_lastname.txt my_info/
-
-Navigate to the folder 'my_info' and make sure that it contains the files. Now, come back outside my_info folder, and compress the folder into a zip file by running:
-
-[source, txt]
-zip -r my_info.zip my_info/
-
-Note that my_info.zip is the name we chose for our compressed file, and '-r' means recursively, which in this case means that we want to compress everything inside the folder. If you run
- 
-[source, txt]
-ls
- 
-You should see the folder and the compressed file:
-
-[source, txt]
-ls
-my_info  my_info.zip
-
-Now remove the folder running:
-
-[source, txt]
-rm -r my_info
-
-'rm' means remove, and '-r' means recursively and indicates we want to remove everything in the folder:
-
-[source, txt]
-rm -r my_info
-
-Now, if you run 
-
-[source, txt]
-ls 
-
-you should see only your compressed file:
-
-[source, txt]
-ls
-my_info.zip
-
-
-You could easily uncompress the folder by running:
-
-[source, txt]
-unzip my_info.zip
-
-And obtain the original folder:
-
-[source, txt]
-ls
-my_info  my_info.zip
-
-
-Now, let's create a zip file protected with encryption, so it cannot be uncompressed without a key. In this context, the words  'key' and 'password' are synonyms.
-
-Let's remove first the .zip file we already created by running:
-
-[source, txt]
-rm my_info.zip
-
-Now, let's create our encrypted zip, by using a password, with the following command:
-
-[source, txt]
-zip --encrypt -r my_protected_info.zip my_info/
-
-You will be asked to input a password and verify it, remember the password you use to be able to decrypt it later:
-
-[source, txt]
-zip --encrypt -r my_protected_info.zip my_info/
-Enter password: 
-Verify password: 
-  adding: my_info/ (stored 0%)
-  adding: my_info/my_name.txt (stored 0%)
-  adding: my_info/my_lastname.txt (stored 0%)
-
-If you  run:
-
-[source, txt]
-unzip my_protected_info.zip 
-
-It will ask for the password, and only if you input the correct password, you will get back the original content!
-
-[source, txt]
-Archive:  my_protected_info.zip
-   creating: my_info/
-[my_protected_info.zip] my_info/my_name.txt password: 
- extracting: my_info/my_name.txt     
- extracting: my_info/my_lastname.txt 
-
-It is not possible to obtain the original content without the password, because such a password is used to do operations with the content to obtain the encrypted file. 
-
-Note that a compressed file, to the human eye, might look similar as if it was encrypted. You can print the contents of a file with 'cat'. If it is not text, you would not understand. Run cat on both files. For the non-encrypted zip, you will see something similar to:
-
-
-[source, txt]
-cat my_info.zip 
-PK
-,�my_info/UT	#[�^���^ux
-                           
-                              
-                                PK
-,�P���my_info/my_name.txtUT	#[�^a\�^ux
-                                           
-                                              
-                                                samuel
-PK
-,�Pg��my_info/my_lastname.txtUT	#[�^a\�^ux
-                                                   
-                                                      
-                                                        pardo
-PK
-,��Amy_info/UT#[�^ux
-                        
-                           
-                             PK
-,�P�����Bmy_info/my_name.txtUT#[�^ux
-                                          
-                                             
-                                               PK
-,�Pg�����my_info/my_lastname.txtUT#[�^ux
-                                                
-                                                   
-                                                     PK�
-
-If you 'cat' the encrypted file, you will see something like this:
-
-[source, txt]
-cat my_protected_info.zip 
-PK
-,�my_info/UT	#[�^�ߜ^ux
-                          
-                             
-                               PK
-	,�P���my_info/my_name.txtUT	#[�^a\�^ux
-                                                           
-                                                              
-                                                                q1�TVi�V�@�+w-��P���PK
-	,�Pg��my_info/my_lastname.txtUT	#[�^a\�^ux
-                                                           
-                                                              
-                                                                ��k�����AbK>B�RB�Pg��PK
-,��Amy_info/UT#[�^ux
-                        
-                           
-                             PK
-	,�P�����Bmy_info/my_name.txtUT#[�^ux
-                                                   
-                                                      
-                                                        PK
-	,�Pg�����my_info/my_lastname.txtUT#[�^ux
-                                                        
-                                                           
-                                                             PK%
-
-
-
-Note that in the non-encrypted zip, it is possible to spot the name 'samuel' and the lastname 'pardo', in contrast with the encrypted one. However, you can see the path of the files in both cases. Sometimes is necessary you also hide this on a zip file. That can be achieved in several ways. One of them, is encrypting the encrypted file again. Generally, encrypting something twice does not provide more security. In this particular case it does, because the file paths were not encrypted at all.
-
-Beware that sometimes files seem to be encrypted, but they are not, and you can recover the original content by running an algorithm without a key. For example, there are compression algorithms that make data smaller, which means they compress the data for real. Previously we called putting a file on zip compression, but you can have a zip file with or without compression. To be precise, compression is only when you make data smaller. We ran the zip command without compression. When data is compressed, it looks as encrypted because if you 'cat' it, you could not understand the contents. However, by simply running the compression algorithm without any key you can get the original content, which is obviously not secure because anyone can run it without knowing any key.
-
-At this point you might have no idea of what happened on the inside while doing encryption. There are many algorithms for encryption, that were created since the Ancient Rome. Old ways of encrypting data are easily broken nowadays. Even relatively new ways of encrypting data are broken easily today. Some of them are considered unbreakable right now, but will be broken in the future.  Let's begin to understand how encryption work!
