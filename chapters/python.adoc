@@ -64,7 +64,7 @@ $ python3 helloworld.py
 You should see that "Hello World!" is printed on the screen when you run it:
 
 [source, text]
-python3 helloworld.py
+$ python3 helloworld.py
 Hello World!
 
 That was our first program in python!
