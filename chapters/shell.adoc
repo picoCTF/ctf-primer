@@ -238,7 +238,7 @@ through that phase, but we do not have to! One word:
 
 In the shell, pressing the TAB key invokes auto-complete by 1. assuming you've
 spelled the command or file correctly up to the point of pressing tab, and 2. 
-completing the command of file name as much as it can.
+completing the command or file name as much as it can.
 
 The functionality of auto-complete in the shell is so different from
 auto-complete in other apps, such as those in a phone, that shell auto-complete
