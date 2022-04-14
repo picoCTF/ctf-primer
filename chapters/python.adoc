@@ -33,7 +33,7 @@ using python 3, the number 3 is the version of python. Let’s start doing the
 Open your shell, go to your home directory, and create a folder called
 "python_examples". You can do it with the following lines:
 
-[source, bash]
+[source, text]
 ----
 $ cd
 $ mkdir python_examples
