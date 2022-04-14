@@ -41,13 +41,13 @@ $ mkdir python_examples
 
 Now, access that folder using
 
-[source, python]
-cd python_examples
+[source, text]
+$ cd python_examples
 
 Create a file called "helloworld.py", you can do it with:
 
-[source, python]
-nano helloworld.py
+[source, text]
+$ nano helloworld.py
 
 To make our 'hello world!' program in python requires just one line of code! Simply write this on the file:
 
@@ -58,18 +58,24 @@ Now save the file in nano by pressing 'control' and 'x' at the same time, and th
 
 Run the program on the terminal with:
 
-[source, python]
-python3 helloworld.py
+[source, text]
+$ python3 helloworld.py
 
 You should see that "Hello World!" is printed on the screen when you run it:
 
-[source, txt]
+[source, text]
 python3 helloworld.py
 Hello World!
 
 That was our first program in python!
 
-Python, as any other programming language, has variables. A variable can hold different types of data. What we just printed on the screen was a string of characters. When we enclose something in quotes, we are telling python it is a string of characters. A string is a data type. In python, to create a variable we simply choose a name and assign the value that we want. For example, we are going to create a variable called my_string, and we are going to assign to that variable the value "Hello World!":
+Python, as any other programming language, has variables. A variable can hold
+different types of data. What we just printed on the screen was a string of
+characters. When we enclose something in quotes, we are telling python it is a
+string of characters. A string is a data type. In python, to create a variable
+we simply choose a name and assign the value that we want. For example, we are
+going to create a variable called my_string, and we are going to assign to that
+variable the value "Hello World!":
 
 [source, python]
 my_string = "Hello World!"
