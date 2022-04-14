@@ -1,20 +1,43 @@
 
 == Programming in python
 
-A computer program is a set of instructions that allow us to do a task automatically on a computer. We can make a computer program in a programming language. Computer programs are generally called "software". With a computer program we can do all sorts of things. Some examples are calculators, video games, text processors, browsers, and all the things you have ever used in a computer. Nowadays, there are computers everywhere. Any device such as a cell phone, smart watch, or modern car is running software that was made in programming. To begin, we are going to learn python, which is one of the easiest programming languages to learn.
+A computer program is a set of instructions that allow us to do a task
+automatically on a computer. We can make a computer program in a programming
+language. Computer programs are generally called "software". With a computer
+program we can do all sorts of things. Some examples are calculators, video
+games, text processors, browsers, and all the things you have ever used in a
+computer. Nowadays, there are computers everywhere. Any device such as a cell
+phone, smart watch, or modern car is running software that was made in
+programming. To begin, we are going to learn python, which is one of the
+easiest programming languages to learn.
 
-Let’s begin writing python! We are not going to explain each detail of python independently. For that, you could read the python documentation, which is located here:
+Let’s begin writing python! We are not going to explain each detail of python
+independently. For that, you could read the python documentation, which is
+located here:
 
 https://docs.python.org/3.9/tutorial/index.html[https://docs.python.org/3.9/tutorial/index.html]
 
-However, if you don’t know any programming, going directly to the documentation can be overwhelming. We are just going to explain some parts of python which are a good start to begin to write your own programs to exploit software. We do this by making examples that achieve one objective and we explain how they work along the way. This will allow you to read code written by someone else, of course, with the help of google if they use elements that you did not know previously.
+However, if you don’t know any programming, going directly to the documentation
+can be overwhelming. We are just going to explain some parts of python which
+are a good start to begin to write your own programs to exploit software. We do
+this by making examples that achieve one objective and we explain how they work
+along the way. This will allow you to read code written by someone else, of
+course, with the help of google if they use elements that you did not know
+previously.
 
-When you are learning a programming language, there is a tradition in which the first program you write simply prints "Hello World!"" on the screen. We will be using python 3, the number 3 is the version of python. Let’s start doing the "hello world!" program.
+When you are learning a programming language, there is a tradition in which the
+first program you write simply prints "Hello World!"" on the screen. We will be
+using python 3, the number 3 is the version of python. Let’s start doing the
+"hello world!" program.
 
-Open the shell server, and create a folder called "python_examples". You can do it with the following line:
+Open your shell, go to your home directory, and create a folder called
+"python_examples". You can do it with the following lines:
 
-[source, python]
-mkdir python_examples
+[source, bash]
+----
+$ cd
+$ mkdir python_examples
+----
 
 Now, access that folder using
 
