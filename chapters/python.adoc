@@ -456,23 +456,38 @@ Run that program and try several numbers!
 
 === Input and output
 
-A program might need to have interactions with a user. For example, a calculator expects that the user enters some numbers to then do the processing. Receiving user input in a terminal is very easy in python because it has predefined functions that do it for us. The function ‘input()’ waits until the user writes something in the terminal and presses enter. Note that a function can have zero parameters. Then, the function returns the string that the user wrote, and we assign it to the variable number_iterations’. Here is an example, in which we allow the user to control the number of iterations of our program:
+A program might need to have interactions with a user. For example, a
+calculator expects that the user enters some numbers to then do the processing.
+Receiving user input in a terminal is very easy in python because it has
+predefined functions that do it for us. The function ‘input()’ waits until the
+user writes something in the terminal and presses enter. Note that a function
+can have zero parameters. Then, the function returns the string that the user
+wrote, and we assign it to the variable number_iterations’. Here is an example,
+in which we allow the user to control the number of iterations of our program:
 
 [source, python]
+----
 print("Input the number of iterations:")
 number_iterations = int(input())
+
 for i in range(number_iterations):
+
     if i < 5:
         print("The following number is less than 5")
     else:
         print("The following number is greater than or equal to 5")
+
     print(i)
+----
 
 Run that program. When you run it, it will do nothing until you input a number in the terminal and press enter.
 
-In other cases, the data we want to input does not have to come from the user. It could come from a file. We can read all the lines from a file using the function 'open'. Create a file called “pico.txt” in the same folder that you are creating the python programs. Then, in that file copy and paste this text:
+In other cases, the data we want to input does not have to come from the user.
+It could come from a file. We can read all the lines from a file using the
+function 'open'. Create a file called “pico.txt” in the same folder that you
+are creating the python programs. Then, in that file copy and paste this text:
 
-[source, python]
+[source, text]
 The Cosmos is all that is or was or ever will be.
 Our feeblest contemplations of the Cosmos stir us 
 -- there is a tingling in the spine, 
@@ -482,19 +497,24 @@ as if a distant memory,
 of falling from a great height. 
 We know we are approaching the greatest of mysteries.
 
-Save the file. Now, in the same folder, create a program with the following code:
+Save the file. Now, in the same folder, create a program with the following
+code:
 
 [source, python]
+----
 filepath = "pico.txt"
 i = 1
+
 with open(filepath, "r") as my_file:
     for line in my_file:
         print(i)
         print(line)
         i += 1
+----
 
-[source, python]
 You should see the following output when you run the program:
+
+[source, text]
 1
 The Cosmos is all that is or was or ever will be.
 2
@@ -512,40 +532,71 @@ of falling from a great height.
 8
 We know we are approaching the greatest of mysteries.
 
-As you saw, this program reads a file and enumerates each line in the output. The 'open' function has two parameters, the first one is the path of the file you want to open, and the second has a string with the letter 'r', which means that we want to **r**ead the file. 'my_file' is just the name of the file we want to read. Then, we can iterate over each of the lines of the file in a for loop.
+As you saw, this program reads a file and enumerates each line in the output.
+The 'open' function has two parameters, the first one is the path of the file
+you want to open, and the second has a string with the letter 'r', which means
+that we want to **r**ead the file. 'my_file' is just the name of the file we
+want to read. Then, we can iterate over each of the lines of the file in a for
+loop.
 
-Note that this is all made inside a 'with' block. We use the 'with' statement before opening a file to close the file automatically after reading. Also, to handle possible exceptions during the execution. What that means is that when you open a file, you must close it and make sure that it closes correctly. For example, if you do my_file.close(), that would close the file. Imagine that along the way before calling close, something happens and you never get to the line in which you close the file, so you left it open accidentally. Later we will give you more details on exceptions. For the time being, just think of 'with' as an easy way to ensure that the file will be closed correctly.
+Note that this is all made inside a 'with' block. We use the 'with' statement
+before opening a file to close the file automatically after reading. Also, to
+handle possible exceptions during the execution. What that means is that when
+you open a file, you must close it and make sure that it closes correctly. For
+example, if you do my_file.close(), that would close the file. Imagine that
+along the way before calling close, something happens and you never get to the
+line in which you close the file, so you left it open accidentally. Later we
+will give you more details on exceptions. For the time being, just think of
+'with' as an easy way to ensure that the file will be closed correctly.
 
-If you want to save your output in another file, you can easily do it in the following manner:
+If you want to save your output in another file, you can easily do it in the
+following manner:
 
 [source, python]
+----
 filepath_read = "pico.txt"
 filepath_write = "outputpico.txt"
 i = 1
+
 with open(filepath_read, "r") as file_read:
     with open(filepath_write, "w") as file_write:
        for line in file_read:
             file_write.write(str(i) + "\n")
             file_write.write(line + "\n")
             i += 1
+
 print("look inside your folder...")
+----
 
 We introduced some new concepts in this code. This:
 
 [source, python]
 str(i)
 
-Is a cast from an integer to string. We want to convert that integer into a string to be able to concatenate two strings. For example, if we have the string "hello" and the integer 123, and we want to create a string that is "hello123", we can concatenate those two values. But first, we need to convert the integer to string, otherwise python will show an error. To concatenate strings, we use the operator '+'. When we add two strings, python will concatenate them. When we add two integers, python will do a mathematical addition. To represent a break of line in a string, we use "\n".
+Is a cast from an integer to string. We want to convert that integer into a
+string to be able to concatenate two strings. For example, if we have the
+string "hello" and the integer 123, and we want to create a string that is
+"hello123", we can concatenate those two values. But first, we need to convert
+the integer to string, otherwise python will show an error. To concatenate
+strings, we use the operator '+'. When we add two strings, python will
+concatenate them. When we add two integers, python will do a mathematical
+addition. To represent a break of line in a string, we use "\n".
 
 After this explanation, you should know that this:
 
 [source, python]
 str(i) + "\n"
 
-Simply converts an integer to string, and then we concatenate a break line to it. We do that, because the function line write() does not add a breakline to the string after it writes it, so we would have a file with a single huge line of text if we don’t do that. When you run the code, you should see no output in the terminal, but if you show the contents of the folder you are in, you should see a new file called 'outputpico.txt'. If you show the contents of that file, you should see the following:
+Simply converts an integer to string, and then we concatenate a break line to
+it. We do that, because the function line write() does not add a breakline to
+the string after it writes it, so we would have a file with a single huge line
+of text if we don’t do that. When you run the code, you should see no output in
+the terminal, but if you show the contents of the folder you are in, you should
+see a new file called 'outputpico.txt'. If you show the contents of that file,
+you should see the following:
 
-[source, txt]
-cat outputpico.txt
+[source, text]
+$ cat outputpico.txt
 1
 The Cosmos is all that is or was or ever will be.
 2
@@ -567,26 +618,44 @@ We just learned how to read and create files!
 
 === Comments
 
-It is a good practice to explain what your code is doing in a comment. In that way, the reader of the code, which may be yourself, will understand what some part of the code is doing. You will realize that when you write some code, you will forget the exact logic and you will have to read it again to understand what you did. In summary, comments are something very important in programming. In python, you write a comment by adding the '#' symbol at the beginning of any line of your code. This line, will be ignored by the python interpreter as it did not exist, so it does nothing in the program. See the following example:
+It is a good practice to explain what your code is doing in a comment. In that
+way, the reader of the code, which may be yourself, will understand what some
+part of the code is doing. You will realize that when you write some code, you
+will forget the exact logic and you will have to read it again to understand
+what you did. In summary, comments are something very important in programming.
+In python, you write a comment by adding the '#' symbol at the beginning of any
+line of your code. This line, will be ignored by the python interpreter as it
+did not exist, so it does nothing in the program. See the following example:
 
 [source, python]
+----
 print("Input the number of iterations")
+
 # We read user input and assign it to the variable number_iterations
 number_iterations = int(input())
+
 # We iterate according to the value input by the user
 for i in range(number_iterations):
     if i < 5:
-         # We only print this message when the value of i is less than 5
+        # We only print this message when the value of i is less than 5
         print("The following number is less than 5")
     else:
         # We only print the value of i is greater than or equal to 5
         print("The following number is greater than or equal to 5")
+
     # We always print this
     print(i)
+----
 
 === Try-except and exceptions
 
-Exceptions are useful in hacking in several cases, for example, when you want an attack to keep executing even if an unknown error occurred. When a program tries to execute an instruction that even though it has a correct syntax, it cannot be done for some other reason, an exception is thrown. For example, if you try to divide a number by zero, that can have the correct syntax to do it, but when the program is executing the line it will stop and fail. Let’s do the experiment:
+Exceptions are useful in hacking in several cases, for example, when you want
+an attack to keep executing even if an unknown error occurred. When a program
+tries to execute an instruction that even though it has a correct syntax, it
+cannot be done for some other reason, an exception is thrown. For example, if
+you try to divide a number by zero, that can have the correct syntax to do it,
+but when the program is executing the line it will stop and fail. Let’s do the
+experiment:
 
 [source, python]
 num1 = 8
@@ -596,9 +665,10 @@ result = num1 / num2
 print(result)
 print("The program keeps executing to do other stuff...")
 
-As you can see the program divides 8 by any number input by the user. If you run it and input for example 2, nothing bad will happen, and you will see this:
+As you can see the program divides 8 by any number input by the user. If you
+run it and input for example 2, nothing bad will happen, and you will see this:
 
-[source, txt]
+[source, text]
 Input the number that will divide:
 2
 4
@@ -606,7 +676,7 @@ The program keeps executing to do other stuff...
 
 Now, run the program again and input 0, you will see this:
 
-[source, python]
+[source, text]
 Input the number that will divide:
 0
 Traceback (most recent call last):
@@ -614,25 +684,39 @@ Traceback (most recent call last):
     result = num1 / num2
 ZeroDivisionError: integer division or modulo by zero
 
-An error ocurred because you cannot divide by zero. That is a rule of python and most programming languages. Your program will stop when an error happens, further lines will not be executed. In this case, you could verify that the number is not zero in an if-clause. For this example, let’s fix the program instead using a try-except:
+An error ocurred because you cannot divide by zero. That is a rule of python
+and most programming languages. Your program will stop when an error happens,
+further lines will not be executed. In this case, you could verify that the
+number is not zero in an if-clause. For this example, let’s fix the program
+instead using a try-except:
 
 [source, python]
+----
 num1 = 8
+
 print("Input the number that will divide:")
 num2 = int(input())
+
 try:
     result = num1 / num2
     print(result)
 except:
     print "An error has occurred, did you try to divide by zero?")
-print("The program keeps executing to do other stuff...")
 
-In our previous code, you would print the same message for any error. Try to input a string instead of 0. It will show the same message. If you want to be more specific, you can catch specific errors in the following manner:
+print("The program keeps executing to do other stuff...")
+----
+
+In our previous code, you would print the same message for any error. Try to
+input a string instead of 0. It will show the same message. If you want to be
+more specific, you can catch specific errors in the following manner:
 
 [source, python]
+----
 num1 = 8
+
 print("Input the number that will divide:")
 num2 = int(input())
+
 try:
     result = num1 / num2
     print(result)
@@ -640,11 +724,13 @@ except ZeroDivisionError:
     print("Do not divide by zero, that is forbidden.")
 except TypeError:
     print("Your input value must be an integer.")
+
 print("The program keeps executing to do other stuff...")
+----
 
 Now when you input a string, it will show this:
 
-[source, python]
+[source, text]
 Input the number that will divide:
 "Any string"
 Your input value must be an integer.
@@ -652,72 +738,100 @@ The program keeps executing to do other stuff...
 
 And if you input zero it will show this:
 
-[source, python]
+[source, text]
 Input the number that will divide:
 0
 Do not divide by zero, that is forbidden.
 The program keeps executing to do other stuff...
 
-Note that when an error occurs, the following lines inside the 'try' block will not execute. See that 'result' is not printed, and that makes sense because there was no result to print. The program jumps into the ‘except’ block immediately.
+Note that when an error occurs, the following lines inside the 'try' block will
+not execute. See that 'result' is not printed, and that makes sense because
+there was no result to print. The program jumps into the ‘except’ block
+immediately.
 
 === Pass arguments to a python program
 
-When you call a program from the command line, it is possible to pass arguments in the same way you do with several programs in the terminal. The following program shows how to do this:
+When you call a program from the command line, it is possible to pass arguments
+in the same way you do with several programs in the terminal. The following
+program shows how to do this:
 
 [source, python]
+----
 import sys
+
 print('Number of arguments:', len(sys.argv), 'arguments.')
 print('Argument List:', str(sys.argv))
+
 print("The number of arguments is taken from the second argument.")
 print("Remember that in an array [0] is the first one, [1] is the second one.")
+
 number_iterations = sys.argv[1]
+
 f = open("output2.txt", "w")
+
 for i in range(int(number_iterations)):
     if i < 5:
         f.write("The following number is less than 5")
     else:
         f.write("The following number is greater than or equal to 5")
     f.write(str(i))
+
 f.close()
 print("look inside your folder...")
+----
 
-In this example we introduced another way to open a file, which does not handle the close for us.
+In this example we introduced another way to open a file, which does not handle
+the close for us.
 
 === ASCII
 
-ASCII is a way in which a computer represents characters. We could say that in memory a computer only stores numbers, but a program can interpret those numbers in a certain way to understand them as characters.
+ASCII is a way in which a computer represents characters. We could say that in
+memory a computer only stores numbers, but a program can interpret those
+numbers in a certain way to understand them as characters.
 
-In the following table, it is shown what number corresponds to each character in ASCII:
+In the following table, it is shown what number corresponds to each character
+in ASCII:
 
 [.text-center]
 .ASCII Table Ref http://www.asciitable.com[http://www.asciitable.com]
 image::images/4image1.png[image,width=624,height=46]
 
 
-The ASCII includes all the characters that are used in the English language. For other languages, there is a bigger character set called Unicode.
+The ASCII includes all the characters that are used in the English language.
+For other languages, there is a bigger character set called Unicode.
 
-For example, in the ASCII table, you can see that the @ symbol is represented as the 64 number in decimal.
+For example, in the ASCII table, you can see that the @ symbol is represented
+as the 64 number in decimal.
 
-The table also has a column called Hx or Hexadecimal, which is base 16. Decimal is base 10.
+The table also has a column called Hx or Hexadecimal, which is base 16. Decimal
+is base 10.
 
-The decimal base is the one we use in everyday life, which likely comes from the fact that humans have 10 fingers. Therefore, we have 10 different symbols to represent all different numbers. In computers, it is helpful to have a base with 16 symbols because it translates easier to binary. You probably know that most computers physically store only binary numbers, which are represented only by 0 and 1. A **b**inary dig**it** is called a bit. Although computers use binary, base 16 is easy to translate from binary for us humans.
+The decimal base is the one we use in everyday life, which likely comes from
+the fact that humans have 10 fingers. Therefore, we have 10 different symbols
+to represent all different numbers. In computers, it is helpful to have a base
+with 16 symbols because it translates easier to binary. You probably know that
+most computers physically store only binary numbers, which are represented only
+by 0 and 1. A **b**inary dig**it** is called a bit. Although computers use
+binary, base 16 is easy to translate from binary for us humans.
 
 The hexadecimal base (or base 16) has the following symbols:
 
-[source, python]
+[source, text]
 0 1 2 3 4 5 6 7 8 9 a b c d e f
 
 The binary base (or base 2) has these symbols:
 
-[source, python]
+[source, text]
 0 1
 
 The decimal base (or base 10), has the following symbols:
 
-[source, python]
+[source, text]
 0 1 2 3 4 5 6 7 8 9
 
-Let’s see in python how can we use the hexadecimal representation to print characters. In a python string, you can put “\x” which is a special sequence to tell python that the following two characters are a hexadecimal number:
+Let’s see in python how can we use the hexadecimal representation to print
+characters. In a python string, you can put “\x” which is a special sequence to
+tell python that the following two characters are a hexadecimal number:
 
 [source, python]
 print("picoCTF")
@@ -725,25 +839,32 @@ print("\x70\x69\x63\x6f\x43\x54\x46")
 
 When you run that program you should see:
 
-[source, python]
+[source, text]
 picoCTF
 picoCTF
 
 Check the table to see that the characters match!
 
-As a challenge, print the string “I_LOVE_PICOCTF” only using hexadecimal. Note that uppercase letters are represented by a different hexadecimal number than lowercase letters.
+As a challenge, print the string “I_LOVE_PICOCTF” only using hexadecimal. Note
+that uppercase letters are represented by a different hexadecimal number than
+lowercase letters.
 
-=== Pwn tools
+=== Pwntools
 
-For binary exploitation, there is a very useful library called pwn tools:
+For binary exploitation, there is a very useful library called pwntools:
 
 http://docs.pwntools.com/en/stable[http://docs.pwntools.com/en/stable]
 
-Keep this library in mind as an important part of python for exploitation. You do not need to learn anything right now. We will teach how to use it in binary exploitation.
+Keep this library in mind as an important part of python for exploitation. You
+do not need to learn anything right now. We will teach how to use it in binary
+exploitation.
 
 === Http requests in python
 
-Below is an example of how you can request a web page in python. Here we are requesting the HTML of the picoCTF website. Right now, maybe you do not know HTML and worry this will not make much sense to you. After you are done with the Web section, come back here and try this example:
+Below is an example of how you can request a web page in python. Here we are
+requesting the HTML of the picoCTF website. Right now, maybe you do not know
+HTML and worry this will not make much sense to you. After you are done with
+the Web section, come back here and try this example:
 
 [source, python]
 import http.client
