@@ -762,26 +762,69 @@ import sys
 print('Number of arguments:', len(sys.argv), 'arguments.')
 print('Argument List:', str(sys.argv))
 
-print("The number of arguments is taken from the second argument.")
-print("Remember that in an array [0] is the first one, [1] is the second one.")
-
+# The number of iterations is taken from the second argument.
+# (Remember that in an array [0] is the first one, [1] is the second one.)
 number_iterations = sys.argv[1]
 
 f = open("output2.txt", "w")
 
 for i in range(int(number_iterations)):
     if i < 5:
-        f.write("The following number is less than 5")
+        f.write("The following number is less than 5\n")
     else:
-        f.write("The following number is greater than or equal to 5")
-    f.write(str(i))
+        f.write("The following number is greater than or equal to 5\n")
+    f.write(str(i)+"\n")
 
 f.close()
 print("look inside your folder...")
 ----
 
-In this example we introduced another way to open a file, which does not handle
-the close for us.
+Put this code into a file called "args.py". If you run it without any
+arguments, it will throw an error:
+
+[source, text]
+$ python3 args.py
+Number of arguments: 1 arguments.
+Argument List: ['args.py']
+Traceback (most recent call last):
+  File "args.py", line 8, in <module>
+    number_iterations = sys.argv[1]
+IndexError: list index out of range
+
+This error happened because the program is expecting an argument on the command
+line, but none is given. More specifically, the second argument in the argument
+list is queried `sys.argv[1]` but it doesn't exist! Do take note, however, that
+even without supplying any arguments to the program, the program name is
+considered the first argument. To run this program properly, we must include an
+integer argument to our program call:
+
+[source, text]
+----
+$ python3 args.py 6
+Number of arguments: 2 arguments.
+Argument List: ['args.py', '6']
+look inside your folder...
+
+$ cat output2.txt
+The following number is less than 5
+0
+The following number is less than 5
+1
+The following number is less than 5
+2
+The following number is less than 5
+3
+The following number is less than 5
+4
+The following number is greater than or equal to 5
+5
+----
+
+Take note that since we did not use `with` to open our file, we had to close it
+manually with the line:
+
+[source, python]
+f.close()
 
 === ASCII
 
