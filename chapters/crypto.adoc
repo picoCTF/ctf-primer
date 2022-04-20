@@ -181,7 +181,7 @@ The result is something you probably know. Hint: the first decrypted letter is '
 
 Caesar's cipher is a *substitution cipher*, because it replaces each letter by something else. In a substitution cipher, you don't necessarily need to replace a letter by another letter. You can use any symbol if you know how to reverse it.
 
-To practice, go to the shell server. Once you are there, create a python script using: 
+To practice, go to the webshell. Once you are there, create a python script using: 
 
 [source, txt]
 nano caesar.py
@@ -576,7 +576,7 @@ b8LMxw7e+vdIntBGqf7T25PLn/MycGPPvNXyIsTzvvY/MXXJHnAqpI5DlqwzbRHz
 q16/S1WLvzg4PsElmv1f
 -----END CERTIFICATE-----
 
-Copy that text into a text file on the shell server, and name it "weak_n_certificate". The first thing we must do to crack RSA with a weak n, is to extract the n from the certificate. Remember that n is the modulus and e is the exponent.
+Copy that text into a text file on the webshell, and name it "weak_n_certificate". The first thing we must do to crack RSA with a weak n, is to extract the n from the certificate. Remember that n is the modulus and e is the exponent.
 You can use the following command to extract those values:
 
 [source, text]
@@ -641,7 +641,7 @@ That is correct, 67867967 and 73176001 happen to be 'p' and 'q' in the RSA publi
 
 Imagine you want to download a big file from the internet. However, after downloading, you want to check that every bit of the file is correct, and nothing was changed because of a transmission error or a malicious attacker. To do this, you can use a hash, which is a value that you get after applying a hash function to the file, and you obtain a string of fixed length that identifies that file. Whenever you apply the hash function to the file, you will get exactly the same hash, unless the file has been modified. If one bit of the file was changed, you would get a very different hash. So, using a hash we can check the integrity.
 
-There are several hash functions used in industry that are considered secure. One that is commonly used, is SHA2, which means "Secure Hashing Algorithm 2", because it is the second version of SHA. Let's look at an example. Open the shell server and create a file called "bio.txt" and copy paste the following content (do not include the quotes and make sure there is not break line at the end or beginning):
+There are several hash functions used in industry that are considered secure. One that is commonly used, is SHA2, which means "Secure Hashing Algorithm 2", because it is the second version of SHA. Let's look at an example. Open the webshell and create a file called "bio.txt" and copy paste the following content (do not include the quotes and make sure there is not break line at the end or beginning):
 
 "Charles Babbage KH FRS (26 December 1791 – 18 October 1871) was an English polymath. A mathematician, philosopher, inventor and mechanical engineer, Babbage originated the concept of a digital programmable computer."
 
