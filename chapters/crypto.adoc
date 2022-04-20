@@ -371,7 +371,7 @@ So far, we saw how transposition and substitution ciphers work. If they are used
 
 === Key ciphers
 
-There is a principle in cryptography called the Kerckhoffs's principle that states: "A cryptosystem should be secure even if everything about the system, except the key, is public knowledge". That principle pretends to overcome the fact that once the encryption algorithm is known by the enemy the encryption is broken. The solution is to use a key. One old algorithm that was used to encrypt data using a key was "Vigenere". It looks certainly stronger than the previous algorithms we learned. Even though it is easily breakable nowadays, in its time it was considered unbreakable.
+There is a principle in cryptography called the Kerckhoffs's principle that states: "A cryptosystem should be secure even if everything about the system, except the key, is public knowledge". That principle professes to overcome the fact that once the encryption algorithm is known by the enemy the encryption is broken. The solution is to use a key. One old algorithm that was used to encrypt data using a key was "Vigenere". It looks certainly stronger than the previous algorithms we learned. Even though it is easily breakable nowadays, in its time it was considered unbreakable.
 
 To understand how Vigenere works we will encrypt the cleartext:
 
