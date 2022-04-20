@@ -298,7 +298,7 @@ Suppose you are a hacker in a social network. When you create your account, inst
 
 When you get to execute JavaScript in someone else's browser, you can read their authentication data, which can be a secret value placed on a cookie or JavaScript local storage after a user logs in. At that point, your friend's account would probably be compromised!
 
-An important skill to have, is to use the browser debugger. For this explanation we will use Firefox. You can download an install Firefox here:
+An important skill to have, is to use the browser debugger. For this explanation we will use Firefox. You can download and install Firefox here:
 
 https://www.mozilla.org/en-US/firefox/new/[https://www.mozilla.org/en-US/firefox/new/, window="_blank"]
 
