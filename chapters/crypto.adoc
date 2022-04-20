@@ -659,7 +659,7 @@ Certificate:
          43:96:ac:33:6d:11:f3:ab:5e:bf:4b:55:8b:bf:38:38:3e:c1:
          25:9a:fd:5f
 
-Factorize that n is easy. If you google "integer factorization online", the first result is this one:
+Factorizing that n is easy. If you google "integer factorization online", the first result is this one:
 
 https://www.alpertron.com.ar/ECM.HTM[[.underline]#https://www.alpertron.com.ar/ECM.HTM#]
 
