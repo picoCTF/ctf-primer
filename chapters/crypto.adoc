@@ -499,7 +499,7 @@ RSA private key: Is a pair of numbers (d,n)
 
 Message: m
 
-Ciphertex: c
+Ciphertext: c
 
 To encrypt: m^e^ mod n = c
 
