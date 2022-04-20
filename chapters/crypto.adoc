@@ -189,6 +189,7 @@ nano caesar.py
 We will use a python code that encrypts and decrypts only lowercase letters using Caesar cipher. This is how it looks:
 
 [source, python]
+----
 def caesar_encrypt(text):
     result = ""
     # Go through each character of the text in this for loop
@@ -207,6 +208,7 @@ def caesar_encrypt(text):
         result = result + chr(new_char_position)
         print(result)
     return result
+
 def caesar_decrypt(cipher_text):
     result = ""
     # Go through each character of the text in this for loop
@@ -225,11 +227,13 @@ def caesar_decrypt(cipher_text):
         result = result + chr(new_char_position)
         print(result)
     return result
+
 text = "picoctf"
 print(f"Plain Text: {text}")
 cipher_text = caesar_encrypt(text)
 print(f"Encrypted: {cipher_text}")
 print(f"Decrypted: {caesar_decrypt(cipher_text)}")
+----
  
 Copy and paste the code into the file, save the file by pressing control+x, press enter, and then execute it with:
  
