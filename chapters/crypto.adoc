@@ -288,42 +288,58 @@ Read the comments in the python source code to understand it. You probably noted
  
 So, as we said before in an example, the letter 'z' would be encrypted with 'c', which is in the position 2 considering that arrays start at 0. Other thing that you maybe did not understand at once from the code, was that we subtracted 97 from the ASCII value. Go to:
  
-http://www.asciitable.com/[.underline]#http://www.asciitable.com/#]
+http://www.asciitable.com/
  
 Note that the letter 'a', is in the position 97, so we simply subtract 97 to apply the overlap trick with modulo 26. Note that this trick would also work by not subtracting 97, but instead applying the modulo on 123, like in the following code:
  
 [source,python]
+----
 def caesar_encrypt(text):
     result = ""
+
     # Go through each character of the text in this for loop
     for i in range(len(text)):
+
         # Obtain the ASCII value using ord
         char_position = ord(text[i])
+
         # Add 3 to the position, as caesar does
         new_char_position = char_position + 3
+
         new_char_position = new_char_position % 123
+
         # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
+
         print(result)
     return result
+
 def caesar_decrypt(cipher_text):
     result = ""
+
     # Go through each character of the text in this for loop
     for i in range(len(cipher_text)):
+
         # Obtain the ASCII value using ord 
         char_position = ord(cipher_text[i]) 
+
         # Substract 3 to the position, to get back original position
         new_char_position = char_position - 3
+
         new_char_position = new_char_position % 123
+
         # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
+
         print(result)
     return result
+
 text = "picoctf"
 print(f"Plain Text: {text}")
 cipher_text = caesar_encrypt(text)
 print(f"Encrypted: {cipher_text}")
 print(f"Decrypted: {caesar_decrypt(cipher_text)}")
+----
  
 Can you explain why?
  
