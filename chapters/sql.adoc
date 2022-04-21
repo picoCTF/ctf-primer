@@ -150,7 +150,7 @@ The objective of the basic SQL injection we are learning, is trying to inject an
 
 "[lime]#SELECT * FROM user where name='#".$name.""[lime]#' and password='#".$password.""[lime]#';#"
 
-The red part of the query, will be concatenated with the value of the variables to conform the final query. Let's suppose that $name is equal to "samuel", and $password is equal to "hello", the query would result in
+The green part of the query will be concatenated with the value of the variables to form the final query. Let's suppose that $name is equal to "samuel", and $password is equal to "hello", the query would result in
 
 SELECT * FROM user where name='samuel' and password='hello';
 
