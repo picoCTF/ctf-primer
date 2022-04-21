@@ -201,7 +201,7 @@ So far, you know that if you inject:
 
 *' or '1'='1*
 
-It will return results, but you are not learning any information. We know two column names, 'username' and password. For this example, suppose you know a user called 'picoctf' and you to get the password from that user. To narrow down the query to the row in which the user 'picoctf' information is stored, you could use:
+It will return results, but you are not learning any information. We know two column names, 'username' and password. For this example, suppose you know a user called 'picoctf' and you want to get the password from that user. To narrow down the query to the row in which the user 'picoctf' information is stored, you could use:
 
 *' or username='picoctf*
 
