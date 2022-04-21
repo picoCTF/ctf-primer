@@ -75,11 +75,14 @@ nano my_c_example.c
 Into that file, write the following code, which will print "Hello World!"
 
 [source, c]
+----
 #include <stdio.h>
+
 int main() {
    printf("Hello World!\n");
    return 0;
 }
+----
 
 Note that this line:
 
