@@ -262,7 +262,7 @@ This script is just one of the many ways in which a blind SQL injection is done.
 
 * We put the *select '* at the end of the query to handle the closing single quote.
 
-* 'NOTHING FOUND...' Is the message printed in the html, so if that is present in the html
+* 'NOTHING FOUND...' Is the message printed in the html, so if that is present in the html then a wrong letter was guessed.
 
 * To clear your doubts, experiment in the SQL editor with similar queries, or do prints on the python script to make sure you understand every part of it.
 
