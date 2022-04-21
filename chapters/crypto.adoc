@@ -4,13 +4,13 @@
 Cryptography is an ancient field that dates to Ancient Rome. Etymologically, the word traces back to the Greek roots "kryptos" meaning "hidden" and "graphein" meaning "to write." It is used to communicate secretly in the presence of an enemy. With cryptography we can achieve the following properties when a message is sent:
 
 
-*Confidentiality: No one unintended will be able to read the message.
+* Confidentiality: No one unintended will be able to read the message.
 
-*Integrity: If a message is tampered, it is possible to detect that it was.
+* Integrity: If a message is tampered, it is possible to detect that it was.
 
-*Authentication: The identity of a person can be verified accurately.
+* Authentication: The identity of a person can be verified accurately.
 
-*Nonrepudiation: If a person sent a specific message, then the person cannot deny that the message was sent by them.
+* Nonrepudiation: If a person sent a specific message, then the person cannot deny that the message was sent by them.
 
 
 First, we will see how to achieve Confidentiality. This is done with encryption. When we want to hide a message, we say that we encrypt the message. To understand how encryption works, we will see an example of an ancient way of encrypting a message that is not secure by any means today, but it is good for illustration. But first, to practice our terminal skills, we will encrypt a folder in linux to prevent anyone from reading its contents without the appropriate password.
