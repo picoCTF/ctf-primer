@@ -213,7 +213,7 @@ image::images/3image14.png[image,width=624,height=130]
 
 Remember that in our injection, if the part at the right of the "or" is true, it will return results. It is true that username is equal to 'picoctf' only in the row on the picoctf!
 
-Now we will add the part that compares the first character of the password. We can do that using an embedded query. An embedded query is a query inside a query. Our embedded query highlighted in red, will simply return the first character of the password. We will compare that first character with the character 'a', so we are guessing that the first character is 'a':
+Now we will add the part that compares the first character of the password. We can do that using an embedded query. An embedded query is a query inside a query. Our embedded query highlighted in green, will simply return the first character of the password. We will compare that first character with the character 'a', so we are guessing that the first character is 'a':
 
 *' or username='picoctf' and [lime]#(select substr(password, 1, 1))#='a*
 
