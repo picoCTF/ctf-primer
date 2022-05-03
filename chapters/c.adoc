@@ -100,7 +100,7 @@ Is the function printf, which we can use to print strings in the terminal. The f
 int main() {
 }
 
-Is the function that wraps the code of our program. Note that in C, the content of function is enclosed in braces {}. By convention, main is the function that would be executed in our program, even if we don't call it. In C, functions return a data type. In this case, main returns an 'int', which means integer.That is why we see the word 'int' right before 'main'. This line:
+Is the function that wraps the code of our program. Note that in C, the content of function is enclosed in braces {}. By convention, main is the function that would be executed in our program, even if we don't call it. In C, functions return a data type. In this case, main returns an 'int', which means integer. That is why we see the word 'int' right before 'main'. This line:
 
 [source, c]
 return 0;
