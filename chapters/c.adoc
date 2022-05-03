@@ -53,7 +53,7 @@ And it would work. But it is important you do not write it like that if you begi
 
 === C Hello World!
 
-Let's get hand on now! Access the picoCTF webshell at:
+Let's get hands on now! Access the picoCTF webshell at:
 
 https://webshell.picoctf.org/
 
