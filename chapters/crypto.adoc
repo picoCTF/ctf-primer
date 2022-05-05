@@ -467,7 +467,7 @@ Since that message is 12 bytes, we require to add a padding of 4 bytes to comple
 
 "HELLOPICOCTF"+"\x04\x04\x04\x04"
 
-Note that "\x" is a way to tell that in a string we want to use that exact number on a byte, even if it is not printable ASCII. Now, suppose we want to encrypt a message of 14 bytes like:
+Note that "\x" is a way to tell that in a string we want to use that exact number on a byte, even if it is not printable ASCII. Now, suppose we want to encrypt a message of 15 bytes like:
 
 "GOODBYEPICOCTF!"
 
