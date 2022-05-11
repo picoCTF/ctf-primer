@@ -25,7 +25,7 @@ In a tool called Wireshark, we can “sniff” the packets transmitted on a netw
 
 On your computer, download Wireshark from their site:
 
-https://www.wireshark.org/[[.underline]#https://www.wireshark.org/#
+https://www.wireshark.org/
 
 You must download the version corresponding to your operating system. It should be a very easy process, however, if you have any issue or doubt, you can Google plenty of good documentation about Wireshark.
 

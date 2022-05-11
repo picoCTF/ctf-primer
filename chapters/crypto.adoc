@@ -4,13 +4,13 @@
 Cryptography is an ancient field that dates to Ancient Rome. Etymologically, the word traces back to the Greek roots "kryptos" meaning "hidden" and "graphein" meaning "to write." It is used to communicate secretly in the presence of an enemy. With cryptography we can achieve the following properties when a message is sent:
 
 
-*Confidentiality: No one unintended will be able to read the message.
+* Confidentiality: No one unintended will be able to read the message.
 
-*Integrity: If a message is tampered, it is possible to detect that it was.
+* Integrity: If a message is tampered, it is possible to detect that it was.
 
-*Authentication: The identity of a person can be verified accurately.
+* Authentication: The identity of a person can be verified accurately.
 
-*Nonrepudiation: If a person sent a specific message, then the person cannot deny that the message was sent by them.
+* Nonrepudiation: If a person sent a specific message, then the person cannot deny that the message was sent by them.
 
 
 First, we will see how to achieve Confidentiality. This is done with encryption. When we want to hide a message, we say that we encrypt the message. To understand how encryption works, we will see an example of an ancient way of encrypting a message that is not secure by any means today, but it is good for illustration. But first, to practice our terminal skills, we will encrypt a folder in linux to prevent anyone from reading its contents without the appropriate password.
@@ -181,7 +181,7 @@ The result is something you probably know. Hint: the first decrypted letter is '
 
 Caesar's cipher is a *substitution cipher*, because it replaces each letter by something else. In a substitution cipher, you don't necessarily need to replace a letter by another letter. You can use any symbol if you know how to reverse it.
 
-To practice, go to the shell server. Once you are there, create a python script using: 
+To practice, go to the webshell. Once you are there, create a python script using: 
 
 [source, txt]
 nano caesar.py
@@ -189,47 +189,67 @@ nano caesar.py
 We will use a python code that encrypts and decrypts only lowercase letters using Caesar cipher. This is how it looks:
 
 [source, python]
+----
 def caesar_encrypt(text):
     result = ""
+
     # Go through each character of the text in this for loop
     for i in range(len(text)):
+
         # Obtain the ASCII value using ord
         char_position = ord(text[i])
+
         # Substract 97 to have a character from 1 to 26
         char_position = char_position - 97
+
         # Add 3 to the position, as caesar does
         new_char_position = char_position + 3
+
         # Make sure that the position does not surpass 26 (we wrap around)
         new_char_position = new_char_position % 26
+
         # Convert back to ASCII values
         new_char_position = new_char_position + 97
+
         # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
+
         print(result)
     return result
+
 def caesar_decrypt(cipher_text):
     result = ""
+
     # Go through each character of the text in this for loop
     for i in range(len(cipher_text)):
+
         # Obtain the ASCII value using ord
         char_position = ord(cipher_text[i])
+
         # Substract 97 to have a character from 1 to 26
         char_position = char_position - 97
+
         # Substract 3 to the position, to get back original position
         new_char_position = char_position - 3
+
         # Make sure that the position does not surpass 26 (we wrap around)
         new_char_position = new_char_position % 26
+
         # Convert back to ASCII values
         new_char_position = new_char_position + 97
+
         # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
+
         print(result)
     return result
+
 text = "picoctf"
 print(f"Plain Text: {text}")
 cipher_text = caesar_encrypt(text)
 print(f"Encrypted: {cipher_text}")
 print(f"Decrypted: {caesar_decrypt(cipher_text)}")
+----
  
 Copy and paste the code into the file, save the file by pressing control+x, press enter, and then execute it with:
  
@@ -268,42 +288,58 @@ Read the comments in the python source code to understand it. You probably noted
  
 So, as we said before in an example, the letter 'z' would be encrypted with 'c', which is in the position 2 considering that arrays start at 0. Other thing that you maybe did not understand at once from the code, was that we subtracted 97 from the ASCII value. Go to:
  
-http://www.asciitable.com/[.underline]#http://www.asciitable.com/#]
+http://www.asciitable.com/
  
 Note that the letter 'a', is in the position 97, so we simply subtract 97 to apply the overlap trick with modulo 26. Note that this trick would also work by not subtracting 97, but instead applying the modulo on 123, like in the following code:
  
 [source,python]
+----
 def caesar_encrypt(text):
     result = ""
+
     # Go through each character of the text in this for loop
     for i in range(len(text)):
+
         # Obtain the ASCII value using ord
         char_position = ord(text[i])
+
         # Add 3 to the position, as caesar does
         new_char_position = char_position + 3
+
         new_char_position = new_char_position % 123
+
         # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
+
         print(result)
     return result
+
 def caesar_decrypt(cipher_text):
     result = ""
+
     # Go through each character of the text in this for loop
     for i in range(len(cipher_text)):
+
         # Obtain the ASCII value using ord 
         char_position = ord(cipher_text[i]) 
+
         # Substract 3 to the position, to get back original position
         new_char_position = char_position - 3
+
         new_char_position = new_char_position % 123
+
         # Convert ASCII value to character and concatenate it to final result
         result = result + chr(new_char_position)
+
         print(result)
     return result
+
 text = "picoctf"
 print(f"Plain Text: {text}")
 cipher_text = caesar_encrypt(text)
 print(f"Encrypted: {cipher_text}")
 print(f"Decrypted: {caesar_decrypt(cipher_text)}")
+----
  
 Can you explain why?
  
@@ -335,7 +371,7 @@ So far, we saw how transposition and substitution ciphers work. If they are used
 
 === Key ciphers
 
-There is a principle in cryptography called the Kerckhoffs's principle that states: "A cryptosystem should be secure even if everything about the system, except the key, is public knowledge". That principle pretends to overcome the fact that once the encryption algorithm is known by the enemy the encryption is broken. The solution is to use a key. One old algorithm that was used to encrypt data using a key was "Vigenere". It looks certainly stronger than the previous algorithms we learned. Even though it is easily breakable nowadays, in its time it was considered unbreakable.
+There is a principle in cryptography called the Kerckhoffs's principle that states: "A cryptosystem should be secure even if everything about the system, except the key, is public knowledge". That principle professes to overcome the fact that once the encryption algorithm is known by the enemy the encryption is broken. The solution is to use a key. One old algorithm that was used to encrypt data using a key was "Vigenere". It looks certainly stronger than the previous algorithms we learned. Even though it is easily breakable nowadays, in its time it was considered unbreakable.
 
 To understand how Vigenere works we will encrypt the cleartext:
 
@@ -431,7 +467,7 @@ Since that message is 12 bytes, we require to add a padding of 4 bytes to comple
 
 "HELLOPICOCTF"+"\x04\x04\x04\x04"
 
-Note that "\x" is a way to tell that in a string we want to use that exact number on a byte, even if it is not printable ASCII. Now, suppose we want to encrypt a message of 14 bytes like:
+Note that "\x" is a way to tell that in a string we want to use that exact number on a byte, even if it is not printable ASCII. Now, suppose we want to encrypt a message of 15 bytes like:
 
 "GOODBYEPICOCTF!"
 
@@ -463,7 +499,7 @@ RSA private key: Is a pair of numbers (d,n)
 
 Message: m
 
-Ciphertex: c
+Ciphertext: c
 
 To encrypt: m^e^ mod n = c
 
@@ -535,7 +571,7 @@ e=11
 
 Now, to obtain 'd' applying the EEA. We can do that on this web site:
 
-https://planetcalc.com/3298/[[.underline]#https://planetcalc.com/3298/#]
+https://planetcalc.com/3298/
 
 We input 11 and 96 in the following manner:
 
@@ -576,7 +612,7 @@ b8LMxw7e+vdIntBGqf7T25PLn/MycGPPvNXyIsTzvvY/MXXJHnAqpI5DlqwzbRHz
 q16/S1WLvzg4PsElmv1f
 -----END CERTIFICATE-----
 
-Copy that text into a text file on the shell server, and name it "weak_n_certificate". The first thing we must do to crack RSA with a weak n, is to extract the n from the certificate. Remember that n is the modulus and e is the exponent.
+Copy that text into a text file on the webshell, and name it "weak_n_certificate". The first thing we must do to crack RSA with a weak n, is to extract the n from the certificate. Remember that n is the modulus and e is the exponent.
 You can use the following command to extract those values:
 
 [source, text]
@@ -623,7 +659,7 @@ Certificate:
          43:96:ac:33:6d:11:f3:ab:5e:bf:4b:55:8b:bf:38:38:3e:c1:
          25:9a:fd:5f
 
-Factorize that n is easy. If you google "integer factorization online", the first result is this one:
+Factorizing that n is easy. If you google "integer factorization online", the first result is this one:
 
 https://www.alpertron.com.ar/ECM.HTM[[.underline]#https://www.alpertron.com.ar/ECM.HTM#]
 
@@ -641,7 +677,7 @@ That is correct, 67867967 and 73176001 happen to be 'p' and 'q' in the RSA publi
 
 Imagine you want to download a big file from the internet. However, after downloading, you want to check that every bit of the file is correct, and nothing was changed because of a transmission error or a malicious attacker. To do this, you can use a hash, which is a value that you get after applying a hash function to the file, and you obtain a string of fixed length that identifies that file. Whenever you apply the hash function to the file, you will get exactly the same hash, unless the file has been modified. If one bit of the file was changed, you would get a very different hash. So, using a hash we can check the integrity.
 
-There are several hash functions used in industry that are considered secure. One that is commonly used, is SHA2, which means "Secure Hashing Algorithm 2", because it is the second version of SHA. Let's look at an example. Open the shell server and create a file called "bio.txt" and copy paste the following content (do not include the quotes and make sure there is not break line at the end or beginning):
+There are several hash functions used in industry that are considered secure. One that is commonly used, is SHA2, which means "Secure Hashing Algorithm 2", because it is the second version of SHA. Let's look at an example. Open the webshell and create a file called "bio.txt" and copy paste the following content (do not include the quotes and make sure there is not break line at the end or beginning):
 
 "Charles Babbage KH FRS (26 December 1791 – 18 October 1871) was an English polymath. A mathematician, philosopher, inventor and mechanical engineer, Babbage originated the concept of a digital programmable computer."
 
@@ -673,7 +709,7 @@ If we store a file, calculate the hash, and keep the hash with us, we could know
 
 Hashes are commonly used to store passwords in a database. When a user logs in, the hash of the password is calculated, and it is compared with the hash stored. If they match, we know that the user input the correct password. Note that a fundamental property of hashes is that it is impossible to get the original text from the hash. Because of this, a system administrator would not be able to learn the actual password of users if they have access to the database. In the case of a data breach, when a database is leaked, attackers would not be able to obtain the real password of users.
 
-How can a hash be attacked? In the case of passwords, an attacker can create a table that maps several passwords to their hash by calculating the hash of several words, for example all the words in an english dictionary. In that way, if the attacker finds a hash of the password in the database, and the password was a word present in an english dictionary, it could be possible to map it back to the original password by looking for it in the table. However, if a user picked a secure password, this attack would not work because that secure password with complexity, would not be ina dictionary. Note there are lists of commonly used passwords which contain words in several languages and modifications of them, for example, "Hello_12345". A secure password should be random characters to prevent this attack.
+How can a hash be attacked? In the case of passwords, an attacker can create a table that maps several passwords to their hash by calculating the hash of several words, for example all the words in an english dictionary. In that way, if the attacker finds a hash of the password in the database, and the password was a word present in an english dictionary, it could be possible to map it back to the original password by looking for it in the table. However, if a user picked a secure password, this attack would not work because that secure password with complexity, would not be in a dictionary. Note there are lists of commonly used passwords which contain words in several languages and modifications of them, for example, "Hello_12345". A secure password should be random characters to prevent this attack.
 
 Challenge: The following hash of a password was leaked from a database, and you know the user did not use a strong password.
 

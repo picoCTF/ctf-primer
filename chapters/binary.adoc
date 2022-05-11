@@ -12,7 +12,7 @@ A hack is not necessarily a cyberattack. It is just a clever way to do something
 #include <stdio.h>
 int main(int argc, char **argv)
 {
-    int x=2;
+    int x=9;
     int y=5;
     int result=y^((x^y)&-(x<y));
     printf("this is the smallest number %d \n", result);
@@ -47,7 +47,7 @@ y ^ ( ( x ^ y ) & - *( x < y )* )
 
 x < y is false, in c false is represented as a 0, that in a byte would look like this: 00000000
 
--0, es 0, so it keeps being 00000000
+-0, is 0, so it keeps being 00000000
 
 So, -*( x < y )* is 0. So far we would have
 
@@ -57,7 +57,7 @@ Now
 
 y ^ ( *(x^y)* & 0 )
 
-*( x ^ y )* & 0 is 0 , because any_value & 0, is still 0
+*( x ^ y )* & 0 is 0 , because any value & 0, is still 0
 
 So we get to
 
@@ -65,9 +65,13 @@ y ^ ( *0* )
 
 This is simply y ^ 0 , when you take any value and do XOR with zero, it is like doing nothing!
 
-So we get to *y* which is the smallest number (cool !!!!!!)
+So we get to *y* which is the smallest number (cool!!!!!!)
 
-That was amazing. That is a beautiful hack! It is actually called a bithack! In a computer, this operation executes much faster than an "if" statement. In most of the programs you don´t need to execute an operation that fast to comply with the functionality you need, but in some cases that is needed.
+But what happens if the values of x and y are swapped, surely it will not still
+print the smallest number? Swap the values in your code, compile and run it
+again to see what happens!
+
+That was amazing. That is a beautiful hack! It is actually called a bithack! In a computer, this operation executes much faster than an "if" statement. In most of the programs you don't need to execute an operation that fast to comply with the functionality you need, but in some cases that is needed.
 
 Let's say that a hack could be simply a clever thing. Now, what is an exploit?
 
@@ -121,20 +125,20 @@ The program did what it was written for. Now, we are going to send a particular 
 [source, python]
 python3 -c 'print("hello world!")' |./v1
 
-You should see "hello world!" printed back to the terminal right after the command. Note that in python you can  repeat the same character if you multiply it by a number, so 128*"@" is simply a string composed by 128 "@" repeated. For example if you run:
+You should see "hello world!" printed back to the terminal right after the command. Note that in python you can  repeat the same character if you multiply it by a number, so 128*"A" is simply a string composed by 128 "A" repeated. For example if you run:
 
 [source, python]
-python3 -c 'print(10*"@")'
+python3 -c 'print(10*"A")'
 
 You should see the output:
 
 [source, python]
 AAAAAAAAAA
 
- Now we are going to send a string that is composed by 128 characters repeated, concatenated to some bytes.
+Now we are going to send a string that is composed by 128 characters repeated, concatenated to some bytes.
 
 [source, python]
-python3 -c 'print(128*"@"+"\x20\xe0\xff\xff\xff\x7f\x00\x00\xb7\x05\x40\x00")' |./v1
+python3 -c 'print(128*"A"+"\x20\xe0\xff\xff\xff\x7f\x00\x00\xb7\x05\x40\x00")' |./v1
 
 As result you will see:
 
@@ -144,7 +148,7 @@ Segmentation fault (core dumped)
 
 What just happened? We simply sent a string, and a function that is never called in the program was called… We can send some particular input to the program to break it and make it do something that we want. That "particular input" you send to a program in the security jargon is called the "*payload*".
 
-You just hacked a very simple binary. But... what happened on the inside? Why?  A very rough explenation, is that when you call a function, the computer needs to know how to come back to continue executing the code that called it after the function finishes its execution. The address of the piece of code that you should continue on after the function call (you do not see this in the source code), is called the return address. Since the program is not checking the boundaries of the input in the C program we made, you can overwrite the place in which the return address is stored! Let’s understand that better so you can manipulate similar exploits at your will.
+You just hacked a very simple binary. But... what happened on the inside? Why?  A very rough explanation, is that when you call a function, the computer needs to know how to come back to continue executing the code that called it after the function finishes its execution. The address of the piece of code that you should continue on after the function call (you do not see this in the source code), is called the return address. Since the program is not checking the boundaries of the input in the C program we made, you can overwrite the place in which the return address is stored! Let’s understand that better so you can manipulate similar exploits at your will.
 
 === What you need to know for a binary exploit
 
