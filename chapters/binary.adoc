@@ -12,7 +12,7 @@ A hack is not necessarily a cyberattack. It is just a clever way to do something
 #include <stdio.h>
 int main(int argc, char **argv)
 {
-    int x=2;
+    int x=9;
     int y=5;
     int result=y^((x^y)&-(x<y));
     printf("this is the smallest number %d \n", result);
@@ -47,7 +47,7 @@ y ^ ( ( x ^ y ) & - *( x < y )* )
 
 x < y is false, in c false is represented as a 0, that in a byte would look like this: 00000000
 
--0, es 0, so it keeps being 00000000
+-0, is 0, so it keeps being 00000000
 
 So, -*( x < y )* is 0. So far we would have
 
@@ -57,7 +57,7 @@ Now
 
 y ^ ( *(x^y)* & 0 )
 
-*( x ^ y )* & 0 is 0 , because any_value & 0, is still 0
+*( x ^ y )* & 0 is 0 , because any value & 0, is still 0
 
 So we get to
 
@@ -65,7 +65,7 @@ y ^ ( *0* )
 
 This is simply y ^ 0 , when you take any value and do XOR with zero, it is like doing nothing!
 
-So we get to *y* which is the smallest number (cool !!!!!!)
+So we get to *y* which is the smallest number (cool!!!!!!)
 
 That was amazing. That is a beautiful hack! It is actually called a bithack! In a computer, this operation executes much faster than an "if" statement. In most of the programs you don´t need to execute an operation that fast to comply with the functionality you need, but in some cases that is needed.
 
