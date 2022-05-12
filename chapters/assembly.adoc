@@ -109,7 +109,7 @@ Set a break point on main:
 (gdb) b main
 Breakpoint 1 at 0x71e
 
-And runt the program:
+And run the program:
 
 [source, txt]
 (gdb) r
