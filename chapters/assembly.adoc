@@ -21,9 +21,9 @@ Note that in the General Registers, when we are using processor of 64 bits, the 
 RAX,EAX,AX (Accumulator register):  It is usually used to place the return value of a function but can be used for other purposes.
                
 
-REX,EBX,BX (Base register): Used as the base pointer for memory access. We subtract or add an offset to the value of this register to access variables.
+RBX,EBX,BX (Base register): Used as the base pointer for memory access. We subtract or add an offset to the value of this register to access variables.
 
-RCX,ECX,CX (Counter register): Called the. Usually used as a loop counter.
+RCX,ECX,CX (Counter register): Usually used as a loop counter.
 
 RDX,EDX,DX (Data register): Usually used to store temporary data in operations.
 
