@@ -79,7 +79,7 @@ It is an attack on a computer program. If a computer program has a vulnerability
 
 === Stack overflow attack
 
-By this point you should already know how to use the terminal, compile programs and have some understanding of C programming. Create the following program in the shell server, and name it vuln1.c:
+By this point you should already know how to use the terminal, compile programs and have some understanding of C programming. Create the following program in the webshell, and name it vuln1.c:
 
 [source, c]
 #include <stdio.h>
@@ -198,7 +198,7 @@ To see a real example in action we can use GDB, a software that allows us to see
 
 ==== GDB, Assembly and machine code
 
-In the shell server, GDB is already installed, so you can run
+In the webshell, GDB is already installed, so you can run
 
 [source, text]
 gdb ./vuln1
