@@ -206,16 +206,16 @@ push   rbp
 
 We observe the instruction ‘push rbp’. As we know already, rbp is the base pointer, which is a register used to keep track of the part of the stack in which the local variables of a function begin to be stored. In this case, the current value of the rbp is pushed into the stack, to be able to recover it later. This is an important part of a function that allow us to keep the value of the base pointer from the previous function. For example, suppose you have a function call inside another function, like in the following example in which we call func2 from func1:
 
-[source, txt]
-Void func2(){
+[source, c]
+void func2(){
 	char var4;
-char var5;
-char var6;
+	char var5;
+	char var6;
 }
-Void func1(){
+void func1(){
 	char var1;
-char var2;
-char var3;
+	char var2;
+	char var3;
 	func2();
 }
 
