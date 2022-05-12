@@ -377,7 +377,7 @@ We make eax zero. Then we have:
 [source, txt]
 mov   rdx, QWORD PTR [rbp-0x8]
 
-That line access bpp-0x8, which contains the value of the stack canary. We assign that value to rdx. Then at this line:
+That line accesses rbp-0x8, which contains the value of the stack canary. We assign that value to rdx. Then at this line:
 
 [source, txt]
 xor    rdx,QWORD PTR fs:0x28
