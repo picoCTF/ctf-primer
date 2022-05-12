@@ -335,7 +335,9 @@ This line:
 
 [source, txt]
 mov    eax,DWORD PTR [rbp-0xc]
+
 Assigns the content at [rbp-0xc], to eax. By now, [rbp-0xc], which is the spot that stores the value of the variable ‘i’ we declared on C,  already has the value that the user input. So, eax currently has the value that the user input.
+
 The line:
 
 [source, txt]
