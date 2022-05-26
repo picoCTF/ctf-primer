@@ -23,82 +23,94 @@
 
 === What is Forensics?
 
-In general, computer science professionals refer to "Digital Forensics" as "Forensics", for simplicity's sake. Digital Forensics is the field in cybersecurity that tries to gather and understand evidence after an incident, which can be crime, to determine how it happened. This not only helps law enforcement when pledging someone innocent or guilty, but also to understand how to improve security in a system that was successfully attacked. Digital Forensics focuses on gathering evidence present in computer devices that hold information electronically. It is a branch of Forensic Science, which can also investigate any type of crime even if there is not computer media involved. 
+In general, computer science professionals refer to "Digital Forensics" as
+"Forensics", for simplicity's sake. Digital Forensics is the field in
+cybersecurity that tries to gather and understand evidence after an incident,
+which can be crime, to determine how it happened. This not only helps law
+enforcement when pledging someone innocent or guilty, but also to understand
+how to improve security in a system that was successfully attacked. Digital
+Forensics focuses on gathering evidence present in computer devices that hold
+information electronically. It is a branch of Forensic Science, which can also
+investigate any type of crime even if there is not computer media involved. 
 
 === How to search for strings and filenames
 
-We will begin by learning how to search for information in a file system.  Go to the picoCTF webshell at:
+We will begin by learning how to search for information in a file system. Go
+to the picoCTF webshell at:
+
 https://webshell.picoctf.org/
 
-Once you are connected, download the file ‘files.zip’ from the following url:
-https://primer.picoctf.org/files/files.zip
+Once you are connected, open up this problem in a separate tab:
 
-To do that, run:
+https://play.picoctf.org/practice/challenge/85
 
-[source, txt]
-wget https://primer.picoctf.org/files/files.zip
+Download the problem file in your webshell by right-clicking the link in the
+problem description and selecting Copy Address or Copy Link. Then download it
+by typing in `wget ` and pasting the address after 'wget', space. Your command
+should look something like this, but is likely to not be exactly the same:
 
-That will download the .zip file, which is a compressed folder, to your current folder. 
-To uncompress it, run:
+[source, text]
+$ wget https://jupiter.challenges.picoctf.org/static/495d43ee4a2b9f345a4307d053b4d88d/file
 
-[source, txt]
-unzip files.zip
+You need to copy and paste your own link for the file.
 
-You will obtain a folder called ‘files’ in your current directory. Let’s try a little challenge. That folder has a  lot of files and folders. More than 8000 files. Try to find the following string there:
+Great! So now you should have the challenge file saved on your webshell as
+`file`. Now what?
 
-[source, txt]
-information on the record will last a billion years. Genes and brains and books
+As a reflex, you should always use the program `file` on new files that CTF
+challenges give you. The next command is kind of confusing, because the first
+word references the program `file` and the second word references the file
+named `file`, but run this command and see what it tells you:
 
-You know by now that you can access folders using the command ‘cd’. For example, to access the folder ‘files’ that you just uncompressed, you can run:
+[source, text]
+$ file file
 
-[source, txt]
-cd files
+If done properly, it should tell you:
 
-But in more than 8000 files, it is very hard to find one string to exploring the files manually. We have computers to help us with that. 
-You could run:
+[source, text]
+file: ASCII text, with very long lines
 
-[source, txt]
-grep -r "information on the record will last a billion years. Genes and brains and books"
+This tells us the file is plain text, but has unusually long lines. Since it
+is plain text, we can use `cat` to see what it contains.
 
-Note that grep is a program in Linux intended for searching strings in files. The ‘-r’ in the command, is used to tell grep that It should search any folder inside the current folder. When you run it, you will see something like this:
-grep -r "information on the record will last a billion years. Genes and brains and books"
-folder_pmbymkjcya/folder_cawigcwvgv/folder_ltdayfmktr/folder_fnpfclfyee/whzxrpivpqld.txt:information on the record will last a billion years. Genes and brains and books encode
-Note that the string you wanted was found. It shows you the path of the file. In this case, is:
+[source, text]
+$ cat file
 
-[source, txt]
-folder_pmbymkjcya/folder_cawigcwvgv/folder_ltdayfmktr/folder_fnpfclfyee/whzxrpivpqld.txt
+Running this command will show that the file is mostly made up of gibberish.
+If this were a cryptography challenge, decoding the gibberish might be what
+needs to happen, but this is a 100 point general skills question, so I doubt
+that's what needs to happen here. What is the challenge author pushing us
+towards? There's only one hint and it is a `grep` tutorial. What is grep?
 
-We can see that even if we have a huge amount of files, a computer can find something very quickly. Now, suppose we know the name of the file, and we want to know the path. Suppose you want to find the file called ‘file_klcvdqhi.txt’
-You can run:
-find . -name file_klcvdqhi.txt
+Grep is a Linux utility, so we can learn about it by bringing up its man page:
 
+[source, text]
+$ man grep
 
-As an output, you should see the path:
+The first line of the man page says:
 
-[source, txt]
-./folder_aziwuihrzs/folder_noitiuqyjv/file_klcvdqhi.txt
+[source, text]
+grep, egrep, fgrep, rgrep - print lines that match patterns
 
-To practice, find the path of the following files:
+This is perfect! We want to search through gibberish to find the flag. But how
+do we specify the pattern to search for and the file to search in? For this,
+I recommend the grep tutorial in the hint, not the man page. (Man pages tend
+to be highly technical and can be confusing to novices)
 
-[source, txt]
-file_ebmjfalaycoai.txt
-file_swdbhgvbkkythij.txt
-file_sivftkrsckd.txt
+One of the first examples in the grep tutorial uses the following command:
 
-What is the content on each of them?
+[source, text]
+$ egrep 'mellon' mysampledata.txt
 
-Now, identify the file name in which is contained each of the following 3 pieces of text:
+'mellon' is what is being searched for and it is being searched for in
+'mysampledata.txt' What if we searched for 'picoCTF' in 'file'? That command
+would look like:
 
-[source, txt]
-collapse and star formation. In this sense, stars have parents; and, as is sometimes also true
+[source, text]
+$ egrep 'picoCTF' file
 
-[source, txt]
-such as meters or miles, chosen for their utility on Earth, would make little sense. Instead,
+This should get the flag for you and print it on your screen.
 
-[source, txt]
-ancient kings and heroes deified by later generations.
+Let's consider another challenge:
 
-That was rather simple. However, it is an important ability to have. Soon we wil publish content about forensics in more depth. Stay tuned!
-
-
-
+--challenge link here--
