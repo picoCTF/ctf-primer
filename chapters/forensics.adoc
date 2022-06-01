@@ -113,4 +113,171 @@ This should get the flag for you and print it on your screen.
 
 Let's consider another challenge:
 
---challenge link here--
+https://play.picoctf.org/practice/challenge/320
+
+Download the zip file into your webshell like you did for the previous
+challenge. As before, use `file` on it right away to have an idea of what
+you're dealing with:
+
+[source, text]
+$ file files.zip
+
+You should see the following output:
+
+[source, text]
+files.zip: Zip archive data, at least v1.0 to extract, compression method=store
+
+To see more of this challenge, all we have to do is unzip the archive:
+
+[source, text]
+$ unzip files.zip
+
+You'll see a lot of output, but you can ignore that for now. List the contents
+of your current directory to see the new directory called 'files'. Try
+exploring that a bit with `cd` and `ls`, remember that you're looking for a
+file called 'uber-secret.txt'.
+
+It may be hard to find 'uber-secret.txt' without the help of a tool. This
+problem is called 'First Find' and our last problem was called 'First Grep'.
+Is there a tool called 'find' in Linux? See if there is a manpage:
+
+[source, text]
+man find
+
+There is! The first line reads:
+
+[source, text]
+find - search for files in a directory hierarchy
+
+This sounds perfect. Exit the manual by pressing 'q'. As mentioned before,
+manpages are quite technical and can be overwhelming to try and read when you
+are first starting out. Let's find some simpler examples by Googling. My
+Google query was `find file linux command`. I felt the need to specify `linux
+command` because `find` is such a generic word. My top Google result was this:
+
+https://www.plesk.com/blog/various/find-files-in-linux-via-command-line/
+
+I especially liked this result because I know plesk is not a commercialized
+site. Scroll down to the first example under `Basic Examples`.
+
+[source, text]
+find . -name thisfile.txt
+
+This command means: starting in the current directory, look in this directory
+and all subdirectories for the file named 'thisfile.txt'. We can slightly
+modify this example to fit our needs for the challenge.
+
+Make sure you are in the 'files' directory for this command. If you unzipped
+the archive in your home directory, you can use the following command to get
+back to the 'files' directory:
+
+[source, text]
+$ cd ~/files
+
+Once you're in the files directory, use this command:
+
+[source, text]
+$ find . -name uber-secret.txt
+
+If you were in the 'files' directory when you ran this command, you should get
+the following output:
+
+[source, text]
+----
+./adequate_books/more_books/.secret/deeper_secrets/deepest_secrets/uber-secret.txt
+----
+
+This is the path to the file that was found. We're going to get into the same
+directory as this file by following the directories listed in this file path.
+We know that '.' is our current directory, so our first cd is to
+'adequate_books'. Remember to use the Tab key to autocomplete unambiguous file
+and directory names. To explain what I mean by 'unambiguous' here's a relevant
+example of an ambiguous file name in our current context:
+
+[source, text]
+$ cd a
+
+If you press the Tab key after only typing 'a' it won't autocomplete because
+there are two directories that start with 'a', 'acceptable_books' and
+'adequate_books'. The shell doesn't know which one you want. To get Tab to
+autocomplete type the following unambiguous directory name and then strike
+tab:
+
+[source, text]
+$ cd ad
+
+When you press tab, it becomes:
+
+[source, text]
+$ cd adequate_books/
+
+One last note on tab completion. When there is an ambiguous file name that
+doesn't tab complete to something, you can hit the tab key again to see the
+list of files that could be completed with your given prefix. The other
+possibility is that there are zero matches on your given prefix, in which
+case nothing is printed when you hit tab a second time.
+
+So now we are in 'adequate_books', what's next? From our found file above,
+'more_books' is after 'adequate_books', so we cd accordingly:
+
+[source, text]
+$ cd more_books/
+
+For this directory, observe the difference between `ls -l` and `ls -al`. You'll
+see that an additional directory is shown when the '-a' flag is given. This
+flag means 'show all (including hidden files and directories)'. In Linux, any
+file or directory starting with '.' is considered hidden and will only be
+shown in specific circumstances.
+
+[source, text]
+$ cd .secret/
+$ cd deeper_secrets/
+$ cd deepest_secrets/
+
+All of these cd commands could be combined into a single command, but I've
+broken them up here for clarity and exposition. List the contents of
+'deepest_secrets':
+
+[source, text]
+$ ls -al
+
+To see the contents of the file, use `cat`:
+
+[source, text]
+$ cat uber-secret.txt
+
+There's the flag for this challenge!
+
+This challenge can also be quickly solved with grep. Go back to the parent
+'files' directory.
+
+[source, text]
+$ cd ~/files
+$ grep -R pico *
+
+For output, you should see:
+
+[source, text]
+14789.txt.utf-8:brassa un picotin d'orge_. Comme depuis une demi-heure environ c'était
+adequate_books/more_books/.secret/deeper_secrets/deepest_secrets/uber-secret.txt:picoCTF{f1nd_15_f457_ab443fd1}
+
+Just based on the 'pico' search pattern, we get one "false positive", but with
+this method, we actually print the flag as well as find it. Please note that
+your flag will likely be different than mine.
+
+Try this challenge with your new found skills:
+
+--challenge url here (samuel's huge zip)--
+
+
+=== Disk analysis
+
+One of the most fundamental skills of a forensics analyst is inspecting and
+deeply understanding disks. These can be actual hardware or dumps of disks
+captured in files. There are a few really good GUI tools out there for not
+just disk analysis, but whole management of digital evidence for cases. Our
+disk analysis problems will not require any licenses to proprietary software.
+Some people like to use Autopsy which is a GUI frontend to the tools we will
+demonstrate how to use in this section. We will use the individual Sleuthkit
+tools so that you learn a little more than from a GUI that abstracts away some
+of the details. Disks are all about the details.
