@@ -163,9 +163,10 @@ site. Scroll down to the first example under `Basic Examples`.
 [source, text]
 find . -name thisfile.txt
 
-This command means: starting in the current directory, look in this directory
-and all subdirectories for the file named 'thisfile.txt'. We can slightly
-modify this example to fit our needs for the challenge.
+This command means: starting in the current directory (which is what `.`, dot 
+means), look in this directory and all subdirectories for the file named 
+'thisfile.txt'. We can slightly modify this example to fit our needs for the
+challenge.
 
 Make sure you are in the 'files' directory for this command. If you unzipped
 the archive in your home directory, you can use the following command to get
@@ -248,26 +249,9 @@ $ cat uber-secret.txt
 
 There's the flag for this challenge!
 
-This challenge can also be quickly solved with grep. Go back to the parent
-'files' directory.
+Try this slightly more difficult challenge with your new found skills:
 
-[source, text]
-$ cd ~/files
-$ grep -R pico *
-
-For output, you should see:
-
-[source, text]
-14789.txt.utf-8:brassa un picotin d'orge_. Comme depuis une demi-heure environ c'était
-adequate_books/more_books/.secret/deeper_secrets/deepest_secrets/uber-secret.txt:picoCTF{f1nd_15_f457_ab443fd1}
-
-Just based on the 'pico' search pattern, we get one "false positive", but with
-this method, we actually print the flag as well as find it. Please note that
-your flag will likely be different than mine.
-
-Try this challenge with your new found skills:
-
---challenge url here (samuel's huge zip)--
+https://play.picoctf.org/practice/challenge/322
 
 
 === Disk analysis
@@ -281,3 +265,62 @@ Some people like to use Autopsy which is a GUI frontend to the tools we will
 demonstrate how to use in this section. We will use the individual Sleuthkit
 tools so that you learn a little more than from a GUI that abstracts away some
 of the details. Disks are all about the details.
+
+We will be considering disk images exclusively, due to the difficulty of
+sending real hard drives through the Internet at the time of this writing! Try
+this picoGym problem, which presents the first step in analyzing disk images:
+
+https://play.picoctf.org/practice/challenge/301
+
+This problem should be pretty approachable given what you've done leading up
+to this point, namely downloading individual challenge files and using command
+line utilities. Something new in this challenge is using netcat or `nc`. For
+this challenge, nc is used to access a checker program. This program will check
+your answer to the challenge and give you the flag if it is correct. For this
+challenge, the invocation of nc (what you type to run it) is given and is
+straightforward, but I will explain it for the sake of clarity. Here's my given
+nc invocation: `nc saturn.picoctf.net 52279` The last number might be different
+for you, that's expected. We'll go through what each part of this program call
+means:
+
+* `nc` This, of course, is the name of the program we are running. Netcat, or
+  'nc' as this system calls it. Sometimes the program name will be the full
+  'netcat' variety, but on the webshell, it is 'nc'.
+* `saturn.picoctf.net` This is the name of the computer we're connecting to.
+  This is a challenge server that picoCTF runs.
+* `52279` This is the number of the port we're connecting to for the challenge.
+  This will probably be different for your challenge.
+
+So go ahead and solve your first Sleuthkit problem on the picoGym and learn the
+tool, `mmls`, which we will use for subsequent problems.
+
+Here's the next challenge in that short series:
+
+https://play.picoctf.org/practice/challenge/300
+
+This challenge requires `mmls` as a first step to use other Sleuthkit tools,
+but now is the time for some true forensic background.
+
+A disk image is a huge dump of many numbers. But these numbers have an
+invisible structure to them that gives them much more meaning. Navigating
+this invisible structure manually is tedious and deeply difficult, but the
+Sleuthkit tools handle this invisible structure for us. To begin using the
+Sleuthkit tools we must understand some of the layers that apply to disk
+images. The four main layers are: media, block, inode, and filename.
+
+* Media: the media layer tools all are prepended with 'm' and operate on the
+  disk image with little guidance from the analyst. `mmls` is a media-layer
+  tool that gives us the partition table of the image and key information for
+  delving into the other layers. Media is the lowest level, providing key
+  information to access the deeper layers, but not shedding much light on the
+  data contained in the image.
+* Block: the block layer is the second lowest level of the four layers
+  considered here. It's the numbers of the disk image broken into equal-sized
+  chunks. A single file is likely to contain multiple blocks.
+* Inode: the inode layer is like the bookkeeping layer of a disk image. It's
+  like the table of contents, with the chapter numbers being like the inodes,
+  and the page numbers like the blocks of a file.
+* Filename: the filename layer is one layer that most any user of a computer
+  actually sees and interacts with. This is the layer with which we will start 
+  our exploration of the Sleuthkit in the current challenge. Interacting with
+  the filename layer will look a lot like using the shell normally.
