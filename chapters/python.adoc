@@ -722,7 +722,7 @@ try:
     print(result)
 except ZeroDivisionError:
     print("Do not divide by zero, that is forbidden.")
-except TypeError:
+except ValueError:
     print("Your input value must be an integer.")
 
 print("The program keeps executing to do other stuff...")
