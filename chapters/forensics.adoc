@@ -266,6 +266,8 @@ demonstrate how to use in this section. We will use the individual Sleuthkit
 tools so that you learn a little more than from a GUI that abstracts away some
 of the details. Disks are all about the details.
 
+==== Sleuthkit Intro presentation
+
 We will be considering disk images exclusively, due to the difficulty of
 sending real hard drives through the Internet at the time of this writing! Try
 this picoGym problem, which presents the first step in analyzing disk images:
@@ -294,6 +296,8 @@ means:
 So go ahead and solve your first Sleuthkit problem on the picoGym and learn the
 tool, `mmls`, which we will use for subsequent problems.
 
+==== Sleuthkit Apprentice walkthrough
+
 Here's the next challenge in that short series:
 
 https://play.picoctf.org/practice/challenge/300
@@ -308,19 +312,365 @@ Sleuthkit tools handle this invisible structure for us. To begin using the
 Sleuthkit tools we must understand some of the layers that apply to disk
 images. The four main layers are: media, block, inode, and filename.
 
-* Media: the media layer tools all are prepended with 'm' and operate on the
-  disk image with little guidance from the analyst. `mmls` is a media-layer
-  tool that gives us the partition table of the image and key information for
-  delving into the other layers. Media is the lowest level, providing key
-  information to access the deeper layers, but not shedding much light on the
-  data contained in the image.
+* Media: the media layer tools all are prepended with 'mm' and operate on the
+  disk image with little guidance from the analyst. `mmls` is a media layer
+tool that gives us the partition table of the image and key information for
+delving into the other layers. Media is the lowest level, providing key
+information to access the deeper layers, but not shedding much light on the
+data contained in the image.
 * Block: the block layer is the second lowest level of the four layers
-  considered here. It's the numbers of the disk image broken into equal-sized
-  chunks. A single file is likely to contain multiple blocks.
-* Inode: the inode layer is like the bookkeeping layer of a disk image. It's
+  considered here. Block layer tools are prepended with 'blk' in the Sleuthkit.
+`blkcat` is a block layer tool that outputs the contents of a single block. The
+block layer is the numbers of the disk image broken into equal-sized chunks. A
+single file is likely to contain multiple blocks.
+* Inode: the inode layer is the bookkeeping layer of a disk image. It's
   like the table of contents, with the chapter numbers being like the inodes,
-  and the page numbers like the blocks of a file.
+and the pages like the blocks of a file. Inode layer tools are prepended with
+'i'. `icat` is an inode layer tool that outputs a single file based on its
+inode number.
 * Filename: the filename layer is one layer that most any user of a computer
-  actually sees and interacts with. This is the layer with which we will start 
-  our exploration of the Sleuthkit in the current challenge. Interacting with
-  the filename layer will look a lot like using the shell normally.
+  actually sees and interacts with. This is the layer with which we will start
+our exploration of the Sleuthkit in the current challenge. Interacting with the
+filename layer will look a lot like using the shell normally. Filename layer
+tools are prepended by 'f'. `fls` lists the files on an image starting at the
+root. This is what we will use for our exploration of the disk image.
+
+First off, download the challenge file:
+
+[source, text]
+$ wget https://artifacts.picoctf.net/c/331/disk.flag.img.gz
+
+Next, decompress the challenge file:
+
+[source, text]
+$ gunzip disk.flag.img.gz
+
+Dump the partition table of the disk image. We want to find the offset to the
+main partition:
+
+[source, text]
+----
+$ mmls disk.flag.img
+
+DOS Partition Table
+Offset Sector: 0
+Units are in 512-byte sectors
+
+      Slot      Start        End          Length       Description
+000:  Meta      0000000000   0000000000   0000000001   Primary Table (#0)
+001:  -------   0000000000   0000002047   0000002048   Unallocated
+002:  000:000   0000002048   0000206847   0000204800   Linux (0x83)
+003:  000:001   0000206848   0000360447   0000153600   Linux Swap / Solaris x86 (0x82)
+004:  000:002   0000360448   0000614399   0000253952   Linux (0x83)
+----
+
+It would seem that the fourth partition is the main partition, because it is
+the largest and has an uneven length. That's a bit of a guess, but it's for
+sure either partition labeled 'Linux (0x83)'. Copy the 'Start' value to your
+clipboard of the fourth partition. Let's look at the root of this partition by
+supplying the 'Start' value to the offset option in `fls`:
+
+[source, text]
+----
+$ fls -o 360448 disk.flag.img
+
+d/d 11: lost+found
+d/d 12: boot
+d/d 1985:       etc
+d/d 1986:       proc
+d/d 1987:       dev
+d/d 1988:       tmp
+d/d 1989:       lib
+d/d 1990:       var
+d/d 3969:       usr
+d/d 3970:       bin
+d/d 1991:       sbin
+d/d 451:        home
+d/d 1992:       media
+d/d 1993:       mnt
+d/d 1994:       opt
+d/d 1995:       root
+d/d 1996:       run
+d/d 1997:       srv
+d/d 1998:       sys
+d/d 2358:       swap
+V/V 31745:      $OrphanFiles
+----
+
+This looks like the main partition because it has many of the standard linux
+root directories, like 'home', 'usr', 'root', etc. Remember that `fls` is part
+of the filename layer Sleuthkit tools. You can think of `fls` as standing for
+'filename list'. Here, it's listed all the top-level directories in the disk
+image.
+
+This next part requires some forensic intuition. A lot of these directories
+are system-generated and maintained. Let's focus on the directories that have
+a lot of potential user influence like `root` and `home`. But first, let's
+take a step back and print the help information for `fls`:
+
+[source, text]
+$ fls
+
+`fls` will print some succinct help information if ran with no arguments. This
+is true for many command line tools and programs, but is not universal.
+
+[source, text]
+----
+$ fls
+Missing image name
+usage: fls [-adDFlhpruvV] [-f fstype] [-i imgtype] [-b dev_sector_size] [-m dir/] [-o imgoffset] [-z ZONE] [-s seconds] image [images] [inode]
+        If [inode] is not given, the root directory is used
+        -a: Display "." and ".." entries
+        -d: Display deleted entries only
+        -D: Display only directories
+        -F: Display only files
+        -l: Display long version (like ls -l)
+        -i imgtype: Format of image file (use '-i list' for supported types)
+        -b dev_sector_size: The size (in bytes) of the device sectors
+        -f fstype: File system type (use '-f list' for supported types)
+        -m: Display output in mactime input format with
+              dir/ as the actual mount point of the image
+        -h: Include MD5 checksum hash in mactime output
+        -o imgoffset: Offset into image file (in sectors)
+        -p: Display full path for each file
+        -r: Recurse on directory entries
+        -u: Display undeleted entries only
+        -v: verbose output to stderr
+        -V: Print version
+        -z: Time zone of original machine (i.e. EST5EDT or GMT) (only useful with -l)
+        -s seconds: Time skew of original machine (in seconds) (only useful with -l & -m)
+----
+
+The first line after our `fls` invocation with no arguments is an error
+message, saying that we failed to include a mandatory argument, the image
+name. However, `fls` uses the opportunity to educate us on how to properly
+invoke it. All arguments in square brackets, i.e. '[' and ']', are optional.
+Anything not in square brackets is mandatory. After the invocation is a
+helpful note saying 'If [inode] is not given, the root directory is used'.
+This is how we first used `fls`. We supplied no inode and the root directory
+was printed. But now, we want to look at specific directories so we will need
+their inodes. Helpfully, `fls` actually prints those along with file and
+directory names. It's the number on the line with each name, if we look back
+to our listing of '$ fls -o 360448 disk.flag.img' we can find the inode number
+for `/home` which is 451. Let's add that to our `fls` call:
+
+[source, text]
+----
+$ fls -o 360448 disk.flag.img 451
+$
+---- 
+
+This actually seems to do nothing. It's not actually doing nothing, there just
+are no results. `/home` is an empty folder in the disk image. Let's try
+another directory, `/root`. Go back and get the inode number and plug it into
+`fls`:
+
+[source, text]
+----
+$ fls -o 360448 disk.flag.img 1995
+r/r 2363:       .ash_history
+d/d 3981:       my_folder
+----
+
+This directory has a file, called `.ash_history` and a directory named
+`my_folder`. Let's see what is in 'my_folder'. Use the inode number like
+before:
+
+[source, text]
+----
+$ fls -o 360448 disk.flag.img 3981
+r/r * 2082(realloc):    flag.txt
+r/r 2371:       flag.uni.txt
+----
+
+Bingo! Now with the inode number of 'flag.uni.txt' we can print the file using
+`icat`:
+
+[source, text]
+----
+$ icat -o 360448 disk.flag.img 2371
+picoCTF{by73_5urf3r_adac6cb4}
+----
+
+Please be aware that your flag will likely have a different suffix.
+
+Now, it's good to go back and address what the other file in 'my_folder' was.
+Its name is flag.txt, why can't we `icat` that file? In short, because the
+file has been deleted and the inode has even been reassigned to a different
+file. You can try using `icat` on the 2082 inode, but it is part of an
+unrelated file somewhere on the system.
+
+If you want to continue to learn about Sleuthkit tools, try this problem:
+
+https://play.picoctf.org/practice/challenge/137
+
+If you want to use what you know to dive even deeper into a disk, try this
+problem:
+
+https://play.picoctf.org/practice/challenge/285
+
+If you get stuck, try reading writeups of the challenges. Just google search
+'Writeup, [challenge name], picoCTF'. There's going to be various levels of
+quality and depth in writeups, so don't feel like you have to stick with the
+first one you look at.
+
+
+=== Packet analysis
+
+Another important field of forensics is packet or network analysis. This field
+of forensics conerns itself with understanding what has happened on a network
+through the examination of captured packets. This will require the use of a GUI
+tool called 'Wireshark', which means you cannot use the webshell to complete
+this problem. The webshell can be used to complete many introductory problems,
+but more advanced problems sometimes need a GUI tool to be solved in an
+efficient manner. Consider this an exercise in installing and using GUI tools.
+Knowing how to do this will help you greatly in the future.
+
+==== Installing Wireshark [[installing_wireshark]]
+
+On your computer, download Wireshark from their site:
+
+https://www.wireshark.org/
+
+You must download the version corresponding to your operating system. It should
+be a straightforward process, however, if you have any issue or doubt, you can
+Google plenty of good documentation about Wireshark.
+
+If you're using a Chromebook you will need administrator privileges to enable
+Linux mode on the device. With Linux mode enabled, you can install Wireshark
+through apt-get and run it with the Linux terminal.
+
+==== Packet Primer walkthrough
+
+Consider this picoCTF challenge:
+
+https://play.picoctf.org/practice/challenge/286
+
+Download the packet capture and open it in Wireshark. It should look like this
+once you open it. Google how to open a packet capture in Wireshark if you can't
+figure it out by exploring the menus of the tool.
+
+[.text-center]
+.Packet Primer opened in Wireshark
+image::images/for-1-open-wireshark.png[]
+
+Packet analysis is all about filtering, even for this packet capture that is
+tiny. Most packet captures are going to have thousands if not tens of thousands
+of packets. This capture has only 9 because it is an introductory problem. You
+could manually inspect each packet and that wouldn't be a bad strategy, but we
+want to approach this problem more technically, because it is just setting us
+up for future problems that have thousands of packets.
+
+So, we know that the flag is unlikely to be in the ARP messages as these are
+just messages relating IP addresses and hardware addresses. To filter out ARP
+messages, add `!arp` to your filter in Wireshark:
+
+NOTE: 'ARP' stands for Address Resolution Protocol and these messages are
+common in every network capture as it is needed to connect a hardware address
+to an IP address.
+
+[.text-center]
+.Packet filter to discard ARP messages
+image::images/for-2-arp-filter.png[]
+
+Of the remaining 5 packets, the first 3 are the TCP handshake and so they can
+be ignored. Of the remaining 2 packets, let's look at the one that has the PSH
+flag set, which means there is data for the application in the packet:
+
+NOTE: The TCP handshake, also known as the 'three-way handshake' can be
+identified by the flags in the packets. First 'SYN' from host A, the 'SYN, ACK'
+from host B, then finally, 'ACK' from host A. 'SYN' stands for synchronization,
+and 'ACK' stands for acknowledgement. Both parties synchronize and acknowledge.
+
+[.text-center]
+.Packet with PSH flag set
+image::images/for-3-psh-packet.png[]
+
+When you click on packet 4, you should see the flag in the packet bytes pane,
+you may have to scroll down to see it all:
+
+[.text-center]
+.Flag in packet bytes pane
+image::images/for-4-packet-flag.png[]
+
+Remember, your flag might be different than mine. It would be good to notice
+that there was something different about the packet with the flag from the
+beginning. It has a protocol of 'S101', and it's the only one. Such glaring
+oddities should always be examined. Sometimes, the only clue in a packet
+analysis problem is a small difference between the flag packet and the rest of
+the thousands of packets. A good strategy is to filter as many packets as you
+can, then look for oddities.  I should note also that there is not always a
+'flag packet'. Sometimes a flag can span across multiple packets, just like
+packet payloads can span across multiple packets.
+
+NOTE: 'S101' is an uncommon protocol. The packet isn't really speaking S101, it
+is just using the preferred port of the protocol, port 9000.
+
+Leave your packet capture open if you can. We are going to use it to illustrate
+concepts introduced in the next section.
+
+
+==== Network Layers [[network_layers]]
+
+We'll now cover some background to deepen your understanding of packets and
+networks. The networks we commonly use today, are broken down into different
+layers. This design by layers assigns responsibilities to each layer to
+accomplish something. It is good to have a design by layers for several
+reasons. For example, if network engineers want to make a change in one of the
+layers, the impact on the other layers is minimized. Another example, is that
+if you are a programmer and want to connect your application with a server, you
+do not necessarily need to care if the user is using wifi or ethernet cable, or
+how the user is connecting to the internet. Your application can simply trust
+other layers are going to take care of that and your application will have a
+successful connection. These are the layers, viewed in a top down approach.
+
+. Application layer: Responsible for handling data traffic between
+applications. HTTP belongs to this layer; HTTP protocol is commonly used to
+obtain Web Pages. In the Packets Primer capture, click the fourth packet. This
+packet's application layer is called 'Data' in the middle pane. Click the arrow
+to expand the view of the layer. There's not much in this display because the
+application data is just the flag. Other layers will break down all the fields
+of a layer, showing the value for each one in the packet.
++
+[.text-center]
+.Application layer expanded
+image::images/for-5-app-layer.png[]
+
+
+. Transport layer: Responsible for providing several connections on the same
+host, that means that you can have several applications on the same device and
+each of them can have a different connection even if it is just one device. It
+also defines functionalities for reliable transport. Two protocols are used on
+this layer. TCP (Transport Control Protocol). You use this protocol when you
+need to have reliable transport, this makes sure that if a piece of information
+was missing while being transfertransferred it is resent. HTTP from the
+Application layer, runs on top of TCP, because when you visit a Web Page you
+want to have every part of it accurately. On the other hand, when you don’t
+need reliable transport, but you want faster transport that does not resend
+parts that were missing, UDP (User Datagram Protocol) is used. An example when
+UDP is needed is for voice communication. When you are talking if a little part
+of the audio is missing, you do not want it to appear later in the
+communication because that would confuse the listener. The listener can still
+understand what you are saying if the part missing is small enough. Since UDP
+has no controls for transport, it is faster than TCP. This layer assigns a port
+to each connection, and that is how it tells the difference between connections
+in the same computer, because of the port.
+
+. Network layer: It provides devices with an address in the network called the
+IP (Internet Protocol) address, and routes information through different
+routers. It provides mapping between all the computers connected to the
+internet. When you connect to a network in some specific place, an IP is
+assigned to your device.
+
+. Data link layer: It provides communication between devices that are connected
+directly. Examples of protocols in the data link layer are Ethernet or WiFi.
+You generally use WiFi to send messages to your router directly without any
+other devices in between. Each device has a physical address in wifi or
+ethernet, known as the mac address. The mac address is used for this layer.
+This is not an address like the IP that can change depending on the network you
+are connected to. The mac address is assigned to the hardware of your network
+card when it is manufactured.
+
+. Physical layer: This handles electrical pulses on the wire that represent
+bits.
+

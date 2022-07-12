@@ -258,7 +258,7 @@ But now, before running it using "run", we want to stop at the beginning of the 
 (gdb) b vuln
 Breakpoint 1 at 0x4005ce
 
-IMPORTANT: the addresses you see might be different, that is ok.
+IMPORTANT: The addresses you see might be different, that is ok.
 
 What does it mean "Breakpoint 1 at 0x4005ce" ? Do you remember that there is a segment of the memory in which the machine code is placed? In the memory address "0x4005ce" the machine code of "vuln()" begins. Input "r" to start the execution of the program and you will see:
 
