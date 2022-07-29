@@ -82,7 +82,7 @@ If you thought about this row:
 |2 |Arpit |Gupta |200 111 1111 |hello
 |===
 
-You were right. That is because that row is the one with the value of 2 in its id. You could filter by any other field. If you are filtering a field of type text, you have to put the value enclosed single quotes. Remove the previous select statement, and add:
+You were right. That is because that row is the one with the value of 2 in its id. You could filter by any other field. If you are filtering a field of type text, you have to enclose the value in single quotes. Remove the previous select statement, and add:
 
 select * from user where phone='200 111 1111' ;
 
