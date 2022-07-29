@@ -162,7 +162,7 @@ The resultant query would be:
 
 [lime]#SELECT * FROM user where name='samuel' and password='#' *or '1'='1*[lime]#';#
 
-Which is a perfectly valid query that will return the whole table. Use what you just learn here to return all the users:
+Which is a perfectly valid query that will return the whole table. Use what you just learned here to return all the users:
 
 https://primer.picoctf.org/vuln/web/basicsql.php[https://primer.picoctf.org/vuln/web/basicsql.php, window="_blank"]
 
