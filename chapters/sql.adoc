@@ -167,7 +167,7 @@ Which is a perfectly valid query that will return the whole table. Use what you 
 https://primer.picoctf.org/vuln/web/basicsql.php[https://primer.picoctf.org/vuln/web/basicsql.php, window="_blank"]
 
 
-This kind of vulnerability it is rarely present in applications. One that is more common, is the blind sql injection.
+This kind of vulnerability is rarely present in applications. One that is more common, is the blind sql injection.
 
 === Blind SQL injection
 
