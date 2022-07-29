@@ -128,7 +128,7 @@ You will see:
 .Filtering by two different names using OR
 image::images/3image19.png[image,width=624,height=138]
 
-What happened here? Analyze the query carefully. You know there is no one called Mario in our table. Why in the world the query return a row? If you think about it, any expression, no matter how long it is, if results in False, but then you do "or" with something that is true, it will be true. For example:
+What happened here? Analyze the query carefully. You know there is no one called Mario in our table. Why in the world does the query return a row? If you think about it, any expression, no matter how long it is, if results in False, but then you do "or" with something that is true, it will be true. For example:
 
 1=2 and 3=2 and 47=1 or 1=1
 
