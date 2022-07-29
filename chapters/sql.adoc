@@ -146,7 +146,7 @@ You just returned all the results! That happens, as you might guess, because "1=
 
 === Basic SQL injection
 
-The objective of the basic SQL injection we are learning is to try to inject an "or" expression that is always true. In that way the server code constructs a query using the user input that deceives the program into it returning the whole table. That happens when a program is concatenating string to construct a query in the server code. The following is an example in PHP:
+The objective of the basic SQL injection we are learning is to try to inject an "or" expression that is always true. In that way the server code constructs a query using the user input that deceives the program into it returning the whole table. That happens when a program is concatenating strings to construct a query in the server code. The following is an example in PHP:
 
 "[lime]#SELECT * FROM user where name='#".$name.""[lime]#' and password='#".$password.""[lime]#';#"
 
