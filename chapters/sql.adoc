@@ -98,7 +98,7 @@ Run it. If you look at the rows inserted. 'Jone Doe' had the same phone number a
 .Result of filtering by a specific phone number
 image::images/3image9.png[image,width=624,height=174]
 
-We can also filter by two fields in the same query using the logical operators 'and' in the following manner:
+We can also filter by two fields in the same query using the logical operator 'and' in the following manner:
 
 select * from user where phone='200 111 1111' and name='Jane';
 
