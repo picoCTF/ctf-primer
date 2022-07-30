@@ -195,7 +195,7 @@ Note, this is fundamental to be able to guess only one character at a time. Tryi
 
 To be able to do that, you need to know the name of the column you are trying to guess. This is not that hard, because in many cases you can infer the name of the database column based on the name of the html input. In other cases, you can leak the name if an error occurs inside the application, and in the error message the application shows the value of the columns.
 
-For the page we are attacking in this example the names are the same as the html input. One column is called 'name', and the other one is called 'password'.
+For the page we are attacking in this example the names are the same as the html input. One column is called 'username', and the other one is called 'password'.
 
 So far, you know that if you inject:
 
