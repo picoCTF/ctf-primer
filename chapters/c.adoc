@@ -9,7 +9,7 @@ Nonetheless, many people still love C. We can use it to implement programs that 
 
 Keep in mind the following aspects of C:
 
-* In C you can access directly an address of memory, and move through it with a pointer even if you don't have variable that is stored there.
+* In C you can access directly an address of memory, and move through it with a pointer even if you don't have a variable that is stored there.
 
 * C is very prompt to vulnerabilities, as we already mentioned. We will learn to exploit those vulnerabilities. C is harder to learn and write than python, because you need to clearly understand how the memory interacts with your program.
 
