@@ -330,7 +330,7 @@ It will be interpreted and shown as this:
 
 *80 c4 83 48*
 
-This is the case only for numbers. Addresses are numbers. In an attack when you want to overwrite an address, you have to consider this and input the bytes of the address backwards so they are interpreted in the correct manner. Why computers do this? There are some reasons and consequences. In fact there are also reasons for using "big endian" which is using the bytes without inverting them. One argument commonly given for supporting little endian, is that some operations are easier to do. For instance, if you have a number, let’s say 255 in decimal, in hexadecimal it would be is 0xff in hexadecimal. If the number is contained in a variable type that takes 4 bytes, for example an "int" in C, it would look like this in memory:
+This is the case only for numbers. Addresses are numbers. In an attack when you want to overwrite an address, you have to consider this and input the bytes of the address backwards so they are interpreted in the correct manner. Why do computers do this? There are some reasons and consequences. In fact there are also reasons for using "big endian" which is using the bytes without inverting them. One argument commonly given for supporting little endian, is that some operations are easier to do. For instance, if you have a number, let’s say 255 in decimal, it would be 0xff in hexadecimal. If the number is contained in a variable type that takes 4 bytes, for example an "int" in C, it would look like this in memory:
 
 ff 00 00 00
 
@@ -338,7 +338,7 @@ Then, you want to cast it to a type that only takes two bytes, for example a "sh
 
 ff 00
 
-Now, imagine that we were not using little endian. The type "int" would hold the number like this
+Now, imagine that we were not using little endian. The type "int" would hold the number like this:
 
 00 00 00 ff
 
