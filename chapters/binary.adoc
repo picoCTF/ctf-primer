@@ -268,7 +268,7 @@ Starting program: /home/samuel/Desktop/problems/vuln1
 Breakpoint 1, 0x00000000004005ce in vuln ()
 (gdb)
 
-"Breakpoint 1, 0x00000000004005ce in vuln ()" means that the first break point we have set, was established at address "0x00000000004005c", which is the same address as "0x4005c"; An address is a number in this case, so zeros at the left cause no effect. Note that in other cases, zeros at the left can have an effect if what we are reading is not being interpreted as a number.
+"Breakpoint 1, 0x00000000004005ce in vuln ()" means that the first break point we have set, was established at address "0x00000000004005ce", which is the same address as "0x4005ce"; An address is a number in this case, so zeros at the left cause no effect. Note that in other cases, zeros at the left can have an effect if what we are reading is not being interpreted as a number.
 
 ===== Processor registers
 
