@@ -701,7 +701,7 @@ try:
     result = num1 / num2
     print(result)
 except:
-    print "An error has occurred, did you try to divide by zero?")
+    print("An error has occurred, did you try to divide by zero?")
 
 print("The program keeps executing to do other stuff...")
 ----

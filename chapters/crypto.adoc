@@ -713,8 +713,8 @@ How can a hash be attacked? In the case of passwords, an attacker can create a t
 
 Challenge: The following hash of a password was leaked from a database, and you know the user did not use a strong password.
 
-e7ae6cfee91a324590df7b048dcc9802b7389c1b0d996d474d61c4cbb1253455
+cd0894152aa5eec36ec79eb2bcb90ca40f056804530f40732b4957a496b23dc8
 
 Search on google the list of passwords called "rockyou" and generate the hash to find the password that corresponds to the leaked hash!
 
-Hint: you can use python to generate hashes. The hashing algorithm is SHA2.
+Hint: you can use python to generate hashes. The hashing algorithm is SHA256.
