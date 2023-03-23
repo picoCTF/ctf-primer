@@ -1,7 +1,7 @@
 
 == A little about C language
 
-We could say that C is one of the oldest programming languages that is still widely used in industry. It was developed in 1972 by the famous Dennis Ritchie, and even after all these years, is in fact one of the most used languages. This is the case because it is very efficient and we can control very directly the resources of the machine, in contrast to other languages, such as python. However, it is a more difficult language to learn to use it correctly, and it is much more prone to errors and vulnerabilities. Even experienced programmers that have written a lot of C in their lives can make a little mistake and introduce a bad vulnerability in a program that hacker can exploit to take complete control of the machine in which the program is running. 
+We could say that C is one of the oldest programming languages that is still widely used in industry. It was developed in 1972 by the famous Dennis Ritchie, and even after all these years, is in fact one of the most used languages. This is the case because it is very efficient and we can control very directly the resources of the machine, in contrast to other languages, such as python. However, it is a more difficult language to learn to use it correctly, and it is much more prone to errors and vulnerabilities. Even experienced programmers that have written a lot of C in their lives can make a little mistake and introduce a bad vulnerability in a program that a hacker can exploit to take complete control of the machine in which the program is running. 
 
 Nonetheless, many people still love C. We can use it to implement programs that need to be very efficient, such as the Operating Systems, Drivers (the programs that control the hardware of devices that we connect to our computer), or Embedded Systems. You will probably not hear about an Operating System, or a Driver, fully implemented on python, at least any time soon. 
 
@@ -9,7 +9,7 @@ Nonetheless, many people still love C. We can use it to implement programs that 
 
 Keep in mind the following aspects of C:
 
-* In C you can access directly an address of memory, and move through it with a pointer even if you don't have variable that is stored there.
+* In C you can access directly an address of memory, and move through it with a pointer even if you don't have a variable that is stored there.
 
 * C is very prompt to vulnerabilities, as we already mentioned. We will learn to exploit those vulnerabilities. C is harder to learn and write than python, because you need to clearly understand how the memory interacts with your program.
 
@@ -45,9 +45,9 @@ And it would work. But it is important you do not write it like that if you begi
 [source, c]
  //This is a comment in C
 
-* You can compile C for different platforms. Compiling, means the process of translating the programing language to machine code. A computer does not understand directly the source code you write. A compiler, is a program that reads your source code, and converts it to a binary that your computer can execute. The instructions in that binary are harder to read for a human in comparison to the source code. Those instructions that the processor understands directly are called machine code. When the programs is compiled, you do not need any additional program to execute it besides the operating system. In contrast, when you run a python program, to execute it, you need the python interpreter. 
+* You can compile C for different platforms. Compiling means the process of translating the programing language to machine code. A computer does not understand directly the source code you write. A compiler is a program that reads your source code and converts it to a binary that your computer can execute. The instructions in that binary are harder to read for a human in comparison to the source code. Those instructions that the processor understands directly are called machine code. When the programs is compiled, you do not need any additional program to execute it besides the operating system. In contrast, when you run a python program, to execute it, you need the python interpreter. 
 
-* Since C is so direct to the machine, people often says that is like a portable Assembly. Assembly, as we will see later, is a language that is used to manipulate the instructions of the processor in your machine. Assembly changes depending of the kind of processor you are using. For example, Intel processors understand a different Assembly language than ARM processors. However, you could write the same program in C and it could work on both, because you can compile it either for ARM or for Intel. 
+* Since C is so direct to the machine, people often say that it is like a portable Assembly. Assembly, as we will see later, is a language that is used to manipulate the instructions of the processor in your machine. Assembly changes depending on the kind of processor you are using. For example, Intel processors understand a different Assembly language than ARM processors. However, you could write the same program in C and it could work on both, because you can compile it either for ARM or for Intel. 
 
 * In languages like python, we do not compile the program, because python has an interpreter that translates line by line when it is being executed. That makes it slower, by a fair amount. You can do an experiment by implementing a for loop that calculates something on each iteration, and compare the result between python and C, and you will note that a python loop takes much longer than a C loop that calculate the same. 
 
