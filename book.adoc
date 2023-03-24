@@ -4,9 +4,12 @@
 :source-highlighter: pygments
 :pygments-style: emacs
 :icons: font
+= The CTF Primer
+:author: Samuel Sabogal Pardo and Luke Jones
 :sectnums:
 include::chapters/intro.adoc[]
 include::chapters/shell.adoc[]
+include::chapters/forensics.adoc[]
 include::chapters/python.adoc[]
 include::chapters/web.adoc[]
 include::chapters/crypto.adoc[]

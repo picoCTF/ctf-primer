@@ -366,6 +366,12 @@ $ cat new-note.txt
 
 ```
 
+==== picoGym Problem
+
+Try out your new shell skills with this challenge from the picoGym:
+
+https://play.picoctf.org/practice/challenge/189
+
 //-----------------------------------------------------------------------------
 === Conclusion
 You may have noticed that we did not cover overcoming challenge 3. If you are
@@ -376,10 +382,10 @@ https://www.git-tower.com/blog/command-line-cheat-sheet/
 Using Google helps with learning commands to help solve problems in the shell,
 and also the "Explain Shell" website I linked to earlier in this chapter.
 
-There is so much to learn in the shell, but before learning more, my friend
-will continue as your guide in the next chapter on the Python programming
-language. Using the `nano` text editor app, as described in the tutorial
-above, you now have the skills to write programs in the shell!
+//There is so much to learn in the shell, but before learning more, my friend
+//will continue as your guide in the next chapter on the Python programming
+//language. Using the `nano` text editor app, as described in the tutorial
+//above, you now have the skills to write programs in the shell!
 
-Let the Shell lessons sink in as you learn more about one of the most popular
-and powerful programming languages to grace the Earth.
+//Let the Shell lessons sink in as you learn more about one of the most popular
+//and powerful programming languages to grace the Earth.

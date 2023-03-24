@@ -3,31 +3,14 @@
 
 A network is made up of several computers connected. They can be connected through different protocols. A Protocol is a set of rules that allow two computers in a network to send and receive information. That set of rules is essential to understand what information is coming from what source, or how to send information to a particular computer in the network. To sniff traffic in a network, we will be using a tool called Wireshark, which can show the packets transmitted on a network and we can get passwords from insecure connections. But first, we will briefly explain some important things so you roughly understand the composition of a packet and can extract the parts you need.
 
-=== Network Layers
-
-The networks we commonly use today, are broken down into different layers. This design by layers assigns responsibilities to each layer to accomplish something. It is good to have a design by layers for several reasons. For example, if network engineers want to make a change in one of the layers, the impact on the other layers is minimized. Another example, is that if you are a programmer and want to connect your application with a server, you do not necessarily need to care if the user is using wifi or ethernet cable, or how the user is connection to the internet. Your application can simply trust other layers are going to take care of that and your application will have a successful connection. These are the layers, viewed in a top down approach.
-
-. Application layer: Responsible for handling data traffic between applications. HTTP belongs to this layer; HTTP protocol is commonly used to obtain Web Pages.
-
-. Transport layer: Responsible for providing several connections on the same host, that means that you can have several applications on the same device and each of them can have a different connection even if it is just one device. It also defines functionalities for reliable transport. Two protocols are used on this layer. TCP (Transport Control Protocol). You use this protocol when you need to have reliable transport, this makes sure that if a piece of information was missing while being transfertransferred it is resent. HTTP from the Application layer, runs on top of TCP, because when you visit a Web Page you want to have every part of it accurately. On the other hand, when you don’t need reliable transport, but you want faster transport that does not resend parts that were missing, UDP (User Datagram Protocol) is used. An example when UDP is needed is for voice communication. When you are talking if a little part of the audio is missing, you do not want it to appear later in the communication because that would confuse the listener. The listener can still understand what you are saying if the part missing is small enough. Since UDP has no controls for transport, it is faster than TCP. This layer assigns a port to each connection, and that is how it tells the difference between connections in the same computer, because of the port.
-
-. Network layer: It provides devices with an address in the network called the IP (Internet Protocol) address, and routes information through different routers. It provides mapping between all the computers connected to the internet. When you connect to a network in some specific place, an IP is assigned to your device.
-
-. Data link layer: It provides communication between devices that are connected directly. Examples of protocols in the data link layer are Ethernet or WiFi. You generally use WiFi to send messages to your router directly without any other devices in between. Each device has a physical address in wifi or ethernet, known as the mac address. The mac address is used for this layer. This is not an address like the IP that can change depending on the network you are connected to. The mac address is assigned to the hardware of your network card when it is manufactured.
-
-. Physical layer: This handles electrical pulses on the wire that represent bits.
-
-When you access a browser and visit a web site, the information of the web site is downloaded in packets. Today’s Internet is fast, and you might feel that the website appears all at once. But if you download a big file, you can see that it takes some time. This happens because the file is broken down into packets that are received in your computer, and begin to accumulate, until they are all received and conform the whole file when the download is completed. Each packet contains a piece corresponding to each layer.
+When you access a browser and visit a web site, the information of the web site is downloaded in packets. Today’s Internet is fast, and you might feel that the website appears all at once. But if you download a big file, you can see that it takes some time. This happens because the file is broken down into packets that are received in your computer, and begin to accumulate, until they are all received and conform the whole file when the download is completed. Each packet contains a piece corresponding to each layer. Review the layers here: <<network_layers>>.
 
 === Sniffing and attack example
 
 In a tool called Wireshark, we can “sniff” the packets transmitted on a network. The technical term that is used to refer to a tool like Wireshark is “sniffer”.
 
-On your computer, download Wireshark from their site:
-
-https://www.wireshark.org/
-
-You must download the version corresponding to your operating system. It should be a very easy process, however, if you have any issue or doubt, you can Google plenty of good documentation about Wireshark.
+Go here for instructions on installing Wireshark if you have not already:
+<<installing_wireshark>>.
 
 Once you install and open it you should see a window similar to this:
 

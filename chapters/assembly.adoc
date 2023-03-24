@@ -4,7 +4,7 @@
 
 
 
-We previously saw in binary exploitation how some registers work and how the memory of a program is allocated. Once you get some idea of how to do basic binary exploits, to enter in a more advance level it is useful to understand the assembly in more detail. There a several assembly languages and they are exclusive to the processor architecture of a computer. Processor architectures have specific instructions. For example,  an Intel processor can execute different instruction than an ARM processor, hence, the assembly language for ARM is different than the one for Intel. To begin, we will be using Intel assembly just for the fact that Intel architecture is widely used. The shell server, and your computer probably, have an Intel architecture. Note that the AMD processors have the same architecture and instruction set as Intel. Smartphones, in contrast to most laptops or desktops computers, generally have an ARM processor.  
+We previously saw in binary exploitation how some registers work and how the memory of a program is allocated. Once you get some idea of how to do basic binary exploits, to enter in a more advance level it is useful to understand the assembly in more detail. There are several assembly languages and they are exclusive to the processor architecture of a computer. Processor architectures have specific instructions. For example,  an Intel processor can execute different instruction than an ARM processor, hence, the assembly language for ARM is different than the one for Intel. To begin, we will be using Intel assembly just for the fact that Intel architecture is widely used. The webshell, and your computer probably, have an Intel architecture. Note that the AMD processors have the same architecture and instruction set as Intel. Smartphones, in contrast to most laptops or desktops computers, generally have an ARM processor.
 
 Intel is CISC (Complex Instruction Set Computer); that implies that it has much more instructions than ARM which is RISC (Reduced Set Instruction Computer). However, we will only be exploring some instruction in intel that are common and useful to know. It would be too dense to begin to explain instructions independently. Instead, let’s make a program and begin to understand it. Assembly is not easy to abstract at the beginning, but once you learn a few things, it becomes very intuitive and it is possible to read assembly to understand the logic of a program in an architecture you never saw before because it has similar patterns. Therefore, we encourage you to keep trying on this part even if it seems not easy to grasp at the beginning.
 
@@ -21,9 +21,9 @@ Note that in the General Registers, when we are using processor of 64 bits, the 
 RAX,EAX,AX (Accumulator register):  It is usually used to place the return value of a function but can be used for other purposes.
                
 
-REX,EBX,BX (Base register): Used as the base pointer for memory access. We subtract or add an offset to the value of this register to access variables.
+RBX,EBX,BX (Base register): Used as the base pointer for memory access. We subtract or add an offset to the value of this register to access variables.
 
-RCX,ECX,CX (Counter register): Called the. Usually used as a loop counter.
+RCX,ECX,CX (Counter register): Usually used as a loop counter.
 
 RDX,EDX,DX (Data register): Usually used to store temporary data in operations.
 
@@ -109,7 +109,7 @@ Set a break point on main:
 (gdb) b main
 Breakpoint 1 at 0x71e
 
-And runt the program:
+And run the program:
 
 [source, txt]
 (gdb) r
@@ -206,16 +206,16 @@ push   rbp
 
 We observe the instruction ‘push rbp’. As we know already, rbp is the base pointer, which is a register used to keep track of the part of the stack in which the local variables of a function begin to be stored. In this case, the current value of the rbp is pushed into the stack, to be able to recover it later. This is an important part of a function that allow us to keep the value of the base pointer from the previous function. For example, suppose you have a function call inside another function, like in the following example in which we call func2 from func1:
 
-[source, txt]
-Void func2(){
+[source, c]
+void func2(){
 	char var4;
-char var5;
-char var6;
+	char var5;
+	char var6;
 }
-Void func1(){
+void func1(){
 	char var1;
-char var2;
-char var3;
+	char var2;
+	char var3;
 	func2();
 }
 
@@ -336,7 +336,8 @@ This line:
 [source, txt]
 mov    eax,DWORD PTR [rbp-0xc]
 
-assigns the content at [rbp-0xc], to eax. By now, [rbp-0xc], which is the spot that stores the value of the variable ‘i’ we declared on C,  already has the value that the user input. So, eax currently has the value that the user input.
+Assigns the content at [rbp-0xc], to eax. By now, [rbp-0xc], which is the spot that stores the value of the variable ‘i’ we declared on C,  already has the value that the user input. So, eax currently has the value that the user input.
+
 The line:
 
 [source, txt]
@@ -376,7 +377,7 @@ We make eax zero. Then we have:
 [source, txt]
 mov   rdx, QWORD PTR [rbp-0x8]
 
-That line access rbp-0x8, which contains the value of the stack canary. We assign that value to rdx. Then at this line:
+That line accesses rbp-0x8, which contains the value of the stack canary. We assign that value to rdx. Then at this line:
 
 [source, txt]
 xor    rdx,QWORD PTR fs:0x28
