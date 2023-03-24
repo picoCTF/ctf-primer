@@ -123,7 +123,7 @@ HelloPicoCTF
 The program did what it was written for. Now, we are going to send a particular string to the program using python. You can run a single line of python in the command using the flag -c, and enclosing the line of code between single quotes. In the terminal you can pass the output of one command as the input to other command using the pipe, which is this character "|". In the following command we are printing something in python, and passing that to the C program we just compiled.
 
 [source, python]
-python3 -c 'print("hello world!")' |./v1
+python3 -c 'print("hello world!")' |./vuln1
 
 You should see "hello world!" printed back to the terminal right after the command. Note that in python you can  repeat the same character if you multiply it by a number, so 128*"A" is simply a string composed by 128 "A" repeated. For example if you run:
 
@@ -138,7 +138,7 @@ AAAAAAAAAA
 Now we are going to send a string that is composed by 128 characters repeated, concatenated to some bytes.
 
 [source, python]
-python3 -c 'print(128*"A"+"\x20\xe0\xff\xff\xff\x7f\x00\x00\xb7\x05\x40\x00")' |./v1
+python3 -c 'print(128*"A"+"\x20\xe0\xff\xff\xff\x7f\x00\x00\xb7\x05\x40\x00")' |./vuln1
 
 As result you will see:
 
@@ -268,7 +268,7 @@ Starting program: /home/samuel/Desktop/problems/vuln1
 Breakpoint 1, 0x00000000004005ce in vuln ()
 (gdb)
 
-"Breakpoint 1, 0x00000000004005ce in vuln ()" means that the first break point we have set, was established at address "0x00000000004005c", which is the same address as "0x4005c"; An address is a number in this case, so zeros at the left cause no effect. Note that in other cases, zeros at the left can have an effect if what we are reading is not being interpreted as a number.
+"Breakpoint 1, 0x00000000004005ce in vuln ()" means that the first break point we have set, was established at address "0x00000000004005ce", which is the same address as "0x4005ce"; An address is a number in this case, so zeros at the left cause no effect. Note that in other cases, zeros at the left can have an effect if what we are reading is not being interpreted as a number.
 
 ===== Processor registers
 
@@ -330,7 +330,7 @@ It will be interpreted and shown as this:
 
 *80 c4 83 48*
 
-This is the case only for numbers. Addresses are numbers. In an attack when you want to overwrite an address, you have to consider this and input the bytes of the address backwards so they are interpreted in the correct manner. Why computers do this? There are some reasons and consequences. In fact there are also reasons for using "big endian" which is using the bytes without inverting them. One argument commonly given for supporting little endian, is that some operations are easier to do. For instance, if you have a number, let’s say 255 in decimal, in hexadecimal it would be is 0xff in hexadecimal. If the number is contained in a variable type that takes 4 bytes, for example an "int" in C, it would look like this in memory:
+This is the case only for numbers. Addresses are numbers. In an attack when you want to overwrite an address, you have to consider this and input the bytes of the address backwards so they are interpreted in the correct manner. Why do computers do this? There are some reasons and consequences. In fact there are also reasons for using "big endian" which is using the bytes without inverting them. One argument commonly given for supporting little endian, is that some operations are easier to do. For instance, if you have a number, let’s say 255 in decimal, it would be 0xff in hexadecimal. If the number is contained in a variable type that takes 4 bytes, for example an "int" in C, it would look like this in memory:
 
 ff 00 00 00
 
@@ -338,7 +338,7 @@ Then, you want to cast it to a type that only takes two bytes, for example a "sh
 
 ff 00
 
-Now, imagine that we were not using little endian. The type "int" would hold the number like this
+Now, imagine that we were not using little endian. The type "int" would hold the number like this:
 
 00 00 00 ff
 

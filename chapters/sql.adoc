@@ -82,7 +82,7 @@ If you thought about this row:
 |2 |Arpit |Gupta |200 111 1111 |hello
 |===
 
-You were right. That is because that row is the one with the value of 2 in its id. You could filter by any other field. If you are filtering a field of type text, you have to put the value enclosed single quotes. Remove the previous select statement, and add:
+You were right. That is because that row is the one with the value of 2 in its id. You could filter by any other field. If you are filtering a field of type text, you have to enclose the value in single quotes. Remove the previous select statement, and add:
 
 select * from user where phone='200 111 1111' ;
 
@@ -98,7 +98,7 @@ Run it. If you look at the rows inserted. 'Jone Doe' had the same phone number a
 .Result of filtering by a specific phone number
 image::images/3image9.png[image,width=624,height=174]
 
-We can also filter by two fields in the same query using the logical operators 'and' in the following manner:
+We can also filter by two fields in the same query using the logical operator 'and' in the following manner:
 
 select * from user where phone='200 111 1111' and name='Jane';
 
@@ -128,7 +128,7 @@ You will see:
 .Filtering by two different names using OR
 image::images/3image19.png[image,width=624,height=138]
 
-What happened here? Analyze the query carefully. You know there is no one called Mario in our table. Why in the world the query return a row? If you think about it, any expression, no matter how long it is, if results in False, but then you do "or" with something that is true, it will be true. For example:
+What happened here? Analyze the query carefully. You know there is no one called Mario in our table. Why in the world does the query return a row? If you think about it, any expression, no matter how long it is, if results in False, but then you do "or" with something that is true, it will be true. For example:
 
 1=2 and 3=2 and 47=1 or 1=1
 
@@ -146,7 +146,7 @@ You just returned all the results! That happens, as you might guess, because "1=
 
 === Basic SQL injection
 
-The objective of the basic SQL injection we are learning, is trying to inject an "or" expression that is always true. In that way the server code constructs a query using the user input that deceives the program into it returning the whole table. That happens, when a program is concatenating string to construct a query in the server code. The following is an example in PHP:
+The objective of the basic SQL injection we are learning is to try to inject an "or" expression that is always true. In that way the server code constructs a query using the user input that deceives the program into it returning the whole table. That happens when a program is concatenating strings to construct a query in the server code. The following is an example in PHP:
 
 "[lime]#SELECT * FROM user where name='#".$name.""[lime]#' and password='#".$password.""[lime]#';#"
 
@@ -162,12 +162,12 @@ The resultant query would be:
 
 [lime]#SELECT * FROM user where name='samuel' and password='#' *or '1'='1*[lime]#';#
 
-Which is a perfectly valid query that will return the whole table. Use what you just learn here to return all the users:
+Which is a perfectly valid query that will return the whole table. Use what you just learned here to return all the users:
 
 https://primer.picoctf.org/vuln/web/basicsql.php[https://primer.picoctf.org/vuln/web/basicsql.php, window="_blank"]
 
 
-This kind of vulnerability it is rarely present in applications. One that is more common, is the blind sql injection.
+This kind of vulnerability is rarely present in applications. One that is more common, is the blind sql injection.
 
 === Blind SQL injection
 
@@ -189,13 +189,13 @@ image::images/3image28.png[image,width=624,height=205]
 
 Internally, the injection deceives the application into returning records, but the application did not show us those records. That's why it is called Blind SQL injection. We can inject SQL, but we cannot see the result!
 
-What can we do about this? We are will try to inject a SQL to guess one character of a field at a time. Suppose we want to guess the first character of the password. If we don't guess it, the application will return "NOTHING FOUND". If we guess it, it will return "REGISTER FOUND".
+What can we do about this? We will try to inject a SQL to guess one character of a field at a time. Suppose we want to guess the first character of the password. If we don't guess it, the application will return "NOTHING FOUND". If we guess it, it will return "REGISTER FOUND".
 
 Note, this is fundamental to be able to guess only one character at a time. Trying to guess a whole string at the same time, is much harder. Suppose a word is made up by a combination of the 26 characters of the alphabet. To guess only the first letter, we only have to try 26 values. However, if we try to guess the whole word, is much more complicated. To illustrate this, suppose we have a word of two letters. If we can guess one at a time, we will need at most 26 trials for the first one, and 26 trials for the second one, for a total of 52 trials. On the other hand, if we try to guess both letters at a time, we will need 26*26 trials, which is 626 trials, because they can have different combinations. If we add more characters, guessing the whole word becomes much harder because it would emerge too many possible words. Nonetheless, guessing one letter at a time, will keep being only 26 trials for each letter. The blind SQL injection is based on that fact, it will try to inject a query that only compares one character at a time.
 
 To be able to do that, you need to know the name of the column you are trying to guess. This is not that hard, because in many cases you can infer the name of the database column based on the name of the html input. In other cases, you can leak the name if an error occurs inside the application, and in the error message the application shows the value of the columns.
 
-For the page we are attacking in this example the names are the same as the html input. One column is called 'name', and the other one is called 'password'.
+For the page we are attacking in this example the names are the same as the html input. One column is called 'username', and the other one is called 'password'.
 
 So far, you know that if you inject:
 
