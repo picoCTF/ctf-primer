@@ -1,0 +1,59 @@
+[appendix]
+== Virtual Environment
+[[environments]]
+
+We mentioned Linux in our chapter on xref:book.adoc#_the_shell[the Shell], and you may be wondering what your next step is. The great thing about Linux is that it's hard to outgrow! 
+
+Linux is a family of open source systems, which are distributed as 'distros', and each has strengths and weaknesses. The advantage of Linux is that the user has the power to control their own device, and freely choose between distros. 
+
+Most of the world's super computers, servers, mobile devices, and embedded systems run a distro of Linux. Even the International Space Station runs Linux!
+
+When developers and hackers choose their tools, xref:book.adoc#_tools[including many mentioned in this Primer], they have to consider how their hardware and software will interact. This is known as their 'environment'. 
+
+=== Web
+
+Many hacking tools are web-based, and so they'll work on any operating system that allows you to run a web browser. The picoCTF webshell is a good example of this. 
+
+Another option is to use a remote server, which is a computer that you can access over the internet. This is a great way to run tools that require a lot of processing power, or to run tools that you don't want to run on your own computer. These are often called 'cloud' services, and they're a great way to get started with hacking.
+
+=== Virtual Machines
+
+Virtual machines are a great way to run tools that require a specific operating system, or to run multiple operating systems at once. These can be run locally, or on a remote server. When using a virtual machine, you can treat it as if it were a separate computer, even if it's sharing hardware.
+
+For example, if you use a Windows computer, you can run a virtual machine with a distro of Linux to run Linux tools. You can also configure your virtual machine to be created in a certain way, and then reset or share that state with others. https://podman.io/[Podman, window="_blank"] is an excellent option for this, and helps teams have effectively identical environments so collaboration is easy.
+
+Additionally, if you're investigating potential malware, it's a good idea to run it in a virtual machine to help protect your computer. If you run into any issues, you can simply reset the virtual machine to a previous state.
+
+=== VPNs
+
+When accessing a remote server, you may need a Virtual Private Network, or VPN, to connect to it. This is a way to securely connect, as well as protect user privacy. In this arrangement, your data will be encrypted and sent to the VPN provider, who will then send it to the remote server. If a third party intercepts your data, they won't be able to read it.
+
+In industry, companies often require their employees to use a company VPN to access their internal network from outside the office. This is a great way to protect sensitive information, and to allow employees to work remotely.
+
+If you choose to use a VPN, it's important to understand that you're trusting the VPN provider with your data. If you're working on a sensitive project, you may want to vet the VPN provider to ensure that they're trustworthy.
+
+=== Authentication 
+
+Hackers need to worry about their own security too! When using virtual services, use strong passwords, and to use multi-factor authentication whenever possible.
+
+If you pursue cybersecurity as a career, many people may be trusting you with their data. You should take this responsibility seriously, and protect your own accounts to avoid putting others at risk.
+
+Best practices change often, but current recommendations include using a password manager, and using a hardware token for multi-factor authentication. When creating a password, consider using a passphrase instead, as these are generally easier to remember and harder to crack.
+
+[.text-center]
+.Password Strength, https://xkcd.com/936[xkcd.com, window="_blank"]
+image::images/environment1.png[]
+
+=== IDEs
+
+IDEs, or Integrated Development Environments, are tools that help developers write code. They often include features like syntax highlighting, code completion, and debugging. 
+
+https://code.visualstudio.com/[Visual Studio Code, window="_blank"] is a popular IDE that's available for Windows, Mac, and Linux. Due to it being open source, many developers are able to contribute plugins to extend its functionality for specific languages or use cases.
+
+An IDE can help hackers by making it easier to write code, and by providing tools to help them understand what their code is doing.
+
+=== Installations
+
+If you're interested in installing a distro of Linux on your computer or on a virtual machine, it's generally a good idea to start with a popular distro so that there are plenty of resources and people that may be able to help you.
+
+A popular distro for beginners is https://ubuntu.com/[Ubuntu, window="_blank"], and another among hackers is https://www.kali.org/[Kali, window="_blank"]. If you don't want to install a distro, you can also use a live USB, which is a USB drive that you can boot from. This is a great way to try out a distro without installing it. Some, like https://tails.net[Tails, window="_blank"], are designed to use this feature to protect user privacy.
