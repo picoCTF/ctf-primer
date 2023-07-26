@@ -75,6 +75,7 @@ $ git checkout <commit ID>
 
 
 === Branching
+[[git-branching]]
 
 You can also create multiple 'branches' of time with the `git branch <branch name>` command! You can see all local and remote branches with `git branch -a`, and switch between them with `git checkout <branch name>`. 
 
@@ -101,12 +102,83 @@ When merging 'C5' into the main branch at 'C2', the commit history of 'C5' will 
 
 Time travel can be tricky! But by keeping careful track of commits and their common ancestors, we can branch and merge with confidence.
 
+=== Merging
+[[git-merging]]
+
+If you're working with a 'remote' repository, such as one on GitHub, you can 'pull' or 'fetch' changes from the remote repository with `git pull`. This will download any changes from the remote repository and merge them with your current branch. This is known as 'fast-forwarding' because the changes are simply added to the end of your branch's commit history. It's important to do this regularly to avoid merge conflicts later!
+
+A merge conflict is when two branches have changes on the same line. This can happen when you're working on your local machine or personal branch, and changes are made to the original file before you merge back in. Fetching the latest changes helps ensure that any differences are minimal. Ideally, conflicts can also be avoided by working on different files or different lines of code on each branch. 
+
+However, if you do run into a merge conflict, Git will show you the difference between the file on each branch and ask what you'd like to keep. You can then use a text editor to delete the other change, or splice the changes together.  
+
+The start of the conflict is marked with `<<<<<<< HEAD`, and the end of the conflict is marked with `>>>>>>> <branch name>`. Somewhere in the middle will be a `=======` which marks the division between the lines in each branch.
+
+It'll be up to you to decide what to keep and what to delete. The markers from Git are just there to help you find the conflict, and can be deleted once you're done. 
+
+For example, if you had a file with the following contents:
+
+[source, txt]
+$ cat example.txt
+This is a file to demonstrate merging.
+
+And were working on two separate branches, one with the following changes:
+
+[source, txt]
+$ git checkout cats
+$ cat example.txt
+Cats are very cute.
+
+And another with the following changes:
+
+[source, txt]
+$ git checkout dogs
+$ cat example.txt
+Dogs are very cute.
+
+If you try to merge the two branches together, you'd get the following error:
+
+[source, txt]
+$ git merge cats
+Auto-merging example.txt
+CONFLICT (content): Merge conflict in example.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+This can be a scary message! But if you open the file, you'll see the following:
+
+[source, txt]
+$ cat example.txt
+This is a file to demonstrate merging.
+<<<<<<< HEAD
+Dogs are very cute.
+=======
+Cats are very cute.
+>>>>>>> cats
+
+The first line is the original file, and the second line is the change from the `cats` branch. The third line is the change from the `dogs` branch.
+
+To resolve this conflict, we'll need to decide how to avoid example.txt from having two different lines in the same place. We could delete one of the lines, or combine them together. For example, we could change the file to the following:
+
+[source, txt]
+$ cat example.txt
+This is a file to demonstrate merging.
+Dogs and cats are very cute.
+
+
+Once you've chosen the changes that will continue through the merge, you can add and commit the file like normal, or use `git merge --continue`. You can also abort the merge with `git merge --abort` if you'd like to start over. One more useful tool is `git stash` which will save your current changes and allow you to return to them later with `git stash pop`.
+
+Afterward, your original branch will be updated with the changes from the other, merged branch. Great job!
+
 
 === Review of Git
+[[git-review]]
 
 .Basic Git commands
 |===
 |Operation |Shell example |Note
+
+|See Git options 
+|`$ git --help`
+|Lists all the available commands and options for Git. 
 
 |Start a repository
 |`$ git init`
@@ -150,6 +222,7 @@ If you want more practice, I (Jeffery), recommend _Oh My Git!_, an open source g
 image::images/image51.png[] 
 
 === Time Machine
+[[time-machine]]
 
 If you're ready to test your skills, check out this playlist in the picoGym:
 
@@ -157,6 +230,7 @@ If you're ready to test your skills, check out this playlist in the picoGym:
 https://play.picoctf.org/practice/challenge/`<TBD>`
 
 === Using GitHub
+[[github]]
 
 GitHub has many features on top of Git to help when writing code and working with files. For example, while it's important to be comfortable with the shell when working with Git and when hacking, GitHub provides a https://desktop.github.com[Desktop client] that can be a convenient GUI for common workflows. They also have a https://github.com/mobile[mobile app], https://github.com/features/codespaces[cloud dev environments], and https://github.com/features/security[automated security scans].
 
