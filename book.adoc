@@ -11,7 +11,6 @@ include::chapters/intro.adoc[]
 include::chapters/shell.adoc[]
 include::chapters/forensics.adoc[]
 include::chapters/python.adoc[]
-include::chapters/git.adoc[]
 include::chapters/web.adoc[]
 include::chapters/crypto.adoc[]
 include::chapters/network.adoc[]
@@ -19,6 +18,8 @@ include::chapters/sql.adoc[]
 include::chapters/c.adoc[]
 include::chapters/binary.adoc[]
 include::chapters/assembly.adoc[]
+include::chapters/git.adoc[]
+
 
 
 

@@ -1,6 +1,6 @@
-
-
+[appendix]
 == Git & Version Control
+
 [[git]]
 
 As you progress through more and more cyber challenges, you may find yourself with quite the collection of files! 
@@ -231,7 +231,7 @@ As a hacker, you'll want to work closely with your team to make sure everyone is
 |Like checking out a commit, this will return or forward your repository to the contents of the branch. Time travel!
 
 |Pull a repository
-|`$ git pull <<repository>`
+|`$ git pull <repository>`
 |Create or update a copy of a repository in your development environment. 
 
 |Push a repository
