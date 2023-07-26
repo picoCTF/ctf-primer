@@ -154,7 +154,7 @@ Dogs are very cute.
 Cats are very cute.
 >>>>>>> cats
 
-The first line is the original file, and the second line is the change from the `cats` branch. The third line is the change from the `dogs` branch.
+The first line is the original file, and the second line is the change from the `dogs` branch. The third line is the change from the `cats` branch.
 
 To resolve this conflict, we'll need to decide how to avoid example.txt from having two different lines in the same place. We could delete one of the lines, or combine them together. For example, we could change the file to the following:
 
@@ -168,6 +168,23 @@ Once you've chosen the changes that will continue through the merge, you can add
 
 Afterward, your original branch will be updated with the changes from the other, merged branch. Great job!
 
+
+=== Pulling & Pushing 
+
+After finishing your changes and pulling and merging the with the main branch, you can 'push' your changes to be used by others, or yourself on a different device. If you're working on a cloned copy, you can use `git push` to send your commits to their source, the remote repository. 
+
+If you're working with files you've created locally, you'll need to create a remote repository to push to. This can be done with `git remote add origin <remote repository URL>`. You can then push your changes to the remote repository with `git push -u origin <branch name>`.
+
+[source, txt]
+$ git push
+$ git remote add origin <remote repository URL>
+$ git push -u origin <branch name>
+
+GitHub is a good tool to get comfortable with collaboration. 'Pull requests' are a way for maintainers of a project to review your work and can help catch any errors that slipped past what merge conflicts can catch. Sometimes, automated tests are run on the code as well to make sure it's ready to go into production!
+
+https://github.com[https://github.com, window="_blank"]
+
+As a hacker, you'll want to work closely with your team to make sure everyone is using updated code, scripts, and programs as modifications are made to solve challenges. Be careful of forcing changes with the `-f` flag as this can overwrite any work that's already been completed.
 
 === Review of Git
 [[git-review]]
@@ -212,13 +229,21 @@ Afterward, your original branch will be updated with the changes from the other,
 |Go to a new branch
 |`git checkout <branch name>`
 |Like checking out a commit, this will return or forward your repository to the contents of the branch. Time travel!
+
+|Pull a repository
+|`$ git pull <<repository>`
+|Create or update a copy of a repository in your development environment. 
+
+|Push a repository
+|`$ git push`
+|Send your updates back to the remote repository so that you and/or others can access them. If your local branch has no remote equivalent, you'll be asked to specify where your commits should be sent.
 |===
 
 
 If you want more practice, I (Jeffery), recommend _Oh My Git!_, an open source game with interactive visualizations and commands.
 
 [.text-center]
-.Oh My Git!, https://ohmygit.org
+.Oh My Git!, https://ohmygit.org[https://ohmygit.org, window="_blank"]
 image::images/image51.png[] 
 
 === Time Machine
@@ -232,9 +257,9 @@ https://play.picoctf.org/practice/challenge/`<TBD>`
 === Using GitHub
 [[github]]
 
-GitHub has many features on top of Git to help when writing code and working with files. For example, while it's important to be comfortable with the shell when working with Git and when hacking, GitHub provides a https://desktop.github.com[Desktop client] that can be a convenient GUI for common workflows. They also have a https://github.com/mobile[mobile app], https://github.com/features/codespaces[cloud dev environments], and https://github.com/features/security[automated security scans].
+GitHub has many features on top of Git to help when writing code and working with files. For example, while it's important to be comfortable with the shell when working with Git and when hacking, GitHub provides a https://desktop.github.com[Desktop client, window="_blank"] that can be a convenient GUI for common workflows. They also have a https://github.com/mobile[mobile app, window="_blank"], https://github.com/features/codespaces[cloud dev environments, window="_blank"], and https://github.com/features/security[automated security scans, window="_blank"].
 
-As a student, a great place to start is the https://education.github.com/pack[GitHub Student Developer Pack], which offers many free resources and further tutorials. 
+As a student, a great place to start is the https://education.github.com/pack[GitHub Student Developer Pack, window="_blank"], which offers many free resources and further tutorials. 
 
 As a collaboration tool, GitHub allows you to create public 'open source' repositories and join discussions or contribute code to others. You can even find the code for picoCTF and add to this primer! https://github.com/picoCTF[https://github.com/picoCTF, window="_blank"]
 
