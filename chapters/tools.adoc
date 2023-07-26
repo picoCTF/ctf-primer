@@ -1,0 +1,58 @@
+[appendix]
+== Tools 
+[[tools]]
+
+Throughout this Primer, we've recommended a number of tools to help you get started with hacking. Here they are, all in one place!
+
+=== General
+
+- picoCTF Webshell: https://webshell.picoctf.org[https://webshell.picoctf.org, window="_blank"]
+
+- Git: https://git-scm.com[https://git-scm.com, window="_blank"]
+
+=== Forensics
+
+- The Sleuth Kit: https://www.sleuthkit.org/sleuthkit[https://www.sleuthkit.org/sleuthkit, window="_blank"]
+
+- Wireshark: https://www.wireshark.org[https://www.wireshark.org, window="_blank"]
+
+- Python: https://www.python.org/about/gettingstarted[https://www.python.org/about/gettingstarted, window="_blank"]
+
+- ASCII Table: https://www.asciitable.com[https://www.asciitable.com, window="_blank"]
+
+- Pwntools: http://docs.pwntools.com/en/stable[http://docs.pwntools.com/en/stable, window="_blank"]
+
+
+=== Web Exploitation
+
+- W3 Schools: https://www.w3schools.com[https://www.w3schools.com, window="_blank"]
+
+- Firefox: https://www.mozilla.org/en-US/firefox/new[https://www.mozilla.org/en-US/firefox/new, window="_blank"]
+
+- Burp Suite: https://portswigger.net/burp[https://portswigger.net/burp, window="_blank"]
+
+=== Cryptography
+
+- Vigenère Cracking Tool: https://www.simonsingh.net/The_Black_Chamber/vigenere_cracking_tool.html[https://www.simonsingh.net/The_Black_Chamber/vigenere_cracking_tool.html, window="_blank"]
+
+- Extended Euclidean algorithm: https://planetcalc.com/3298[https://planetcalc.com/3298, window="_blank"]
+
+- Integer factorization calculator: https://www.alpertron.com.ar/ECM.HTM[https://www.alpertron.com.ar/ECM.HTM, window="_blank"]
+
+=== Databases
+
+- MySQL: https://paiza.io/en/projects/new?language=mysql[https://paiza.io/en/projects/new?language=mysql, window="_blank"]
+
+=== Assembly
+
+- Intel assembly: https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Arch1001_x86-64_Asm+2021_v1/about[https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Arch1001_x86-64_Asm+2021_v1/about, window="_blank"]
+
+=== Git 
+
+- Git: https://git-scm.com[https://git-scm.com, window="_blank"]
+
+- Git Cheat Sheet: https://education.github.com/git-cheat-sheet-education.pdf[https://education.github.com/git-cheat-sheet-education.pdf, window="_blank"]
+
+- Oh My Git!: https://ohmygit.org[https://ohmygit.org, window="_blank"]
+
+- GitHub: https://github.com[https://github.com, window="_blank"]
