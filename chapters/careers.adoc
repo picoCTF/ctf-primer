@@ -8,16 +8,16 @@ Organizations need people who can analyze data and find patterns, people who can
 
 It's also possible to pursue a career more independently, as a consultant or freelancer. This can be a good option for people who want to work on their own schedule and have more control over their work.
 
-The National Security Agency (NSA) also maintains a list of resources through their GenCyber program for students and teachers interested in cybersecurity careers: https://www.gen-cyber.com/resources[https://www.gen-cyber.com/resources, window="_blank"].
+The National Security Agency (NSA) also contributes to training through the RING program - Regions Investing in the Next Generation. Here's an interactive exercise from them: https://d2hie3dpn9wvbb.cloudfront.net/NSA+Ring+Project/index.html[https://d2hie3dpn9wvbb.cloudfront.net/NSA+Ring+Project/index.html, window="_blank"]
 
 === Bug Bounties
 [[bounties]]
 
 One way vulnerabilities are reduced is through bug bounty programs, in which organizations offer rewards to their employees or the public for finding vulnerabilities and reporting them to be fixed. 
 
-This is beneficial to the organization because it allows them to find and fix vulnerabilities before they are exploited by malicious actors. Many companies and even governments have bug bounty programs, and many people are safer because of the security flaws that have been found and fixed through them.
+This is beneficial to the organization because it allows them to find and fix vulnerabilities before they are exploited by malicious actors. Many companies have bug bounty programs, and many people are safer because of the security flaws that have been found and fixed through them.
 
-Bug bounty programs are also beneficial to the hackers who participate in them, as they can earn money while practicing their skills as well as helping others be more secure.
+Bug bounty programs are also beneficial to hackers as they can earn money legitimately while practicing their skills and helping others be more secure.
 
 Some bug bounty programs include:
 
@@ -39,7 +39,7 @@ image::images/careers1.png[]
 
 When a vulnerability is found, it is assigned a CVE number, which is a unique identifier for that vulnerability. CVE stands for Common Vulnerabilities and Exposures, and it is a list of publicly known cybersecurity vulnerabilities. CVEs are assigned by the CVE Numbering Authority (CNA). 
 
-By defining and cataloging vulnerabilities, security researchers, engineers, and analysts can more easily communicate about them. This allows them to be fixed more quickly and efficiently.
+By defining and cataloging vulnerabilities, security researchers, engineers, and analysts can more easily communicate about them to each other. Imagine trying to fix a problem without knowing what to call it!
 
 The list of CVEs, and forms to submit or update them, can be found at https://www.cve.org[https://www.cve.org, window="_blank"].
 
@@ -47,7 +47,7 @@ The list of CVEs, and forms to submit or update them, can be found at https://ww
 === Ethical Considerations
 [[ethical-considerations]]
 
-Before publishing a vulnerability from a bug bounty program, or as a CVE, it is important to consider the ethical implications of doing so.
+Before publishing a vulnerability from a bug bounty program, or as a CVE, you should consider the ethical implications of doing so.
 
 If a vulnerability is published before it is fixed, it could be exploited by malicious actors. This could cause harm to people or organizations, as well as legal consequences for the publisher. Each organization or program will have its own rules and preferences for how to responsibly disclose vulnerabilities. 
 
@@ -55,4 +55,6 @@ Additionally, never hack into a system without permission, or attempt to go furt
 
 If the organization does not respond to a disclosure of a security risk to them or their users within a reasonable timeframe, there may be other options such as contacting a governing agency. In the United States, the Cybersecurity and Infrastructure Security Agency (CISA) is a good place to start: https://www.cisa.gov/coordinated-vulnerability-disclosure-process[https://www.cisa.gov/coordinated-vulnerability-disclosure-process, window="_blank"]. 
 
-If a malicous actor is able to find and exploit an unreported vulnerability, it is known as a 'zero-day', because the organization has had zero days to fix it. These are considered the most dangerous, and can impact millions of innocent people. While this Primer cannot cover all the ethical considerations of reporting individual vulnerabilities, it is important to consider your ability to help others through responsible disclosure.
+If a malicous actor is able to find and exploit an unreported vulnerability, it is known as a 'zero-day', because the organization has had zero days to fix it. These are considered the most dangerous, and can impact millions of innocent people. Ultimately, careers in cybersecurity are all about preventing these from hapening.
+
+While this Primer cannot cover all the ethical considerations of reporting individual vulnerabilities, it is important to consider your ability to help others through responsible disclosure.
