@@ -246,14 +246,6 @@ If you want more practice, I (Jeffery), recommend _Oh My Git!_, an open source g
 .Oh My Git!, https://ohmygit.org[https://ohmygit.org, window="_blank"]
 image::images/image51.png[] 
 
-=== Time Machine
-[[time-machine]]
-
-If you're ready to test your skills, check out this playlist in the picoGym:
-
-
-https://play.picoctf.org/practice/challenge/`<TBD>`
-
 === Using GitHub
 [[github]]
 
