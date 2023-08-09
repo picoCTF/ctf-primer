@@ -1,0 +1,262 @@
+[appendix]
+== Git & Version Control
+
+[[git]]
+
+As you progress through more and more cyber challenges, you may find yourself with quite the collection of files! 
+
+You may also find that you want to try multiple approaches while solving a problem, or work with a team. Using version control, such as Git, can save you a lot of time and effort.
+
+
+
+[quote,Git Community,https://git-scm.com]
+
+____
+
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+____
+
+
+Version control is a way for developers to 'time-travel' by allowing them to save their files and return to them at any point. For example, you may start making changes to your Python code, and find that suddenly it doesn't work anymore! Git would allow you to go back to a version of your code that does work.
+
+When working with teams of programmers or hackers, version control allows you to compare differences, or diffs, of each file and then 'merge' your progress together. This way, multiple people can work on the same problem without undoing each other's progress!
+
+Along with Git, other Version Control Systems (VCS) include Subversion (SVN), Sapling, and Piper. Many large companies will develop or modify their VCS to fit their needs, though the basic principles remain the same. With tens of thousands of employees working on the same projects, some form of version control is a necessity for professionals to get work done.
+
+Another term for VCS is Source Configuration Management (SCM). These terms can be used interchangeably. However, Git and GitHub are less similar. Git is a VCS or SCM, while GitHub is web-based platform for development and collaboration that uses Git. We'll talk more about GitHub later in this chapter.
+
+You can get started with Git locally, on your computer, or remotely in the cloud like with the picoCTF webshell: 
+
+https://webshell.picoctf.org[https://webshell.picoctf.org, window="_blank"]
+
+
+=== 'Git' Started with Git
+[[git-started]]
+
+To start using Git locally, make sure to download a copy for your operating system from their website: 
+
+https://git-scm.com/downloads[https://git-scm.com/downloads, window="_blank"]
+
+This has already been done for you in the picoCTF webshell, and can be verified by typing ``git --version``.
+
+[source, txt]
+$ git --version
+
+Using a VCS takes some practice with the shell. If you feel a bit lost, you may want to touch up with xref:book.adoc#_the_shell[our chapter on using one].
+
+Once inside a shell with Git installed, you can start, or initialize a repository with `git init`. This will start 'tracking' all the files in your current folder.
+
+[source, txt]
+$ git init
+
+A repository, often abbreviated as a repo, is a collection of files. Version control works by 'tracking' changes to these files, and letting you undo or merge changes whenever you want.
+
+You can now tell Git who you are with `git config --global user.email "<your email>"` and `git config --global user.name "<your name>"`.
+
+[source, txt]
+$ git config --global user.email "<your email>"
+$ git config --global user.name "<your name>"
+
+
+Many video games have 'save' or 'check' points, where you can return to a point in the level if you need to. In Git, 'commits' act in a very similar way. You can add, or stage, all the files in your current folder with `git add .`, then commit them to be saved with `git commit -m "<your description>"`.
+
+[source, txt]
+$ git add .
+$ git commit -m "<your description>"
+
+Now, you can make any changes you want to the contents of your folder. You could add or delete files, or change lines of code.
+
+When you're ready to go back in time, you can see your past commits with `git log`. By default, this will show the author, commit ID, time, and description. The commit ID will be a long series of letters and numbers. This is based on a 'hash' of your files. We'll talk more about hashing later in this Primer with the xref:book.adoc#_cryptography[cryptography chapter]. By copying the commit ID, we can time travel back to that save point with `git checkout <commit ID>`. Pretty cool right?
+
+[source, txt]
+$ git log
+$ git checkout <commit ID>
+
+
+=== Branching
+[[git-branching]]
+
+You can also create multiple 'branches' of time with the `git branch <branch name>` command! You can see all local and remote branches with `git branch -a`, and switch between them with `git checkout <branch name>`. 
+
+[source, txt]
+$ git branch -a
+$ git checkout <branch name>
+
+When you start a repository, you'll be on the `main` branch. This may also be called the `trunk` or `boss`. If you're working on an older repository, you may see it referred to as `master`. You can rename your `main` branch to whatever you'd like, but make sure that any collaborators know about the change.
+
+Creating multiple branches as you work is a very powerful way to keep track of what you're working on. Each branch can have its own commit history. This can be especially useful for multiple people working together. 
+
+It's a good habit for each person to have their own branch, and for each new feature or problem to be worked on its own branch. When ready, a branch can be 'merged' or 'combined' with the branch you currently have checked out with the `git merge <branch name>` command.
+
+[source, txt]
+$ git merge <branch name>
+
+[.text-center]
+.Scott Chacon and Ben Straub, Pro Git https://git-scm.com/book/en/v2
+image::images/image50.png[]
+
+Above is an example of a branching structure. Each commit is numbered with a prefix 'C', and a branch has been created to work on a feature. 'C4' is a snapshot, or check point, of the most progress on the master, or main, branch. 'C5' with commit ID "iss53" is a snapshot of the most progress done for the feature. Note how 'C5' contains 'C0', 'C1', 'C2', and 'C3' while 'C4' only contains 'C0', 'C1', and 'C2'. 
+
+When merging 'C5' into the main branch at 'C2', the commit history of 'C5' will be merged as well. If `$ git log` were to be run afterward, it would show a path from commit 'C4' to 'C5' to 'C3' to 'C2' to 'C1' and finally to the initial commit 'C0'. 
+
+Time travel can be tricky! But by keeping careful track of commits and their common ancestors, we can branch and merge with confidence.
+
+=== Merging
+[[git-merging]]
+
+If you're working with a 'remote' repository, such as one on GitHub, you can 'pull' or 'fetch' changes from the remote repository with `git pull`. This will download any changes from the remote repository and merge them with your current branch. This is known as 'fast-forwarding' because the changes are simply added to the end of your branch's commit history. It's important to do this regularly to avoid merge conflicts later!
+
+A merge conflict is when two branches have changes on the same line. This can happen when you're working on your local machine or personal branch, and changes are made to the original file before you merge back in. Fetching the latest changes helps ensure that any differences are minimal. Ideally, conflicts can also be avoided by working on different files or different lines of code on each branch. 
+
+However, if you do run into a merge conflict, Git will show you the difference between the file on each branch and ask what you'd like to keep. You can then use a text editor to delete the other change, or splice the changes together.  
+
+The start of the conflict is marked with `<<<<<<< HEAD`, and the end of the conflict is marked with `>>>>>>> <branch name>`. Somewhere in the middle will be a `=======` which marks the division between the lines in each branch.
+
+It'll be up to you to decide what to keep and what to delete. The markers from Git are just there to help you find the conflict, and can be deleted once you're done. 
+
+For example, if you had a file with the following contents:
+
+[source, txt]
+$ cat example.txt
+This is a file to demonstrate merging.
+
+And were working on two separate branches, one with the following changes:
+
+[source, txt]
+$ git checkout cats
+$ cat example.txt
+Cats are very cute.
+
+And another with the following changes:
+
+[source, txt]
+$ git checkout dogs
+$ cat example.txt
+Dogs are very cute.
+
+If you try to merge the two branches together, you'd get the following error:
+
+[source, txt]
+$ git merge cats
+Auto-merging example.txt
+CONFLICT (content): Merge conflict in example.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+This can be a scary message! But if you open the file, you'll see the following:
+
+[source, txt]
+$ cat example.txt
+This is a file to demonstrate merging.
+<<<<<<< HEAD
+Dogs are very cute.
+=======
+Cats are very cute.
+>>>>>>> cats
+
+The first line is the original file, and the second line is the change from the `dogs` branch. The third line is the change from the `cats` branch.
+
+To resolve this conflict, we'll need to decide how to avoid example.txt from having two different lines in the same place. We could delete one of the lines, or combine them together. For example, we could change the file to the following:
+
+[source, txt]
+$ cat example.txt
+This is a file to demonstrate merging.
+Dogs and cats are very cute.
+
+
+Once you've chosen the changes that will continue through the merge, you can add and commit the file like normal, or use `git merge --continue`. You can also abort the merge with `git merge --abort` if you'd like to start over. One more useful tool is `git stash` which will save your current changes and allow you to return to them later with `git stash pop`.
+
+Afterward, your original branch will be updated with the changes from the other, merged branch. Great job!
+
+
+=== Pulling & Pushing 
+
+After finishing your changes and pulling and merging the with the main branch, you can 'push' your changes to be used by others, or yourself on a different device. If you're working on a cloned copy, you can use `git push` to send your commits to their source, the remote repository. 
+
+If you're working with files you've created locally, you'll need to create a remote repository to push to. This can be done with `git remote add origin <remote repository URL>`. You can then push your changes to the remote repository with `git push -u origin <branch name>`.
+
+[source, txt]
+$ git push
+$ git remote add origin <remote repository URL>
+$ git push -u origin <branch name>
+
+GitHub is a good tool to get comfortable with collaboration. 'Pull requests' are a way for maintainers of a project to review your work and can help catch any errors that slipped past what merge conflicts can catch. Sometimes, automated tests are run on the code as well to make sure it's ready to go into production!
+
+https://github.com[https://github.com, window="_blank"]
+
+As a hacker, you'll want to work closely with your team to make sure everyone is using updated code, scripts, and programs as modifications are made to solve challenges. Be careful of forcing changes with the `-f` flag as this can overwrite any work that's already been completed.
+
+=== Review of Git
+[[git-review]]
+
+.Basic Git commands
+|===
+|Operation |Shell example |Note
+
+|See Git options 
+|`$ git --help`
+|Lists all the available commands and options for Git. 
+
+|Start a repository
+|`$ git init`
+|'Initialize' your current folder into a 'repository' where files and file changes can be tracked.
+
+|Stage a file
+|`$ git add .` or `$ git add <file name>`
+|'Staging' a file means it will be added to your next commit. 
+
+
+|Commit file(s)
+|`$ git commit -m "<your description>"`
+|'Commit' your files to be saved. It's a good habit to write short, helpful commit messages so that you and others can find your work easily later.
+
+|See past commits
+|`$ git log`
+|See past 'save points' and their commit IDs so you can go back to them.
+
+|Go to a past commit
+|`$ git checkout <commit ID>`
+|Return the repository to a past commit. 
+
+|Combine commits together
+|`$ git merge <branch or commit name>`
+|Combine the work on different branches together. Be careful of merge conflicts! You'll be prompted to choose which work should be brought forward.
+
+|Create a new branch
+|`$ git branch`
+|Create a new 'branch' of time. This new branch will start with the commit history of its parent branch, but once checked out, future commits will stay on that branch until merged.
+
+|Go to a new branch
+|`git checkout <branch name>`
+|Like checking out a commit, this will return or forward your repository to the contents of the branch. Time travel!
+
+|Pull a repository
+|`$ git pull <repository>`
+|Create or update a copy of a repository in your development environment. 
+
+|Push a repository
+|`$ git push`
+|Send your updates back to the remote repository so that you and/or others can access them. If your local branch has no remote equivalent, you'll be asked to specify where your commits should be sent.
+|===
+
+
+If you want more practice, I (Jeffery), recommend _Oh My Git!_, an open source game with interactive visualizations and commands.
+
+[.text-center]
+.Oh My Git!, https://ohmygit.org[https://ohmygit.org, window="_blank"]
+image::images/image51.png[] 
+
+=== Using GitHub
+[[github]]
+
+GitHub has many features on top of Git to help when writing code and working with files. For example, while it's important to be comfortable with the shell when working with Git and when hacking, GitHub provides a https://desktop.github.com[Desktop client, window="_blank"] that can be a convenient GUI for common workflows. They also have a https://github.com/mobile[mobile app, window="_blank"], https://github.com/features/codespaces[cloud dev environments, window="_blank"], and https://github.com/features/security[automated security scans, window="_blank"].
+
+As a student, a great place to start is the https://education.github.com/pack[GitHub Student Developer Pack, window="_blank"], which offers many free resources and further tutorials. 
+
+As a collaboration tool, GitHub allows you to create public 'open source' repositories and join discussions or contribute code to others. You can even find the code for picoCTF and add to this primer! https://github.com/picoCTF[https://github.com/picoCTF, window="_blank"]
+
+Many open source repositories will include a CONTRIBUTING.md file that discusses what help they're looking for. More discussion and best practices for the open source community can be found at https://opensource.guide[https://opensource.guide, window="_blank"]
+
+Just make sure, as a hacker and competitor, that you're allowed to publish what you're working on to a public repository! Many competitons, including picoCTF, ask that files related to competition are kept secret for some time in order to ensure fairness. Check public repositories for licenses as well, which will detail how their code can be used.
+
+We hope you join our community!
