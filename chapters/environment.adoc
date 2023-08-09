@@ -12,33 +12,42 @@ When developers and hackers choose their tools, xref:book.adoc#_tools[including 
 
 === Web
 
-Many hacking tools are web-based, and so they'll work on any operating system that allows you to run a web browser. The picoCTF webshell is a good example of this. 
+Many hacking tools are web-based, and so they'll work on any operating system that allows you to run a web browser. A good example is https://crackstation.net[CrackStation, window="_blank"] which allows anyone with an internet connection to check password hashes. 
 
-Another option is to use a remote server, which is a computer that you can access over the internet. This is a great way to run tools that require a lot of processing power, or to run tools that you don't want to run on your own computer. These are often called 'cloud' services, and they're a great way to get started with hacking.
+Another option is to use a remote server, which is a computer that you can access over the internet. Typically, you'd own or rent this server, so you'd have more control over how it's used. This is a great way to run tools that require a lot of processing power, or to run tools that you don't want to run on your own computer due to space or computing power limitations. Remote servers are often called and offered by 'cloud' services, and they're a great way to get started with hacking! 
+
+Note that web-based tools are often hosted on their own remote servers that they use as a 'backend' to process inputs and requests from the 'frontend', or the website that you can interact with. Having a remote server, like an instance of Amazon Web Services, Google Cloud Platform, or Azure, is unique in that you can choose the tools that are installed, the capability of the server, and how accessible to the public it is.
 
 === Virtual Machines
 
-Virtual machines are a great way to run tools that require a specific operating system, or to run multiple operating systems at once. These can be run locally, or on a remote server. When using a virtual machine, you can treat it as if it were a separate computer, even if it's sharing hardware.
+Virtual machines (VM) are a great way to run tools that require a specific operating system, or to run multiple operating systems at once. These can be run locally, or on a remote server. 
 
-For example, if you use a Windows computer, you can run a virtual machine with a distro of Linux to run Linux tools. You can also configure your virtual machine to be created in a certain way, and then reset or share that state with others. https://podman.io/[Podman, window="_blank"] is an excellent option for this, and helps teams have effectively identical environments so collaboration is easy.
+You might sometimes hear VMs referred to as a 'box' because anything inside of one tends to stay inside. You can treat a VM as if it were a separate computer - even if it's sharing hardware locally or with your remote server!
 
-Additionally, if you're investigating potential malware, it's a good idea to run it in a virtual machine to help protect your computer. If you run into any issues, you can simply reset the virtual machine to a previous state.
+For example, if you use a Windows computer, you can run a virtual machine with a distro of Linux to run Linux tools. You can also configure your virtual machine to be created in a certain way, and then reset or share that state with others! https://podman.io/[Podman, window="_blank"] is an excellent option for this, and helps teams have effectively identical environments so collaboration is easy. Since hacking can sometimes be very dependent on the version of a target's hardware or software, being able to practice on an exact copy is helpful. For the same reason, this is why downloading security updates for your software is a good idea! Cyber teams around the world work to 'patch' problems and publish fixes as quickly as they can.
+
+Additionally, if you're investigating potential malware, it's a good idea to run it in a virtual machine to help protect your computer. Since the VM acts like an independent computer, most malware will be contained inside it. If you run into any issues, you can simply reset the virtual machine to a previous state.
+
+To get started, you might be interested in https://www.virtualbox.org[VirtualBox, window="_blank"], which alows for software virtualization to whatever your other tools or use cases need.
+
 
 === VPNs
 
-When accessing a remote server, you may need a Virtual Private Network, or VPN, to connect to it. This is a way to securely connect, as well as protect user privacy. In this arrangement, your data will be encrypted and sent to the VPN provider, who will then send it to the remote server. If a third party intercepts your data, they won't be able to read it.
+When accessing a remote server, you may need a Virtual Private Network, or VPN, to connect to it. This is a way to securely connect, as well as protect your privacy. 
 
-In industry, companies often require their employees to use a company VPN to access their internal network from outside the office. This is a great way to protect sensitive information, and to allow employees to work remotely.
+In this arrangement, your data will be encrypted and sent to the VPN provider, who will then send it to a remote server, like a website or your hacking. If a third party intercepts your data, they won't be able to read it, and if they're listening to your traffic, all they'll see is the connection to the VPN, rather than where you go next. Pretty handy!
+
+In industry, companies often require their employees to use a company VPN to access their internal network from outside the office. Just like how VPNs can protect an individual's data, they can protect a company's sensitive information too! Without a VPN, employees working remotely may be vulnerable to their credentials being stolen.
 
 If you choose to use a VPN, it's important to understand that you're trusting the VPN provider with your data. If you're working on a sensitive project, you may want to vet the VPN provider to ensure that they're trustworthy.
 
 === Authentication 
 
-Hackers need to worry about their own security too! When using virtual services, use strong passwords, and to use multi-factor authentication whenever possible.
+Hackers need to worry about their own security too! When using virtual services, along with a VPN, use strong passwords and multi-factor authentication whenever possible. That way, even if an adversary were to steal your password from one service, they would need others in order to impersonate you.
 
 If you pursue cybersecurity as a career, many people may be trusting you with their data. You should take this responsibility seriously, and protect your own accounts to avoid putting others at risk.
 
-Best practices change often, but current recommendations include using a password manager, and using a hardware token for multi-factor authentication. When creating a password, consider using a passphrase instead, as these are generally easier to remember and harder to crack.
+Best practices change often, but current recommendations include using a password manager, and including a hardware token for authentication. When creating a password, consider using a passphrase instead, as these are generally easier to remember and harder to crack.
 
 [.text-center]
 .Password Strength, https://xkcd.com/936[xkcd.com, window="_blank"]
@@ -50,7 +59,7 @@ IDEs, or Integrated Development Environments, are tools that help developers wri
 
 https://code.visualstudio.com/[Visual Studio Code, window="_blank"] is a popular IDE that's available for Windows, Mac, and Linux. Due to it being open source, many developers are able to contribute plugins to extend its functionality for specific languages or use cases.
 
-An IDE can help hackers by making it easier to write code, and by providing tools to help them understand what their code is doing.
+An IDE can help hackers by making it easier to write code for scripts, read code from their targets, and by providing tools to help them understand what code is doing.
 
 === Installations
 
