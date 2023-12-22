@@ -1,5 +1,11 @@
 
 == Cryptography
+[discrete]
+===== Samuel Sabogal Pardo
+
+{empty}
+
+'''
 
 Cryptography is an ancient field that dates to Ancient Rome. Etymologically, the word traces back to the Greek roots "kryptos" meaning "hidden" and "graphein" meaning "to write." It is used to communicate secretly in the presence of an enemy. With cryptography we can achieve the following properties when a message is sent:
 

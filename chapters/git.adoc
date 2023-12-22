@@ -1,5 +1,11 @@
 [appendix]
 == Git & Version Control
+[discrete]
+===== Jeffery John
+
+{empty}
+
+'''
 
 [[git]]
 

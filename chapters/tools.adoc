@@ -1,6 +1,12 @@
 [appendix]
 == Tools 
 [[tools]]
+[discrete]
+===== Jeffery John
+
+{empty}
+
+'''
 
 Throughout this Primer, we've recommended a number of tools to help you get started with hacking. Here they are, all in one place!
 

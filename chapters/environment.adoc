@@ -1,6 +1,12 @@
 [appendix]
 == Virtual Environment
 [[environments]]
+[discrete]
+===== Jeffery John
+
+{empty}
+
+'''
 
 We mentioned Linux in our chapter on xref:book.adoc#_the_shell[the Shell], and you may be wondering what your next step is. The great thing about Linux is that it's hard to outgrow! 
 

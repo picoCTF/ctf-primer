@@ -1,6 +1,13 @@
 [appendix]
 == Careers
 [[careers]]
+[discrete]
+===== Jeffery John
+
+{empty}
+
+'''
+
 
 With all this effort learning cyber skills, you might be wondering how to use and practice them. There are many different career paths in cybersecurity, and they all require different skills. Some of the most common careers in cybersecurity are as analysts, engineers, and penetration testers. 
 
