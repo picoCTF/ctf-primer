@@ -1,6 +1,12 @@
 
 
 == Web Exploits
+[discrete]
+===== Samuel Sabogal Pardo
+
+{empty}
+
+'''
 
 Web exploits are a nice starting point to dive into the world of hacking. Chances are that you are familiar with a web browser, so you will feel you are working on something that you already know!
 

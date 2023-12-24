@@ -1,5 +1,11 @@
 
 == Binary Exploitation
+[discrete]
+===== Samuel Sabogal Pardo
+
+{empty}
+
+'''
 
 Get ready for binary exploitation. We use C to explain binary exploitation because it is a language very prone to have vulnerabilities, however, other languages have similar vulnerabilities.
 

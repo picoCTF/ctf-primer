@@ -1,5 +1,11 @@
 
 == Programming in python
+[discrete]
+===== Samuel Sabogal Pardo
+
+{empty}
+
+'''
 
 A computer program is a set of instructions that allow us to do a task
 automatically on a computer. We can make a computer program in a programming

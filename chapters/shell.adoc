@@ -1,6 +1,14 @@
 //-----------------------------------------------------------------------------
 == The Shell
 [[shl]]
+[discrete]
+===== Luke Jones
+
+{empty}
+
+'''
+
+
 The Shell is foundational to so many parts of securing computing devices and 
 their networks. Intimidating and alluring (like most symbols enshrined by film
 makers), understanding the shell can make or break one's ability to solve 
