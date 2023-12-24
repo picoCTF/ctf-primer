@@ -41,7 +41,7 @@ To get started, you might be interested in https://www.virtualbox.org[VirtualBox
 
 When accessing a remote server, you may need a Virtual Private Network, or VPN, to connect to it. This is a way to securely connect, as well as protect your privacy. 
 
-In this arrangement, your data will be encrypted and sent to the VPN provider, who will then send it to a remote server, like a website or your hacking. If a third party intercepts your data, they won't be able to read it, and if they're listening to your traffic, all they'll see is the connection to the VPN, rather than where you go next. Pretty handy!
+In this arrangement, your data will be encrypted and sent to the VPN provider, who will then send it to a remote server, such as a website. If a third party intercepts your data, they won't be able to read it, and if they're listening to your traffic, all they'll see is the connection to the VPN, rather than where you go next. Pretty handy!
 
 In industry, companies often require their employees to use a company VPN to access their internal network from outside the office. Just like how VPNs can protect an individual's data, they can protect a company's sensitive information too! Without a VPN, employees working remotely may be vulnerable to their credentials being stolen.
 

@@ -177,7 +177,7 @@ Afterward, your original branch will be updated with the changes from the other,
 
 === Pulling & Pushing 
 
-After finishing your changes and pulling and merging the with the main branch, you can 'push' your changes to be used by others, or yourself on a different device. If you're working on a cloned copy, you can use `git push` to send your commits to their source, the remote repository. 
+After finishing your changes and pulling and merging with the main branch, you can 'push' your changes to be used by others, or yourself on a different device. If you're working on a cloned copy, you can use `git push` to send your commits to their source, the remote repository. 
 
 If you're working with files you've created locally, you'll need to create a remote repository to push to. This can be done with `git remote add origin <remote repository URL>`. You can then push your changes to the remote repository with `git push -u origin <branch name>`.
 
