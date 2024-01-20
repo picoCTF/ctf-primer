@@ -37,7 +37,7 @@ Now, you can create the table using the following statement:
 
 create table user (id integer, name text, lastname text, phone text, password text);
 
-Analyze the statement carefully. This statement creates a table called "user" with three columns. The first column is "id", and has the data type int, which means integer. The other columns are "name", "lastname", and "phone", which are of datatype text. In datatype integer, as you might guess, you can only store integers. In a datatype text, you can store strings. Put that statement in the SQL editor and hit the button "Run". If it was successful, you will see a green bar on top of the editor with the label "success". When you create tables in SQL, they are stored and become available to insert future data on them. However, in this online editor tables just survive in a single run, so in the same script we will have to create the table, insert the data, and query the data.
+Analyze the statement carefully. This statement creates a table called "user" with five columns. The first column is "id", and has the data type int, which means integer. The other columns are "name", "lastname", "phone", and "password", which are of datatype text. In datatype integer, as you might guess, you can only store integers. In a datatype text, you can store strings. Put that statement in the SQL editor and hit the button "Run". If it was successful, you will see a green bar on top of the editor with the label "success". When you create tables in SQL, they are stored and become available to insert future data on them. However, in this online editor tables just survive in a single run, so in the same script we will have to create the table, insert the data, and query the data.
 
 So far we have created the table but it is empty. To insert a row, add the following statement:
 
@@ -51,7 +51,7 @@ image::images/3image16.png[image,width=624,height=46]
 
 Now, add the following line that will query the data you have inserted so far:
 
-Select * from user;
+select * from user;
 
 The * means that you want to see the content of all the columns. Hit Run.
 
