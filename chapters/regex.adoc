@@ -1,0 +1,86 @@
+
+== Regular Expressions (Regex)
+[discrete]
+===== Jeffery John
+
+{empty}
+
+'''
+
+[[regex]]
+
+Regular expressions, or regex, are a way to search for patterns in text. For example, you can use regular expressions to look for email addresses in a document, or even a flag for a capture-the-flag challenge. Several programming languages, including Python, have built-in support for regular expressions. 
+
+=== Common Use Cases
+
+You've likely used regex before. For example, `grep` and `find` are two Unix commands that use regular expressions to search for files and text. For more about them, xref:book.adoc#_how_to_search_for_strings_and_filenames[see our forensics section here].
+
+Some other common use cases for regular expressions include searching for:
+
+* URLs
+
+* Phone numbers
+
+* Dates
+
+* IP addresses
+
+* Passwords
+
+Regular expressions can also be used to validate, or check, a user's input. For example, you may want to check that a user's credit card number is in the correct format before allowing them to submit a form.
+
+This can also be useful for replacing or removing a string from a document. For example, you may want to remove all instances of a certain word, or perhaps prevent an attacker from submitting a form with malicious code.
+
+=== Basic Syntax
+
+Regex can be difficult to understand at a glance, as it is meant for describing patterns, not just simple strings.
+
+A regex pattern is a sequence of characters that define a search. The regex `xyz` would match the string 'xyz', but not 'xy' or 'xzy'.
+
+This can be expanded to include more complex patterns. For example, `x..`` or `x.*y.*z`` would also match 'xyz', but also 'xab' or 'x123y456z'. 
+
+Much of our data is structured in a way that can be described by regular expressions. Email address often include the '@' symbol and a domain address, and credit card numbers often follow rules based on their issuer. Even our picoCTF flags are often in the format picoCTF{}, which could be described by regex as `picoCTF\{.{1,15}\}`. 
+
+==== Literal & Meta characters
+
+Literal characters are the simplest pattern. They are characters that must be present. Like in our earlier example, the regex `xyz` could only match the string 'xyz'.
+
+Metacharacters have special rules. For example, the period `.` can match any character. The asterisk `*` can match match zero or more of the character before it. Additionally, the plus `+` can match one or more of the character before it, and the question mark `?` can match zero or one of the character before it.
+
+These can be combined to create even more complex patterns. While they sound very similar, a single character can make a big difference in the information you can find!
+
+==== Escaping Special Characters
+
+Just like in many programming languages, you can use a backslash `\` to escape a special character. For example, if you want to match a period, you would use `\.`. This prevents the period from being treated as a metacharacter, which would lead to your regex matching any character, not just a period.
+
+==== Character Classes
+
+Character classes are a way to find a set. The regex `[xyz]` would match any of the characters 'x', 'y', or 'z', but not necessarily need to match all of them. This can be expanded to include ranges, like `[a-z]` or `[0-9]`.
+
+=== Anchors
+
+Anchors can match the start (`^`) or end (`$`) of a string. This can be helpful if you aren't sure what the rest of the string looks like, but you know part of the pattern.
+
+=== Regex in Python
+
+We covered xref:book.adoc#_programming_in_python[Python] in our earlier chapters, which includes built-in support for regular expressions. By importing the `re` module, you can create and test regex in your code.
+
+As an example:
+
+[source,python]
+----
+import re
+
+pattern = 'hello, *'
+string = 'hello, world!'
+match = re.search(pattern, string)
+
+if match:
+    print('Match found!')
+else:
+    print('No match found.')
+----
+
+This would print 'Match found!', as the pattern 'hello, *' matches the string 'hello, world!'. It would also return a match if the string included your name, like 'hello, reader!'.
+
+Throughout this Primer, we'll share examples from xref:book.adoc#_levels_of_code[other coding languages] as well. Regex is a very helpful tool, and so it is nice to be able to use it in many different environments, depending on what is available and your comfort level. You might see regex for helping with a database query, website, or even a CTF challenge!
