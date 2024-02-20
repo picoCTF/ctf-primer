@@ -1,0 +1,48 @@
+// I think a chapter on this might be interesting to touch on the PicoLock game developed Fall 2023
+// https://picolock.itch.io/picolockgame
+
+[appendix]
+== Fair Play 
+[[games]]
+[discrete]
+===== Jeffery John
+
+{empty}
+
+'''
+
+Nowadays, software is used for more than just work. Entertainment like video games are extremely popular. However, where there is software, there is the potential for vulnerabilities. 
+
+Along with the traditional reasons hackers might target a system, like user information or organization resources, video games have additional incentives like competitive advantages. Rather than directly targeting other players, hackers may find exploits that allow unfair in-game outcomes for their own characters or avatars. 
+
+This is different than using systems intended by the game developers. An in-game tool that is 'balanced' to be better than others is not a hack. It is a feature, even if the community disagrees. 
+
+On the other hand, a hacker adding a new tool, or modifying an existing one to be better than what other players have access to, is more likely to be the result of a hack. Sometimes, this can be encouraged, like in the case of modding communities. Modifications, or mods, are ways for players to change a game to their liking. However, for a competitive game, mods are often not allowed to keep a level playing field.
+
+=== Local
+
+In a local game, or one that is played on a single device, the game is generally secure if the device is. These kinds of games are generally single-player and up to the player to decide what is fair. There are exceptions like games with multiplayer leaderboards, or external competitions like speedrunning, that may add rules outside of the 'standard' game.
+
+For example, if a player wants to 'mod' to add new items in a single player game, only their account would be directly affected. However, this may still be against the game's terms of service, and could still be considered hacking. This is particularly true for ecosystems like Steam or Xbox Live that give the players 'achievements' or 'trophies' for completing certain tasks. In those cases, modifying the game could still affect other players indirectly due to the player reaching tasks they otherwise might not have been able to. 
+
+However, many games encourage modding, and have systems in place to allow players to easily develop and share mods. This can bring new life to a game, and is a great way for players to learn about 'hacking' and game development.
+
+=== Network
+
+When networks become involved, there are more opportunities for hacking. The game might exist on the devices of several players, as well as on the developer's servers. This increase in dependencies for the game to work as intended means that there are more chances for vulnerabilities to exist. 
+
+You may have heard of terms like 'aimbot' or 'wallhack'. These are generalized terms for specific outcomes of a hack, that apply across many games. An aimbot is a tool that automatically aims at enemies, and a wallhack is a tool that allows the player to see through walls. There is no one way to implement these tools, or any one software that is vulnerable to them. However, due to how desireable these may be to a competitive hacker, they are often tried. 
+
+In a networked game, the developer's server may attempt to authenticate players and monitor for suspicious behavior. It is up to the developer to update their detection methodology and architect their game in a way that prevents players hacking the game client on their device in a way that affects other devices.
+
+Some hacks may not attempt to modify the game code at all, but rather to stall or disrupt the game's network connection. This kind of 'denial of service' attack is not unique to games, but can still be used for unfair advantages or to make a game unplayable for others.
+
+=== Fair Hacking
+
+The ethics of hacking in games is a complex topic. Compared to other software systems, games are designed to be fun. However, just like any other system, all users deserve to have fair access. Disrupting the game for others, or giving a player an unfair advantage for competition, would be considered hacking. 
+
+If you'd like to play a game based around hacking, we have one!
+
+[.text-center]
+.PicoLock, CyLab https://picolock.itch.io/picolockgame
+image::images/picolock.png[]
