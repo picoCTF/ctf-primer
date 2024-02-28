@@ -10,3 +10,105 @@
 //    Intermediate Representation (IR)
 //    Assembly & ISA’s
 //    Machine Instructions
+
+== Levels of Code
+[discrete]
+===== Luke Jones
+
+{empty}
+
+'''
+
+Throughout this Primer, we have discussed programming languages like xref:book.adoc#_programming_in_python[Python], xref:book.adoc#_javascript[JavaScript], xref:book.adoc#_sql[SQL], xref:book.adoc#_server_code[PHP], and xref:book.adoc#_a_little_about_c_language[C].
+
+We have tried to introduce these languages in the ways that they are used most often in cybersecurity, but each can do many of the things that the others can do. It is just as possible to run a web server in Python, as it is to write regular expressions in JavaScript.
+
+What does set these languages apart is the level of abstraction that they provide. This is a concept that is important to understand when working with code, and especially when working with reverse engineering.
+
+Abstraction in programming is about how much the author has to think about the underlying hardware. To the end user, it's unlikely to matter or be noticed. For cybersecurity, we want to be conscious of what vulnerabilities may be hidden in these abstractions.
+
+=== High-level Languages
+
+High-level languages are the most abstract. They are meant to be easy to read by other developers and fast to code in. They are also meant to be portable, which means they can be run on many different kinds of hardware like your desktop, phone, or server. 
+
+These languages are often used to write applications or scripts, due to their ease of use. Since many programs do not need to be used by anyone other than the developer, it makes sense that developers often choose a language that is easiest for them.
+
+Some examples of high-level languages are Python, Nim, and Perl.
+
+In order for these languages to work, they need to be translated into a lower-level language. This is done by a compiler or interpreter. Here are some comparisons between high-level languages:
+
+[source, python]
+print("Hello World!")
+
+[source, nim]
+echo "Hello World!"
+
+[source, perl]
+print "Hello World!\n";
+
+Each of these examples does the same thing, but the syntax is a bit different. This is because each language has its own rules and conventions. However, a computer is still able to execute the code in the same way because of the translation to a lower level like machine code.
+
+If the developer is not confident, a high-level language can also protect them from accidentally writing insecure code that may be vulnerable to attacks like buffer overflows. These can be avoided in low-level languages, but the abstraction and easier syntax of high-level languages can help prevent these mistakes.
+
+=== Low-level Languages
+
+Low-level languages are less abstract than high-level languages. They are meant to be fast and easy for the computer to understand, not necessarily the developer.
+
+These languages are often used to write operating systems, drivers, and other software that needs to interact with the hardware.
+
+Some examples of lower level languages are C, Assembly, and Rust. We say lower level here, and not low level, because abstraction is also a relative concept. Assembly may be more direct to hardware than C, but C is lower level than Python. For comparisons between lower level languages:
+
+[source, c]
+#include <stdio.h>
+int main() {
+    printf("Hello World!\n");
+    return 0;
+}
+
+[source, nasm]
+section .data
+    hello db 'Hello, world!',0
+section .text
+global _start
+_start:
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, hello
+    mov edx, 13
+    int 0x80
+    mov eax, 1
+    xor ebx, ebx
+    int 0x80
+
+[source, rust]
+fn main() {
+    println!("Hello, world!");
+}
+
+Compared to the higher level languages, these are a bit more verbose for us as readers and developers. However, to the computer and hardware, not much has changed. We just see more of the details that were abstracted away by features in the higher level languages.
+
+These languages will also need to be translated into machine code for the computer to run, but they can execute faster because they can take advantage of hardware features and optimizations that interpreters may not be able to.
+
+=== Intermediate Representation (IR)
+
+Intermediate Representation (IR) allows for interpreters and compilers to work with code in a way that is more abstract than machine code, but less abstract than high-level languages. 
+
+This can lessen the gap between high and low level languages, and allow for some optimizations and other features that are otherwise not possible in high-level languages. IR is often used for applications that may be run on many different kinds of hardware, like web browsers. Rather than compiling the code several times, the IR can be optimized for multiple types of hardware, and the code will only need to be translated once to an IR. 
+
+Some examples of IR are LLVM and WebAssembly. These can be useful when reverse engineering, as IR can be easier to work with and understand than raw machine code. 
+
+=== Assembly & ISA’s
+
+We have touched on xref:book.adoc#_assembly[assembly language] before when considering C. Assembly is even less abstract than C, and consists of instructions that are directly translated to machine code. When writing in assembly, a developer has to consider the architecture of the hardware that the code will be run on, as each has its own set of instructions. This can be impractical for most applications, but is necessary for some software that needs to be as fast as possible.
+
+ISA, or Instruction Set Architecture, is the set of instructions that a particular hardware architecture can understand. This is what assembly language is written in, and is what the compiler or interpreter will translate high-level languages into.
+
+Some examples of ISA’s are x86, ARM, and MIPS. When reverse engineering these, a hacker will need to understand how the assembly code will differ between what they may be familiar with.
+
+=== Machine Instructions
+
+Finally, machine instructions are the lowest level of code, and have no abstraction. These are the instructions that the hardware can understand, and are what the compiler or interpreter will ultimately translate the code into. 
+
+These instructions are often represented in hexadecimal, and are not meant to be read by humans. It is still possible to access these instructions with tools like debuggers and hex editors, but it would be difficult to understand what is happening without a deep understanding of the hardware and the ISA.
+
+With each level of code, abstractions can take shortcuts that may be exploited by attackers. For example, a high-level language may have a feature that is meant to make it easier to work with strings, or a low-level language may have a feature that is meant to make it easier to work with memory, but these both may have vulnerabilities that can be exploited. 
