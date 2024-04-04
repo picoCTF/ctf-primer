@@ -525,7 +525,7 @@ Private key (d,n) -> (35,117)
 
 Message m –> 10
 
-So far, we have a private key which has an e=11, and a public key with a d=35. Our message is 10. To encrypt 10, we do:
+So far, we have a public key which has an e=11, and a private key with a d=35. Our message is 10. To encrypt 10, we do:
 
 10^11^ mod 117
 
