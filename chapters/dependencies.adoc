@@ -1,0 +1,46 @@
+
+[appendix]
+== Dependencies 
+[discrete]
+===== Jeffery John
+
+{empty}
+
+'''
+
+[[dependencies]]
+
+=== Why Depend on Anything?
+
+Coding everything yourself can be difficult! Between your network connection, database, operating system, program language, and other parts of your technical environment, it's also difficult to check everything for security vulnerabilities, bugs, and other issues. However, just about everyone relies on at least some dependencies. As a result, security research teams and even individuals can protect both themselves and others by checking dependencies for safety. 
+
+For example, your operating system might receive regular updates for new features and bugfixes. This can help you, as well as everyone else relying on the operating system as a dependency to their own projects.
+
+While it's possible to develop your own tools and implementations, it's also often more difficult to do so securely. Large and existing projects often have more resources, processes, and vested interest in continual checks and updates. This is also an advantage of open source, where everyone can access and check the code.
+
+I (Jeffery) certainly would have had a much more difficult time starting out if I had to start programming from nothing. It'd be a bit like learning to ride a bycicle by making the wheels first. And even if I did, how would I know if the wheels were safe?
+
+Dependencies are not inherently secure or insecure, but they can be reviewed by many groups, while your own code might only be reviewed by you and your own team members. Popular dependencies can still be vulnerable, and as a result may make your own project vulnerable, but they are also more likely to be used by someone verifying their security. That person can be you, too!
+
+=== Semantic Versioning
+
+Semantic versioning is a way of labeling changes to a software package. Version numbers are often in the format of `MAJOR.MINOR.PATCH`, where `MAJOR` represents incompatible changes, `MINOR` represents backwards-compatible changes, and `PATCH` represents backwards-compatible bug fixes. For example, if a package is at version `1.2.3`, then `1` is the major release number, `2` is the minor update, and `3` is a patch number.
+
+This versioning allows developers of packages to tell users how their code may behave when updating. If someone were relying on a package, `XYZ`, for their project and `XYZ` is at version `1.2.3`, then they may be confident that updating to version `1.3.0` will not break their project, but updating to `2.0.0` might. 
+
+Projects often have many, many dependencies. Some dependencies even have their own dependencies. It's possible for these dependencies to have conflicting requirements, or to only be compatible with certain versions. This can be difficult to plan and develop, but it's also why clear versioning is important.
+
+=== Security Updates
+
+It is rare for a software dependency to be truly 'done'. Technology is always changing, and so do security threats. A project might work today, but be vulnerable tomorrow, and need a new release version to fix the problem. 
+
+With really big projects, like some servers and smart devices, frequent updates are often necessary to fight cyber attacks. Anything that many people use can be a tempting target for hackers, and what they learn from one attempt can even by used to attack less prepared or older versions of the same software.
+
+Versioning can help keep track of what dependencies are a risk to the project, as well as prioritize what should be researched and updated. From a cybersecurity perspective, it's important to look for new security advisories and warnings, and to find patches for projects you're responsible for as fast as possible. One system for this is xref:book.adoc#_the_cve_program[the CVE® Program] which can alert you to emerging threats.
+
+=== Package Managers
+
+Some good news is that you don't have to check for these updates manually. Many programming languages have package managers that can automatically search for changes to dependencies, and install and manage them. For example, Python has `pip`, JavaScript has `npm`, and Ruby has `gem`. 
+
+For updates that are incompatible, package managers can also help find versions of dependencies that will integrate with the rest of the project. 
+
