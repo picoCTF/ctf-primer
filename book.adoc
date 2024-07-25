@@ -5,7 +5,7 @@
 :pygments-style: emacs
 :icons: font
 = The CTF Primer
-:author: Samuel Sabogal Pardo, et al.
+:author: Samuel Sabogal Pardo, Jeffery John, Luke Jones
 :sectnums:
 include::chapters/intro.adoc[]
 include::chapters/shell.adoc[]
