@@ -697,6 +697,17 @@ As a result, you should get a hex string of 64 characters. In this particular te
 [source, text]
 338f1cefc564f86ecfc241310d35e31125bb14cff61c080f293be2ef24fb3a69
 
+Note: The file actually has an ending new line symbol (\n) and that's important so if you run it a different environment (Windows, WSL2, ...) you might get a different result. What works is adding a new line symbol at the end (\n) at the end like the echo command does 
+
+[source, text]
+echo 'Charles Babbage KH FRS (26 December 1791 – 18 October 1871) was an English polymath. A mathematician, philosopher, inventor and mechanical engineer, Babbage originated the concept of a digital programmable computer.' | sha256sum
+    338f1cefc564f86ecfc241310d35e31125bb14cff61c080f293be2ef24fb3a69  -
+
+As opposed to explicitly removing the end new line symbol (\n) via -n
+[source, text]
+$ echo -n 'Charles Babbage KH FRS (26 December 1791 – 18 October 1871) was an English polymath. A mathematician, philosopher, inventor and mechanical engineer, Babbage originated the concept of a digital programmable computer.' | sha256sum
+    53e019fdd0a5f9e7d4d04c95e3110a4dbfa82af4433552ad4018964d2514a98b  -
+
 That string is an identification for the information contained in our file. If we make just a little change to the file, it will change completely. For example, create a new file called "bio2.txt" with the same data, but now without the dot at the end:
 
 "Charles Babbage KH FRS (26 December 1791 – 18 October 1871) was an English polymath. A mathematician, philosopher, inventor and mechanical engineer, Babbage originated the concept of a digital programmable computer"
