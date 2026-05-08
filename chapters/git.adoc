@@ -32,9 +32,9 @@ Along with Git, other Version Control Systems (VCS) include Subversion (SVN), Sa
 
 Another term for VCS is Source Configuration Management (SCM). These terms can be used interchangeably. However, Git and GitHub are less similar. Git is a VCS or SCM, while GitHub is web-based platform for development and collaboration that uses Git. We'll talk more about GitHub later in this chapter.
 
-You can get started with Git locally, on your computer, or remotely in the cloud like with the picoCTF webshell: 
+You can get started with Git locally, on your computer, or remotely in the cloud like with the CyLab Academy webshell: 
 
-https://webshell.picoctf.org[https://webshell.picoctf.org, window="_blank"]
+https://webshell.cylabacademy.org[https://webshell.cylabacademy.org, window="_blank"]
 
 
 === 'Git' Started with Git
@@ -44,7 +44,7 @@ To start using Git locally, make sure to download a copy for your operating syst
 
 https://git-scm.com/downloads[https://git-scm.com/downloads, window="_blank"]
 
-This has already been done for you in the picoCTF webshell, and can be verified by typing ``git --version``.
+This has already been done for you in the CyLab Academy webshell, and can be verified by typing ``git --version``.
 
 [source, txt]
 $ git --version
@@ -259,10 +259,10 @@ GitHub has many features on top of Git to help when writing code and working wit
 
 As a student, a great place to start is the https://education.github.com/pack[GitHub Student Developer Pack, window="_blank"], which offers many free resources and further tutorials. 
 
-As a collaboration tool, GitHub allows you to create public 'open source' repositories and join discussions or contribute code to others. You can even find the code for picoCTF and add to this primer! https://github.com/picoCTF[https://github.com/picoCTF, window="_blank"]
+As a collaboration tool, GitHub allows you to create public 'open source' repositories and join discussions or contribute code to others. You can even find the code for CyLab Academy and add to this primer! https://github.com/picoCTF[https://github.com/picoCTF, window="_blank"]
 
 Many open source repositories will include a CONTRIBUTING.md file that discusses what help they're looking for. More discussion and best practices for the open source community can be found at https://opensource.guide[https://opensource.guide, window="_blank"]
 
-Just make sure, as a hacker and competitor, that you're allowed to publish what you're working on to a public repository! Many competitons, including picoCTF, ask that files related to competition are kept secret for some time in order to ensure fairness. Check public repositories for licenses as well, which will detail how their code can be used.
+Just make sure, as a hacker and competitor, that you're allowed to publish what you're working on to a public repository! Many competitons, including those of the CyLab Security Academy, ask that files related to competition are kept secret for some time in order to ensure fairness. Check public repositories for licenses as well, which will detail how their code can be used.
 
 We hope you join our community!

@@ -112,9 +112,10 @@ Now let's talk about *getting* a shell!
 === Get a Shell
 [[shl-get-a-shell]]
 Cybersecurity is a topic that is most deeply learned by listening *and* doing.
-For this reason, I advise you to create a picoCTF account at this point if
-you have not already. Beyond providing 120+ security challenges in helpful
-learning ramps, every picoCTF account gets access to a web-based Linux _shell_.
+For this reason, I advise you to create a CyLab Academy account at this point
+if you have not already. Beyond providing 500+ security challenges in helpful
+learning ramps, every CyLab Academy account gets access to a web-based Linux
+_shell_.
 
 A note on the structure of my (LT's) chapters: many times I will provide a high
 level tutorial for a task and also a step by step walkthrough for the same
@@ -129,25 +130,25 @@ the step by step walkthrough.
 
 ==== High level tutorial
 . *Gain access to a practice shell*
-.. Register for a picoCTF account
+.. Register for a CyLab Academy account
   * Click link in email that is sent to registered email address
-... Log in to the picoCTF webshell
+... Log in to the CyLab Academy webshell
 
 ==== Step by Step Walkthrough
 //TODO punt : turn bold text into hyperlinks in this section
-*Register for a picoCTF account at the link below.* You will need to
+*Register for a CyLab Academy account at the link below.* You will need to
 validate the email address you provide by clicking on a link that is sent to
 it.
 
-https://play.picoctf.org/
+https://learn.cylabacademy.org/
 
 After successfully registering, a web shell can be accessed at the URL below.
-*Use the same  user name and password that you registered on the picoCTF
+*Use the same  user name and password that you registered on the CyLab Academy
 website to log into the shell at the link below* (or in the "Webshell" panel
-on the picoCTF website) For the sake of security, you will not see your password
+on the CyLab Academy website) For the sake of security, you will not see your password
 as you type it in.
 
-https://webshell.picoctf.org/
+https://webshell.cylabacademy.org/
 
 ==== Debrief
 Congratulations (esp. if this is your first time staring at a command prompt)!
@@ -238,7 +239,7 @@ https://www.git-tower.com/blog/command-line-cheat-sheet/
 
 ==== Challenge 2: Typing out long commands
 Many wonderfully brilliant students of mine have not known how to speed up
-their typing in the shell command prompt until thousands of picoCTF points into
+their typing in the shell command prompt until thousands of CTF points into
 their learning. I take responsibility for this, and really, most of us go
 through that phase, but we do not have to! One word:
 
@@ -374,11 +375,11 @@ $ cat new-note.txt
 
 ```
 
-==== picoGym Problem
+==== Challenge Library Problem
 
-Try out your new shell skills with this challenge from the picoGym:
+Try out your new shell skills with this challenge from the Challenge Library:
 
-https://play.picoctf.org/practice/challenge/189
+https://learn.cylabacademy.org/library/189
 
 //-----------------------------------------------------------------------------
 === Conclusion

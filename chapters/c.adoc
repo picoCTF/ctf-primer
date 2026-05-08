@@ -60,9 +60,9 @@ And it would work. But it is important you do not write it like that if you begi
 
 === C Hello World!
 
-Let's get hands on now! Access the picoCTF webshell at:
+Let's get hands on now! Access the CyLab Academy webshell at:
 
-https://webshell.picoctf.org/
+https://webshell.cylabacademy.org/
 
 Create a folder called 'c_examples' using:
 

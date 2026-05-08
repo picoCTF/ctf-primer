@@ -39,7 +39,7 @@ A regex pattern is a sequence of characters that define a search. The regex `xyz
 
 This can be expanded to include more complex patterns. For example, `x..` or `x.*y.*z`` would also match 'xyz', but also 'xab' or 'x123y456z'. 
 
-Much of our data is structured in a way that can be described by regular expressions. Email address often include the '@' symbol and a domain address, and credit card numbers often follow rules based on their issuer. Even our picoCTF flags are often in the format picoCTF{}, which could be described by regex as `picoCTF\{.{1,15}\}`. 
+Much of our data is structured in a way that can be described by regular expressions. Email address often include the '@' symbol and a domain address, and credit card numbers often follow rules based on their issuer. Even our CyLab Academy flags are often in the format picoCTF{}, which could be described by regex as `picoCTF\{.{1,15}\}`. 
 
 ==== Literal & Meta characters
 

@@ -12,7 +12,7 @@ Throughout this Primer, we've recommended a number of tools to help you get star
 
 === General
 
-- picoCTF Webshell: https://webshell.picoctf.org[https://webshell.picoctf.org, window="_blank"]
+- CyLab Academy Webshell: https://webshell.cylabacademy.org[https://webshell.cylabacademy.org, window="_blank"]
 
 - Git: https://git-scm.com[https://git-scm.com, window="_blank"]
 

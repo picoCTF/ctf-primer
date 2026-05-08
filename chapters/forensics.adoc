@@ -1,4 +1,4 @@
-//Forensics outline from Textbook0 Google Doc on shared picoCTF drive
+//Forensics outline from Textbook0 Google Doc on shared CyLab Academy drive
 //  The Worlds of Forensics
 //    As a Profession
 //    As a Capture-The-Flag Competition Category
@@ -42,13 +42,13 @@ investigate any type of crime even if there is not computer media involved.
 === How to search for strings and filenames
 
 We will begin by learning how to search for information in a file system. Go
-to the picoCTF webshell at:
+to the CyLab Academy webshell at:
 
-https://webshell.picoctf.org/
+https://webshell.cylabacademy.org/
 
 Once you are connected, open up this problem in a separate tab:
 
-https://play.picoctf.org/practice/challenge/85
+https://learn.cylabacademy.org/library/85
 
 Download the problem file in your webshell by right-clicking the link in the
 problem description and selecting Copy Address or Copy Link. Then download it
@@ -56,7 +56,7 @@ by typing in `wget ` and pasting the address after 'wget', space. Your command
 should look something like this, but is likely to not be exactly the same:
 
 [source, text]
-$ wget https://jupiter.challenges.picoctf.org/static/495d43ee4a2b9f345a4307d053b4d88d/file
+$ wget https://jupiter.challenges.cylabacademy.org/static/495d43ee4a2b9f345a4307d053b4d88d/file
 
 You need to copy and paste your own link for the file.
 
@@ -119,7 +119,7 @@ This should get the flag for you and print it on your screen.
 
 Let's consider another challenge:
 
-https://play.picoctf.org/practice/challenge/320
+https://learn.cylabacademy.org/library/320
 
 Download the zip file into your webshell like you did for the previous
 challenge. As before, use `file` on it right away to have an idea of what
@@ -257,7 +257,7 @@ There's the flag for this challenge!
 
 Try this slightly more difficult challenge with your new found skills:
 
-https://play.picoctf.org/practice/challenge/322
+https://learn.cylabacademy.org/library/322
 
 
 === Disk analysis
@@ -276,9 +276,9 @@ of the details. Disks are all about the details.
 
 We will be considering disk images exclusively, due to the difficulty of
 sending real hard drives through the Internet at the time of this writing! Try
-this picoGym problem, which presents the first step in analyzing disk images:
+this Challenge Library problem, which presents the first step in analyzing disk images:
 
-https://play.picoctf.org/practice/challenge/301
+https://learn.cylabacademy.org/library/301
 
 This problem should be pretty approachable given what you've done leading up
 to this point, namely downloading individual challenge files and using command
@@ -295,18 +295,18 @@ means:
   'nc' as this system calls it. Sometimes the program name will be the full
   'netcat' variety, but on the webshell, it is 'nc'.
 * `saturn.picoctf.net` This is the name of the computer we're connecting to.
-  This is a challenge server that picoCTF runs.
+  This is a challenge server that CyLab Academy runs.
 * `52279` This is the number of the port we're connecting to for the challenge.
   This will probably be different for your challenge.
 
-So go ahead and solve your first Sleuthkit problem on the picoGym and learn the
+So go ahead and solve your first Sleuthkit problem in the Challenge Library and learn the
 tool, `mmls`, which we will use for subsequent problems.
 
 ==== Sleuthkit Apprentice walkthrough
 
 Here's the next challenge in that short series:
 
-https://play.picoctf.org/practice/challenge/300
+https://learn.cylabacademy.org/library/300
 
 This challenge requires `mmls` as a first step to use other Sleuthkit tools,
 but now is the time for some true forensic background.
@@ -341,7 +341,9 @@ filename layer will look a lot like using the shell normally. Filename layer
 tools are prepended by 'f'. `fls` lists the files on an image starting at the
 root. This is what we will use for our exploration of the disk image.
 
-First off, download the challenge file:
+First off, download the challenge file. Remember the technique we learned
+earlier. The link will be different, and you have to right click on the link
+in the description to get it:
 
 [source, text]
 $ wget https://artifacts.picoctf.net/c/331/disk.flag.img.gz
@@ -508,12 +510,12 @@ unrelated file somewhere on the system.
 
 If you want to continue to learn about Sleuthkit tools, try this problem:
 
-https://play.picoctf.org/practice/challenge/137
+https://learn.cylabacademy.org/library/137
 
 If you want to use what you know to dive even deeper into a disk, try this
 problem:
 
-https://play.picoctf.org/practice/challenge/285
+https://learn.cylabacademy.org/library/285
 
 If you get stuck, try reading writeups of the challenges. Just google search
 'Writeup, [challenge name], picoCTF'. There's going to be various levels of
@@ -548,9 +550,9 @@ through apt-get and run it with the Linux terminal.
 
 ==== Packet Primer walkthrough
 
-Consider this picoCTF challenge:
+Consider this CyLab Academy challenge:
 
-https://play.picoctf.org/practice/challenge/286
+https://learn.cylabacademy.org/library/286
 
 Download the packet capture and open it in Wireshark. It should look like this
 once you open it. Google how to open a packet capture in Wireshark if you can't

@@ -24,9 +24,9 @@ First, we will see how to achieve Confidentiality. This is done with encryption.
 === Practical example
 
 
-To use cryptography in real life, you should never use your own implementations. To begin, we will demonstrate how to encrypt a file, without any knowledge in cryptography. Go to the picoCTF webshell at:
+To use cryptography in real life, you should never use your own implementations. To begin, we will demonstrate how to encrypt a file, without any knowledge in cryptography. Go to the CyLab Academy webshell at:
 
-https://webshell.picoctf.org/
+https://webshell.cylabacademy.org/
 
 When you are there, create a file called 'my_name.txt' containing your name. You could use the 'nano' editor, but in linux it is possible to do the following trick: If your name was 'samuel', you would run the following command to create the text file:
 

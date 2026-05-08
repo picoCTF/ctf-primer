@@ -911,13 +911,13 @@ exploitation.
 === Http requests in python
 
 Below is an example of how you can request a web page in python. Here we are
-requesting the HTML of the picoCTF website. Right now, maybe you do not know
+requesting the HTML of the CyLab Academy website. Right now, maybe you do not know
 HTML and worry this will not make much sense to you. After you are done with
 the Web section, come back here and try this example:
 
 [source, python]
 import http.client
-conn = http.client.HTTPSConnection("picoctf.org")
+conn = http.client.HTTPSConnection("cylabacademy.org")
 conn.request("GET", "/")
 r1 = conn.getresponse()
 print(r1.status, r1.reason)

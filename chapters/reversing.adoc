@@ -1,4 +1,5 @@
-//Reversing Outline from Textbook0 Google Doc in picoCTF shared drive
+//Reversing Outline from Textbook0 Google Doc in CyLab Security Academy shared
+//drive
 //  The Worlds of Reversing
 //    Software Debugging
 //    Cracking
