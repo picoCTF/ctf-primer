@@ -1,5 +1,5 @@
 # CTF Primer
-
+![CTF Primer banner](./images/logos/banner.png)
 
 ## Overview
 
